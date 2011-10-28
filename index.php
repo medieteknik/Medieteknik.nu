@@ -6,6 +6,6 @@
 </head>
 
 <body>
-<p>Lyser om solen!</p>
+<p>Lyser som två solar!</p>
 </body>
 </html>
