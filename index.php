@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+header('Content-type: text/html; charset=utf-8');
+?><!DOCTYPE html>
 <html lang="sv">
 
 <head>
@@ -6,7 +8,9 @@
 </head>
 
 <body>
-<p>Lyser om solen!</p>
+<p>Lyser som två solar!</p>
+<p>Moget</p>
 <p>det gillar vi</p>
+
 </body>
 </html>
