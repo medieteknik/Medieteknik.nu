@@ -4,7 +4,19 @@
 		
 		public function index()
 		{
-			$data['main_content'] = 'startsida';
-			$this->load->view('includes/template.php',$data);
+			
+			// Header data
+			$header_data['title'] = "Medietkenik Main page";
+			//$header_data['css_screen'] = array('reset', 'basic', 'base');
+			$header_data['container'] = true;
+
+			// Data for Startsida view
+			$startsida_data['data'] = "data";
+
+			$this->load->view('includes/head',$header_data);
+			$this->load->view('includes/header');
+			$this->load->view('includes/menu');
+			$this->load->view('startsida', $startsida_data);
+			$this->load->view('includes/footer',$header_data);
 		}
 	}
