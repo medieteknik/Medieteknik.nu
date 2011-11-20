@@ -41,6 +41,9 @@
 $route['default_controller'] = "main";
 $route['404_override'] = '';
 
+// language url
+$route['(\w{2})/(.*)'] = '$2';
+$route['(\w{2})'] = $route['default_controller'];
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
