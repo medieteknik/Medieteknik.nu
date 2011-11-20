@@ -49,7 +49,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'medieteknik';
-$db['default']['password'] = '';
+$db['default']['password'] = 's4tw8r76jTx5zDCr';
 $db['default']['database'] = 'medieteknik';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -62,7 +62,6 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
-include("password.php");
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
