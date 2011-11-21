@@ -9,10 +9,9 @@ class Users extends CI_Controller {
 		$header_data['title'] = "Medietkenik Users";
 		//$header_data['css_screen'] = array('reset', 'basic', 'base');
 		$header_data['container'] = true;
-
-		// Menu data
-		$this->lang->load('menu', $this->config->item('language'));
-		$menu_data = $this->lang->language;
+		
+		// Menu data, combining if key is missing from selected language
+		$menu_data = $this->lang->load_with_fallback('menu', $this->config->item('language'), 'swedish');
 
 		// user view data
 		$this->load->model('User_model');
@@ -21,9 +20,7 @@ class Users extends CI_Controller {
 		$this->load->view('includes/head',$header_data);
 		$this->load->view('includes/header');
 		$this->load->view('includes/menu',$menu_data);
-		
 		$this->load->view('users_view',$user_data);
-		
 		$this->load->view('includes/footer',$header_data);
 	}
 }

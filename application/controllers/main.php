@@ -6,12 +6,10 @@
 		{
 			// Header data
 			$header_data['title'] = "Medietkenik Main page";
-			//$header_data['css_screen'] = array('reset', 'basic', 'base');
 			$header_data['container'] = true;
 			
-			// Menu data
-			$this->lang->load('menu', $this->config->item('language'));
-			$menu_data = $this->lang->language;
+			// Menu data, combining if key is missing from selected language
+			$menu_data = $this->lang->load_with_fallback('menu', $this->config->item('language'), 'swedish');
 
 			// Data for Startsida view
 			$startsida_data['data'] = "data";
