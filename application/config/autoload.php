@@ -109,7 +109,8 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array();
+//  "install_model" checks and creates all necessary tables
+$autoload['model'] = array('install_model');
 
 
 /* End of file autoload.php */

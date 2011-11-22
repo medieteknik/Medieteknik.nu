@@ -127,11 +127,15 @@ class MY_Lang extends CI_Lang
         log_message('debug', "Language_Identifier Class Initialized");
     }
 	
-	function load_with_fallback($langfile = '', $idiom = '', $defaultidiom = '')
+	function load_with_fallback($langfile = '', $idiom = '', $fallback = '')
 	{
-		$arr1 = $this->load($langfile, $defaultidiom, TRUE);
-		$arr2 = $this->load($langfile, $idiom, TRUE);
-		return array_merge($arr1,$arr2);
+		if($idiom == $fallback) {
+			return $this->load($langfile, $idiom, TRUE);
+		} else {
+			$arr1 = $this->load($langfile, $fallback, TRUE);
+			$arr2 = $this->load($langfile, $idiom, TRUE);
+			return array_merge($arr1,$arr2);
+		}
 	}
 	
 }
