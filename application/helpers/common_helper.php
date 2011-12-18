@@ -27,3 +27,7 @@ function readable_date($date, $lang = '') {
 	}
 	return $string;
 }
+
+function compact_name($name) {
+	return preg_replace("/ /","_",strtolower($name));
+}

@@ -135,6 +135,7 @@ function get_groups_fields()
 			'type' => 'INT',
 			'constraint' => 5, 
 			'unsigned' => TRUE,
+			'auto_increment' => TRUE
 			),
 		'group_name' => array(
 			'type' => 'VARCHAR',
