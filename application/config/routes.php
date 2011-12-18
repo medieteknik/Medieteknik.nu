@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "main";
+$route['default_controller'] = "news";
 $route['404_override'] = '';
 
 // language url

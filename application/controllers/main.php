@@ -5,7 +5,7 @@
 		public function index()
 		{
 			// Header data
-			$header_data['title'] = "Medietkenik Main page";
+			$header_data = $this->lang->load_with_fallback('header', $this->config->item('language'), 'swedish');
 			$header_data['container'] = true;
 			
 			// Menu data, combining if key is missing from selected language

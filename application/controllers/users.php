@@ -6,7 +6,7 @@ class Users extends CI_Controller {
 	{
 			
 		// Header data
-		$header_data['title'] = "Medietkenik Users";
+		$header_data = $this->lang->load_with_fallback('header', $this->config->item('language'), 'swedish');
 		//$header_data['css_screen'] = array('reset', 'basic', 'base');
 		$header_data['container'] = true;
 		

@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'parser');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','create_tables');
+$autoload['helper'] = array('url', 'common', 'create_tables');
 
 
 /*

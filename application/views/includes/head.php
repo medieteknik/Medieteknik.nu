@@ -3,10 +3,10 @@
 <html lang="sv">
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="Medietekniksektionens officiella hemsida">
-	<meta name="author" content="Medietekniks Webbutskott">
+	<meta name="description" content="<?php echo $description; ?>">
+	<meta name="author" content="<?php echo $author; ?>">
 	
-	<title><?php if(isset($title)) echo $title; else echo "Medieteknik Sektionen"; ?></title>
+	<title><?php echo $title; ?></title>
 	
 	<link rel="stylesheet" href="<?php echo base_url(); ?>web/css/reset.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>web/css/base.css" type="text/css" media="screen">
