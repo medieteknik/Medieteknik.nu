@@ -65,10 +65,11 @@ function get_news_table_fields()
 			'constraint' => 5, 
 			'unsigned' => TRUE,
 		),
-		'user_group_id' => array(
+		'group_id' => array(
 			'type' => 'INT',
 			'constraint' => 5, 
 			'unsigned' => TRUE,
+			'default' => 0,
 		),
 		'date' => array(
 			'type' => 'DATETIME',
@@ -136,48 +137,17 @@ function get_groups_fields()
 			'constraint' => 5, 
 			'unsigned' => TRUE,
 			'auto_increment' => TRUE
-			),
+		),
+		'sub_to_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'default' => 0,
+		),
 		'group_name' => array(
 			'type' => 'VARCHAR',
 			'constraint' => '50',
 			),
-		);
-	return $fields;
-}
-
-function get_users_groups_fields()
-{	
-	$fields = array(
-		'id' => array(
-			'type' => 'INT',
-			'constraint' => 5, 
-			'unsigned' => TRUE,
-			'auto_increment' => TRUE
-		),
-		'user_id' => array(
-			'type' => 'INT',
-			'constraint' => 5, 
-			'unsigned' => TRUE,
-		),
-		'group_id' => array(
-			'type' => 'INT',
-			'constraint' => 5, 
-			'unsigned' => TRUE,
-		),
-		'start' => array(
-			'type' => 'DATETIME',
-		),
-		'stop' => array(
-			'type' => 'DATETIME',
-		),
-		'position' => array(
-			'type' => 'VARCHAR',
-			'constraint' => '50',
-		),
-		'email' => array(
-			'type' => 'VARCHAR',
-			'constraint' => '320',
-		),
 		);
 	return $fields;
 }
@@ -202,3 +172,31 @@ function get_groups_descriptions_fields()
 		);
 	return $fields;
 }
+
+function get_users_groups_fields()
+{	
+	$fields = array(
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'group_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'position' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'email' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '320',
+		),
+		);
+	return $fields;
+}
+
+
+

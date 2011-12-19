@@ -103,7 +103,7 @@ class Install_model extends CI_Model {
 			
 			$data = array(
 			   'user_id' => 1,
-			   'user_group_id' => 1 ,
+			   'group_id' => 1 ,
 			   'date' => "2011-11-11 11:11:00",
 			   'draft' => 0,
 			   'approved' => 1,
@@ -208,7 +208,19 @@ class Install_model extends CI_Model {
 			log_message('info', "Created table: groups");
 			
 			$data = array(
-			   'group_name' => "Medietekniksektionens styrelse",
+			   'group_name' => "Styrelsen",
+			);
+			$this->db->insert('groups', $data);
+			
+			$data = array(
+			   'sub_to_id' => 1,
+			   'group_name' => "Styrelsen 2011/2012",
+			);
+			$this->db->insert('groups', $data);
+			
+			$data = array(
+			   'sub_to_id' => 0,
+			   'group_name' => "gamla styrelsen såatteh",
 			);
 			$this->db->insert('groups', $data);
 		}
@@ -252,7 +264,8 @@ class Install_model extends CI_Model {
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
 			$this->dbforge->add_field(get_users_groups_fields()); 	// get_user_table_fields() returns an array with the fields
-			$this->dbforge->add_key('id',true);						// set the primary keys
+			$this->dbforge->add_key('user_id',true);						// set the primary keys
+			$this->dbforge->add_key('group_id',true);
 			$this->dbforge->create_table('users_groups');
 			
 			log_message('info', "Created table: users_groups");
@@ -260,8 +273,6 @@ class Install_model extends CI_Model {
 			$data = array(
 			   'user_id' => 1,
 			   'group_id' => 1,
-			   'start' => "2011-06-01 00:00:00",
-			   'stop' => "2012-06-01 00:00:00",
 			   'position' => "Studienämndsordförande",
 			   'email' => "snordf@medieteknik.nu",
 			);

@@ -29,5 +29,16 @@ function readable_date($date, $lang = '') {
 }
 
 function compact_name($name) {
-	return preg_replace("/ /","_",strtolower($name));
+	$string = strtolower($name);
+	$string = preg_replace("/(å|ä)/","a",$string);
+	$string = preg_replace("/(ö)/","o",$string);
+	return preg_replace("/[^A-Za-z0-9_]/","_",strtolower($string));
+}
+
+function uncompact_name($name) {
+	$string = preg_replace("/^_*/", "", $name);
+	$string = preg_replace("/_*$/", "", $string);
+	$string = preg_replace("/[_]+/i", ".{1}", $string);
+	$string = preg_replace("/a/i", "(a|å|ä){1}", $string);
+	return preg_replace("/o/i", "(o|ö){1}", $string);
 }
