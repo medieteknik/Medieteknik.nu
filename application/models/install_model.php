@@ -111,7 +111,7 @@ class Install_model extends CI_Model {
 			$this->db->insert('news', $data);
 			$data = array(
 			   'user_id' => 2,
-			   'user_group_id' => 1 ,
+			   'group_id' => 1 ,
 			   'date' => "2011-12-11 11:11:00",
 			   'draft' => 0,
 			   'approved' => 1,
