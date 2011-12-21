@@ -15,6 +15,11 @@ class Install_model extends CI_Model {
 		$this->create_groups_table();
 		$this->create_users_groups_table();
 		$this->create_groups_descriptions_table();
+		$this->create_forum_categories_table();
+		$this->create_forum_categories_descriptions_table();
+		$this->create_forum_topic_table();
+		$this->create_forum_reply_table();
+		$this->create_forum_reply_guest_table();
 
 		// Log a debug message
 		log_message('debug', "Install_model Class Initialized");
@@ -277,6 +282,132 @@ class Install_model extends CI_Model {
 			   'email' => "snordf@medieteknik.nu",
 			);
 			$this->db->insert('users_groups', $data);
+		}
+	}
+	
+	function create_forum_categories_table() {
+		if(!$this->db->table_exists('forum_categories'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_forum_categories_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('forum_categories');
+			
+			log_message('info', "Created table: forum_categories");
+			
+			$data = array(
+			   'sub_to_id' => 0,
+				'guest_allowed' => 1,
+				'posting_allowed' => 1,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			$data = array(
+			   'sub_to_id' => 0,
+				'guest_allowed' => 0,
+				'posting_allowed' => 1,
+			);
+			$this->db->insert('forum_categories', $data);
+		}
+	}
+	
+	function create_forum_categories_descriptions_table() {
+		if(!$this->db->table_exists('forum_categories_descriptions'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_forum_categories_descriptions_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('cat_id',true);
+			$this->dbforge->add_key('lang_id',true);
+			$this->dbforge->create_table('forum_categories_descriptions');
+			
+			log_message('info', "Created table: forum_categories_descriptions");
+			
+			$data = array(
+			   	'cat_id' => 1,
+				'lang_id' => 1,
+				'title' => 'Sökande',
+				'description' => 'I den här forumdelen kan gäster skriva och fråga om medieteknikprogrammet.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 1,
+				'lang_id' => 2,
+				'title' => 'Applicant',
+				'description' => 'In this forum guests can post and ask questions about Media Technology',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 2,
+				'lang_id' => 1,
+				'title' => 'Medieteknikdagarna',
+				'description' => 'Här pratar vi om Medieteknikdagarna',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 2,
+				'lang_id' => 2,
+				'title' => 'Media Technology Days',
+				'description' => 'This forum is reserved for discussions about the Media Technology Days',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+		}
+	}
+	
+	function create_forum_topic_table() {
+		if(!$this->db->table_exists('forum_topic'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_forum_topic_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('forum_topic');
+			
+			log_message('info', "Created table: forum_topic");
+			
+			$data = array(
+			   	'cat_id' => 2,
+				'user_id' => 1,
+				'topic' => 'När börjar det?',
+				'post_date' => '2011-12-12 11:00:00',
+			);
+			$this->db->insert('forum_topic', $data);
+		}
+	}
+	
+	function create_forum_reply_table() {
+		if(!$this->db->table_exists('forum_reply'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_forum_reply_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('forum_reply');
+			
+			log_message('info', "Created table: forum_reply");
+			
+			$data = array(
+			   	'topic_id' => 1,
+				'user_id' => 1,
+				'reply' => 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?\nDet viktiga är inte exakt dag utan på ett ungefär?\n\npuss',
+				'reply_date' => '2011-12-12 11:00:00',
+			);
+			$this->db->insert('forum_reply', $data);
+		}
+	}
+	
+	function create_forum_reply_guest_table() {
+		if(!$this->db->table_exists('forum_reply_guest'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_forum_reply_guest_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('forum_reply_guest');
+			
+			log_message('info', "Created table: forum_reply_guest");
 		}
 	}
 	

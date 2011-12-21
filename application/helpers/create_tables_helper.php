@@ -198,5 +198,144 @@ function get_users_groups_fields()
 	return $fields;
 }
 
+function get_forum_categories_fields() {
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'sub_to_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'default' => 0
+		),
+		'guest_allowed' => array(
+			'type' => 'TINYINT',
+			'unsigned' => TRUE,
+			'default' => 0
+		),
+		'posting_allowed' => array(
+			'type' => 'TINYINT',
+			'unsigned' => TRUE,
+			'default' => 1
+		),
+		);
+	return $fields;
+}
+
+function get_forum_categories_descriptions_fields() {
+	$fields = array(
+		'cat_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'lang_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'title' => array(
+			'type' => 'VARCHAR',
+			'constraint' => "50",
+		),
+		'description' => array(
+			'type' => 'VARCHAR',
+			'constraint' => "300",
+		),
+		);
+	return $fields;
+}
+
+function get_forum_topic_fields() {
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'cat_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'topic' => array(
+			'type' => 'VARCHAR',
+			'constraint' => "100",
+		),
+		'post_date' => array(
+			'type' => 'DATETIME',
+		),
+		);
+	return $fields;
+}
+
+function get_forum_reply_fields() {
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'topic_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'reply' => array(
+			'type' => 'TEXT',
+		),
+		'reply_date' => array(
+			'type' => 'DATETIME',
+		),
+		);
+	return $fields;
+}
+
+function get_forum_reply_guest_fields() {
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'topic_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'post' => array(
+			'type' => 'TEXT',
+		),
+		'reply_date' => array(
+			'type' => 'DATETIME',
+		),
+		'first_name' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'email' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '320',
+		),
+		);
+	return $fields;
+}
 
 
