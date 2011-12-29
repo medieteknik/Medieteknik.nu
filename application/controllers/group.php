@@ -30,6 +30,15 @@ class Group extends CI_Controller {
 		$this->load->model('Group_model');
 		$groups_data['groups_array'] = $this->Group_model->get_all_groups();
 		$groups_data['common_lang'] = $this->lang->load_with_fallback('common', $this->language, 'swedish');
+		
+		// image
+		$this->load->library('imagemanip');
+		$mhm = new imagemanip();$mhm->create("example");
+		$mhm2 = new imagemanip();$mhm2->create("example_large");
+		$groups_data['images_array'] = array($mhm,$mhm2);
+		//echo $mhm->get_img_tag();
+		//$mhm = $this->imagemanip->create("jonas");
+		//echo $mhm->filename_thumb;
 
 		$this->load->view('includes/head',$header_data);
 		$this->load->view('includes/header');
