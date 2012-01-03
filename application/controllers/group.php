@@ -31,6 +31,10 @@ class Group extends CI_Controller {
 		$groups_data['groups_array'] = $this->Group_model->get_all_groups();
 		$groups_data['common_lang'] = $this->lang->load_with_fallback('common', $this->language, 'swedish');
 		
+		// tweets
+		$this->load->model('Tweet_model');
+		$groups_data['tweet_array'] = $this->Tweet_model->get_latest_tweets();
+		
 		// image
 		$this->load->library('imagemanip');
 		$mhm = new imagemanip();$mhm->create("example");
