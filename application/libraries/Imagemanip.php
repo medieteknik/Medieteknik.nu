@@ -141,8 +141,7 @@ class Imagemanip
 	}
 	
 	private function generate_image($fullsize = false) {
-		
-		if(!file_exists($this->path_to_thumb_directory.$this->filename_thumb) || true) {
+		if(!file_exists($this->path_to_thumb_directory.$this->filename_thumb)) {
 			if(!is_writable($this->path_to_thumb_directory)) {
 				return false;
 			}
