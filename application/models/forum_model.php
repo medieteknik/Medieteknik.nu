@@ -9,21 +9,25 @@ class Forum_model extends CI_Model {
 
     function get_all_categories_sub_to($id = 0, $lang = 'se')
     {
-		$this->db->select("forum_categories.id, forum_categories.guest_allowed, forum_categories.posting_allowed");
-		$this->db->select("forum_categories_descriptions.title, forum_categories_descriptions.description");
-		$this->db->from("forum_categories");
-		$this->db->join("forum_categories_descriptions", 'forum_categories.id = forum_categories_descriptions.cat_id', 'left');
-		$this->db->join("language", 'forum_categories_descriptions.lang_id = language.id', 'left');
-		$this->db->order_by("forum_categories_descriptions.title ASC");
-		$this->db->where('language.language_abbr', $lang);
-		$this->db->where('forum_categories.sub_to_id', $id);
-		$query = $this->db->get();
+		$prim = $lang;
+		if($prim == 'se') $sec = 'en';
+		if($prim == 'en') $sec = 'se';
+		
+		$arr = array("title", "description");
+		
+		$q = "SELECT forum_categories.id, forum_categories.guest_allowed, forum_categories.posting_allowed ";
+		$q .= $this->db->get_select_lang($arr, $prim, $sec);
+		$q .= "FROM forum_categories ";
+		$q .= $this->db->get_join_language("forum_categories_descriptions", "cat_id",'forum_categories.id', $prim, $arr);
+		$q .= $this->db->get_join_language("forum_categories_descriptions", "cat_id",'forum_categories.id', $sec, $arr);
+		$q .= "WHERE forum_categories.sub_to_id = '".$id."' ORDER BY title ASC";
+		
+		$query = $this->db->query($q);
 		
 		$result = $query->result();
 		foreach($result as $res) {
 			$res->sub_categories = $this->get_all_categories_sub_to($res->id, $lang);
 		}
-		
         return $result;
     }
 
@@ -36,6 +40,25 @@ class Forum_model extends CI_Model {
 	AND language.language_abbr =  'se'
 	OR language.language_abbr IS NULL 
 	LIMIT 0 , 30
+	
+	SELECT COALESCE( title_se, title_en ) AS title
+	FROM forum_categories
+	LEFT JOIN (
+
+	SELECT cat_id, title AS title_se
+	FROM forum_categories_descriptions
+	JOIN language ON forum_categories_descriptions.lang_id = language.id
+	WHERE language.language_abbr =  'se'
+	) AS prim ON prim.cat_id = forum_categories.id
+	LEFT JOIN (
+
+	SELECT cat_id, title AS title_en
+	FROM forum_categories_descriptions
+	JOIN language ON forum_categories_descriptions.lang_id = language.id
+	WHERE language.language_abbr =  'en'
+	) AS sec ON sec.cat_id = forum_categories.id
+	
+title
 	*/
 }
 
