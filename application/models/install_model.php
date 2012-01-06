@@ -34,6 +34,7 @@ class Install_model extends CI_Model {
     }
  	
 	function create_sql_functions() {
+		$arr = array();
 		$query = $this->db->query("SHOW FUNCTION STATUS");
 		foreach($query->result() as $r) {
 			if($r->Db == "medieteknik") {

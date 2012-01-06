@@ -18,12 +18,16 @@ class MY_DB_mysql_driver extends CI_DB_mysql_driver {
 		$abbr_array = $ci->config->item('lang_uri_abbr');
 		
 		unset($abbr_array[$prim_abbr]);
-		
 		$sec_abbr = key($abbr_array);
-		$query = $this->query("SELECT id FROM language WHERE language_abbr = '".$prim_abbr."' OR language_abbr = '".$sec_abbr."' ORDER BY FIELD(language_abbr, '".$prim_abbr."', '".$sec_abbr."')");
-		$result = $query->result();
-		$this->query("SET @primary_language_id = ".$result[0]->id.";");
-		$this->query("SET @secondary_language_id = ".$result[1]->id.";");
+		if($this->table_exists('language')) {
+			$query = $this->query("SELECT id FROM language WHERE language_abbr = '".$prim_abbr."' OR language_abbr = '".$sec_abbr."' ORDER BY FIELD(language_abbr, '".$prim_abbr."', '".$sec_abbr."')");
+			$result = $query->result();
+			$this->query("SET @primary_language_id = ".$result[0]->id.";");
+			$this->query("SET @secondary_language_id = ".$result[1]->id.";");
+		} else {
+			$this->query("SET @primary_language_id = 1;");
+			$this->query("SET @secondary_language_id = 2;");
+		}
 		
         log_message('debug', 'Extended DB driver class instantiated!');
     }

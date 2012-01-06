@@ -9,25 +9,12 @@ class Forum_model extends CI_Model {
 
     function get_all_categories_sub_to($id = 0)
     {
-		
-		
 		$this->db->select("*");
 		$this->db->from("forum_categories");
 		$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
 		$this->db->where("forum_categories.sub_to_id", $id);
 		$this->db->order_by("title ASC");
 		$query = $this->db->get();
-		/*
-		$q = "SELECT forum_categories.id, forum_categories.guest_allowed, forum_categories.posting_allowed ";
-		$q .= $this->db->get_select_lang($arr, $prim, $sec);
-		$q .= "FROM forum_categories ";
-		$q .= $this->db->get_join_language("forum_categories_descriptions", "cat_id",'forum_categories.id', $prim, $arr);
-		$q .= $this->db->get_join_language("forum_categories_descriptions", "cat_id",'forum_categories.id', $sec, $arr);
-		$q .= "WHERE forum_categories.sub_to_id = '".$id."' ORDER BY title ASC";
-		
-		$query = $this->db->query($q);
-		*/
-		
 		$result = $query->result();
 		foreach($result as $res) {
 			$res->sub_categories = $this->get_all_categories_sub_to($res->id);
