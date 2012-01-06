@@ -7,14 +7,17 @@ class Forum_model extends CI_Model {
         parent::__construct();
     }
 
-    function get_all_categories_sub_to($id = 0, $lang = 'se')
+    function get_all_categories_sub_to($id = 0)
     {
-		$prim = $lang;
-		if($prim == 'se') $sec = 'en';
-		if($prim == 'en') $sec = 'se';
 		
-		$arr = array("title", "description");
 		
+		$this->db->select("*");
+		$this->db->from("forum_categories");
+		$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
+		$this->db->where("forum_categories.sub_to_id", $id);
+		$this->db->order_by("title ASC");
+		$query = $this->db->get();
+		/*
 		$q = "SELECT forum_categories.id, forum_categories.guest_allowed, forum_categories.posting_allowed ";
 		$q .= $this->db->get_select_lang($arr, $prim, $sec);
 		$q .= "FROM forum_categories ";
@@ -23,11 +26,13 @@ class Forum_model extends CI_Model {
 		$q .= "WHERE forum_categories.sub_to_id = '".$id."' ORDER BY title ASC";
 		
 		$query = $this->db->query($q);
+		*/
 		
 		$result = $query->result();
 		foreach($result as $res) {
-			$res->sub_categories = $this->get_all_categories_sub_to($res->id, $lang);
+			$res->sub_categories = $this->get_all_categories_sub_to($res->id);
 		}
+		
         return $result;
     }
 
@@ -58,7 +63,30 @@ class Forum_model extends CI_Model {
 	WHERE language.language_abbr =  'en'
 	) AS sec ON sec.cat_id = forum_categories.id
 	
-title
+	SELECT
+	    e.cat_id,COALESCE(o.title,e.title)
+	    FROM forum_categories_descriptions                e
+	        LEFT OUTER JOIN forum_categories_descriptions o ON e.cat_id=o.cat_id and o.lang_id='1'
+	    WHERE e.lang_id='2'
+	
+	SET @prim = 1;
+	SET @sec = 2;
+
+SET @primary_language_id = 1;
+SET @secondary_language_id = 2;
+
+CREATE FUNCTION get_primary_language_id()
+RETURNS INT(5)
+RETURN @primary_language_id;
+
+CREATE FUNCTION get_secondary_language_id()
+RETURNS INT(5)
+RETURN @secondary_language_id;
+
+CREATE OR REPLACE VIEW forum_categories_descriptions_language AS (SELECT e.cat_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.description,e.description) as description  
+FROM forum_categories_descriptions               e
+LEFT OUTER JOIN forum_categories_descriptions o ON e.cat_id=o.cat_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()
+WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))
 	*/
 }
 

@@ -26,7 +26,15 @@ class Group_model extends CI_Model {
 		$use_name = uncompact_name($name);
 		
 		//echo $use_name;
-		
+		$this->db->select("groups.id, groups.group_name, groups_descriptions_language.description");
+		$this->db->from("groups");
+		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.group_id", "");
+		$this->db->where("groups.id IN (SELECT groups.id FROM groups WHERE groups.group_name REGEXP '^(".$use_name.")$' )");
+		//$this->db->order_by("title ASC");
+		$this->db->limit(1);
+		$query = $this->db->get();
+		/*
+		$query = $this->db->get();
 		$query = $this->db->query("
 			SELECT groups.id, groups.group_name, groups_descriptions.description FROM groups
 			LEFT JOIN groups_descriptions ON groups.id = groups_descriptions.group_id
@@ -34,7 +42,7 @@ class Group_model extends CI_Model {
 			WHERE groups.id IN (SELECT groups.id FROM groups WHERE groups.group_name REGEXP '^(".$use_name.")$' ) AND (language.language_abbr = '".$lang."' OR language.language_abbr IS NULL)
 			LIMIT 1
 		");
-		
+		*/
 	    return $query->result();
 		/*
 		$this->db->select("groups.id, groups.group_name, groups_descriptions.description");

@@ -12,40 +12,20 @@
 class MY_DB_mysql_driver extends CI_DB_mysql_driver {
     final public function __construct($params) {
         parent::__construct($params);
+		
+		$ci = & get_instance();
+		$prim_abbr = $ci->config->item('language_abbr');
+		$abbr_array = $ci->config->item('lang_uri_abbr');
+		
+		unset($abbr_array[$prim_abbr]);
+		
+		$sec_abbr = key($abbr_array);
+		$query = $this->query("SELECT id FROM language WHERE language_abbr = '".$prim_abbr."' OR language_abbr = '".$sec_abbr."' ORDER BY FIELD(language_abbr, '".$prim_abbr."', '".$sec_abbr."')");
+		$result = $query->result();
+		$this->query("SET @primary_language_id = ".$result[0]->id.";");
+		$this->query("SET @secondary_language_id = ".$result[1]->id.";");
+		
         log_message('debug', 'Extended DB driver class instantiated!');
     }
-
-	final public function get_select_lang($in, $prim = 'se', $sec  = "en")
-	{
-		$q = " ";
-		if(is_array($in)) {
-			foreach($in as $a) {
-				$q .= ", COALESCE(".$a."_".$prim.",".$a."_".$sec.") as ".$a." ";
-			}
-		} else {
-			$q .= ", COALESCE(".$a."_".$prim.",".$a."_".$sec.") as ".$a." ";
-		}
-		return $q;
-		
-	}
-	final public function get_join_language($table, $cond1, $cond2, $lang = '', $in)
-	{
-		
-		$prim = $lang;
-		$name = $table."_".$lang;
-		
-		$q = "LEFT JOIN (SELECT ". $cond1 . " ";
-		if(is_array($in)) {
-			foreach($in as $a) {
-				$q .= "," . $a . " as ". $a . "_". $prim;
-			}
-		} else {
-			$q .= $in . " as ". $in . "_". $prim;
-		}
-		$q .= " FROM " . $table ." JOIN language ON ".$table.".lang_id = language.id WHERE language.language_abbr =  '".$prim."') as ".$name." ON ".$name.".".$cond1." = ". $cond2 . " ";
-		
-		return $q;
-		
-	}
 }
 ?>
