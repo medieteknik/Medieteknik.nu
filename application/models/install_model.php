@@ -1,6 +1,5 @@
 <?php
 class Install_model extends CI_Model {
-
     function __construct()
     {
         // Call the Model constructor
@@ -59,30 +58,14 @@ class Install_model extends CI_Model {
 			$this->dbforge->add_field(get_user_table_fields()); 	// get_user_table_fields() returns an array with the fields
 			$this->dbforge->add_key('id',true);						// set the primary keys
 			$this->dbforge->create_table('users');
-			
+			$q = $this->db->query("ALTER TABLE  `users` ADD UNIQUE (`lukasid`)");
 			log_message('info', "Created table: users");
 			
-			// inserting data
-			$data = array(
-			   'first_name' => 'Jonas' ,
-			   'last_name' => 'Strandstedt' ,
-			   'lukasid' => 'jonst123'
-			);
-			$this->db->insert('users', $data);
-			
-			$data = array(
-			   'first_name' => 'John' ,
-			   'last_name' => 'Doe' ,
-			   'lukasid' => 'johdo987'
-			);
-			$this->db->insert('users', $data);
-			
-			$data = array(
-			   'first_name' => 'Joe' ,
-			   'last_name' => 'Schmoe' ,
-			   'lukasid' => 'joesc567'
-			);
-			$this->db->insert('users', $data);
+			// inserting users
+			$this->load->model("User_model");
+			$this->User_model->add_user("Jonas", "Strandstedt", "jonst184", "password");
+			$this->User_model->add_user("Emil", "Axelsson", "emiax775", "password");
+			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
 		}
 	}
 	
@@ -99,19 +82,10 @@ class Install_model extends CI_Model {
 			
 			log_message('info', "Created table: language");
 			
-			// inserting data
-			$data = array(
-			   'language_abbr' => 'se' ,
-			   'language_name' => 'Svenska' ,
-			   'language_order' => 1
-			);
+			// Adding language
+			$data = array('language_abbr' => 'se' , 'language_name' => 'Svenska' , 'language_order' => 1);
 			$this->db->insert('language', $data);
-			
-			$data = array(
-			   'language_abbr' => 'en' ,
-			   'language_name' => 'English' ,
-			   'language_order' => 2
-			);
+			$data = array('language_abbr' => 'en' ,'language_name' => 'English' ,'language_order' => 2);
 			$this->db->insert('language', $data);
 		}
 	}
@@ -128,23 +102,6 @@ class Install_model extends CI_Model {
 			$this->dbforge->create_table('news');
 			
 			log_message('info', "Created table: news");
-			
-			$data = array(
-			   'user_id' => 1,
-			   'group_id' => 1 ,
-			   'date' => "2011-11-11 11:11:00",
-			   'draft' => 0,
-			   'approved' => 1,
-			);
-			$this->db->insert('news', $data);
-			$data = array(
-			   'user_id' => 2,
-			   'group_id' => 1 ,
-			   'date' => "2011-12-11 11:11:00",
-			   'draft' => 0,
-			   'approved' => 1,
-			);
-			$this->db->insert('news', $data);
 		}
 	}
 	
@@ -162,41 +119,15 @@ class Install_model extends CI_Model {
 			
 			log_message('info', "Created table: news_translation");
 			
-			$data = array(
-			   'news_id' => 1,
-			   'lang_id' => 1,
-			   'title' => "Klistrad nyhet!",
-			   'text' => "Den här nyheten är verkligen klistrad",
-			   'last_edit' => "0000-00-00 00:00:00"
-			);
-			$this->db->insert('news_translation', $data);
+			$this->load->model("News_model");
+			$translations = array(
+									array("lang" => "se", "title" => "Klistrad nyhet!", "text" => "Den här nyheten är verkligen klistrad"),
+									array("lang" => "en", "title" => "Sticky News!", "text" => "This is some sticky news!"),
+								);
+			$this->News_model->add_news(1,0, $translations, "2012-01-06");
+			$this->News_model->add_news(1,0, array("lang_abbr" => "se", "title" => "Inte klistrad!", "text" => "Den här nyheten är inte klistrad eller översatt!"), "2012-01-06");
 			
-			$data = array(
-			   'news_id' => 1,
-			   'lang_id' => 2,
-			   'title' => "Sticky News!",
-			   'text' => "This is some sticky news!",
-			   'last_edit' => "0000-00-00 00:00:00"
-			);
-			$this->db->insert('news_translation', $data);
-			
-			$data = array(
-			   'news_id' => 2,
-			   'lang_id' => 1,
-			   'title' => "Inte klistrad!",
-			   'text' => "Den här nyheten är inte klistrad!",
-			   'last_edit' => "0000-00-00 00:00:00"
-			);
-			$this->db->insert('news_translation', $data);
-			
-			$data = array(
-			   'news_id' => 2,
-			   'lang_id' => 2,
-			   'title' => "Not sticky!",
-			   'text' => "TThis news is not sticky!",
-			   'last_edit' => "0000-00-00 00:00:00"
-			);
-			$this->db->insert('news_translation', $data);
+
 		}
 	}
 	
@@ -319,17 +250,102 @@ class Install_model extends CI_Model {
 			
 			log_message('info', "Created table: forum_categories");
 			
+			//applicant
 			$data = array(
 			   'sub_to_id' => 0,
 				'guest_allowed' => 1,
-				'posting_allowed' => 1,
+				'posting_allowed' => 0,
+				'order' => 2,
 			);
 			$this->db->insert('forum_categories', $data);
 			
+			// student
 			$data = array(
 			   'sub_to_id' => 0,
 				'guest_allowed' => 0,
+				'posting_allowed' => 0,
+				'order' => 1,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// ADVERTISEMENT
+			$data = array(
+			   'sub_to_id' => 0,
+				'guest_allowed' => 0,
+				'posting_allowed' => 0,
+				'order' => 3,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// school
+			$data = array(
+			   'sub_to_id' => 2,
+				'guest_allowed' => 0,
 				'posting_allowed' => 1,
+				'order' => 1,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// work and LEISURE
+			$data = array(
+			   'sub_to_id' => 2,
+				'guest_allowed' => 0,
+				'posting_allowed' => 1,
+				'order' => 2,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// buy and sell
+			$data = array(
+			   'sub_to_id' => 2,
+				'guest_allowed' => 0,
+				'posting_allowed' => 1,
+				'order' => 3,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// ACG
+			$data = array(
+			   'sub_to_id' => 2,
+				'guest_allowed' => 0,
+				'posting_allowed' => 1,
+				'order' => 4,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// thesis
+			$data = array(
+			   'sub_to_id' => 3,
+				'guest_allowed' => 0,
+				'posting_allowed' => 1,
+				'order' => 1,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// other services
+			$data = array(
+			   'sub_to_id' => 3,
+				'guest_allowed' => 0,
+				'posting_allowed' => 1,
+				'order' => 2,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// advertisement
+			$data = array(
+			   'sub_to_id' => 3,
+				'guest_allowed' => 0,
+				'posting_allowed' => 1,
+				'order' => 3,
+			);
+			$this->db->insert('forum_categories', $data);
+			
+			// q&a
+			$data = array(
+			   'sub_to_id' => 1,
+				'guest_allowed' => 1,
+				'posting_allowed' => 1,
+				'order' => 1,
 			);
 			$this->db->insert('forum_categories', $data);
 		}
@@ -365,17 +381,147 @@ class Install_model extends CI_Model {
 			$data = array(
 			   	'cat_id' => 2,
 				'lang_id' => 1,
-				'title' => 'Medieteknikdagarna',
-				'description' => 'Här pratar vi om Medieteknikdagarna',
+				'title' => 'Student',
+				'description' => 'Detta forum är avsett för studenter att prata om allt och inget',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
 			$data = array(
 			   	'cat_id' => 2,
 				'lang_id' => 2,
-				'title' => 'Media Technology Days',
-				'description' => 'This forum is reserved for discussions about the Media Technology Days',
+				'title' => 'Student',
+				'description' => 'This forum is for students',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 3,
+				'lang_id' => 1,
+				'title' => 'Annonser och jobb',
+				'description' => 'Här finns alla annonser och jobb samlade',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 3,
+				'lang_id' => 2,
+				'title' => 'Ads and jobs',
+				'description' => 'Here is all the ads and jobs',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 4,
+				'lang_id' => 1,
+				'title' => 'Skolan',
+				'description' => 'Allt som rör kurser, plugg och annat skolreleterat.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 4,
+				'lang_id' => 2,
+				'title' => 'School',
+				'description' => 'All about courses, studying and other school related topics.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 5,
+				'lang_id' => 1,
+				'title' => 'Köp & sälj',
+				'description' => 'Känner du att du har för många prylar? Sälj överflödet här.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 5,
+				'lang_id' => 2,
+				'title' => 'Buy & sell',
+				'description' => 'Too much stuff? Sell it here',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 6,
+				'lang_id' => 1,
+				'title' => 'Arbete & fritid',
+				'description' => 'Om det gäller fest, sportande, jobb eller bara allmän fritid, skriv här.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 6,
+				'lang_id' => 2,
+				'title' => 'Work & leisure',
+				'description' => 'Partying, partying yeah! Fun fun fun fun!',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			// english only for ACG
+			$data = array(
+			   	'cat_id' => 7,
+				'lang_id' => 2,
+				'title' => 'Advanced Computer Graphics',
+				'description' => 'This forum is for ACG students and topics about the Master program ACG.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 8,
+				'lang_id' => 1,
+				'title' => 'Exjobb',
+				'description' => 'Annonser om exjobb här',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 8,
+				'lang_id' => 2,
+				'title' => 'Thesis',
+				'description' => 'Ads about thesis here',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 9,
+				'lang_id' => 1,
+				'title' => 'Övriga tjänster',
+				'description' => 'Andra jobberbjudanden.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 9,
+				'lang_id' => 2,
+				'title' => 'Other Services',
+				'description' => 'Jobs',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 10,
+				'lang_id' => 1,
+				'title' => 'Övriga annonser',
+				'description' => 'Annonser',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 10,
+				'lang_id' => 2,
+				'title' => 'Other advertisements',
+				'description' => 'Ads',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
+			$data = array(
+			   	'cat_id' => 11,
+				'lang_id' => 1,
+				'title' => 'Frågor & svar',
+				'description' => 'Undrar du något om hur det är att plugga medieteknik? Fråga här.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			$data = array(
+			   	'cat_id' => 11,
+				'lang_id' => 2,
+				'title' => 'Questions & Answers',
+				'description' => 'Have a question about Medie Technology? Ask it here.',
+			);
+			$this->db->insert('forum_categories_descriptions', $data);
+			
 		}
 	}
 	

@@ -5,9 +5,9 @@ foreach($tweet_array as $tweet) {
 	echo '<div style="background-color: #'.$tweet->user->profile_sidebar_fill_color.';"><img src="'.$tweet->user->profile_image_url.'" />'.$tweet->user->screen_name . ": " . $tweet->text . "</div>";
 }
 
-echo "<pre>";
-var_dump($tweet_array);
-echo "</pre>";
+//echo "<pre>";
+//var_dump($tweet_array);
+//echo "</pre>";
 
 
 
@@ -22,4 +22,3 @@ foreach($groups_array as $group) {
 		echo '<li>'.anchor('group/info/'.compact_name($group->group_name),$group->group_name).'</li>';
 	echo '</ul>';
 }
-?>

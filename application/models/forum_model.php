@@ -13,7 +13,7 @@ class Forum_model extends CI_Model {
 		$this->db->from("forum_categories");
 		$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
 		$this->db->where("forum_categories.sub_to_id", $id);
-		$this->db->order_by("title ASC");
+		$this->db->order_by("order ASC");
 		$query = $this->db->get();
 		$result = $query->result();
 		foreach($result as $res) {

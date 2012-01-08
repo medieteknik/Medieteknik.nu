@@ -3,6 +3,10 @@
 <?php 
 foreach($categories_array as $cat) {
 	echo $cat->title . "<br/>";
+	foreach($cat->sub_categories as $subcat) {
+		echo $subcat->title . " - " .$subcat->description. "<br/>";
+	}
+	echo "<br/>";
 }
 
 ?>

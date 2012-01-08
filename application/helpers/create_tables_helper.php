@@ -21,6 +21,10 @@ function get_user_table_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '10',
 			),
+		'password_hash' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '130',
+			),
 		);
 	return $fields;
 }
@@ -221,6 +225,18 @@ function get_forum_categories_fields() {
 			'type' => 'TINYINT',
 			'unsigned' => TRUE,
 			'default' => 1
+		),
+		'group_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			'default' => 0
+		),
+		'order' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			'default' => 0
 		),
 		);
 	return $fields;
