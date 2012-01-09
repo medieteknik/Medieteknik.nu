@@ -22,6 +22,8 @@ class Install_model extends CI_Model {
 		$this->create_forum_topic_table();
 		$this->create_forum_reply_table();
 		$this->create_forum_reply_guest_table();
+		$this->create_privileges_table();
+		$this->create_users_privileges_table();
 		
 		// check all views exist
 		$this->create_forum_categories_descriptions_language_view();
@@ -577,6 +579,67 @@ class Install_model extends CI_Model {
 			$this->dbforge->create_table('forum_reply_guest');
 			
 			log_message('info', "Created table: forum_reply_guest");
+		}
+	}
+	
+	function create_privileges_table() {
+		if(!$this->db->table_exists('privileges'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_privileges_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('privileges');
+			
+			log_message('info', "Created table: privileges");
+			
+			$data = array(
+			   	'privilege_name' => 'admin',
+				'privilege_description' => 'Allows the user to acces the admin controller'
+			);
+			$this->db->insert('privileges', $data);
+			
+			$data = array(
+			   	'privilege_name' => 'forum_moderator',
+				'privilege_description' => 'Allows user to moderate forum'
+			);
+			$this->db->insert('privileges', $data);
+			
+			$data = array(
+			   	'privilege_name' => 'news_post',
+				'privilege_description' => 'Allows user to post news, but not approve them'
+			);
+			$this->db->insert('privileges', $data);
+			
+			$data = array(
+			   	'privilege_name' => 'news_editor',
+				'privilege_description' => 'Allows user to post news, and approve them'
+			);
+			$this->db->insert('privileges', $data);
+		}
+	}
+	
+	function create_users_privileges_table() {
+		if(!$this->db->table_exists('users_privileges'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_users_privileges_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('user_id',true);
+			$this->dbforge->add_key('privilege_id',true);
+			$this->dbforge->create_table('users_privileges');
+			
+			log_message('info', "Created table: users_privileges");
+			
+			// admin
+			$data = array('user_id' => 1,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 2,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
+			
+			// news_post
+			$data = array('user_id' => 3,'privilege_id' => 3);
+			$this->db->insert('users_privileges', $data);
 		}
 	}
 	

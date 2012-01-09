@@ -18,8 +18,10 @@ class Admin extends CI_Controller {
 	}
 	
 	function login() {
-		//$this->login->validate("jonst184", "password", true);
+		
 		$this->login->logout();
+		$this->login->validate("jonst184", "password");
+		
 		if($this->login->is_logged_in()) {
 			echo "logged in";
 		}

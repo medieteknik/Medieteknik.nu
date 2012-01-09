@@ -28,10 +28,15 @@ class Login
 		return false;
 	}
 	
-	public function has_privilege() {
+	public function has_privilege($privileges) {
+		if(!isset($privileges)) {
+			return false;
+		}
+		
 		if($this->is_logged_in()) {
-			// needs a little modification ;D
-			return true;
+			$id = $this->CI->session->userdata('id');
+			$this->CI->load->model('User_model');
+			return $this->CI->User_model->has_privilege($id, $privileges);
 		}
 		return false;
 	}
@@ -44,6 +49,11 @@ class Login
 		{
 			$result = $query->result();
 			$result = $result[0];
+			
+			if($admin === true && !$this->CI->User_model->has_privilege($result->id, "admin")) { 
+				return false;
+			}
+			
 			$data = array(
 				'id' => $result->id,
 				'lukasid' => $result->lukasid,

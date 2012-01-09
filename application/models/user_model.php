@@ -21,6 +21,38 @@ class User_model extends CI_Model {
 		return false;
 		
 	}
+	
+	function has_privilege($user_id, $privilege) {
+		if(!is_array($privilege)) {
+			$thePrivileges = array($privilege);
+		}
+		$first = true;
+		
+		$this->db->select("*");
+		$this->db->from("privileges");
+		$this->db->join("users_privileges", "users_privileges.privilege_id = privileges.id", "");
+		$this->db->where("users_privileges.user_id", $user_id);
+		foreach($thePrivileges as $p) {
+			if($first) {
+				$this->db->where("privileges.privilege_name ", $p);
+				$first = false;
+			} else {
+				$this->db->or_where("privileges.privilege_name ", $p);
+			}
+		}
+		
+		$query = $this->db->get();
+		if($query->num_rows == 1)
+		{
+			return true;
+		}
+		return false;
+/*
+SELECT * FROM privileges
+JOIN users_privileges ON users_privileges.privilege_id = privileges.id
+WHERE privileges.privilege_name = 'admin' AND users_privileges.user_id = '1'
+*/
+	}
     
     function get_all_users()
     {

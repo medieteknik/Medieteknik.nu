@@ -354,4 +354,38 @@ function get_forum_reply_guest_fields() {
 	return $fields;
 }
 
+function get_privileges_fields(){
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'privilege_name' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '20',
+		),
+		'privilege_description' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '320',
+		),
+		);
+	return $fields;
+}
 
+function get_users_privileges_fields(){
+	$fields = array(
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE
+		),
+		'privilege_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE
+		)
+		);
+	return $fields;
+}
