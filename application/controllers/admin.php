@@ -7,7 +7,7 @@ class Admin extends CI_Controller {
         // Call the Model constructor
         parent::__construct();
 
-		if($this->login->is_admin() && $this->uri->segment(2) != "login") {
+		if(!$this->login->is_admin() && $this->uri->segment(2) != "login") {
 			redirect('/admin/login/', 'refresh');
 		}
     }
@@ -20,13 +20,17 @@ class Admin extends CI_Controller {
 	function login() {
 		
 		$this->login->logout();
-		$this->login->validate("jonst184", "password");
+		$this->login->validate("emiax775", "password");
 		
 		if($this->login->is_logged_in()) {
 			echo "logged in";
 		}
 		if($this->login->is_admin()) {
 			echo " and admin";
+		}
+		
+		if($this->login->has_privilege("admin")) {
+			echo "<br> true";
 		}
 	}
 	

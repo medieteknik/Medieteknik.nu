@@ -25,6 +25,8 @@ class User_model extends CI_Model {
 	function has_privilege($user_id, $privilege) {
 		if(!is_array($privilege)) {
 			$thePrivileges = array($privilege);
+		} else {
+			$thePrivileges = $privilege;
 		}
 		$first = true;
 		
@@ -32,6 +34,8 @@ class User_model extends CI_Model {
 		$this->db->from("privileges");
 		$this->db->join("users_privileges", "users_privileges.privilege_id = privileges.id", "");
 		$this->db->where("users_privileges.user_id", $user_id);
+		$this->db->where_in("privileges.privilege_name ", $thePrivileges);
+		/*
 		foreach($thePrivileges as $p) {
 			if($first) {
 				$this->db->where("privileges.privilege_name ", $p);
@@ -40,9 +44,10 @@ class User_model extends CI_Model {
 				$this->db->or_where("privileges.privilege_name ", $p);
 			}
 		}
+		*/
 		
 		$query = $this->db->get();
-		if($query->num_rows == 1)
+		if($query->num_rows > 0)
 		{
 			return true;
 		}
