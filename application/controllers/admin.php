@@ -50,6 +50,7 @@ class Admin extends CI_Controller {
 		$this->load->view('includes/head',$header_data);
 		$this->load->view('includes/header');
 		$this->parser->parse('includes/menu',$menu_data);
+		$this->parser->parse('admin/menu',$menu_data);
 		$this->load->view('forum_overview', $forum_data);
 		$this->load->view('includes/footer',$header_data);
 	}
