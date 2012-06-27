@@ -1,0 +1,162 @@
+@import url(http://reset5.googlecode.com/hg/reset.min.css);
+@import url(http://fonts.googleapis.com/css?family=Asap:400,400italic,700,700italic);
+
+html, body { background-color: #e8e8e9; text-align: center; font: 0.95em'Asap'; }
+#main-header {
+	height: 118px;
+	background-color: #f4f4f4;
+	-moz-box-shadow: 0px 1px 3px #aaa;
+	-webkit-box-shadow: 0px 1px 3px #aaa;
+	box-shadow: 0px 1px 3px #aaa;
+	color: #666;
+}
+
+#main-header h1 {
+	padding-top: 35px;
+	font-size: 1.3em;
+}
+#main-header h2 {
+	font-size: 0.9em;
+}
+
+
+#main-header-logo { padding-top: 10px; margin-right: 25px; float: left; }
+#main-header-userbar { }
+
+.wrapper {
+	margin: 0 auto 0 auto;
+	width: 1000px;
+	text-align: left;
+}
+#main-navigation {padding: 20px 10px 20px 10px;}
+
+#main-navigation ul li {
+	float: left;
+	padding-right: 30px;
+}
+#main-navigation ul li a {
+	color: #000;
+	text-decoration: none;
+}
+#main-navigation ul li a:hover {
+	color: #f57d20;
+}
+
+#main-left {
+	width: 750px;
+	margin-right: 14px;
+	float: left;
+}
+
+#main-right {
+	width: 230px;
+	float: left;	
+}
+
+
+.main-box {
+	background-color: #f4f4f4;	
+	-moz-box-shadow: 0px 1px 3px #aaa;
+	-webkit-box-shadow: 0px 1px 3px #aaa;
+	box-shadow: 0px 1px 3px #aaa;
+	margin-bottom: 15px;
+}
+
+.main-box h2 {
+	padding: 12px;
+	font-size: 1.3em;
+}
+
+.main-box.news h2 {
+	color: #111;
+}
+.main-box.news {
+	background-color: #f4f4f4;
+	color: #333;
+}
+
+.main-box.featured h2 {
+	color: #f57d20;
+}
+
+.main-box.featured {
+	background-color: #111;	
+	color: #f4f4f4;	
+}
+
+#main-left .main-box .oneThird { float: left; width: 250px; }
+#main-left .main-box .twoThirds { float: left; width: 500px; }
+#main-left .main-box .oneHalf { float: left; width: 375px; }
+
+.main-box p {
+	font-size: 0.95em;	
+	padding: 0 12px 12px 12px;
+	line-height: 1.4em;	
+}
+
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.filter-bar {
+	font-size: 0.95em;
+	margin-bottom: 15px; 
+}
+
+.filter-bar h2 {
+	float: left;
+	padding: 2px;
+	font-weight: normal;
+}
+
+.filter-bar ul {
+	float: left;
+	list-style: none;
+}
+
+.filter-bar ul li {
+	float: left;
+	padding-left: 8px;
+}
+
+.filter-bar ul li a {
+	background-color: #ccc;
+	padding: 2px 5px;
+	border-radius: 30px;
+
+}
+
+.filter-bar p {
+	float: left;
+}
+
+.filter-bar a {
+	float: left;
+}
+
+
+ul.box-list {
+	list-style: none;
+	font-size: 0.90em;
+
+}
+
+ul.box-list li {
+	padding: 10px;
+	color: #666;
+}
+
+ul.box-list li span {
+ 	float: right;
+}
+
+
+ul.box-list li:nth-child(odd){
+	background-color: #eee;
+}
+

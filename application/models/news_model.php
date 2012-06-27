@@ -11,7 +11,7 @@ class News_model extends CI_Model {
     {
 		
 		$this->db->select("users.first_name, users.last_name");
-		$this->db->select("news.date, news_translation_language.title, news_translation_language.text");
+		$this->db->select("news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');

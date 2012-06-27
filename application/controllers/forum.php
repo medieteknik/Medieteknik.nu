@@ -19,23 +19,30 @@ class Forum extends CI_Controller {
 	}
 	
 	function overview() {
-		// Header data
-		$header_data = $this->lang->load_with_fallback('header', $this->language, 'swedish');
-		$header_data['container'] = true;
-		
-		// Menu data, combining if key is missing from selected language
-		$menu_data = $this->lang->load_with_fallback('menu', $this->language, 'swedish');
+		// language data
+		$lang_data = $this->lang->load_with_fallback('common', $this->language, 'swedish');
 
-		// Data for Startsida view
+		// Data for news view
 		$this->load->model('Forum_model');
 		$forum_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to(0,$this->language_abbr);
-		$forum_data['common_lang'] = $this->lang->load_with_fallback('common', $this->language, 'swedish');
+		$forum_data['lang'] = $lang_data;
 		
-		$this->load->view('includes/head',$header_data);
-		$this->load->view('includes/header');
-		$this->parser->parse('includes/menu',$menu_data);
-		$this->load->view('forum_overview', $forum_data);
-		$this->load->view('includes/footer',$header_data);
+		// data for the right column
+		$upcomingevents['title'] = "Kommande Event";
+		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
+		$latestforum['title'] = "Nytt i Forumet";
+		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
+
+		// composing the views
+		$this->load->view('includes/head', $lang_data);
+		$this->load->view('includes/header', $lang_data);
+		$template_data['menu'] = $this->load->view('includes/menu',$lang_data, true);
+		$template_data['left_content'] = $this->load->view('forum_overview', $forum_data, true);					
+		$template_data['right_content'] = $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$this->load->view('templates/main_template',$template_data);
+		$this->load->view('includes/footer');
+
 	}
 	
 	

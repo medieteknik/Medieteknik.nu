@@ -12,6 +12,9 @@ URI String (1 to 5):<br />
 3: <?php echo $this->uri->segment(3); ?><br />
 4: <?php echo $this->uri->segment(4); ?><br />
 5: <?php echo $this->uri->segment(5); ?>
+
+<br><br>
+<?php echo CI_VERSION; ?>
 <hr>
 <pre>
 <?php var_dump($data) ?>
