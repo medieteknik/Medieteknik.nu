@@ -38,6 +38,25 @@ class Forum_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+	
+	function get_topic($id) {
+		$this->db->select("*");
+		$this->db->from("forum_topic");
+		$this->db->where("forum_topic.id", $id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		$theone = $query->result();
+		return $theone[0];
+	}
+	
+	function get_replies($id) {
+		$this->db->select("*");
+		$this->db->from("forum_reply");
+		$this->db->where("forum_reply.topic_id", $id);
+		$this->db->order_by("forum_reply.reply_date ASC");
+		$query = $this->db->get();
+		return $query->result();
+	}
 
 	/*
 	SELECT * 

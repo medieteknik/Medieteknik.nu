@@ -64,6 +64,16 @@ WHERE privileges.privilege_name = 'admin' AND users_privileges.user_id = '1'
         $query = $this->db->get('users');
         return $query->result();
     }
+    
+    function get_user_profile($id) {
+		$this->db->select("*");
+		$this->db->from("users");
+		$this->db->where("users.id", $id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		$res = $query->result();
+		return $res[0];
+	}
 	
 	function lukasid_exists($lid = '') {
 		$this->db->where('lukasid', $lid);
