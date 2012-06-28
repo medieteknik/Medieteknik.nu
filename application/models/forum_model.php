@@ -18,10 +18,26 @@ class Forum_model extends CI_Model {
 		$result = $query->result();
 		foreach($result as $res) {
 			$res->sub_categories = $this->get_all_categories_sub_to($res->id);
+			foreach($res->sub_categories as $cat) {
+				$cat->threads = $this->get_latest_threads($cat->id,5);
+			}
 		}
 		
         return $result;
     }
+    
+    function get_latest_threads($id, $max_threads = 5) {
+		//$this->db->distinct();
+		$this->db->select("*");
+		$this->db->from("forum_reply");
+		$this->db->join("forum_topic", "forum_reply.topic_id = forum_topic.id", "");
+		$this->db->where("forum_topic.cat_id", $id);
+		$this->db->order_by("forum_reply.reply_date ASC");
+		$this->db->group_by("forum_topic.id"); 
+		$this->db->limit($max_threads);
+		$query = $this->db->get();
+		return $query->result();
+	}
 
 	/*
 	SELECT * 

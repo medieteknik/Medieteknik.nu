@@ -93,6 +93,11 @@ html, body { background-color: #e8e8e9; text-align: center; font: 0.95em'Asap'; 
 	padding: 0 12px 12px 12px;
 	line-height: 1.4em;	
 }
+.main-box ul {
+	font-size: 0.95em;	
+	padding: 0 12px 12px 12px;
+	line-height: 1.4em;	
+}
 
 
 .clearfix:after {
