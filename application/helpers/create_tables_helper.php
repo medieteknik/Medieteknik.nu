@@ -29,6 +29,35 @@ function get_user_table_fields()
 	return $fields;
 }
 
+function get_users_data_table_fields()
+{	
+	$fields = array(
+		'users_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE
+			),
+		'image_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE
+			),
+		'web' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '300',
+			),
+		'linkedin' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '300',
+			),
+		'presentation' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '1000', 
+			),
+		);
+	return $fields;
+}
+
 function get_language_table_fields()
 {	
 	$fields = array(

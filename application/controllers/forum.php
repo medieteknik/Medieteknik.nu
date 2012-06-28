@@ -37,7 +37,7 @@ class Forum extends CI_Controller {
 		$this->load->view('includes/head', $lang_data);
 		$this->load->view('includes/header', $lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$lang_data, true);
-		$template_data['left_content'] = $this->load->view('forum_overview', $forum_data, true);					
+		$template_data['left_content'] = $this->load->view('forum_overview', $forum_data, true);				
 		$template_data['right_content'] = $this->load->view('includes/list', $upcomingevents, true);
 		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
 		$this->load->view('templates/main_template',$template_data);

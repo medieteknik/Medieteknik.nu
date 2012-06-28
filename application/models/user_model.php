@@ -68,11 +68,22 @@ WHERE privileges.privilege_name = 'admin' AND users_privileges.user_id = '1'
     function get_user_profile($id) {
 		$this->db->select("*");
 		$this->db->from("users");
+		$this->db->join("users_data", "users.id = users_data.users_id", "left");
 		$this->db->where("users.id", $id);
 		$this->db->limit(1);
 		$query = $this->db->get();
 		$res = $query->result();
-		return $res[0];
+		$res = $res[0];
+		return $res;
+	}
+	
+	function get_user_privileges($id) {
+		$this->db->select("*");
+		$this->db->from("users_privileges");
+		$this->db->join("privileges", "privileges.id = users_privileges.privilege_id", "");
+		$this->db->where("users_privileges.user_id", $id);
+		$query = $this->db->get();
+		return $query->result();
 	}
 	
 	function lukasid_exists($lid = '') {

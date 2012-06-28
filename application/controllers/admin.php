@@ -2,14 +2,33 @@
 	
 class Admin extends CI_Controller {
 	
+	public $language = '';
+	public $language_abbr = '';
+	public $lang_data = '';
+	public $adminmenu = '';
+	
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
-
-		if(!$this->login->is_admin() && $this->uri->segment(2) != "login") {
-			redirect('/admin/login/', 'refresh');
+        
+		$this->language = $this->config->item('language');
+		$this->language_abbr = $this->config->item('language_abbr');
+		
+		// language data
+		$this->lang_data = $this->lang->load_with_fallback('common', $this->language, 'swedish');
+		
+		if(!$this->login->is_admin() && $this->uri->segment(2) != "access_denied") {
+			redirect('/admin/access_denied', 'refresh');
 		}
+		
+		$this->adminmenu['title'] = "Admin";
+		$this->adminmenu['items'] = array(	array('title' => $this->lang_data['admin_addnews'], 'href' => "admin/news"),
+										array('title' => $this->lang_data['admin_editusers'], 'href' => "admin/edit_users"),
+										array('title' => $this->lang_data['admin_editimages'], 'href' => "admin/edit_images"),
+										array('title' => $this->lang_data['admin_addusers'], 'href' => "admin/add_users"),
+										array('title' => $this->lang_data['admin_addusers'], 'href' => "admin/add_users"));
+		
     }
 
 	public function index()
@@ -17,6 +36,28 @@ class Admin extends CI_Controller {
 		$this->overview();
 	}
 	
+	public function access_denied() {
+		// Data for denied view
+		$denied_data['lang'] = $this->lang_data;
+		
+		// data for the right column
+		$upcomingevents['title'] = "Kommande Event";
+		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
+		$latestforum['title'] = "Nytt i Forumet";
+		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
+
+		// composing the views
+		$this->load->view('includes/head', $this->lang_data);
+		$this->load->view('includes/header', $this->lang_data);
+		$template_data['menu'] = $this->load->view('includes/menu',$denied_data, true);
+		$template_data['left_content'] = $this->load->view('admin/denied',  $profile_data, true);					
+		$template_data['right_content'] = $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$this->load->view('templates/main_template',$template_data);
+		$this->load->view('includes/footer');
+	}
+	
+	/*
 	function login() {
 		
 		$this->login->logout();
@@ -33,34 +74,58 @@ class Admin extends CI_Controller {
 			echo "<br> true";
 		}
 	}
-	
+	*/
 	function overview() {
-		// Header data
-		$header_data = $this->lang->load_with_fallback('header', $this->language, 'swedish');
-		$header_data['container'] = true;
-		
-		// Menu data, combining if key is missing from selected language
-		$menu_data = $this->lang->load_with_fallback('menu', $this->language, 'swedish');
 
-		// Data for Startsida view
-		$this->load->model('Forum_model');
-		$forum_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to(0,$this->language_abbr);
-		$forum_data['common_lang'] = $this->lang->load_with_fallback('common', $this->language, 'swedish');
+		// Data for overview view
+		$this->load->model('User_model');
+		$overview_data['privileges'] = $this->User_model->get_user_privileges($this->login->get_id());
+		$overview_data['lang'] = $this->lang_data;
+		//$profile_data['lang'] = $lang_data;
 		
-		$this->load->view('includes/head',$header_data);
-		$this->load->view('includes/header');
-		$this->parser->parse('includes/menu',$menu_data);
-		$this->parser->parse('admin/menu',$menu_data);
-		$this->load->view('forum_overview', $forum_data);
-		$this->load->view('includes/footer',$header_data);
+		// data for the right column
+		$upcomingevents['title'] = "Kommande Event";
+		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
+		$latestforum['title'] = "Nytt i Forumet";
+		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
+
+		// composing the views
+		$this->load->view('includes/head', $this->lang_data);
+		$this->load->view('includes/header', $this->lang_data);
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['left_content'] = $this->load->view('admin/overview',  $overview_data, true);					
+		$template_data['right_content'] = $this->load->view('includes/link', $this->adminmenu, true);			
+		$template_data['right_content'] .= $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$this->load->view('templates/main_template',$template_data);
+		$this->load->view('includes/footer');
 	}
 	
-	private function checkLogin() {
-		if($this->uri->segment(2) == "login") {
-			return true;
-		}
-		return false;
+	function news() {
+		$this->load->helper('form');
+		// Data for forum view
+		//$this->load->model('User_model');
+		$news_data['lang'] = $this->lang_data;
+		//$profile_data['lang'] = $lang_data;
+		
+		$upcomingevents['title'] = "Kommande Event";
+		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
+		$latestforum['title'] = "Nytt i Forumet";
+		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
+
+		// composing the views
+		$this->load->view('includes/head', $this->lang_data);
+		$this->load->view('includes/header', $this->lang_data);
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['left_content'] = $this->load->view('admin/news',  $news_data, true);					
+		$template_data['right_content'] = $this->load->view('includes/link', $this->adminmenu, true);			
+		$template_data['right_content'] .= $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$this->load->view('templates/main_template',$template_data);
+		$this->load->view('includes/footer');
 	}
+	
+
 	
 	
 }

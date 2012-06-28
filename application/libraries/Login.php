@@ -72,11 +72,11 @@ class Login
 	}
 	
 	public function get_id() {
-		return $this->session->userdata('id');
+		return $this->CI->session->userdata('id');
 	}
 	
 	public function get_lukasid() {
-		return $this->session->userdata('lukasid');
+		return $this->CI->session->userdata('lukasid');
 	}
 	
 	public function logout() {

@@ -10,6 +10,7 @@ class Install_model extends CI_Model {
 		
 		// check all tables one by one and fill them with content if necessary
 		$this->create_users_table();
+		$this->create_users_data_table();
 		$this->create_language_table();
 		$this->create_news_table();
 		$this->create_news_translation_table();
@@ -68,6 +69,24 @@ class Install_model extends CI_Model {
 			$this->User_model->add_user("Jonas", "Strandstedt", "jonst184", "password");
 			$this->User_model->add_user("Emil", "Axelsson", "emiax775", "password");
 			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
+		}
+	}
+	
+	function create_users_data_table()
+	{
+		// if the users_data table does not exist, create it
+		if(!$this->db->table_exists('users_data'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_users_data_table_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('users_id',true);						// set the primary keys
+			$this->dbforge->create_table('users_data');
+			log_message('info', "Created table: users");
+			
+			// inserting data
+			$data = array('users_id' => 1, 'web' => "http://www.jonasstrandstedt.se", 'presentation' => "Jag heter jonas");
+			$this->db->insert('users_data', $data);
 		}
 	}
 	
@@ -616,7 +635,7 @@ class Install_model extends CI_Model {
 			
 			$data = array(
 			   	'privilege_name' => 'admin',
-				'privilege_description' => 'Allows the user to acces the admin controller'
+				'privilege_description' => 'Allows the user to access the admin controller'
 			);
 			$this->db->insert('privileges', $data);
 			
@@ -654,6 +673,12 @@ class Install_model extends CI_Model {
 			
 			// admin
 			$data = array('user_id' => 1,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 1,'privilege_id' => 2);
+			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 1,'privilege_id' => 3);
+			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 1,'privilege_id' => 4);
 			$this->db->insert('users_privileges', $data);
 			$data = array('user_id' => 2,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);

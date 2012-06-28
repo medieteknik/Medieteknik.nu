@@ -33,6 +33,12 @@ $lang['user_password'] = "Lösenord";
 $lang['groups_title'] = "Grupper";
 $lang['groups_nomatch'] = "Ingen grupp matchade ditt sökkriterium";
 
+// admin
+$lang['admin_addnews'] = "Skapa nyhet";
+$lang['admin_editimages'] = "Redigera bilder";
+$lang['admin_editusers'] = "Redigera användare";
+$lang['admin_addusers'] = "Lägg till användare";
+
 // misc
 $lang['misc_date_yesterday'] = "Igår";
 $lang['misc_date_today'] = "Idag";
@@ -40,3 +46,7 @@ $lang['misc_swedish'] = "Svenska";
 $lang['misc_english'] = "Engelska";
 $lang['misc_swedish_native'] = "Svenska";
 $lang['misc_english_native'] = "English";
+$lang['misc_headline'] = "Rubrik";
+$lang['misc_text'] = "Text";
+$lang['misc_right'] = "Right";
+$lang['misc_left'] = "Left";

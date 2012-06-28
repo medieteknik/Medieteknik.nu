@@ -45,7 +45,8 @@ if (defined('ENVIRONMENT'))
 			exit('The application environment is not set correctly.');
 	}
 }
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 /*
  *---------------------------------------------------------------
  * SYSTEM FOLDER NAME
