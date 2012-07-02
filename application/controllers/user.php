@@ -41,9 +41,9 @@ class User extends CI_Controller {
 		$this->load->view('includes/head', $lang_data);
 		$this->load->view('includes/header', $lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$lang_data, true);
-		$template_data['left_content'] = $this->load->view('user_profile',  $profile_data, true);					
-		$template_data['right_content'] = $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$template_data['main_content'] = $this->load->view('user_profile',  $profile_data, true);					
+		$template_data['sidebar_content'] = $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
 	}
@@ -65,9 +65,9 @@ class User extends CI_Controller {
 		$this->load->view('includes/head', $lang_data);
 		$this->load->view('includes/header', $lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$lang_data, true);
-		$template_data['left_content'] = $this->load->view('login_notloggedin',  $login_data, true);					
-		$template_data['right_content'] = $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$template_data['main_content'] = $this->load->view('login_notloggedin',  $login_data, true);					
+		$template_data['sidebar_content'] = $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
 	}
@@ -91,9 +91,9 @@ class User extends CI_Controller {
 		$this->load->view('includes/head', $lang_data);
 		$this->load->view('includes/header', $lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$lang_data, true);
-		$template_data['left_content'] = $this->load->view('login_view',  $login_data, true);					
-		$template_data['right_content'] = $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$template_data['main_content'] = $this->load->view('login_view',  $login_data, true);					
+		$template_data['sidebar_content'] = $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
 	}
@@ -154,9 +154,9 @@ class Login extends CI_Controller {
 		$this->load->view('includes/head', $lang_data);
 		$this->load->view('includes/header', $lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$lang_data, true);
-		$template_data['left_content'] = $this->load->view('login_view',  $login_data, true);					
-		$template_data['right_content'] = $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['right_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$template_data['main_content'] = $this->load->view('login_view',  $login_data, true);					
+		$template_data['sidebar_content'] = $this->load->view('includes/list', $upcomingevents, true);
+		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
 	}

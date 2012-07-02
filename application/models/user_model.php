@@ -29,6 +29,7 @@ class User_model extends CI_Model {
 			$thePrivileges = $privilege;
 		}
 		$first = true;
+		array_push($thePrivileges, 'superadmin');
 		
 		$this->db->select("*");
 		$this->db->from("privileges");

@@ -1,4 +1,4 @@
-
+<!--
 <div class="filter-bar clearfix">
     <h2>Filtrera:</h2>
     <ul>
@@ -41,15 +41,17 @@
         </p>
     </div>                    
 </div>
-
+-->
 <?php 
 foreach($news_array as $news_item) {
 	echo '<div class="main-box news clearfix">';
-		echo '<h2>'.$news_item->title.'</h2>';
+		echo anchor('news/view/'.$news_item->id,'<h2>'.$news_item->title.'</h2>');;
 		echo '<p>'.$news_item->text.'</p>';
+		/*
 		echo '<pre>';
 		var_dump($news_item);
 		echo '</pre>';
+		*/
 	echo '</div>';
 }
 

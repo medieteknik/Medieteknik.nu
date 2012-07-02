@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class Admin extends CI_Controller {
+class Admin_images extends CI_Controller {
 	
 	public $language = '';
 	public $language_abbr = '';
@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 		// language data
 		$this->lang_data = $this->lang->load_with_fallback('common', $this->language, 'swedish');
 		
-		if(!$this->login->is_admin() && $this->uri->segment(2) != "access_denied") {
+		if(!$this->login->is_admin()) {
 			redirect('/admin/access_denied', 'refresh');
 		}
 		
@@ -44,50 +44,11 @@ class Admin extends CI_Controller {
 		$this->overview();
 	}
 	
-	public function access_denied() {
-		// Data for denied view
-		$denied_data['lang'] = $this->lang_data;
-		
-		// data for the right column
-		$upcomingevents['title'] = "Kommande Event";
-		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
-		$latestforum['title'] = "Nytt i Forumet";
-		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
-
-		// composing the views
-		$this->load->view('includes/head', $this->lang_data);
-		$this->load->view('includes/header', $this->lang_data);
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/denied',  $denied_data, true);					
-		$template_data['sidebar_content'] = $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
-		$this->load->view('templates/main_template',$template_data);
-		$this->load->view('includes/footer');
-	}
-	
-	/*
-	function login() {
-		
-		$this->login->logout();
-		$this->login->validate("emiax775", "password");
-		
-		if($this->login->is_logged_in()) {
-			echo "logged in";
-		}
-		if($this->login->is_admin()) {
-			echo " and admin";
-		}
-		
-		if($this->login->has_privilege("admin")) {
-			echo "<br> true";
-		}
-	}
-	*/
 	function overview() {
 
 		// Data for overview view
-		$this->load->model('User_model');
-		$overview_data['privileges'] = $this->User_model->get_user_privileges($this->login->get_id());
+		$this->load->model('News_model');
+		$overview_data['news_array'] = $this->News_model->admin_get_all_news_overview();
 		$overview_data['lang'] = $this->lang_data;
 		//$profile_data['lang'] = $lang_data;
 		
@@ -101,7 +62,7 @@ class Admin extends CI_Controller {
 		$this->load->view('includes/head', $this->lang_data);
 		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/overview',  $overview_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/news_overview',  $overview_data, true);					
 		$template_data['sidebar_content'] = $this->load->view('includes/link', $this->adminmenu, true);			
 		$template_data['sidebar_content'] .= $this->load->view('includes/list', $upcomingevents, true);
 		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
@@ -109,12 +70,23 @@ class Admin extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 	
-	function news() {
+	function create() {
 		$this->load->helper('form');
 		// Data for forum view
 		//$this->load->model('User_model');
 		$news_data['lang'] = $this->lang_data;
 		//$profile_data['lang'] = $lang_data;
+		
+		$news_data['is_editor'] = true;
+		
+		$news_data['languages'] = array	(
+													array(	'lang_abbr' => 'se',
+															'language_name' => 'Svenska',
+															'id' => 1),
+													array(	'lang_abbr' => 'en',
+															'language_name' => 'English',
+															'id' => 2)
+												);
 		
 		$upcomingevents['title'] = "Kommande Event";
 		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
@@ -125,12 +97,16 @@ class Admin extends CI_Controller {
 		$this->load->view('includes/head', $this->lang_data);
 		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/news',  $news_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/news_create',  $news_data, true);					
 		$template_data['sidebar_content'] = $this->load->view('includes/link', $this->adminmenu, true);			
 		$template_data['sidebar_content'] .= $this->load->view('includes/list', $upcomingevents, true);
 		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
+	}
+	
+	function edit_translation($id, $lang_abbr) {
+		
 	}
 	
 

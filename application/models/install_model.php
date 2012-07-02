@@ -25,6 +25,8 @@ class Install_model extends CI_Model {
 		$this->create_forum_reply_guest_table();
 		$this->create_privileges_table();
 		$this->create_users_privileges_table();
+		$this->create_images_table();
+		$this->create_news_images_table();
 		
 		// check all views exist
 		$this->create_forum_categories_descriptions_language_view();
@@ -145,8 +147,8 @@ class Install_model extends CI_Model {
 									array("lang" => "se", "title" => "Klistrad nyhet!", "text" => "Den här nyheten är verkligen klistrad"),
 									array("lang" => "en", "title" => "Sticky News!", "text" => "This is some sticky news!"),
 								);
-			$this->News_model->add_news(1,0, $translations, "2012-01-06");
-			$this->News_model->add_news(1,0, array("lang_abbr" => "se", "title" => "Inte klistrad!", "text" => "Den här nyheten är inte klistrad eller översatt!"), "2012-01-06");
+			$this->News_model->add_news(1, $translations, "2012-01-06");
+			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Inte klistrad!", "text" => "Den här nyheten är inte klistrad eller översatt!"), "2012-01-06");
 			
 
 		}
@@ -634,8 +636,14 @@ class Install_model extends CI_Model {
 			log_message('info', "Created table: privileges");
 			
 			$data = array(
+			   	'privilege_name' => 'superadmin',
+				'privilege_description' => 'Full access to everything'
+			);
+			$this->db->insert('privileges', $data);
+			
+			$data = array(
 			   	'privilege_name' => 'admin',
-				'privilege_description' => 'Allows the user to access the admin controller'
+				'privilege_description' => 'Allows the user to access the admin menu'
 			);
 			$this->db->insert('privileges', $data);
 			
@@ -674,20 +682,43 @@ class Install_model extends CI_Model {
 			// admin
 			$data = array('user_id' => 1,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
-			$data = array('user_id' => 1,'privilege_id' => 2);
-			$this->db->insert('users_privileges', $data);
-			$data = array('user_id' => 1,'privilege_id' => 3);
-			$this->db->insert('users_privileges', $data);
-			$data = array('user_id' => 1,'privilege_id' => 4);
-			$this->db->insert('users_privileges', $data);
 			$data = array('user_id' => 2,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
 			
 			// news_post
-			$data = array('user_id' => 2,'privilege_id' => 3);
+			$data = array('user_id' => 2,'privilege_id' => 4);
 			$this->db->insert('users_privileges', $data);
-			$data = array('user_id' => 3,'privilege_id' => 3);
+			$data = array('user_id' => 3,'privilege_id' => 4);
 			$this->db->insert('users_privileges', $data);
+		}
+	}
+	
+	function create_images_table() {
+		if(!$this->db->table_exists('images'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_images_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('images');
+			
+			log_message('info', "Created table: images");
+			
+		}
+	}
+	
+	function create_news_images_table() {
+		if(!$this->db->table_exists('news_images'))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_news_images_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('news_id',true);
+			$this->dbforge->add_key('images_id',true);
+			$this->dbforge->create_table('news_images');
+			
+			log_message('info', "Created table: news_images");
+			
 		}
 	}
 	

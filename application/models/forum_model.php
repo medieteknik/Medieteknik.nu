@@ -50,8 +50,9 @@ class Forum_model extends CI_Model {
 	}
 	
 	function get_replies($id) {
-		$this->db->select("*");
+		$this->db->select("forum_reply.*, users.first_name, users.last_name");
 		$this->db->from("forum_reply");
+		$this->db->join("users", "forum_reply.user_id = users.id", "");
 		$this->db->where("forum_reply.topic_id", $id);
 		$this->db->order_by("forum_reply.reply_date ASC");
 		$query = $this->db->get();

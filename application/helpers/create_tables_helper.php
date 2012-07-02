@@ -418,3 +418,61 @@ function get_users_privileges_fields(){
 		);
 	return $fields;
 }
+
+function get_images_fields(){
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'image_title' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'image_description' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '320',
+		),
+		
+		);
+	return $fields;
+}
+
+function get_news_images_fields(){
+	$fields = array(
+		'news_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'images_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'size' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'position' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'height' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		
+		);
+	return $fields;
+}

@@ -26,7 +26,7 @@ function readable_date($date, $lang = '') {
 	if($lang == '') {
 		$lang = array('date_today' => 'Idag', 'date_yesterday' => 'Igår');
 	}
-	
+		
 	$theDate = new DateTime($date);
 	$today = new DateTime(date("Y-m-d H:i:s"));
 	$interval = $theDate->diff($today);
@@ -56,4 +56,24 @@ function uncompact_name($name) {
 	$string = preg_replace("/[_]+/i", ".{1}", $string);
 	$string = preg_replace("/a/i", "(a|å|ä){1}", $string);
 	return preg_replace("/o/i", "(o|ö){1}", $string);
+}
+
+function text_format($input, $p = 'p') {
+	//\r\n, \n\r, \n and \r
+	$patterns = array('/\r\n/', '/\n\r/', '/\r/', '/\n/');
+	$replacements = array('<br/>','<br/>','<br/>','<br/>');
+	$text = preg_replace($patterns,$replacements, $input);
+	
+	// more than one (2-30) line break is converted to a paragraph
+	if($p != '') {
+		return '<'.$p.'>'.preg_replace('/(<br\/>){2,30}/','</'.$p.'><'.$p.'>', $text).'</'.$p.'>';
+	} else {
+		return $text;
+	}
+	
+	/*
+	$patterns = array('/Hej/', '/undrar/', '/(\n){2}/');
+	$replacements = array('Hello', 'wonder', '</p><p>');
+	return preg_replace($patterns,$replacements, $input);
+	*/
 }

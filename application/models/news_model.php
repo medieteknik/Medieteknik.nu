@@ -9,14 +9,24 @@ class News_model extends CI_Model {
     
     function get_latest_news()
     {
+		// check if approved to see not approved news
+		$admin = $this->login->has_privilege('news_editor');
 		
 		$this->db->select("users.first_name, users.last_name");
-		$this->db->select("news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
+		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
 		$this->db->join("users", 'news.user_id = users.id', '');
 		$this->db->join("news_sticky", 'news.id = news_sticky.news_id', 'left');
+		
+		if(!$admin) {
+			// not admin, forces news to be approved and not draft
+			$this->db->where("news.draft",0);
+			$this->db->where("news.approved",1);
+		}
+		//$this->db->where("news.date <=","DATE(NOW())");
+		$this->db->where("DATE(news.date) <= DATE(NOW())");
 		$this->db->order_by("sticky_order DESC, news.date DESC");
 		$query = $this->db->get();
         return $query->result();
@@ -30,8 +40,53 @@ WHERE language.language_abbr = 'se'
 ORDER BY sticky_order DESC, news.date DESC
 */
     }
+    
+    function get_news($id)
+    {
+		
+		$this->db->select("users.first_name, users.last_name");
+		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
+		$this->db->from("news");
+		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
+		$this->db->join("users", 'news.user_id = users.id', '');
+		$this->db->where("news.id",$id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		$res = $query->result();
+        return $res[0];
+	}
+	
+	function admin_get_all_news_overview() {
+		$this->db->select("news.*, language.language_name, language.language_abbr, news_translation.*");
+		$this->db->from("news");
+		$this->db->from("language");
+		$this->db->join("news_translation", 'news_translation.news_id = news.id AND news_translation.lang_id = language.id', 'left');
+		$query = $this->db->get();
+		$translations = $query->result();
+		
+		$this->db->select("*");
+		$this->db->from("news");
+		$query = $this->db->get();
+		$news_array = $query->result();
+		
+		foreach($news_array as $news) {
+			$news->translations = array();
+			foreach($translations as $t) {
+				if($t->id == $news->id) {
+					array_push($news->translations, $t);
+				}
+			}
+		}
+		return $news_array;
+		
+/*
+SELECT * FROM news
+JOIN language
+LEFT JOIN news_translation ON news_translation.news_id = news.id AND news_translation.lang_id = language.id
+*/
+	}
 
-	function add_news($user_id, $group_id, $translations = array(), $post_date = '') {
+	function add_news($user_id, $translations = array(), $post_date = '', $draft = 0, $approved = 0, $group_id = 0) {
 		if(!is_array($translations)) {
 			return false;
 		}
@@ -82,8 +137,8 @@ ORDER BY sticky_order DESC, news.date DESC
 		   'user_id' => $user_id,
 		   'group_id' => $theGroup,
 		   'date' => $theTime,
-		   'draft' => 0,
-		   'approved' => 1,
+		   'draft' => $draft,
+		   'approved' => $approved,
 		);
 		$this->db->insert('news', $data);
 		$news_id = $this->db->insert_id();
