@@ -27,6 +27,9 @@ class News extends CI_Controller {
 
 	public function index()
 	{
+		// load image model
+		$this->load->library('Imagemanip');
+		
 		// Data for news view
 		$this->load->model('News_model');
 		$news_data['news_array'] = $this->News_model->get_latest_news();

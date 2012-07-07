@@ -48,6 +48,7 @@ $lang['admin_addtranslation'] = "Add translation";
 // date
 $lang['date_yesterday'] = "Yesterday";
 $lang['date_today'] = "Today";
+$lang['date_placeholder'] = "yyyy-mm-dd HH:mm";
 
 // misc
 $lang['misc_swedish'] = "Swedish";
@@ -70,3 +71,4 @@ $lang['misc_height'] = "Height";
 $lang['misc_save'] = "Save";
 $lang['misc_postdate'] = "Post date";
 $lang['misc_lasteditdate'] = "Last edited";
+$lang['misc_file'] = "File";

@@ -149,6 +149,7 @@ class Install_model extends CI_Model {
 								);
 			$this->News_model->add_news(1, $translations, "2012-01-06");
 			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Inte klistrad!", "text" => "Den här nyheten är inte klistrad eller översatt!"), "2012-01-06");
+			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Utkast!", "text" => "Ett utkast mtf!"), "2012-10-06", 1);
 			
 
 		}

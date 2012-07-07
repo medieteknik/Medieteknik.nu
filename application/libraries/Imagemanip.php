@@ -22,8 +22,12 @@ class Imagemanip
 	protected $tag;
 	protected $tag_pos;
 	
-	public function __construct() {
+	public function __construct($orig_filename = '', $crop = 'no', $w = 100, $h = 75, $filters = array(), $alt = '', $tag = '') {
+		if($orig_filename != '') {
+			$this->create($orig_filename,$crop,$w,$h,$filters,$alt,$tag);
+		}
 	}
+	
 	
 	public function create($orig_filename = '', $crop = 'no', $w = 100, $h = 75, $filters = array(), $alt = '', $tag = '') {
 		$this->set_orig_filename($orig_filename);
@@ -37,13 +41,13 @@ class Imagemanip
 	}
 	
 	public function __toString() {
-		return $this->get_filepath(false);
+		return $this->get_filepath(FALSE);
 	}
 	
-	public function get_filepath($fullsize = false) {
+	public function get_filepath($fullsize = FALSE) {
 		$this->genereate_filename($fullsize);
 		$this->generate_image($fullsize);
-		return $this->path_to_thumb_directory.$this->filename_thumb;
+		return base_url().$this->path_to_thumb_directory.$this->filename_thumb;
 	}
 	
 	public function get_img_tag() {

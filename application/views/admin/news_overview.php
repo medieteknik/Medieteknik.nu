@@ -8,13 +8,14 @@ echo '	<div class="main-box clearfix">
 echo '	<div class="main-box clearfix">
 			<h2>'.$lang['menu_admin'].'</h2>';
 foreach($news_array as $news) {
-		echo $news->date . ' ' . $news->draft . ' ' . $news->approved . '<br/>';
+		echo $news->date . ' ' . $news->draft . ' ' . $news->approved . ' ' . $news->sticky_order . '<br/>';
 		foreach($news->translations as $translation) {
 				if(empty($translation->title)) {
-					echo $translation->language_name . ': ' . anchor('admin_news/add_translation/'.$translation->id.'/'.$translation->language_abbr,'['.$lang['admin_addtranslation'].']').'<br/>';
+					echo $translation->language_name . ': ' . anchor('admin_news/edit/'.$translation->id,'['.$lang['admin_addtranslation'].']').'<br/>';
 				} else {
-					echo $translation->language_name . ': ' . anchor('admin_news/edit_translation/'.$translation->id.'/'.$translation->language_abbr,$translation->title).'<br/>';
+					echo $translation->language_name . ': ' . anchor('admin_news/edit/'.$translation->id,$translation->title).'<br/>';
 				}
+				//do_dump($news);
 		}
 		echo '<br/>';
 }

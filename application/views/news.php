@@ -1,58 +1,48 @@
-<!--
-<div class="filter-bar clearfix">
-    <h2>Filtrera:</h2>
-    <ul>
-        <li><a><?php echo $news_news; ?></a></li>
-        <li><a><?php echo $news_socialmedia; ?></a></li>
-        <li><a><?php echo $news_studentprojects; ?></a></li>
-        <li><a><?php echo $news_activethreads; ?></a></li>
-    </ul>                    
-</div>		
-<div class="main-box news clearfix">
-    <div class="twoThirds">
-        <h2>MidsommarphesTen</h2>
-		<p>
-            Aenean tincidunt dui lacus. Ut tincidunt auctor tellus id fermentum. Donec eget turpis augue. Mauris at ipsum est. Donec pharetra adipiscing rhoncus. Ut non condimentum leo. Vestibulum leo velit, aliquam in auctor id, elementum sit amet sapien. Donec id lacus sed odio tincidunt facilisis nec in massa.
-        </p>
-		<p>
-            Aenean tincidunt dui lacus. Ut tincidunt auctor tellus id fermentum. Donec eget turpis augue. Mauris at ipsum est. Donec pharetra adipiscing rhoncus. Ut non condimentum leo. Vestibulum leo velit, aliquam in auctor id, elementum sit amet sapien. Donec id lacus sed odio tincidunt facilisis nec in massa.
-        </p>
-    </div>
-    <img class="oneThird" src="<?php echo base_url(); ?>web/img/feedItem1.png"/>
-</div>
-<div class="main-box news">
-    <h2>Overallsinvigning med Mette</h2>
-    <p>
-            Aenean tincidunt dui lacus. Ut tincidunt auctor tellus id fermentum. Donec eget turpis augue. Mauris at ipsum est. Donec pharetra adipiscing rhoncus. Ut non condimentum leo. Vestibulum leo velit, aliquam in auctor id, elementum sit amet sapien. Donec id lacus sed odio tincidunt facilisis nec in massa.
-    </p>
-</div>
-<div class="main-box news clearfix">
-    <img class="twoThirds" src="<?php echo base_url(); ?>web/img/feedItem2.png"/>
-    <div class="oneThird">
-        <h2>Välkommen till Campus</h2>
-        <p>
-            Aenean tincidunt dui lacus. Ut tincidunt auctor tellus id fermentum. Donec eget turpis augue. Mauris at ipsum est. 
-        </p>
-        <p>
-            Aenean tincidunt dui lacus. Ut tincidunt auctor tellus id fermentum. Donec eget turpis augue. Mauris at ipsum est. 
-        </p>
-        <p>
-            Aenean tincidunt dui lacus. Ut tincidunt auctor tellus id fermentum. Donec eget turpis augue. Mauris at ipsum est. 
-        </p>
-    </div>                    
-</div>
--->
 <?php 
 foreach($news_array as $news_item) {
-	echo '<div class="main-box news clearfix">';
-		echo anchor('news/view/'.$news_item->id,'<h2>'.$news_item->title.'</h2>');;
-		echo '<p>'.$news_item->text.'</p>';
-		/*
+	$img_div = "";
+	$news_class = "";
+	if($news_item->image_original_filename != "") {
+		$image = new imagemanip();
+		$image->create($news_item->image_original_filename, 'zoom', news_size_to_px($news_item->size), $news_item->height);
+		
+
+		$img_div = '<img class="'.news_size_to_class($news_item->size).'" src="'.$image->get_filepath().'" />';
+		$news_class = news_size_to_class_invert($news_item->size);
+		//$news_class = news_size_to_class_invert();
+	}
+	// $news_div = '<div class="'.$news_class.'">'.anchor('news/view/'.$news_item->id,'<h2>'.$news_item->title.'</h2>').'<p>'.$news_item->text.'</p></div>';
+	$news_div = '<div class="'.$news_class.'"><h2>'.$news_item->title.'</h2><p>'.$news_item->text.'</p></div>';
+	
+	$story = "";
+	if($news_item->position == 1 || $news_item->size == 4) {
+		$story = $img_div.$news_div;
+	} else {
+		$story = $news_div.$img_div;
+	}
+	echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => "Till nyheten"));
+	
+	
+	/*
+	echo '<div class="main-box news clearfix" href="#">';
+
+		
+		if($news_item->position == 1 || $news_item->size == 4) {
+			echo $img_div;
+			echo $news_div;
+		} else {
+			echo $news_div;
+			echo $img_div;
+		}
+		
+		
 		echo '<pre>';
 		var_dump($news_item);
 		echo '</pre>';
-		*/
+		
+		
 	echo '</div>';
+	*/
 }
 
 /*
@@ -60,4 +50,4 @@ echo '<p>'.$news_author.': '.get_full_name($news_item).'</p>';
 echo '<p>'.readable_date($news_item->date, $common_lang).'</p>';
 */
 
-?>
+

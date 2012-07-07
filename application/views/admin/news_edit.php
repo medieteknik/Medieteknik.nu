@@ -1,8 +1,12 @@
 <?php
+
+
+// do_dump($news);
+
 $post_date = array(
               'name'        => 'post_date',
               'id'          => 'post_date',
-              'value'       => '',
+              'value'       => $news->date,
               'placeholder' => $lang['date_placeholder'],
             );
 
@@ -23,25 +27,36 @@ $options = array(
                   '4'   => '1/1',
                 );
 $pos = array(
-                  'left'  => $lang['misc_left'],
-                  'right'    => $lang['misc_right'],
+                  '1'  => $lang['misc_left'],
+                  '2'    => $lang['misc_right'],
                 );
+$image_div = "";
+if($news->image_original_filename != "") {
+	$image = new imagemanip($news->image_original_filename, 'zoom', news_size_to_px($news->size), $news->height);
+	$image_div = '<div><img src="'.$image.'"/></div>';
+}
+
+
+$draft_checked = FALSE;
+if($news->draft == 1) $draft_checked = TRUE;
 
 $draft = array(
     'name'        => 'draft',
     'id'          => 'draft',
     'value'       => '1',
-    'checked'     => FALSE,
+    'checked'     => $draft_checked,
     );
-    
+
+$approved_checked = FALSE;
+if($news->approved == 1) $approved_checked = TRUE;
 $approved = array(
     'name'        => 'approved',
     'id'          => 'approved',
     'value'       => '1',
-    'checked'     => FALSE,
+    'checked'     => $approved_checked,
     );
 
-echo form_open_multipart('admin_news/add_news');
+echo form_open_multipart('admin_news/edit_news/'.$id);
 echo '	<div class="main-box clearfix">
 			<h2>'.$lang['admin_addnews'].'</h2>';
 			echo form_label($lang['misc_postdate'], 'post_date');
@@ -64,17 +79,18 @@ echo '	<div class="main-box clearfix">
 echo '	</div>';
 echo '	<div class="main-box clearfix">
 			<h2>'.$lang['misc_image'].'</h2>';
+				echo $image_div;
 				echo '<div>';
 					echo form_label($lang['misc_size'], 'img_size');
-					echo form_dropdown('img_size', $options);
+					echo form_dropdown('img_size', $options, $news->size);
 				echo '</div>';
 				echo '<div>';
 					echo form_label($lang['misc_position'], 'img_position');
-					echo form_dropdown('img_position', $pos);
+					echo form_dropdown('img_position', $pos, $news->position);
 				echo '</div>';
 				echo '<div>';
 					echo form_label($lang['misc_height'], 'img_height');
-					echo '<input type="number" min="75" max="400" name="img_height" id="img_height" value="150" />';
+					echo '<input type="number" min="75" max="400" name="img_height" id="img_height" value="'.$news->height.'" />';
 				echo '</div>';
 				echo '<div>';
 				echo form_upload($img_file);
@@ -82,22 +98,24 @@ echo '	<div class="main-box clearfix">
 echo '	</div>';
 
 
-foreach($languages as $language) {
+foreach($news->translations as $t) {
+	
 	$title = array(
-              'name'        => 'title_'.$language['language_abbr'],
-              'id'          => 'title_'.$language['language_abbr'],
-              'value'       => '',
+              'name'        => 'title_'.$t->language_abbr,
+              'id'          => 'title_'.$t->language_abbr,
+              'value'       => $t->title,
             );
 	$text = array(
-              'name'        => 'text_'.$language['language_abbr'],
-              'id'          => 'text_'.$language['language_abbr'],
+              'name'        => 'text_'.$t->language_abbr,
+              'id'          => 'text_'.$t->language_abbr,
+              'value'       => $t->text,
             );
 	
 	echo '<div class="main-box clearfix">';
-	echo '<h2>'.$language['language_name'].'</h2>';
-	echo form_label($lang['misc_headline'], 'title_'.$language['language_abbr']);
+	echo '<h2>'.$t->language_name.'</h2>';
+	echo form_label($lang['misc_headline'], 'title_'.$t->language_abbr);
 	echo form_input($title);
-	echo form_label($lang['misc_text'], 'text_'.$language['language_abbr']);
+	echo form_label($lang['misc_text'], 'text_'.$t->language_abbr);
 	echo form_textarea($text);
 	echo '</div>';
 }

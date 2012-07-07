@@ -55,11 +55,16 @@ html, body { background-color: #e8e8e9; text-align: center; font: 0.95em'Asap'; 
 
 
 .main-box {
+	display: block;
 	background-color: #f4f4f4;	
 	-moz-box-shadow: 0px 1px 3px #aaa;
 	-webkit-box-shadow: 0px 1px 3px #aaa;
 	box-shadow: 0px 1px 3px #aaa;
 	margin-bottom: 15px;
+}
+
+a.main-box {
+	text-decoration: none;
 }
 
 .main-box h2 {
@@ -165,3 +170,10 @@ ul.box-list li:nth-child(odd){
 	background-color: #eee;
 }
 
+label {
+	display: inline-block;
+	width: 100px;
+}
+input[type=text] {
+	display: block;
+}

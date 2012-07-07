@@ -48,6 +48,7 @@ $lang['admin_addtranslation'] = "Lägg till översättning";
 // date
 $lang['date_yesterday'] = "Igår";
 $lang['date_today'] = "Idag";
+$lang['date_placeholder'] = "åååå-mm-dd HH:mm";
 
 // misc
 $lang['misc_swedish'] = "Svenska";
@@ -70,4 +71,5 @@ $lang['misc_height'] = "Höjd";
 $lang['misc_save'] = "Spara";
 $lang['misc_postdate'] = "Publiceringsdatum";
 $lang['misc_lasteditdate'] = "Senast redigerad";
+$lang['misc_file'] = "Fil";
 

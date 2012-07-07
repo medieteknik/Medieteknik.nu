@@ -432,6 +432,10 @@ function get_images_fields(){
 			'constraint' => 5, 
 			'unsigned' => TRUE,
 		),
+		'image_original_filename' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
 		'image_title' => array(
 			'type' => 'VARCHAR',
 			'constraint' => '50',
