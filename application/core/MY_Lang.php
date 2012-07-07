@@ -27,6 +27,8 @@
 */
 class MY_Lang extends CI_Lang
 {
+	protected $CI;
+	
     function __construct() {
 
         global $URI, $CFG, $IN;
@@ -125,7 +127,9 @@ class MY_Lang extends CI_Lang
         }
         
         log_message('debug', "Language_Identifier Class Initialized");
+        
     }
+
 	
 	function load_with_fallback($langfile = '', $idiom = '', $fallback = '')
 	{

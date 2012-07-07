@@ -112,6 +112,8 @@ function news_size_to_px($size) {
 			return 375;
 		case 3:
 			return 500;
+		case 4:
+			return 750;
 		default:
 			return "";
 		

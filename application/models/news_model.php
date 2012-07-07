@@ -45,13 +45,24 @@ ORDER BY sticky_order DESC, news.date DESC
     
     function get_news($id)
     {
+		// check if approved to see not approved news
+		$admin = $this->login->has_privilege('news_editor');
 		
-		$this->db->select("users.first_name, users.last_name");
+		$this->db->select("users.first_name, users.last_name, news_images.*, images.*");
 		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
 		$this->db->join("users", 'news.user_id = users.id', '');
+		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
+		$this->db->join("images", 'news_images.images_id = images.id', 'left');
 		$this->db->where("news.id",$id);
+		
+		if(!$admin) {
+			// not admin, forces news to be approved and not draft
+			$this->db->where("news.draft",0);
+			$this->db->where("news.approved",1);
+		}
+		
 		$this->db->limit(1);
 		$query = $this->db->get();
 		$res = $query->result();

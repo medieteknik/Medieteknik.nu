@@ -1,23 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class Admin_news extends CI_Controller {
-	
-	public $language = '';
-	public $language_abbr = '';
-	public $lang_data = '';
-	public $adminmenu = '';
+class Admin_news extends MY_Controller {
+
 	public $languages = '';
 	
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
-        
-		$this->language = $this->config->item('language');
-		$this->language_abbr = $this->config->item('language_abbr');
-		
-		// language data
-		$this->lang_data = $this->lang->load_with_fallback('common', $this->language, 'swedish');
 		
 		if(!$this->login->is_admin()) {
 			redirect('/admin/access_denied', 'refresh');
@@ -36,21 +26,6 @@ class Admin_news extends CI_Controller {
 															'id' => 2)
 												);
 		
-		$this->adminmenu['title'] = "Admin";
-		$this->adminmenu['items'] = array(array('title' => $this->lang_data['menu_admin'], 'href' => "admin"));
-		
-		if($this->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminnews'], 'href' => "admin_news"));
-			
-		if($this->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin/edit_users"));
-			
-		if($this->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editimages'], 'href' => "admin/edit_images"));
-			
-		if($this->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_addusers'], 'href' => "admin/add_users"));
-		
     }
 
 	public function index()
@@ -62,51 +37,31 @@ class Admin_news extends CI_Controller {
 
 		// Data for overview view
 		$this->load->model('News_model');
-		$overview_data['news_array'] = $this->News_model->admin_get_all_news_overview();
-		$overview_data['lang'] = $this->lang_data;
-		//$profile_data['lang'] = $lang_data;
-		
-		// data for the right column
-		$upcomingevents['title'] = "Kommande Event";
-		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
-		$latestforum['title'] = "Nytt i Forumet";
-		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
+		$main_data['news_array'] = $this->News_model->admin_get_all_news_overview();
+		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
 		$this->load->view('includes/head', $this->lang_data);
 		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/news_overview',  $overview_data, true);					
-		$template_data['sidebar_content'] = $this->load->view('includes/link', $this->adminmenu, true);			
-		$template_data['sidebar_content'] .= $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$template_data['main_content'] = $this->load->view('admin/news_overview',  $main_data, true);					
+		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
 	}
 	
 	function create() {
 		// Data for forum view
-		//$this->load->model('User_model');
-		$news_data['lang'] = $this->lang_data;
-		//$profile_data['lang'] = $lang_data;
-		
-		$news_data['is_editor'] = true;
-		
-		$news_data['languages'] = $this->languages;
-		
-		$upcomingevents['title'] = "Kommande Event";
-		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
-		$latestforum['title'] = "Nytt i Forumet";
-		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
+		$main_data['lang'] = $this->lang_data;
+		$main_data['is_editor'] = true;
+		$main_data['languages'] = $this->languages;
 
 		// composing the views
 		$this->load->view('includes/head', $this->lang_data);
 		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/news_create',  $news_data, true);					
-		$template_data['sidebar_content'] = $this->load->view('includes/link', $this->adminmenu, true);			
-		$template_data['sidebar_content'] .= $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$template_data['main_content'] = $this->load->view('admin/news_create',  $main_data, true);					
+		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
 	}
@@ -225,30 +180,18 @@ class Admin_news extends CI_Controller {
 	}
 	
 	function edit($id) {
-		$this->load->library('Imagemanip');
 		// Data for overview view
-		$news_data['news'] = $this->News_model->admin_get_news($id);
-		$news_data['lang'] = $this->lang_data;
-		//$profile_data['lang'] = $lang_data;
-		
-		$news_data['is_editor'] = true;
-		$news_data['id'] = $id;
-		
-		$news_data['languages'] = $this->languages;
-		
-		$upcomingevents['title'] = "Kommande Event";
-		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
-		$latestforum['title'] = "Nytt i Forumet";
-		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
+		$main_data['news'] = $this->News_model->admin_get_news($id);
+		$main_data['lang'] = $this->lang_data;
+		$main_data['is_editor'] = true;
+		$main_data['id'] = $id;
 
 		// composing the views
 		$this->load->view('includes/head', $this->lang_data);
 		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/news_edit',  $news_data, true);					
-		$template_data['sidebar_content'] = $this->load->view('includes/link', $this->adminmenu, true);			
-		$template_data['sidebar_content'] .= $this->load->view('includes/list', $upcomingevents, true);
-		$template_data['sidebar_content'] .= $this->load->view('includes/list', $latestforum, true);
+		$template_data['main_content'] = $this->load->view('admin/news_edit',  $main_data, true);					
+		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 		$this->load->view('includes/footer');
 		
@@ -258,14 +201,6 @@ class Admin_news extends CI_Controller {
 		// check if translations is added
 		foreach($this->languages as $lang) {
 			$this->News_model->update_translation($id, $lang['language_abbr'], $this->input->post('title_'.$lang['language_abbr']), $this->input->post('text_'.$lang['language_abbr']));
-			
-			/*
-			if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '') {
-				echo 'yes för ' . $lang['language_abbr'] . '<br>';
-				array_push($translations, array("lang" => $lang['language_abbr'], "title" => $this->input->post('title_'.$lang['language_abbr']), "text" => $this->input->post('text_'.$lang['language_abbr'])));
-				$success = true;
-			}
-			*/
 		}
 		
 		// get the time
