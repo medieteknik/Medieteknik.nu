@@ -14,6 +14,7 @@ class News extends MY_Controller {
 		// Data for news view
 		$this->load->model('News_model');
 		$main_data['news_array'] = $this->News_model->get_latest_news();
+		$main_data['lang'] = $this->lang_data;
 		
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -27,7 +28,7 @@ class News extends MY_Controller {
 		// Data for news view
 		$this->load->model('News_model');
 		$main_data['news'] = $this->News_model->get_news($id);
-		$main_data['language'] = $this->lang_data;
+		$main_data['lang'] = $this->lang_data;
 		
 		// composing the views, old way commented
 		//$this->load->view('includes/head', $this->lang_data);

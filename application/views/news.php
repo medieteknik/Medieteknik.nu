@@ -20,9 +20,9 @@ foreach($news_array as $news_item) {
 	} else {
 		$story = $news_div.$img_div;
 	}
-	echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => "Till nyheten"));
+	echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => $lang['news_tothenews'] ));
 	
-	
+
 	/*
 	echo '<div class="main-box news clearfix" href="#">';
 

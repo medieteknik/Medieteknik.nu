@@ -15,7 +15,7 @@ if($news->image_original_filename != "") {
 echo '<div class="main-box news clearfix">';
 	echo $img_div;
 	echo '<h2>'.$news->title.'</h2>';
-	echo '<p>'.readable_date($news->date,$language).'</p>';
+	echo '<p>'.readable_date($news->date,$lang).'</p>';
 	echo '<p>'.$news->text.'</p>';
 	//do_dump($news);
 echo '</div>';

@@ -9,6 +9,7 @@ $lang['head_author'] = "Media Technology Assosciation web group";
 
 // menu
 $lang['menu_news'] = "News";
+$lang['menu_archive'] = "Archive";
 $lang['menu_wiki'] = "Wiki";
 $lang['menu_users'] = "List Users";
 $lang['menu_group'] = "Groups";
@@ -24,6 +25,8 @@ $lang['news_socialmedia'] = "Social media";
 $lang['news_studentprojects'] = "Student project";
 $lang['news_activethreads'] = "Active forum threads";
 $lang['news_author'] = "Author";
+$lang['news_tothenews'] = "To the news";
+$lang['news_editthenews'] = "Edit the news";
 
 // forum
 $lang['forum_forum'] = "Forum";

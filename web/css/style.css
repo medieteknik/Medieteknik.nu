@@ -191,3 +191,9 @@ label {
 input[type=text] {
 	display: block;
 }
+
+.main-box.red {
+	background-color: #dc6060;
+	color: #fff;
+}
+

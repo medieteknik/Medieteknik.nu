@@ -125,10 +125,12 @@ ORDER BY sticky_order DESC, news.date DESC
 		$query = $this->db->get();
 		$translations = $query->result();
 		
-		$this->db->select("*");
+		$this->db->select("news.*, news_images.height, news_images.position, news_images.size, news_images.images_id, images.image_original_filename");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
 		$this->db->join("news_sticky", 'news.id = news_sticky.news_id', 'left');
+		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
+		$this->db->join("images", 'news_images.images_id = images.id', 'left');
 		//$this->db->where("DATE(news.date) <= DATE(NOW())");
 		$this->db->order_by("sticky_order DESC, news.date DESC");
 		$query = $this->db->get();

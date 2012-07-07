@@ -9,6 +9,7 @@ $lang['head_author'] = "Medietekniks Webbutskott";
 
 // menu
 $lang['menu_news'] = "Nyheter";
+$lang['menu_archive'] = "Arkiv";
 $lang['menu_wiki'] = "Wiki";
 $lang['menu_users'] = "Lista användare";
 $lang['menu_group'] = "Grupper";
@@ -24,6 +25,8 @@ $lang['news_socialmedia'] = "Sociala medier";
 $lang['news_studentprojects'] = "Studentprojekt";
 $lang['news_activethreads'] = "Aktiva forumtrådar";
 $lang['news_author'] = "Skribent";
+$lang['news_tothenews'] = "Till nyheten";
+$lang['news_editthenews'] = "Redigera nyheten";
 
 // forum
 $lang['forum_forum'] = "Forum";

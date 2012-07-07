@@ -22,7 +22,7 @@ function get_full_name($arr) {
 	return trim($fullname);
 }
 
-function readable_date($date, $lang = '') {
+function readable_date($date, &$lang) {
 	if($lang == '') {
 		$lang = array('date_today' => 'Idag', 'date_yesterday' => 'Igår');
 	}
