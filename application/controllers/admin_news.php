@@ -188,6 +188,12 @@ class Admin_news extends MY_Controller {
 	}
 	
 	function edit_news($id) {
+		$this->load->model("Images_model");
+		$config = $this->Images_model->news_get_config();
+		$this->load->library('upload', $config);
+		
+		$this->db->trans_start();
+		
 		// check if translations is added
 		foreach($this->languages as $lang) {
 			$this->News_model->update_translation($id, $lang['language_abbr'], $this->input->post('title_'.$lang['language_abbr']), $this->input->post('text_'.$lang['language_abbr']));
@@ -208,8 +214,8 @@ class Admin_news extends MY_Controller {
 		if(is_numeric($this->input->post('img_position')) && $this->input->post('img_position') >= 1 && $this->input->post('img_position') <= 2) $position = $this->input->post('img_position'); 
 			
 		$data = array(
-               'draft' => $title,
-               'approved' => $name,
+               'draft' => $draft,
+               'approved' => $approved,
                'date' => $theTime,
             );
 
@@ -225,6 +231,36 @@ class Admin_news extends MY_Controller {
 		$this->db->where('news_id', $id);
 		$this->db->update('news_images', $data);
 		
+		if ( ! $this->upload->do_upload('img_file'))
+		{
+			
+		} else {
+			
+			$this->db->delete('news_images', array('news_id' => $id)); 
+			
+			$data = array('upload_data' => $this->upload->data());
+				
+			$data = array(
+				'user_id' => 1,
+				'image_original_filename' => $data['upload_data']['file_name'],
+				'image_title' => 'news_image',
+				'image_description' => 'news_image',
+				);
+			$this->db->insert('images', $data);
+			$images_id = $this->db->insert_id();
+			
+			$data = array(
+				'news_id' => $id,
+				'images_id' => $images_id,
+				'size' => $size,
+				'position' => $position,
+				'height' => $imgheight,
+				);
+			$this->db->insert('news_images', $data);
+				
+		}
+		
+		$this->db->trans_complete();
 		redirect('admin_news', 'refresh');
 	}
 	
