@@ -49,7 +49,7 @@ ORDER BY sticky_order DESC, news.date DESC
 		$admin = $this->login->has_privilege('news_editor');
 		
 		$this->db->select("users.first_name, users.last_name, news_images.*, images.*");
-		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
+		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id, news_translation_language.last_edit");
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
 		$this->db->join("users", 'news.user_id = users.id', '');

@@ -8,3 +8,15 @@ echo '	<div class="main-box clearfix">
 				//echo '</pre>';
 			}
 		echo'</ul></div>';
+
+echo '
+<div class="main-box clearfix">
+	<h2>Forumet</h2>
+	<p>Inga flaggade inlägg</p>
+	<p>Inga inlägg kräver godkännande</p>
+</div>
+<div class="main-box clearfix">
+	<h2>Nyheter</h2>
+	<p>1 nyhet behöver bli godkänd</p>
+</div>
+';

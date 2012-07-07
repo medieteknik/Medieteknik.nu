@@ -59,7 +59,7 @@ $approved = array(
 echo 
 form_open_multipart('admin_news/edit_news/'.$id),
 '<div class="main-box clearfix">
-	<h2>', $lang['admin_addnews'], '</h2>',
+	<h2>', $lang['admin_editnews'], '</h2>',
 	form_label($lang['misc_postdate'], 'post_date'),
 	form_input($post_date);
 	if($is_editor) {
@@ -68,7 +68,7 @@ form_open_multipart('admin_news/edit_news/'.$id),
 	if($is_editor) {
 		echo '<div>', form_checkbox($approved),form_label($lang['misc_approved'], 'approved'), '</div>';
 	} else {
-		echo form_hidden($lang['misc_approved'], 'approved');
+		echo form_hidden($lang['misc_approved'], array('name' => 'approved','id' => 'approved', 'value' => $news->approved));
 	}
 echo form_submit('save', $lang['misc_save']),
 '</div>

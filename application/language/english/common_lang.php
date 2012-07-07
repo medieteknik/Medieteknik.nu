@@ -27,6 +27,7 @@ $lang['news_activethreads'] = "Active forum threads";
 $lang['news_author'] = "Author";
 $lang['news_tothenews'] = "To the news";
 $lang['news_editthenews'] = "Edit the news";
+$lang['news_lastedit'] = "Last edit";
 
 // forum
 $lang['forum_forum'] = "Forum";

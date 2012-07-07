@@ -27,6 +27,7 @@ $lang['news_activethreads'] = "Aktiva forumtrådar";
 $lang['news_author'] = "Skribent";
 $lang['news_tothenews'] = "Till nyheten";
 $lang['news_editthenews'] = "Redigera nyheten";
+$lang['news_lastedit'] = "Senast redigerad";
 
 // forum
 $lang['forum_forum'] = "Forum";

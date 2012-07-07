@@ -41,16 +41,17 @@ class Sidebar
 		
 		if($this->CI->login->has_privilege('news_editor'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminnews'], 'href' => "admin_news"));
-			
+		
+		/*	
 		if($this->CI->login->has_privilege('news_editor'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin/edit_users"));
-			
+		
 		if($this->CI->login->has_privilege('news_editor'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editimages'], 'href' => "admin/edit_images"));
 			
 		if($this->CI->login->has_privilege('news_editor'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_addusers'], 'href' => "admin/add_users"));
-			
+		*/
 		return $this->CI->load->view('includes/list', $this->adminmenu, true);
 	}
 	
