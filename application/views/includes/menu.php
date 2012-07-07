@@ -1,26 +1,30 @@
+<?php
+echo '
 <nav id="main-navigation" class="clearfix">
 	<ul>
-		<li><?php echo anchor("news",$menu_news);?></li>
-		<li><?php echo anchor("forum",$menu_forum);?></li>
-		<li><a>Wiki</a></li>
-		<?php
-		echo '<li><a href="'.substr(site_url(), 0, -2).'se'.uri_string().'">'.$misc_swedish.'</a></li>';
-		echo '<li><a href="'.substr(site_url(), 0, -2).'en'.uri_string().'">'.$misc_english.'</a></li>';
+		<li>', anchor("news",$menu_news), '</li>
+		<li>', anchor("forum",$menu_forum), '</li>
+		<li>', anchor("test", 'Test'), '</li>
+		<li>', anchor("wiki",$menu_wiki), '</li>
+		<li>', anchor(substr(site_url(), 0, -2).'se'.uri_string(), $misc_swedish), '</li>
+		<li>', anchor(substr(site_url(), 0, -2).'en'.uri_string(), $misc_english), '</li>';
 		
 		if($this->login->is_logged_in()) {
-			echo '<li>'.anchor('user/logout',$menu_logout).'</li>';
+			echo '<li>',anchor('user/logout',$menu_logout),'</li>';
 		} else {
-			echo '<li>'.anchor('user/login',$menu_login).'</li>';
+			echo '<li>',anchor('user/login',$menu_login),'</li>';
 		}
 		if($this->login->is_admin()) {
-			echo '<li>'.anchor('admin',$menu_admin).'</li>';
+			echo '<li>',anchor('admin',$menu_admin),'</li>';
 		}
 		
-		?>
+echo '		
 	</ul>
 </nav>
 
-<?php
+';
+
+
 
 /*
 <li><?php echo anchor("news",$menu_news);?></li>

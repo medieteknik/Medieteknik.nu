@@ -9,6 +9,7 @@ $lang['head_author'] = "Medietekniks Webbutskott";
 
 // menu
 $lang['menu_news'] = "Nyheter";
+$lang['menu_wiki'] = "Wiki";
 $lang['menu_users'] = "Lista användare";
 $lang['menu_group'] = "Grupper";
 $lang['menu_association'] = "Sektionen";
@@ -44,6 +45,8 @@ $lang['admin_editimages'] = "Redigera bilder";
 $lang['admin_editusers'] = "Redigera användare";
 $lang['admin_addusers'] = "Lägg till användare";
 $lang['admin_addtranslation'] = "Lägg till översättning";
+$lang['admin_denied_title'] = "Nekad åtkomst";
+$lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
 
 // date
 $lang['date_yesterday'] = "Igår";
@@ -72,4 +75,6 @@ $lang['misc_save'] = "Spara";
 $lang['misc_postdate'] = "Publiceringsdatum";
 $lang['misc_lasteditdate'] = "Senast redigerad";
 $lang['misc_file'] = "Fil";
+$lang['misc_latestforum'] = "Nytt i forumet";
+$lang['misc_upcomingevents'] = "Kommande Event";
 

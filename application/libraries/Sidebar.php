@@ -20,15 +20,15 @@ class Sidebar
 	}
 	
 	public function get_latest_events() {
-		$upcomingevents['title'] = "Kommande Event";
-		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan"));
+		$upcomingevents['title'] = $this->lang_data['misc_upcomingevents'] ;
+		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan", 'href' => 'linj'));
 		
 		return $this->CI->load->view('includes/list', $upcomingevents, true);	
 	}
 	
 	public function get_latest_forum() {
 		
-		$latestforum['title'] = "Nytt i Forumet";
+		$latestforum['title'] = $this->lang_data['misc_latestforum'];
 		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
 		
 		return $this->CI->load->view('includes/list', $latestforum, true);	
@@ -51,7 +51,7 @@ class Sidebar
 		if($this->CI->login->has_privilege('news_editor'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_addusers'], 'href' => "admin/add_users"));
 			
-		return $this->CI->load->view('includes/link', $this->adminmenu, true);
+		return $this->CI->load->view('includes/list', $this->adminmenu, true);
 	}
 	
 	public function get_standard() {

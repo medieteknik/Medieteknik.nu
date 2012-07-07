@@ -4,17 +4,18 @@
 
 // head
 $lang['head_title'] = "Master of Science in Media Technology and Engineering";
-$lang['head_description'] = "Medieteknik association official website";
-$lang['head_author'] = "Medietekniks Webbutskott";
+$lang['head_description'] = "Media Technology association official website";
+$lang['head_author'] = "Media Technology Assosciation web group";
 
 // menu
 $lang['menu_news'] = "News";
-$lang['menu_users'] = "Lista användare";
+$lang['menu_wiki'] = "Wiki";
+$lang['menu_users'] = "List Users";
 $lang['menu_group'] = "Groups";
 $lang['menu_association'] = "Association";
 $lang['menu_forum'] = "Forum";
 $lang['menu_login'] = "Log in";
-$lang['menu_logout'] = "log ut";
+$lang['menu_logout'] = "Log ut";
 $lang['menu_admin'] = "Admin";
 
 // news
@@ -44,6 +45,8 @@ $lang['admin_editimages'] = "Edit images";
 $lang['admin_editusers'] = "Edit users";
 $lang['admin_addusers'] = "Add users";
 $lang['admin_addtranslation'] = "Add translation";
+$lang['admin_denied_title'] = "Access denied";
+$lang['admin_denied_message'] = "You need to be logged in and have permission to view the requested site.";
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -72,3 +75,5 @@ $lang['misc_save'] = "Save";
 $lang['misc_postdate'] = "Post date";
 $lang['misc_lasteditdate'] = "Last edited";
 $lang['misc_file'] = "File";
+$lang['misc_latestforum'] = "Latest in the forum";
+$lang['misc_upcomingevents'] = "Upcoming Events";

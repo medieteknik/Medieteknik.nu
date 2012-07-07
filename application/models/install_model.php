@@ -71,6 +71,7 @@ class Install_model extends CI_Model {
 			$this->User_model->add_user("Jonas", "Strandstedt", "jonst184", "password");
 			$this->User_model->add_user("Emil", "Axelsson", "emiax775", "password");
 			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
+			$this->User_model->add_user("Anders", "Nord", "andno992", "password");
 		}
 	}
 	
@@ -680,15 +681,15 @@ class Install_model extends CI_Model {
 			
 			log_message('info', "Created table: users_privileges");
 			
-			// admin
+			// superadmin
 			$data = array('user_id' => 1,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
 			$data = array('user_id' => 2,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 4,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
 			
 			// news_post
-			$data = array('user_id' => 2,'privilege_id' => 4);
-			$this->db->insert('users_privileges', $data);
 			$data = array('user_id' => 3,'privilege_id' => 4);
 			$this->db->insert('users_privileges', $data);
 		}

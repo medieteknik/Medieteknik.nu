@@ -3,7 +3,20 @@
     <ul class="box-list">
 		<?php
 		foreach($items as $item) {
-			echo '<li>'.$item['title'].'<span>'.$item['data'].'</span></li>';
+			
+			$data = '';
+			
+			if(isset($item['data']) && $item['data'] != '') {
+				$data = '<span>'.$item['data'].'</span>';
+			}
+			
+			$text = $item['title'].$data;
+			
+			if(isset($item['href']) && $item['href'] != '') {
+				echo '<li>',anchor($item['href'], $text),'</li>';
+			} else {
+				echo '<li>',$text,'</li>';
+			}
 		}
 		?>
     </ul>

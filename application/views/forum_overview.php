@@ -2,22 +2,29 @@
 
 <?php 
 foreach($categories_array as $cat) {
-	echo "<h2>".$cat->title . "</h2>";
+	
+	echo '<h2>', $cat->title, '</h2>';
+	
 	foreach($cat->sub_categories as $subcat) {
-		echo '<div class="main-box clearfix">';
-		echo '<div class="oneThird"><h2>'.$subcat->title.'</h2><p>'.$subcat->description.'</p></div>';
-		echo '	<div class="twoThirds">';
-					if(count($subcat->threads) > 0) {
-						echo '<ul class="box-list">';
-						foreach($subcat->threads as $thread) {
-							echo '<li>'.anchor('forum/thread/'.$thread->id,$thread->topic).'</li>';
-						}
-						echo '</ul>';
+echo '
+		<div class="main-box clearfix">
+			<div class="oneThird">
+				<h2>', $subcat->title, '</h2>
+				<p>', $subcat->description, '</p>
+			</div>
+			<div class="twoThirds">';
+				if(count($subcat->threads) > 0) {
+					echo '<ul class="box-list">';
+					foreach($subcat->threads as $thread) {
+						echo '<li>', anchor('forum/thread/'.$thread->id,$thread->topic), '</li>';
+					}
+					echo '</ul>';
 					} else {
 						echo '<p>'.$lang['forum_nothreads'].'</p>';
-						
 					}
-		echo '</div></div>';
+echo '
+			</div>
+		</div>';
 	}
 }
 
@@ -65,4 +72,3 @@ echo '<p>
 					</p>';
 */
 
-?>

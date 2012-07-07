@@ -25,7 +25,6 @@ class Admin_news extends MY_Controller {
 															'language_name' => 'English',
 															'id' => 2)
 												);
-		
     }
 
 	public function index()
@@ -41,13 +40,10 @@ class Admin_news extends MY_Controller {
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
-		$this->load->view('includes/head', $this->lang_data);
-		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('admin/news_overview',  $main_data, true);					
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
-		$this->load->view('includes/footer');
 	}
 	
 	function create() {
@@ -57,13 +53,10 @@ class Admin_news extends MY_Controller {
 		$main_data['languages'] = $this->languages;
 
 		// composing the views
-		$this->load->view('includes/head', $this->lang_data);
-		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('admin/news_create',  $main_data, true);					
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
-		$this->load->view('includes/footer');
 	}
 	
 	function add_news() {
@@ -187,13 +180,10 @@ class Admin_news extends MY_Controller {
 		$main_data['id'] = $id;
 
 		// composing the views
-		$this->load->view('includes/head', $this->lang_data);
-		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('admin/news_edit',  $main_data, true);					
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
-		$this->load->view('includes/footer');
 		
 	}
 	

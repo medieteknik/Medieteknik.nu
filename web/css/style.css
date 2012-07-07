@@ -67,6 +67,10 @@ a.main-box {
 	text-decoration: none;
 }
 
+.main-box a {
+	color: #f57d20;
+}
+
 .main-box h2 {
 	padding: 12px;
 	font-size: 1.3em;
@@ -159,6 +163,16 @@ ul.box-list {
 ul.box-list li {
 	padding: 10px;
 	color: #666;
+}
+
+ul.box-list li a {
+	display: block;
+	padding: 10px;
+	margin: -10px;
+	color: #666;
+}
+ul.box-list li a:hover {
+	color: #f57d20;
 }
 
 ul.box-list li span {

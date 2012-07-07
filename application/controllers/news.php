@@ -16,14 +16,11 @@ class News extends MY_Controller {
 		$main_data['news_array'] = $this->News_model->get_latest_news();
 		
 		// composing the views
-		$this->load->view('includes/head', $this->lang_data);
-		$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('carouselle','', true);
 		$template_data['main_content'] .= $this->load->view('news', $main_data, true);						
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
-		$this->load->view('includes/footer');
 	}
 	
 	public function view($id) {
@@ -32,13 +29,13 @@ class News extends MY_Controller {
 		$main_data['news'] = $this->News_model->get_news($id);
 		$main_data['language'] = $this->lang_data;
 		
-		// composing the views
-		$this->load->view('includes/head', $this->lang_data);
-		$this->load->view('includes/header', $this->lang_data);
+		// composing the views, old way commented
+		//$this->load->view('includes/head', $this->lang_data);
+		//$this->load->view('includes/header', $this->lang_data);
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('news_full', $main_data, true);						
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
-		$this->load->view('includes/footer');
+		//$this->load->view('includes/footer');
 	}
 }

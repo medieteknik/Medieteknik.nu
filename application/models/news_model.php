@@ -227,45 +227,6 @@ ORDER BY sticky_order DESC, news.date DESC
 		return $news_id;
 	}
 	
-	function add_translation($news_id, $lang_abbr, $title, $text, $last_edit = '') {
-		$theTitle = trim($title);
-		$theText = trim($text);
-		
-		if(strlen($theTitle) < 1 || strlen($theText) < 1) {
-			return false;
-		}
-		
-		$theTime = strtotime($last_edit);
-		if($theTime === false) {
-			$theTime = "0000-00-00 00:00:00";
-		} else {
-			$theTime = date("Y-m-d H:i:s", $theTime);
-		}
-		
-		$this->db->where('id', $news_id);
-		$query = $this->db->get('news');
-		if($query->num_rows != 1) {
-			return false;
-		}
-		$this->db->where('language_abbr', $lang_abbr);
-		$query = $this->db->get('language');
-		if($query->num_rows != 1) {
-			return false;
-		}
-		$lang_id = $query->result(); $lang_id = $lang_id[0]->id;
-		
-		$data = array(
-		   'news_id' => $news_id,
-		   'lang_id' => $lang_id,
-		   'title' => $theTitle,
-		   'text' => $theText,
-		   'last_edit' => $theTime
-		);
-		$this->db->insert('news_translation', $data);
-		
-		return true;
-	}
-	
 	function update_translation($news_id, $lang_abbr, $title, $text) {
 		$theTitle = trim($title);
 		$theText = trim($text);

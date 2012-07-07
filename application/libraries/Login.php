@@ -10,7 +10,7 @@ class Login
 	
 	function is_logged_in() {
 		$is_logged_in = $this->CI->session->userdata('is_logged_in');
-		if(!isset($is_logged_in) || $is_logged_in != true)
+		if(!isset($is_logged_in) || $is_logged_in !== true)
 		{
 			return false;
 		}

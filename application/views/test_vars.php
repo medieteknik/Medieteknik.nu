@@ -1,4 +1,8 @@
-Startsidan
+
+<div class="main-box clearfix">
+	<h2>variabeltest</h2>
+	<p>
+
 data = {data}
 <br><br>
 <?php echo site_url(); ?><br />
@@ -15,7 +19,5 @@ URI String (1 to 5):<br />
 
 <br><br>
 <?php echo CI_VERSION; ?>
-<hr>
-<pre>
-<?php var_dump($data) ?>
-</pre>
+<hr></p>
+</div>

@@ -56,46 +56,41 @@ $approved = array(
     'checked'     => $approved_checked,
     );
 
-echo form_open_multipart('admin_news/edit_news/'.$id);
-echo '	<div class="main-box clearfix">
-			<h2>'.$lang['admin_addnews'].'</h2>';
-			echo form_label($lang['misc_postdate'], 'post_date');
-			echo form_input($post_date);
-			if($is_editor) {
-				echo '<div>';
-				echo form_checkbox($draft);
-				echo form_label($lang['misc_draft'], 'draft');
-				echo '</div>';
-			}
-			if($is_editor) {
-				echo '<div>';
-				echo form_checkbox($approved);
-				echo form_label($lang['misc_approved'], 'approved');
-				echo '</div>';
-			} else {
-				echo form_hidden($lang['misc_approved'], 'approved');
-			}
-			echo form_submit('save', $lang['misc_save']);
-echo '	</div>';
-echo '	<div class="main-box clearfix">
-			<h2>'.$lang['misc_image'].'</h2>';
-				echo $image_div;
-				echo '<div>';
-					echo form_label($lang['misc_size'], 'img_size');
-					echo form_dropdown('img_size', $options, $news->size);
-				echo '</div>';
-				echo '<div>';
-					echo form_label($lang['misc_position'], 'img_position');
-					echo form_dropdown('img_position', $pos, $news->position);
-				echo '</div>';
-				echo '<div>';
-					echo form_label($lang['misc_height'], 'img_height');
-					echo '<input type="number" min="75" max="400" name="img_height" id="img_height" value="'.$news->height.'" />';
-				echo '</div>';
-				echo '<div>';
-				echo form_upload($img_file);
-				echo '</div>';
-echo '	</div>';
+echo 
+form_open_multipart('admin_news/edit_news/'.$id),
+'<div class="main-box clearfix">
+	<h2>', $lang['admin_addnews'], '</h2>',
+	form_label($lang['misc_postdate'], 'post_date'),
+	form_input($post_date);
+	if($is_editor) {
+		echo '<div>', form_checkbox($draft),form_label($lang['misc_draft'], 'draft'),'</div>';
+	}
+	if($is_editor) {
+		echo '<div>', form_checkbox($approved),form_label($lang['misc_approved'], 'approved'), '</div>';
+	} else {
+		echo form_hidden($lang['misc_approved'], 'approved');
+	}
+echo form_submit('save', $lang['misc_save']),
+'</div>
+<div class="main-box clearfix">
+	<h2>'.$lang['misc_image'].'</h2>',
+	$image_div,
+	'<div>',
+		form_label($lang['misc_size'], 'img_size'),
+		form_dropdown('img_size', $options, $news->size),
+	'</div>
+	<div>',
+		form_label($lang['misc_position'], 'img_position'),
+		form_dropdown('img_position', $pos, $news->position),
+	'</div>
+	<div>',
+		form_label($lang['misc_height'], 'img_height'),
+		'<input type="number" min="75" max="400" name="img_height" id="img_height" value="'.$news->height.'" />',
+	'</div>
+	<div>',
+		form_upload($img_file),
+	'</div>
+</div>';
 
 
 foreach($news->translations as $t) {
@@ -111,12 +106,13 @@ foreach($news->translations as $t) {
               'value'       => $t->text,
             );
 	
-	echo '<div class="main-box clearfix">';
-	echo '<h2>'.$t->language_name.'</h2>';
-	echo form_label($lang['misc_headline'], 'title_'.$t->language_abbr);
-	echo form_input($title);
-	echo form_label($lang['misc_text'], 'text_'.$t->language_abbr);
-	echo form_textarea($text);
-	echo '</div>';
+	echo '
+	<div class="main-box clearfix">
+	<h2>',$t->language_name,'</h2>',
+	form_label($lang['misc_headline'], 'title_'.$t->language_abbr),
+	form_input($title),
+	form_label($lang['misc_text'], 'text_'.$t->language_abbr),
+	form_textarea($text),
+	'</div>';
 }
 echo form_close();
