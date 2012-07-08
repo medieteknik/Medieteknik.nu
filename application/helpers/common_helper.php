@@ -28,9 +28,9 @@ function readable_date($date, &$lang) {
 	}
 		
 	$theDate = new DateTime($date);
-	$today = new DateTime(date("Y-m-d H:i:s"));
+	$today = new DateTime(date("Y-m-d 24:00:00"));
 	$interval = $theDate->diff($today);
-	$n = $interval->format("%a"); // get total number of days that differ (always positive number)
+	$n = $interval->format("%d"); // get total number of days that differ (always positive number)
 	
 	$string = '';
 	if($n == 0) {
