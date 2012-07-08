@@ -5,5 +5,5 @@
             Aenean tincidunt dui lacus. Ut tincidunt auctor tellus id fermentum. Donec eget turpis augue. Mauris at ipsum est. Donec pharetra adipiscing rhoncus. Ut non condimentum leo. 
         </p>
     </div>
-    <img class="twoThirds" src="<?php echo base_url(); ?>web/img/carouselle.png"/>
+    <img class="twoThirds" src="<?php echo base_url(); ?>web/img/carouselle.png" alt="carouselle"/>
 </div>

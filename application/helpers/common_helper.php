@@ -22,7 +22,7 @@ function get_full_name($arr) {
 	return trim($fullname);
 }
 
-function readable_date($date, &$lang) {
+function readable_date($date, &$lang, $short = FALSE) {
 	if($lang == '') {
 		$lang = array('date_today' => 'Idag', 'date_yesterday' => 'Igår');
 	}
@@ -33,13 +33,32 @@ function readable_date($date, &$lang) {
 	$n = $interval->format("%d"); // get total number of days that differ (always positive number)
 	
 	$string = '';
-	if($n == 0) {
-		$string = $lang['date_today'] . " " . $theDate->format('H:i');
-	} else if ($n == 1) {
-		$string = $lang['date_yesterday'] . " " . $theDate->format('H:i');
+	if($short) {
+		switch($n) {
+			case 0:
+				$string = $theDate->format('H:i');
+				break;
+			case 1:
+				$string = $lang['date_yesterday'];
+				break;
+			default:
+				$string = $theDate->format('Y-m-d');
+				break;
+		}
 	} else {
-		$string = $theDate->format('Y-m-d H:i');
+		switch($n) {
+			case 0:
+				$string = $lang['date_today'] . " " . $theDate->format('H:i');
+				break;
+			case 1:
+				$string = $lang['date_yesterday'] . " " . $theDate->format('H:i');
+				break;
+			default:
+				$string = $theDate->format('Y-m-d H:i');
+				break;
+		}
 	}
+	
 	return $string;
 }
 

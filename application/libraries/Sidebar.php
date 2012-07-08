@@ -19,6 +19,14 @@ class Sidebar
 		$this->lang_data = $this->CI->lang->load_with_fallback('common', $this->language, 'swedish');
 	}
 	
+	public function get_about() {
+		$upcomingevents['title'] = $this->lang_data['menu_about'] ;
+		$upcomingevents['items'] = array(	array('title' => "Om utbildningen", 'href' => 'about/education'),
+											array('title' => "Om sektionen", 'href' => 'about/assosciation'));
+		
+		return $this->CI->load->view('includes/list', $upcomingevents, true);	
+	}
+	
 	public function get_latest_events() {
 		$upcomingevents['title'] = $this->lang_data['misc_upcomingevents'] ;
 		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan", 'href' => 'linj'));
@@ -28,8 +36,18 @@ class Sidebar
 	
 	public function get_latest_forum() {
 		
+		$this->CI->load->model('Forum_model');
+		
+		$data = $this->CI->Forum_model->get_all_latest_threads(7);
+		
+		//do_dump($data);
+		$latestforum['items'] = array();
+		
+		foreach($data as $item) {
+			array_push($latestforum['items'], array('title' => $item->topic, 'data' => readable_date($item->date,$this->lang_data, TRUE), 'href' => 'forum/thread/'.$item->id));
+		}
+		
 		$latestforum['title'] = $this->lang_data['misc_latestforum'];
-		$latestforum['items'] = array(array('title' => "Första", 'data' => "Såatteeeh"));
 		
 		return $this->CI->load->view('includes/list', $latestforum, true);	
 	}
@@ -55,9 +73,10 @@ class Sidebar
 		return $this->CI->load->view('includes/list', $this->adminmenu, true);
 	}
 	
-	public function get_standard() {
+	public function get_standard($showadmin = true) {
 		$menus = '';
-		if($this->CI->login->has_privilege('admin')) {
+		
+		if($showadmin && $this->CI->login->has_privilege('admin')) {
 			$menus .= $this->get_admin_menu();
 		}
 		

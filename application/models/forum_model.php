@@ -39,6 +39,18 @@ class Forum_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_all_latest_threads($max_threads = 5) {
+		//$this->db->distinct();
+		$this->db->select("forum_topic.id, forum_topic.topic, MAX(forum_reply.reply_date) as date");
+		$this->db->from("forum_reply");
+		$this->db->join("forum_topic", "forum_reply.topic_id = forum_topic.id", "");
+		$this->db->order_by("date DESC");
+		$this->db->group_by("forum_topic.id"); 
+		$this->db->limit($max_threads);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
 	function get_topic($id) {
 		$this->db->select("*");
 		$this->db->from("forum_topic");

@@ -9,6 +9,7 @@ $lang['head_author'] = "Medietekniks Webbutskott";
 
 // menu
 $lang['menu_news'] = "Nyheter";
+$lang['menu_about'] = "Medieteknik";
 $lang['menu_archive'] = "Arkiv";
 $lang['menu_wiki'] = "Wiki";
 $lang['menu_users'] = "Lista användare";

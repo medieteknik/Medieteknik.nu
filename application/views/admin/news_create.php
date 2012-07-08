@@ -31,7 +31,7 @@ $draft = array(
     'name'        => 'draft',
     'id'          => 'draft',
     'value'       => '1',
-    'checked'     => FALSE,
+    'checked'     => TRUE,
     );
     
 $approved = array(
