@@ -16,6 +16,8 @@ if(count($topics_array) > 0) {
 	
 	
 	//do_dump($thread_array);
+} else if(isset($postform)) {
+	echo '<p>Inga trådar</p>';
 }
 echo '</div>';
 

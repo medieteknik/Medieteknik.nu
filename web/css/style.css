@@ -199,6 +199,7 @@ input[type=text] {
 
 ul.forum {
 	list-style: none;
+	padding: 0;
 }
 ul.forum a {
 	display: block;
@@ -206,12 +207,22 @@ ul.forum a {
 	text-decoration: none;
 	padding: 7px;
 }
+ul.forum ul.forum {
+	padding-left: 15px;
+	padding-bottom: 15px;
+}
 
 ul.forum ul.forum a {
 	padding: 3px;
+	background-color: #ccc;
+	color: #333;
+}
+
+ul.forum ul.forum li:nth-child(odd) a {
 	background-color: #ddd;
 	color: #333;
 }
+
 
 ul.topics {
 	list-style: none;
