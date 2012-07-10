@@ -2,6 +2,7 @@
 foreach($news_array as $news_item) {
 	$img_div = "";
 	$news_class = "";
+	$style = "";
 	if($news_item->image_original_filename != "") {
 		$image = new imagemanip();
 		$image->create($news_item->image_original_filename, 'zoom', news_size_to_px($news_item->size), $news_item->height);
@@ -9,10 +10,12 @@ foreach($news_array as $news_item) {
 
 		$img_div = '<img class="'.news_size_to_class($news_item->size).'" src="'.$image->get_filepath().'" />';
 		$news_class = news_size_to_class_invert($news_item->size);
+		$style = 'max-height:'.$news_item->height.'px; overflow: hidden;';
 		//$news_class = news_size_to_class_invert();
 	}
 	// $news_div = '<div class="'.$news_class.'">'.anchor('news/view/'.$news_item->id,'<h2>'.$news_item->title.'</h2>').'<p>'.$news_item->text.'</p></div>';
-	$news_div = '<div class="'.$news_class.'"><h2>'.$news_item->title.'</h2><p>'.$news_item->text.'</p></div>';
+	
+	$news_div = '<div style="'.$style.'" class="'.$news_class.'"><h2>'.$news_item->title.'</h2><p>'.$news_item->text.'</p></div>';
 	
 	$story = "";
 	if($news_item->position == 1 || $news_item->size == 4) {

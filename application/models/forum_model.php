@@ -7,20 +7,46 @@ class Forum_model extends CI_Model {
         parent::__construct();
     }
 
-    function get_all_categories_sub_to($id = 0)
+    function get_all_categories_sub_to($id = 0, $levels = 1, $recursive = FALSE)
     {
-		$this->db->select("*");
+		//$this->db->distinct();
+		
+		
+		$this->db->select("forum_categories.*, forum_categories_descriptions_language.title, forum_categories_descriptions_language.description");
 		$this->db->from("forum_categories");
 		$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
+		$this->db->join("forum_topic", "forum_topic.cat_id = forum_categories.id", "left");
+		$this->db->join("forum_reply", "forum_reply.topic_id = forum_topic.id", "left");
+		$this->db->group_by("forum_categories.id");
 		$this->db->where("forum_categories.sub_to_id", $id);
 		$this->db->order_by("order ASC");
 		$query = $this->db->get();
 		$result = $query->result();
-		foreach($result as $res) {
-			$res->sub_categories = $this->get_all_categories_sub_to($res->id);
-			foreach($res->sub_categories as $cat) {
-				$cat->threads = $this->get_latest_threads($cat->id,5);
+		if($levels > 1) {
+			foreach($result as $res) {
+				$res->sub_categories = $this->get_all_categories_sub_to($res->id, $levels - 1, TRUE);
+				/*
+				foreach($res->sub_categories as $cat) {
+					$cat->threads = $this->get_latest_threads($cat->id,5);
+				}
+				*/
 			}
+		}
+		
+		if(!$recursive && $id != 0) {
+			$this->db->select("forum_categories.*, forum_categories_descriptions_language.title, forum_categories_descriptions_language.description");
+			$this->db->from("forum_categories");
+			$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
+			$this->db->where("forum_categories.id", $id);
+			$this->db->limit(1);
+			
+			$query = $this->db->get();
+			$result2 = $query->result();
+			foreach($result2 as $res) {
+				$res->sub_categories = $result;
+			}
+			$result = $result2;
+			
 		}
 		
         return $result;
@@ -39,6 +65,17 @@ class Forum_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_topics($id) {
+		//$this->db->distinct();
+		$this->db->select("*");
+		$this->db->from("forum_topic");
+		$this->db->join("forum_reply", "forum_reply.id = forum_topic.last_reply_id", "");
+		$this->db->where("forum_topic.cat_id", $id);
+		$this->db->order_by("forum_reply.reply_date DESC");
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
 	function get_all_latest_threads($max_threads = 5) {
 		//$this->db->distinct();
 		$this->db->select("forum_topic.id, forum_topic.topic, MAX(forum_reply.reply_date) as date");
@@ -52,8 +89,10 @@ class Forum_model extends CI_Model {
 	}
 	
 	function get_topic($id) {
-		$this->db->select("*");
+		$this->db->select("forum_topic.*");
 		$this->db->from("forum_topic");
+		//$this->db->join("forum_categories", "forum_categories.id = forum_topic.cat_id");
+		//$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
 		$this->db->where("forum_topic.id", $id);
 		$this->db->limit(1);
 		$query = $this->db->get();
@@ -123,5 +162,57 @@ FROM forum_categories_descriptions               e
 LEFT OUTER JOIN forum_categories_descriptions o ON e.cat_id=o.cat_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()
 WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))
 	*/
+	
+	function create_topic($cat_id, $user_id, $topic, $post, $date = '') {
+		
+		
+		$theTime = strtotime($date);
+		if($theTime === false) {
+			$theTime = date("Y-m-d H:i:s", time());
+		} else {
+			$theTime = date("Y-m-d H:i:s", $theTime);
+		}
+		
+		$this->db->trans_start();
+		
+		$data = array(	'cat_id' 		=> $cat_id, 
+						'user_id' 		=> $user_id,
+						'topic'			=> $topic,
+						'last_reply_id'	=> 0,
+						);
+		$query = $this->db->insert('forum_topic', $data);
+		$topic_id = $this->db->insert_id();
+		
+		$this->add_reply($topic_id, $user_id, $post, $theTime);
+		
+		$this->db->trans_complete();
+		
+		return $topic_id;
+		
+	}
+	
+	function add_reply($topic_id, $user_id, $reply, $date = '') {
+		$theTime = strtotime($date);
+		if($theTime === false) {
+			$theTime = date("Y-m-d H:i:s", time());
+		} else {
+			$theTime = date("Y-m-d H:i:s", $theTime);
+		}
+		
+		$data = array(	'topic_id' 		=> $topic_id, 
+						'user_id' 		=> $user_id,
+						'reply'			=> $reply,
+						'reply_date'	=> $theTime,
+						);
+		$query = $this->db->insert('forum_reply', $data);
+		$reply_id = $this->db->insert_id();
+		
+		$data = array(
+               'last_reply_id' => $reply_id,
+            );
+
+		$this->db->where('id', $topic_id);
+		$this->db->update('forum_topic', $data);
+	}
 }
 

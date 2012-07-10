@@ -560,21 +560,22 @@ class Install_model extends CI_Model {
 			$this->dbforge->create_table('forum_topic');
 			
 			log_message('info', "Created table: forum_topic");
-			
+			/*
 			$data = array(
 			   	'cat_id' => 4,
 				'user_id' => 1,
 				'topic' => 'När börjar det?',
-				'post_date' => '2011-12-12 11:00:00',
+				'last_updated' => '2011-12-12 11:00:00',
 			);
 			$this->db->insert('forum_topic', $data);
 			$data = array(
 			   	'cat_id' => 4,
 				'user_id' => 2,
 				'topic' => 'LiU is the best.',
-				'post_date' => '2011-12-12 12:00:00',
+				'last_updated' => '2011-12-12 12:00:00',
 			);
 			$this->db->insert('forum_topic', $data);
+			*/
 		}
 	}
 	
@@ -589,6 +590,7 @@ class Install_model extends CI_Model {
 			
 			log_message('info', "Created table: forum_reply");
 			
+			/*
 			$data = array(
 			   	'topic_id' => 1,
 				'user_id' => 1,
@@ -610,6 +612,14 @@ class Install_model extends CI_Model {
 				'reply_date' => '2011-12-12 13:00:00',
 			);
 			$this->db->insert('forum_reply', $data);
+			*/
+			
+			
+			// inserting users
+			$this->load->model("Forum_model");
+			$this->Forum_model->create_topic(4, 1, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?\nDet viktiga är inte exakt dag utan på ett ungefär?\n\npuss', '2011-12-12 11:00:00');
+			$this->Forum_model->create_topic(4, 2, 'LiU is the best.', 'its only a game.', '2011-12-12 12:00:00');
+			$this->Forum_model->add_reply(1, 2, 'Det har redan varit.', '2011-12-12 13:00:00');
 		}
 	}
 	
