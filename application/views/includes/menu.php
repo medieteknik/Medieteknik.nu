@@ -15,6 +15,7 @@ echo '
 			echo '<li>',anchor('admin',$menu_admin),'</li>';
 		}
 		if($this->login->is_logged_in()) {
+			echo '<li>',anchor('user','Profil'),'</li>';
 			echo '<li>',anchor('user/logout',$menu_logout),'</li>';
 		} else {
 			echo '<li>',anchor('user/login',$menu_login),'</li>';

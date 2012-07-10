@@ -139,6 +139,18 @@ function news_size_to_px($size) {
 	}
 }
 
+function lang_id_to_imgpath($id) {
+	switch($id) {
+		case 1:
+			return base_url().'web/img/flags/se.png';
+		case 2:
+			return base_url().'web/img/flags/gb.png';
+		default:
+			return "";
+		
+	}
+}
+
 /**
  * Better GI than print_r or var_dump -- but, unlike var_dump, you can only dump one variable.  
  * Added htmlentities on the var content before echo, so you see what is really there, and not the mark-up.

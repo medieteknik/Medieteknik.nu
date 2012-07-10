@@ -15,7 +15,8 @@ foreach($news_array as $news_item) {
 	}
 	// $news_div = '<div class="'.$news_class.'">'.anchor('news/view/'.$news_item->id,'<h2>'.$news_item->title.'</h2>').'<p>'.$news_item->text.'</p></div>';
 	
-	$news_div = '<div style="'.$style.'" class="'.$news_class.'"><h2>'.$news_item->title.'</h2><p>'.$news_item->text.'</p></div>';
+	$lang_img = '<img src="'.lang_id_to_imgpath($news_item->lang_id).'" alt="flag" class="news_flag" />';
+	$news_div = '<div style="'.$style.'" class="'.$news_class.'">'.$lang_img.'<h2>'.$news_item->title.'</h2><p>'.$news_item->text.'</p></div>';
 	
 	$story = "";
 	if($news_item->position == 1 || $news_item->size == 4) {
@@ -24,7 +25,6 @@ foreach($news_array as $news_item) {
 		$story = $news_div.$img_div;
 	}
 	echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => $lang['news_tothenews'] ));
-	
 
 	/*
 	echo '<div class="main-box news clearfix" href="#">';
