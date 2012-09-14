@@ -1,4 +1,9 @@
 <?php
+/**
+* The following functions are defining the tables
+*
+* @uses the install model class is using these functions when creating the tables
+*/
 
 function get_user_table_fields()
 {	

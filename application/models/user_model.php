@@ -6,7 +6,14 @@ class User_model extends CI_Model {
         // Call the Model constructor
         parent::__construct();
     }
-
+	
+	/**
+	 * Validates if the user credentials is correct
+	 *
+	 * @param  string	$lukasid	The lukas-id of the user, for example abcde123
+	 * @param  string	$password	The password in clear text
+	 * @return bool 	
+	 */ 
 	function validate($lukasid = '', $password = '')
 	{
 		$lid = preg_replace("/(@.*)/", "", $lukasid);
@@ -22,6 +29,13 @@ class User_model extends CI_Model {
 		
 	}
 	
+	/**
+	 * Checks if the user has any of the specified privileges
+	 *
+	 * @param  integer	$user_id	The user id
+	 * @param  string	$privilege	The privilege name, ex forum_moderator or array('forum_moderator', 'admin')
+	 * @return bool 	
+	 */ 
 	function has_privilege($user_id, $privilege) {
 		if(!is_array($privilege)) {
 			$thePrivileges = array($privilege);
@@ -36,16 +50,6 @@ class User_model extends CI_Model {
 		$this->db->join("users_privileges", "users_privileges.privilege_id = privileges.id", "");
 		$this->db->where("users_privileges.user_id", $user_id);
 		$this->db->where_in("privileges.privilege_name ", $thePrivileges);
-		/*
-		foreach($thePrivileges as $p) {
-			if($first) {
-				$this->db->where("privileges.privilege_name ", $p);
-				$first = false;
-			} else {
-				$this->db->or_where("privileges.privilege_name ", $p);
-			}
-		}
-		*/
 		
 		$query = $this->db->get();
 		if($query->num_rows > 0)
@@ -53,19 +57,25 @@ class User_model extends CI_Model {
 			return true;
 		}
 		return false;
-/*
-SELECT * FROM privileges
-JOIN users_privileges ON users_privileges.privilege_id = privileges.id
-WHERE privileges.privilege_name = 'admin' AND users_privileges.user_id = '1'
-*/
 	}
     
+	/**
+	 * Fetches all the users
+	 *
+	 * @return array 	
+	 */ 
     function get_all_users()
     {
         $query = $this->db->get('users');
         return $query->result();
     }
     
+	/**
+	 * Fetches the user profile of specified user
+	 *
+	 * @param  integer	$id	The id of the user
+	 * @return bool 	
+	 */ 
     function get_user_profile($id) {
 		$this->db->select("*");
 		$this->db->from("users");
@@ -78,6 +88,12 @@ WHERE privileges.privilege_name = 'admin' AND users_privileges.user_id = '1'
 		return $res;
 	}
 	
+	/**
+	 * Fetches the privileges of specied user
+	 *
+	 * @param  integer	$id		The id of the user
+	 * @return array 	
+	 */ 
 	function get_user_privileges($id) {
 		$this->db->select("*");
 		$this->db->from("users_privileges");
@@ -87,6 +103,12 @@ WHERE privileges.privilege_name = 'admin' AND users_privileges.user_id = '1'
 		return $query->result();
 	}
 	
+	/**
+	 * Checks if specified lukasid exists
+	 *
+	 * @param  string	$lukasid	The lukasid to check
+	 * @return bool 	
+	 */ 
 	function lukasid_exists($lid = '') {
 		$this->db->where('lukasid', $lid);
 		$query = $this->db->get('users');
@@ -96,7 +118,16 @@ WHERE privileges.privilege_name = 'admin' AND users_privileges.user_id = '1'
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Adds a user to the database
+	 *
+	 * @param  string	$fname		The first name of the user
+	 * @param  string	$lname		The last name of the user
+	 * @param  string	$lukasid	The lukasid of the user, ex abcde123
+	 * @param  string	$password	The password in clear text
+	 * @return bool 	
+	 */ 
 	function add_user($fname = '', $lname = '', $lukasid ='', $password = '') {
 		// fixing and trimming
 		$fn = trim(preg_replace("/[^A-Za-z]/", "", $fname ));

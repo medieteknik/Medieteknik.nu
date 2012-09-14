@@ -1,4 +1,7 @@
 <?php
+/**
+* The following functions are used by many classes, therefore the name common helpers
+*/
 
 function encrypt_password($password) {
 	$salt = 'MT_sillystring_as_sal';

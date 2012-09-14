@@ -7,6 +7,11 @@ class News_model extends CI_Model {
         parent::__construct();
     }
     
+	/**
+	 * Fetches latest news
+	 *
+	 * @return array 	
+	 */ 
     function get_latest_news()
     {
 		// check if approved to see not approved news
@@ -43,6 +48,12 @@ ORDER BY sticky_order DESC, news.date DESC
 */
     }
     
+	/**
+	 * Fetches a specific news item
+	 *
+	 * @param  integer	$id		The ID of the news item
+	 * @return array 	
+	 */ 
     function get_news($id)
     {
 		// check if approved to see not approved news
@@ -69,6 +80,12 @@ ORDER BY sticky_order DESC, news.date DESC
         return $res[0];
 	}
 	
+	/**
+	 * fetches a specific news item, admin-style => more data included
+	 *
+	 * @param  integer	$id		The ID of the news item
+	 * @return array 	
+	 */ 
 	function admin_get_news($id)
     {
 		$this->db->select("news.*, language.language_name, language.language_abbr, news_translation.*");
@@ -117,6 +134,11 @@ ORDER BY sticky_order DESC, news.date DESC
         */
 	}
 	
+	/**
+	 * Fetches all news for the admin overview
+	 *
+	 * @return array 	
+	 */ 
 	function admin_get_all_news_overview() {
 		$this->db->select("news.*, language.language_name, language.language_abbr, news_translation.*");
 		$this->db->from("news");
@@ -146,7 +168,18 @@ ORDER BY sticky_order DESC, news.date DESC
 		}
 		return $news_array;
 	}
-
+	
+	/**
+	 * Create a new news
+	 *
+	 * @param  integer	$user_id		The ID os the user who creates the news
+	 * @param  array 	$translations	All translations of the news item, array("lang_abbr" => "se", "title" => "Inte klistrad!", "text" => "Den här nyheten är inte klistrad eller översatt!")
+	 * @param  date		$post_date		The date of the news item
+	 * @param  integer	$draft			Specify if the news item is a draft, 1 = Draft, 0 = Not draft
+	 * @param  integer	$approved		Specify if the news item is approved, 1 = Approved, 0 = Not approved
+	 * @param  integer	$group_id		The id of the group the user belongs to when posting
+	 * @return The news id 	
+	 */ 
 	function add_news($user_id, $translations = array(), $post_date = '', $draft = 0, $approved = 1, $group_id = 0) {
 		if(!is_array($translations)) {
 			return false;
@@ -229,6 +262,15 @@ ORDER BY sticky_order DESC, news.date DESC
 		return $news_id;
 	}
 	
+	/**
+	 * Update a translation of a specific news item
+	 *
+	 * @param  integer	$news_id		The ID of the news item
+	 * @param  string	$lang_abbr		The language translation abbreviation
+	 * @param  string	$title			The title of the news item translation
+	 * @param  string	$text			The text of the news item translation
+	 * @return bool		True or false depending on success or failure
+	 */ 
 	function update_translation($news_id, $lang_abbr, $title, $text) {
 		$theTitle = trim($title);
 		$theText = trim($text);

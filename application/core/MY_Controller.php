@@ -1,6 +1,10 @@
 <?php (defined('BASEPATH')) OR exit('No direct script access allowed');
 
-
+/**
+ * Our own standard controller class
+ *
+ * MY_Controller is an extension of CI_Controller and simplifies language handling
+ */ 
 class MY_Controller extends CI_Controller {
 	
 	public $language = '';
