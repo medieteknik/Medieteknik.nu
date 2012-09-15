@@ -77,24 +77,54 @@ function uncompact_name($name) {
 	return preg_replace("/o/i", "(o|ö){1}", $string);
 }
 
-function text_format($input, $p = 'p') {
+function _img_format($matches) {
+	$c = count($matches);
+	$id = $matches[1];
+	if($c > 2)
+		$w = $matches[2];
+	else
+		$w = 130;
+	if($c > 3)
+		$h = $matches[3];
+	else 
+		$h = 75;
+		
+	
+	$im = new imagemanip($id, 'zoom', $w, $h);
+	return $im->get_img_tag();
+	//return $matches[0];
+	//return count($matches);
+}
+
+function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) {
 	//\r\n, \n\r, \n and \r
 	$patterns = array('/\r\n/', '/\n\r/', '/\r/', '/\n/');
 	$replacements = array('<br/>','<br/>','<br/>','<br/>');
 	$text = preg_replace($patterns,$replacements, $input);
 	
+	// bold and italics
+	$text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);
+	$text = preg_replace('/\[i\](.*)\[\/i\]/','<i>${1}</i>', $text);
+	
+	if($xtravaganza === TRUE) {
+		// URL
+		$in		=array('`((?:https?|ftp)://\S+[[:alnum:]]/?)`si','`((?<!//)(www\.\S+[[:alnum:]]/?))`si');
+		$out	=array('<a href="$1"  rel=nofollow>$1</a> ','<a href="http://$1" rel=\'nofollow\'>$1</a>');
+		$text = preg_replace($in,$out,$text);
+		
+		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+)\]/','_img_format', $text);
+		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+)]/','_img_format', $text);
+		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+) h=(\d+)]/','_img_format', $text);
+	} else {
+		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
+	}
+	
 	// more than one (2-30) line break is converted to a paragraph
-	if($p != '') {
-		return '<'.$p.'>'.preg_replace('/(<br\/>){2,30}/','</'.$p.'><'.$p.'>', $text).'</'.$p.'>';
+	if($pre != '' && $post != '') {
+		return $pre.preg_replace('/(<br\/>){2,30}/',$post.$pre, $text).$post;
 	} else {
 		return $text;
 	}
-	
-	/*
-	$patterns = array('/Hej/', '/undrar/', '/(\n){2}/');
-	$replacements = array('Hello', 'wonder', '</p><p>');
-	return preg_replace($patterns,$replacements, $input);
-	*/
 }
 
 function news_size_to_class($size) {

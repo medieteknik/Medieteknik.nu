@@ -116,3 +116,12 @@ foreach($news->translations as $t) {
 	'</div>';
 }
 echo form_close();
+
+echo '
+<div class="main-box news clearfix red">
+<h2>Delete</h2>',
+form_open('admin_news/delete'),
+form_submit('delete', 'Delete'),
+form_close(),
+'</div>
+';

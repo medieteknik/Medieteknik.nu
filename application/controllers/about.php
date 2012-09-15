@@ -32,5 +32,15 @@ class About extends MY_Controller {
 		$template_data['sidebar_content'] = $this->sidebar->get_about().$this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
+	
+	public function format() {
+		$main_data['lang'] = $this->lang_data;
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('about_format',  $main_data, true);					
+		$template_data['sidebar_content'] = $this->sidebar->get_about().$this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
+	}
 
 }

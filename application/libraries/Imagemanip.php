@@ -60,7 +60,7 @@ class Imagemanip
 		}
 		$this->genereate_filename(false);
 		if($this->generate_image(false)) {
-			return '<img src="'.base_url().$this->get_filepath(false).'" width="'.$use_width.'" height="'.$use_height.'" alt="'.$this->alt.'" />';
+			return '<img src="'.$this->get_filepath(false).'" width="'.$use_width.'" height="'.$use_height.'" alt="'.$this->alt.'" />';
 		} else {
 			return '<div class="not_writable" style="background-color: #ccc; border: 1px solid #000; color: #fff; display: inline-block; width: '.$use_width.'px; height: '.$use_height.'px;">'.$this->path_to_thumb_directory.' is not writable</div>';
 		}

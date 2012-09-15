@@ -145,11 +145,13 @@ class Install_model extends CI_Model {
 			
 			$this->load->model("News_model");
 			$translations = array(
-									array("lang" => "se", "title" => "Klistrad nyhet!", "text" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
+									array("lang" => "se", "title" => "Klistrad nyhet!", "text" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
 									array("lang" => "en", "title" => "Sticky News!", "text" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->News_model->add_news(1, $translations, "2012-01-06");
-			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Inte klistrad!", "text" => "Den här nyheten är inte klistrad eller översatt!"), "2012-01-06");
+			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Bilder", "text" => "Bild1 = [img id=news_4ff898bae87bb]
+			Bild2 = [img id=news_4ff898bae87bb w=200] 
+			Bild3 = [img id=news_4ff898bae87bb w=150 h=100]"), "2012-01-06");
 			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Utkast!", "text" => "Ett utkast mtf!"), "2012-10-06", 1);
 			
 
@@ -617,7 +619,10 @@ class Install_model extends CI_Model {
 			
 			// inserting users
 			$this->load->model("Forum_model");
-			$this->Forum_model->create_topic(4, 1, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?\nDet viktiga är inte exakt dag utan på ett ungefär?\n\npuss', '2011-12-12 11:00:00');
+			$this->Forum_model->create_topic(4, 1, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?
+			Det viktiga är inte exakt dag utan på ett ungefär?
+			
+			puss', '2011-12-12 11:00:00');
 			$this->Forum_model->create_topic(4, 2, 'LiU is the best.', 'its only a game.', '2011-12-12 12:00:00');
 			$this->Forum_model->add_reply(1, 2, 'Det har redan varit.', '2011-12-12 13:00:00');
 		}
