@@ -1,5 +1,6 @@
 <?php
-class Images_model extends CI_Model {
+class Images_model extends CI_Model 
+{
 
     function __construct()
     {
@@ -7,7 +8,8 @@ class Images_model extends CI_Model {
         parent::__construct();
     }
     
-	function news_get_config() {
+	function news_get_config() 
+	{
 		
 		$config['upload_path'] ='./user_content/images/original';
 		$config['allowed_types'] = 'jpg';
@@ -20,11 +22,13 @@ class Images_model extends CI_Model {
 		return $config;
 	}
 
-	function add_image(&$upload_data, $userid, $title = '', $description = '') {
+	function add_image(&$upload_data, $userid, $title = '', $description = '') 
+	{
 		
 	}
 	
-	function add_news_image(&$upload_data) {
+	function add_news_image(&$upload_data) 
+	{
 		
 	}
 }

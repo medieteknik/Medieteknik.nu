@@ -1,17 +1,20 @@
 <?php 
 	
-class User extends MY_Controller {
+class User extends MY_Controller 
+{
 
 	public function index()
 	{
-		if($this->login->is_logged_in()) {
+		if($this->login->is_logged_in()) 
+		{
 			$this->profile($this->login->get_id());
 		}else {
 			$this->not_logged_in();
 		}
 	}
 	
-	public function profile($id) {
+	public function profile($id) 
+	{
 
 		// Data for forum view
 		$this->load->model('User_model');
@@ -25,7 +28,8 @@ class User extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	public function not_logged_in() {
+	public function not_logged_in() 
+	{
 		// Data for forum view
 		$main_data['lang'] = $this->lang_data;
 
@@ -36,7 +40,8 @@ class User extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	public function login() {
+	public function login() 
+	{
 		$this->load->helper('form');
 
 		// Data for forum view
@@ -49,18 +54,19 @@ class User extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	public function logout() {
+	public function logout() 
+	{
 		$this->login->logout();
 		redirect('user/login', 'refresh');
 	}
 	
-	public function checklogin() {
-		if($this->input->post('username') != false && $this->input->post('password') != false && $this->login->validate($this->input->post('username'), $this->input->post('password'))){
-			
+	public function checklogin() 
+	{
+		if($this->input->post('username') != false && $this->input->post('password') != false && $this->login->validate($this->input->post('username'), $this->input->post('password')))
+		{
 			//success
 			redirect('user', 'refresh');
 		} else {
-			
 			// fail
 			//echo $this->input->post('username') ." ". $this->input->post('password');
 			redirect('user/login', 'refresh');

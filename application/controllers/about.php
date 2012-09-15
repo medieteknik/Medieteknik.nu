@@ -1,13 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class About extends MY_Controller {
+class About extends MY_Controller 
+{
 	
 	public function index()
 	{
 		$this->education();
 	}
 	
-	public function assosciation() {
+	public function assosciation() 
+	{
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
@@ -17,7 +19,8 @@ class About extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	public function education() {
+	public function education() 
+	{
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
@@ -27,7 +30,8 @@ class About extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	public function format() {
+	public function format() 
+	{
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views

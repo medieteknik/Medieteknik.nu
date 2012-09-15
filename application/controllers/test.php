@@ -1,13 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class Test extends MY_Controller {
+class Test extends MY_Controller 
+{
 
 	public function index()
 	{
 		$this->overview();
 	}
 
-	function overview() {
+	function overview() 
+	{
 
 		// Data for overview view
 		$this->load->model('User_model');

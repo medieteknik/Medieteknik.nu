@@ -1,5 +1,6 @@
 <?php
-class User_model extends CI_Model {
+class User_model extends CI_Model 
+{
 
     function __construct()
     {
@@ -36,8 +37,10 @@ class User_model extends CI_Model {
 	 * @param  string	$privilege	The privilege name, ex forum_moderator or array('forum_moderator', 'admin')
 	 * @return bool 	
 	 */ 
-	function has_privilege($user_id, $privilege) {
-		if(!is_array($privilege)) {
+	function has_privilege($user_id, $privilege) 
+	{
+		if(!is_array($privilege)) 
+		{
 			$thePrivileges = array($privilege);
 		} else {
 			$thePrivileges = $privilege;
@@ -76,7 +79,8 @@ class User_model extends CI_Model {
 	 * @param  integer	$id	The id of the user
 	 * @return bool 	
 	 */ 
-    function get_user_profile($id) {
+    function get_user_profile($id) 
+    {
 		$this->db->select("*");
 		$this->db->from("users");
 		$this->db->join("users_data", "users.id = users_data.users_id", "left");
@@ -94,7 +98,8 @@ class User_model extends CI_Model {
 	 * @param  integer	$id		The id of the user
 	 * @return array 	
 	 */ 
-	function get_user_privileges($id) {
+	function get_user_privileges($id) 
+	{
 		$this->db->select("*");
 		$this->db->from("users_privileges");
 		$this->db->join("privileges", "privileges.id = users_privileges.privilege_id", "");
@@ -109,7 +114,8 @@ class User_model extends CI_Model {
 	 * @param  string	$lukasid	The lukasid to check
 	 * @return bool 	
 	 */ 
-	function lukasid_exists($lid = '') {
+	function lukasid_exists($lid = '') 
+	{
 		$this->db->where('lukasid', $lid);
 		$query = $this->db->get('users');
 		if($query->num_rows == 1)
@@ -128,7 +134,8 @@ class User_model extends CI_Model {
 	 * @param  string	$password	The password in clear text
 	 * @return bool 	
 	 */ 
-	function add_user($fname = '', $lname = '', $lukasid ='', $password = '') {
+	function add_user($fname = '', $lname = '', $lukasid ='', $password = '') 
+	{
 		// fixing and trimming
 		$fn = trim(preg_replace("/[^A-Za-z]/", "", $fname ));
 		$ln = trim(preg_replace("/[^A-Za-z]/", "", $lname ));
@@ -136,9 +143,11 @@ class User_model extends CI_Model {
 		$pwd = trim($password);
 		
 		// check lengths
-		if(strlen($fn) > 0 && strlen($ln) > 0 && strlen($lid) == 8 && strlen($pwd) > 5) {
+		if(strlen($fn) > 0 && strlen($ln) > 0 && strlen($lid) == 8 && strlen($pwd) > 5) 
+		{
 			// if lukas_id not exists insert user
-			if(!$this->lukasid_exists($lid)) {
+			if(!$this->lukasid_exists($lid)) 
+			{
 				$data = array(
 				   'first_name' => $fn ,
 				   'last_name' => $ln,

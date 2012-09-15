@@ -236,7 +236,8 @@ function get_users_groups_fields()
 	return $fields;
 }
 
-function get_forum_categories_fields() {
+function get_forum_categories_fields() 
+{
 	$fields = array(
 		'id' => array(
 			'type' => 'INT',
@@ -276,7 +277,8 @@ function get_forum_categories_fields() {
 	return $fields;
 }
 
-function get_forum_categories_descriptions_fields() {
+function get_forum_categories_descriptions_fields() 
+{
 	$fields = array(
 		'cat_id' => array(
 			'type' => 'INT',
@@ -300,7 +302,8 @@ function get_forum_categories_descriptions_fields() {
 	return $fields;
 }
 
-function get_forum_topic_fields() {
+function get_forum_topic_fields() 
+{
 	$fields = array(
 		'id' => array(
 			'type' => 'INT',
@@ -331,7 +334,8 @@ function get_forum_topic_fields() {
 	return $fields;
 }
 
-function get_forum_reply_fields() {
+function get_forum_reply_fields() 
+{
 	$fields = array(
 		'id' => array(
 			'type' => 'INT',
@@ -359,7 +363,8 @@ function get_forum_reply_fields() {
 	return $fields;
 }
 
-function get_forum_reply_guest_fields() {
+function get_forum_reply_guest_fields() 
+{
 	$fields = array(
 		'id' => array(
 			'type' => 'INT',
@@ -390,7 +395,8 @@ function get_forum_reply_guest_fields() {
 	return $fields;
 }
 
-function get_privileges_fields(){
+function get_privileges_fields()
+{
 	$fields = array(
 		'id' => array(
 			'type' => 'INT',
@@ -410,7 +416,8 @@ function get_privileges_fields(){
 	return $fields;
 }
 
-function get_users_privileges_fields(){
+function get_users_privileges_fields()
+{
 	$fields = array(
 		'user_id' => array(
 			'type' => 'INT',
@@ -426,7 +433,8 @@ function get_users_privileges_fields(){
 	return $fields;
 }
 
-function get_images_fields(){
+function get_images_fields()
+{
 	$fields = array(
 		'id' => array(
 			'type' => 'INT',
@@ -456,7 +464,8 @@ function get_images_fields(){
 	return $fields;
 }
 
-function get_news_images_fields(){
+function get_news_images_fields()
+{
 	$fields = array(
 		'news_id' => array(
 			'type' => 'INT',

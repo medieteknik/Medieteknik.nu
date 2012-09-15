@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class Admin_news extends MY_Controller {
+class Admin_news extends MY_Controller 
+{
 
 	public $languages = '';
 	
@@ -9,7 +10,8 @@ class Admin_news extends MY_Controller {
         // Call the Model constructor
         parent::__construct();
 		
-		if(!$this->login->is_admin()) {
+		if(!$this->login->is_admin()) 
+		{
 			redirect('/admin/access_denied', 'refresh');
 		}
 		
@@ -32,7 +34,8 @@ class Admin_news extends MY_Controller {
 		$this->overview();
 	}
 	
-	function overview() {
+	function overview() 
+	{
 
 		// Data for overview view
 		$this->load->model('News_model');
@@ -46,7 +49,8 @@ class Admin_news extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	function create() {
+	function create() 
+	{
 		// Data for forum view
 		$main_data['lang'] = $this->lang_data;
 		$main_data['is_editor'] = true;
@@ -59,12 +63,14 @@ class Admin_news extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	function add_news() {
+	function add_news() 
+	{
 		$translations = array();
 		$success = false;
 		
 		// check if translations is added
-		foreach($this->languages as $lang) {
+		foreach($this->languages as $lang) 
+		{
 			if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '') {
 				//echo 'yes för ' . $lang['language_abbr'] . '<br>';
 				array_push($translations, array("lang" => $lang['language_abbr'], "title" => $this->input->post('title_'.$lang['language_abbr']), "text" => $this->input->post('text_'.$lang['language_abbr'])));
@@ -72,7 +78,8 @@ class Admin_news extends MY_Controller {
 			}
 		}
 		
-		if($success) {
+		if($success) 
+		{
 			$this->load->model("Images_model");
 	
 			$config = $this->Images_model->news_get_config();
@@ -81,7 +88,8 @@ class Admin_news extends MY_Controller {
 			
 			// get the time
 			$theTime = date("Y-m-d H:i",time());
-			if(strtotime($this->input->post('post_date')) !== false) {
+			if(strtotime($this->input->post('post_date')) !== false) 
+			{
 				$theTime = $this->input->post('post_date');
 			}
 			
@@ -96,7 +104,8 @@ class Admin_news extends MY_Controller {
 			$this->db->trans_start();
 			$news_id = $this->News_model->add_news(1, $translations, $theTime, $draft, $approved);
 			
-			if ($this->upload->do_upload('img_file')) {
+			if ($this->upload->do_upload('img_file')) 
+			{
 				$data = array('upload_data' => $this->upload->data());
 				
 				$data = array(
@@ -127,7 +136,8 @@ class Admin_news extends MY_Controller {
 		}
 	}
 	
-	function edit($id) {
+	function edit($id) 
+	{
 		// Data for overview view
 		$main_data['news'] = $this->News_model->admin_get_news($id);
 		$main_data['lang'] = $this->lang_data;
@@ -142,7 +152,8 @@ class Admin_news extends MY_Controller {
 		
 	}
 	
-	function edit_news($id) {
+	function edit_news($id) 
+	{
 		$this->load->model("Images_model");
 		$config = $this->Images_model->news_get_config();
 		$this->load->library('upload', $config);
@@ -150,13 +161,15 @@ class Admin_news extends MY_Controller {
 		$this->db->trans_start();
 		
 		// check if translations is added
-		foreach($this->languages as $lang) {
+		foreach($this->languages as $lang) 
+		{
 			$this->News_model->update_translation($id, $lang['language_abbr'], $this->input->post('title_'.$lang['language_abbr']), $this->input->post('text_'.$lang['language_abbr']));
 		}
 		
 		// get the time
 		$theTime = date("Y-m-d H:i",time());
-		if(strtotime($this->input->post('post_date')) !== false) {
+		if(strtotime($this->input->post('post_date')) !== false) 
+		{
 			$theTime = $this->input->post('post_date');
 		}
 			
@@ -186,7 +199,8 @@ class Admin_news extends MY_Controller {
 		$this->db->where('news_id', $id);
 		$this->db->update('news_images', $data);
 		
-		if ($this->upload->do_upload('img_file')) {
+		if ($this->upload->do_upload('img_file')) 
+		{
 			
 			$this->db->delete('news_images', array('news_id' => $id)); 
 			

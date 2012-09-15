@@ -1,5 +1,6 @@
 <?php
-class Tweet_model extends CI_Model {
+class Tweet_model extends CI_Model 
+{
 	
 	protected $tweet_folder = "web/tweet_cache/";
 
@@ -9,7 +10,8 @@ class Tweet_model extends CI_Model {
         parent::__construct();
     }
     
-	function get_latest_tweets() {
+	function get_latest_tweets() 
+	{
 		$tweeters = array(
 			array(	"screen_name" => "VisualiseringC", 
 					"last_update" => 10),
@@ -45,8 +47,10 @@ class Tweet_model extends CI_Model {
 		
 		// only return the 10 latest
 		$i = 0;
-		foreach($all_tweets as $tweet) {
-			if($i > 9) {
+		foreach($all_tweets as $tweet) 
+		{
+			if($i > 9) 
+			{
 				unset($all_tweets[$i]);
 			}
 			$i++;

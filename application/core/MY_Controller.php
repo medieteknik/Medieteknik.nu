@@ -5,7 +5,8 @@
  *
  * MY_Controller is an extension of CI_Controller and simplifies language handling
  */ 
-class MY_Controller extends CI_Controller {
+class MY_Controller extends CI_Controller 
+{
 	
 	public $language = '';
 	public $language_abbr = '';

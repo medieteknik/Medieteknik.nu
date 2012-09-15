@@ -1,5 +1,6 @@
 <?php
-class Forum_model extends CI_Model {
+class Forum_model extends CI_Model 
+{
 
     function __construct()
     {
@@ -28,8 +29,10 @@ class Forum_model extends CI_Model {
 		$this->db->order_by("order ASC");
 		$query = $this->db->get();
 		$result = $query->result();
-		if($levels > 1) {
-			foreach($result as $res) {
+		if($levels > 1) 
+		{
+			foreach($result as $res) 
+			{
 				$res->sub_categories = $this->get_all_categories_sub_to($res->id, $levels - 1, TRUE);
 				/*
 				foreach($res->sub_categories as $cat) {
@@ -40,7 +43,8 @@ class Forum_model extends CI_Model {
 		}
 		
 		// if not a recursive call and not the root node, fetch also the title of the current category
-		if(!$recursive && $id != 0) {
+		if(!$recursive && $id != 0) 
+		{
 			$this->db->select("forum_categories.*, forum_categories_descriptions_language.title, forum_categories_descriptions_language.description");
 			$this->db->from("forum_categories");
 			$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
@@ -49,7 +53,8 @@ class Forum_model extends CI_Model {
 			
 			$query = $this->db->get();
 			$result2 = $query->result();
-			foreach($result2 as $res) {
+			foreach($result2 as $res) 
+			{
 				$res->sub_categories = $result;
 			}
 			$result = $result2;
@@ -66,7 +71,8 @@ class Forum_model extends CI_Model {
 	 * @param  integer  $max_threads	How many threads to fetch
 	 * @return array 	
 	 */ 
-    function get_latest_threads($id, $max_threads = 5) {
+    function get_latest_threads($id, $max_threads = 5) 
+    {
 		$this->db->select("*");
 		$this->db->from("forum_reply");
 		$this->db->join("forum_topic", "forum_reply.topic_id = forum_topic.id", "");
@@ -84,7 +90,8 @@ class Forum_model extends CI_Model {
 	 * @param  integer	$id		The ID of the category from which to fetch topics
 	 * @return array 	
 	 */ 
-	function get_topics($id) {
+	function get_topics($id) 
+	{
 		$this->db->select("*");
 		$this->db->from("forum_topic");
 		$this->db->join("forum_reply", "forum_reply.id = forum_topic.last_reply_id", "");
@@ -100,7 +107,8 @@ class Forum_model extends CI_Model {
 	 * @param  integer	$max_threads	Maximum number of threads to fetch
 	 * @return array 	
 	 */ 
-	function get_all_latest_threads($max_threads = 5) {
+	function get_all_latest_threads($max_threads = 5) 
+	{
 		$this->db->select("forum_topic.id, forum_topic.topic, MAX(forum_reply.reply_date) as date");
 		$this->db->from("forum_reply");
 		$this->db->join("forum_topic", "forum_reply.topic_id = forum_topic.id", "");
@@ -117,7 +125,8 @@ class Forum_model extends CI_Model {
 	 * @param  integer	$id		The ID of the topic to fetch
 	 * @return array 	
 	 */ 
-	function get_topic($id) {
+	function get_topic($id) 
+	{
 		$this->db->select("forum_topic.*");
 		$this->db->from("forum_topic");
 		$this->db->where("forum_topic.id", $id);
@@ -133,7 +142,8 @@ class Forum_model extends CI_Model {
 	 * @param  integer	$id		The ID of topic to fetch replies from
 	 * @return array 	
 	 */ 
-	function get_replies($id) {
+	function get_replies($id) 
+	{
 		$this->db->select("forum_reply.*, users.first_name, users.last_name");
 		$this->db->from("forum_reply");
 		$this->db->join("users", "forum_reply.user_id = users.id", "");
@@ -153,11 +163,13 @@ class Forum_model extends CI_Model {
 	 * @param  date		$date		The date when the topic is supposed to be posted
  	 * @return integer	The new topic ID 	
  	 */ 
-	function create_topic($cat_id, $user_id, $topic, $post, $date = '') {
+	function create_topic($cat_id, $user_id, $topic, $post, $date = '') 
+	{
 		$theTime = strtotime($date);
 		
 		// if unable to parse the date, use the current datetime
-		if($theTime === false) {
+		if($theTime === false) 
+		{
 			$theTime = date("Y-m-d H:i:s", time());
 		} else {
 			$theTime = date("Y-m-d H:i:s", $theTime);
@@ -189,9 +201,11 @@ class Forum_model extends CI_Model {
 	 * @param  string	$reply	The actual reply
 	 * @param  date		$date	The date when the reply is supposed to be posted
 	 */ 
-	function add_reply($topic_id, $user_id, $reply, $date = '') {
+	function add_reply($topic_id, $user_id, $reply, $date = '') 
+	{
 		$theTime = strtotime($date);
-		if($theTime === false) {
+		if($theTime === false) 
+		{
 			$theTime = date("Y-m-d H:i:s", time());
 		} else {
 			$theTime = date("Y-m-d H:i:s", $theTime);
@@ -205,9 +219,8 @@ class Forum_model extends CI_Model {
 		$query = $this->db->insert('forum_reply', $data);
 		$reply_id = $this->db->insert_id();
 		
-		$data = array(
-               'last_reply_id' => $reply_id,
-            );
+		$data = array(	'last_reply_id' => $reply_id,
+            			);
 
 		$this->db->where('id', $topic_id);
 		$this->db->update('forum_topic', $data);

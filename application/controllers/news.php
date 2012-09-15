@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class News extends MY_Controller {
+class News extends MY_Controller 
+{
 
 	public function index()
 	{
@@ -18,7 +19,8 @@ class News extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
-	public function view($id) {
+	public function view($id) 
+	{
 		// Data for news view
 		$this->load->model('News_model');
 		$main_data['news'] = $this->News_model->get_news($id);

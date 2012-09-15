@@ -9,8 +9,10 @@
  *
  * @author Simon Emms <simon@simonemms.com>
  */
-class MY_DB_mysql_driver extends CI_DB_mysql_driver {
-    final public function __construct($params) {
+class MY_DB_mysql_driver extends CI_DB_mysql_driver 
+{
+    final public function __construct($params) 
+    {
         parent::__construct($params);
 		
 		$ci = & get_instance();
@@ -19,7 +21,8 @@ class MY_DB_mysql_driver extends CI_DB_mysql_driver {
 		
 		unset($abbr_array[$prim_abbr]);
 		$sec_abbr = key($abbr_array);
-		if($this->table_exists('language')) {
+		if($this->table_exists('language')) 
+		{
 			$query = $this->query("SELECT id FROM language WHERE language_abbr = '".$prim_abbr."' OR language_abbr = '".$sec_abbr."' ORDER BY FIELD(language_abbr, '".$prim_abbr."', '".$sec_abbr."')");
 			$result = $query->result();
 			$this->query("SET @primary_language_id = ".$result[0]->id.";");

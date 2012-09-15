@@ -29,8 +29,8 @@ class MY_Lang extends CI_Lang
 {
 	protected $CI;
 	
-    function __construct() {
-
+    function __construct() 
+    {
         global $URI, $CFG, $IN;
         
         $config =& $CFG->config;
@@ -46,9 +46,11 @@ class MY_Lang extends CI_Lang
         /* adjust the uri string leading slash */
         $URI->uri_string = preg_replace("|^\/?|", '/', $URI->uri_string);
         
-        if ($lang_ignore) {
+        if ($lang_ignore) 
+        {
             
-            if (isset($lang_uri_abbr[$uri_abbr])) {
+            if (isset($lang_uri_abbr[$uri_abbr])) 
+            {
             
                 /* set the language_abbreviation cookie */
                 $IN->set_cookie('user_lang', $uri_abbr, $config['sess_expiration']);
@@ -60,7 +62,8 @@ class MY_Lang extends CI_Lang
             
             }
             
-            if (strlen($uri_abbr) == 2) {
+            if (strlen($uri_abbr) == 2) 
+            {
                 
                 /* reset the uri identifier */
                 $index_page .= empty($index_page) ? '' : '/';
@@ -80,7 +83,8 @@ class MY_Lang extends CI_Lang
         }
 
         /* check validity against config array */
-        if (isset($lang_uri_abbr[$lang_abbr])) {
+        if (isset($lang_uri_abbr[$lang_abbr])) 
+        {
            
            /* reset uri segments and uri string */
            $URI->_reindex_segments(array_shift($URI->segments));
@@ -91,7 +95,8 @@ class MY_Lang extends CI_Lang
            $config['language_abbr'] = $lang_abbr;
             
            /* if abbreviation is not ignored */
-           if ( ! $lang_ignore) {
+           if ( ! $lang_ignore)
+           {
                    
                    /* check and set the uri identifier */
                    $index_page .= empty($index_page) ? $lang_abbr : "/$lang_abbr";
@@ -106,12 +111,14 @@ class MY_Lang extends CI_Lang
         } else {
                        
             /* if abbreviation is not ignored */   
-            if ( ! $lang_ignore) {                   
+            if ( ! $lang_ignore) 
+            {                   
                    
                    /* check and set the uri identifier to the default value */    
                 $index_page .= empty($index_page) ? $default_abbr : "/$default_abbr";
                 
-                if (strlen($lang_abbr) == 2) {
+                if (strlen($lang_abbr) == 2) 
+                {
                     
                     /* remove invalid abbreviation */
                     $URI->uri_string = preg_replace("|^\/?$lang_abbr|", '', $URI->uri_string);
@@ -145,7 +152,8 @@ class MY_Lang extends CI_Lang
 }
 
 /* translate helper */
-function t($line) {
+function t($line) 
+{
     global $LANG;
     return ($t = $LANG->line($line)) ? $t : $line;
 }

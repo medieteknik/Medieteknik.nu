@@ -1,13 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class Admin_images extends MY_Controller {
+class Admin_images extends MY_Controller 
+{
 	
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
 		
-		if(!$this->login->is_admin()) {
+		if(!$this->login->is_admin()) 
+		{
 			redirect('/admin/access_denied', 'refresh');
 		}
 		
@@ -18,7 +20,8 @@ class Admin_images extends MY_Controller {
 		$this->overview();
 	}
 	
-	function overview() {
+	function overview() 
+	{
 
 		// Data for overview view
 		$this->load->model('News_model');
@@ -31,9 +34,4 @@ class Admin_images extends MY_Controller {
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
-	
-	
-
-	
-	
 }

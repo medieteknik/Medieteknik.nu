@@ -3,29 +3,35 @@
 * The following functions are used by many classes, therefore the name common helpers
 */
 
-function encrypt_password($password) {
+function encrypt_password($password) 
+{
 	$salt = 'MT_sillystring_as_sal';
-	if(CRYPT_SHA512 == 1){
+	if(CRYPT_SHA512 == 1)
+	{
 		return substr(crypt($password, '$6$rounds=10000$'.$salt.'$'),33);
 	}
-	if (CRYPT_SHA256 == 1) {
+	if (CRYPT_SHA256 == 1) 
+	{
 	    return substr(crypt($password, '$5$rounds=10000$'.$salt.'$'),33);
 	}
-	if (CRYPT_MD5 == 1) {
+	if (CRYPT_MD5 == 1) 
+	{
 	    return substr(crypt($password, '$1$'.$salt.'$'),12);
 	}
 	
 	return false;
 }
 
-function get_full_name($arr) {
+function get_full_name($arr) 
+{
 	$fullname = '';
 	if(isset($arr->first_name)) $fullname .= $arr->first_name;
 	if(isset($arr->last_name)) $fullname .= " ". $arr->last_name;
 	return trim($fullname);
 }
 
-function readable_date($date, &$lang, $short = FALSE) {
+function readable_date($date, &$lang, $short = FALSE) 
+{
 	if($lang == '') {
 		$lang = array('date_today' => 'Idag', 'date_yesterday' => 'Igår');
 	}
@@ -36,8 +42,10 @@ function readable_date($date, &$lang, $short = FALSE) {
 	$n = $interval->format("%d"); // get total number of days that differ (always positive number)
 	
 	$string = '';
-	if($short) {
-		switch($n) {
+	if($short) 
+	{
+		switch($n) 
+		{
 			case 0:
 				$string = $theDate->format('H:i');
 				break;
@@ -49,7 +57,8 @@ function readable_date($date, &$lang, $short = FALSE) {
 				break;
 		}
 	} else {
-		switch($n) {
+		switch($n) 
+		{
 			case 0:
 				$string = $lang['date_today'] . " " . $theDate->format('H:i');
 				break;
@@ -65,14 +74,16 @@ function readable_date($date, &$lang, $short = FALSE) {
 	return $string;
 }
 
-function compact_name($name) {
+function compact_name($name) 
+{
 	$string = strtolower($name);
 	$string = preg_replace("/(å|ä)/","a",$string);
 	$string = preg_replace("/(ö)/","o",$string);
 	return preg_replace("/[^A-Za-z0-9_]/","_",strtolower($string));
 }
 
-function uncompact_name($name) {
+function uncompact_name($name) 
+{
 	$string = preg_replace("/^_*/", "", $name);
 	$string = preg_replace("/_*$/", "", $string);
 	$string = preg_replace("/[_]+/i", ".{1}", $string);
@@ -80,7 +91,8 @@ function uncompact_name($name) {
 	return preg_replace("/o/i", "(o|ö){1}", $string);
 }
 
-function _img_format($matches) {
+function _img_format($matches) 
+{
 	$c = count($matches);
 	$id = $matches[1];
 	if($c > 2)
@@ -95,11 +107,10 @@ function _img_format($matches) {
 	
 	$im = new imagemanip($id, 'zoom', $w, $h);
 	return $im->get_img_tag();
-	//return $matches[0];
-	//return count($matches);
 }
 
-function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) {
+function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) 
+{
 	//\r\n, \n\r, \n and \r
 	$patterns = array('/\r\n/', '/\n\r/', '/\r/', '/\n/');
 	$replacements = array('<br/>','<br/>','<br/>','<br/>');
@@ -109,7 +120,8 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) 
 	$text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);
 	$text = preg_replace('/\[i\](.*)\[\/i\]/','<i>${1}</i>', $text);
 	
-	if($xtravaganza === TRUE) {
+	if($xtravaganza === TRUE) 
+	{
 		// URL
 		$in		=array('`((?:https?|ftp)://\S+[[:alnum:]]/?)`si','`((?<!//)(www\.\S+[[:alnum:]]/?))`si');
 		$out	=array('<a href="$1"  rel=nofollow>$1</a> ','<a href="http://$1" rel=\'nofollow\'>$1</a>');
@@ -123,15 +135,18 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) 
 	}
 	
 	// more than one (2-30) line break is converted to a paragraph
-	if($pre != '' && $post != '') {
+	if($pre != '' && $post != '') 
+	{
 		return $pre.preg_replace('/(<br\/>){2,30}/',$post.$pre, $text).$post;
 	} else {
 		return $text;
 	}
 }
 
-function news_size_to_class($size) {
-	switch($size) {
+function news_size_to_class($size) 
+{
+	switch($size) 
+	{
 		case 1:
 			return "oneThird";
 		case 2:
@@ -143,8 +158,10 @@ function news_size_to_class($size) {
 		
 	}
 }
-function news_size_to_class_invert($size) {
-	switch($size) {
+function news_size_to_class_invert($size) 
+{
+	switch($size) 
+	{
 		case 1:
 			return "twoThirds";
 		case 2:
@@ -156,8 +173,10 @@ function news_size_to_class_invert($size) {
 		
 	}
 }
-function news_size_to_px($size) {
-	switch($size) {
+function news_size_to_px($size) 
+{
+	switch($size) 
+	{
 		case 1:
 			return 250;
 		case 2:
@@ -172,8 +191,10 @@ function news_size_to_px($size) {
 	}
 }
 
-function lang_id_to_imgpath($id) {
-	switch($id) {
+function lang_id_to_imgpath($id) 
+{
+	switch($id) 
+	{
 		case 1:
 			return base_url().'web/img/flags/se.png';
 		case 2:

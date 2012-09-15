@@ -1,5 +1,6 @@
 <?php
-class News_model extends CI_Model {
+class News_model extends CI_Model 
+{
 
     function __construct()
     {
@@ -27,25 +28,16 @@ class News_model extends CI_Model {
 		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
 		$this->db->join("images", 'news_images.images_id = images.id', 'left');
 		
-		if(!$admin) {
+		if(!$admin) 
+		{
 			// not admin, forces news to be approved and not draft
 			$this->db->where("news.draft",0);
 			$this->db->where("news.approved",1);
 		}
-		//$this->db->where("news.date <=","DATE(NOW())");
 		$this->db->where("DATE(news.date) <= DATE(NOW())");
 		$this->db->order_by("sticky_order DESC, news.date DESC");
 		$query = $this->db->get();
         return $query->result();
-/*
-SELECT users.first_name,users.last_name, news.date, news_translation.title, news_translation.text, COALESCE(sticky_order,0) as sticky_order FROM news
-JOIN news_translation ON news.id = news_translation.news_id
-JOIN language ON news_translation.lang_id = language.id
-JOIN users ON news.user_id = users.id
-LEFT JOIN news_sticky ON news.id = news_sticky.news_id
-WHERE language.language_abbr = 'se'
-ORDER BY sticky_order DESC, news.date DESC
-*/
     }
     
 	/**
@@ -68,7 +60,8 @@ ORDER BY sticky_order DESC, news.date DESC
 		$this->db->join("images", 'news_images.images_id = images.id', 'left');
 		$this->db->where("news.id",$id);
 		
-		if(!$admin) {
+		if(!$admin) 
+		{
 			// not admin, forces news to be approved and not draft
 			$this->db->where("news.draft",0);
 			$this->db->where("news.approved",1);
@@ -109,29 +102,15 @@ ORDER BY sticky_order DESC, news.date DESC
 		$news = $news_array[0];
 		
 		$news->translations = array();
-		foreach($translations as $t) {
-			if($t->id == $news->id) {
+		foreach($translations as $t) 
+		{
+			if($t->id == $news->id) 
+			{
 				array_push($news->translations, $t);
 			}
 		}
 		
 		return $news;
-		/*
-		$this->db->select("users.first_name, users.last_name, news_images.*, images.*");
-		$this->db->select("news.id, news.date, news.draft, news.approved, news_translation.title, news_translation.text, news_translation.lang_id");
-		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
-		$this->db->from("news");
-		$this->db->join("news_translation", 'news.id = news_translation.news_id', '');
-		$this->db->join("users", 'news.user_id = users.id', '');
-		$this->db->join("news_sticky", 'news.id = news_sticky.news_id', 'left');
-		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
-		$this->db->join("images", 'news_images.images_id = images.id', 'left');
-		$this->db->where("news.id",$id);
-		$this->db->limit(1);
-		$query = $this->db->get();
-		$res = $query->result();
-        return $res[0];
-        */
 	}
 	
 	/**
@@ -139,7 +118,8 @@ ORDER BY sticky_order DESC, news.date DESC
 	 *
 	 * @return array 	
 	 */ 
-	function admin_get_all_news_overview() {
+	function admin_get_all_news_overview() 
+	{
 		$this->db->select("news.*, language.language_name, language.language_abbr, news_translation.*");
 		$this->db->from("news");
 		$this->db->from("language");
@@ -153,7 +133,6 @@ ORDER BY sticky_order DESC, news.date DESC
 		$this->db->join("news_sticky", 'news.id = news_sticky.news_id', 'left');
 		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
 		$this->db->join("images", 'news_images.images_id = images.id', 'left');
-		//$this->db->where("DATE(news.date) <= DATE(NOW())");
 		$this->db->order_by("sticky_order DESC, news.date DESC");
 		$query = $this->db->get();
 		$news_array = $query->result();
@@ -180,17 +159,21 @@ ORDER BY sticky_order DESC, news.date DESC
 	 * @param  integer	$group_id		The id of the group the user belongs to when posting
 	 * @return The news id 	
 	 */ 
-	function add_news($user_id, $translations = array(), $post_date = '', $draft = 0, $approved = 1, $group_id = 0) {
-		if(!is_array($translations)) {
+	function add_news($user_id, $translations = array(), $post_date = '', $draft = 0, $approved = 1, $group_id = 0) 
+	{
+		if(!is_array($translations)) 
+		{
 			return false;
 		}
 		$arr_keys = array_keys($translations);
-		if(!is_numeric($arr_keys[0])) {
+		if(!is_numeric($arr_keys[0])) 
+		{
 			$theTranslations = array($translations);
 		} else {
 			$theTranslations = $translations;
 		}
-		foreach($theTranslations as &$translation) {
+		foreach($theTranslations as &$translation) 
+		{
 			$arr_keys = array_keys($translation);
 			if((!in_array("lang_abbr",$arr_keys) && !in_array("lang",$arr_keys)) || !in_array("title",$arr_keys) || !in_array("text",$arr_keys)) {
 				return false;
@@ -202,15 +185,18 @@ ORDER BY sticky_order DESC, news.date DESC
 		
 		$this->db->where('id', $user_id);
 		$query = $this->db->get('users');
-		if($query->num_rows != 1) {
+		if($query->num_rows != 1) 
+		{
 			return false;
 		}
 		
-		if(is_numeric($group_id) && $group_id > 0) {
+		if(is_numeric($group_id) && $group_id > 0) 
+		{
 			$this->db->where('user_id', $user_id);
 			$this->db->where('group_id', $group_id);
 			$query = $this->db->get('users_groups');
-			if($query->num_rows != 1) {
+			if($query->num_rows != 1) 
+			{
 				$theGroup = 0;
 			} else {
 				$theGroup = $group_id;
@@ -240,19 +226,22 @@ ORDER BY sticky_order DESC, news.date DESC
 		$news_id = $this->db->insert_id();
 		
 		$success = true;
-		foreach($theTranslations as &$translation) { 
+		foreach($theTranslations as &$translation) 
+		{ 
 			$lang_abbr = $translation["lang_abbr"];
 			$title = $translation["title"];
 			$text = $translation["text"];
 			$theSuccess = $this->update_translation($news_id, $lang_abbr, $title, $text);
-			if(!$theSuccess) {
+			if(!$theSuccess) 
+			{
 				$success = $theSuccess;
 			}
 			
 		}
 		
 		//if($use_transaction) {
-			if ($this->db->trans_status() === FALSE || !$success) {
+			if ($this->db->trans_status() === FALSE || !$success) 
+			{
 				$this->db->trans_rollback();
 				return false;
 			} else {
@@ -267,7 +256,8 @@ ORDER BY sticky_order DESC, news.date DESC
 	 *
 	 *	@return An array with the counted results
 	 */
-	function admin_get_notifications() {
+	function admin_get_notifications() 
+	{
 		$this->db->select("SUM(news.approved=0) as news_unapproved");
 		$this->db->from("news");
 		$query = $this->db->get();
@@ -284,38 +274,44 @@ ORDER BY sticky_order DESC, news.date DESC
 	 * @param  string	$text			The text of the news item translation
 	 * @return bool		True or false depending on success or failure
 	 */ 
-	function update_translation($news_id, $lang_abbr, $title, $text) {
+	function update_translation($news_id, $lang_abbr, $title, $text) 
+	{
 		$theTitle = trim($title);
 		$theText = trim($text);
 		
 		// check if the news exists
 		$this->db->where('id', $news_id);
 		$query = $this->db->get('news');
-		if($query->num_rows != 1) {
+		if($query->num_rows != 1) 
+		{
 			return false;
 		}
 		
 		// check if the language exists
 		$this->db->where('language_abbr', $lang_abbr);
 		$query = $this->db->get('language');
-		if($query->num_rows != 1) {
+		if($query->num_rows != 1) 
+		{
 			return false;
 		}
 		$lang_id = $query->result(); $lang_id = $lang_id[0]->id;
 		
 		// if both title and text is null then delete the translation
-		if($theTitle == '' && $theText == '') {
+		if($theTitle == '' && $theText == '') 
+		{
 			$this->db->delete('news_translation', array('news_id' => $news_id, 'lang_id' => $lang_id));
 			return true;
 		} 
 		
 		// if one of the title and the text is null then exit
-		if($theTitle == '' || $theText == '') {
+		if($theTitle == '' || $theText == '') 
+		{
 			return false;
 		}
 		
 		$query = $this->db->get_where('news_translation', array('news_id' => $news_id, 'lang_id' => $lang_id), 1, 0);
-		if ($query->num_rows() == 0) {
+		if ($query->num_rows() == 0) 
+		{
 			// A record does not exist, insert one.
 			$data = array(	'news_id' 	=> $news_id, 
 							'lang_id' 	=> $lang_id,
@@ -325,7 +321,8 @@ ORDER BY sticky_order DESC, news.date DESC
 						);
 			$query = $this->db->insert('news_translation', $data);
 			// Check to see if the query actually performed correctly
-			if ($this->db->affected_rows() > 0) {
+			if ($this->db->affected_rows() > 0) 
+			{
 				return TRUE;
 			}
 		} else {

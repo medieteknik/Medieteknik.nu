@@ -4,9 +4,8 @@
  *
  * @author Simon Emms <simon@simonemms.com>
  */
-class MY_Loader extends CI_Loader {
-
-
+class MY_Loader extends CI_Loader 
+{
     /**
      * Database Loader
      *

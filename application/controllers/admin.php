@@ -1,13 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
-class Admin extends MY_Controller {
+class Admin extends MY_Controller 
+{
 
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
 		
-		if(!$this->login->is_admin() && $this->uri->segment(2) != "access_denied") {
+		if(!$this->login->is_admin() && $this->uri->segment(2) != "access_denied") 
+		{
 			redirect('/admin/access_denied', 'refresh');
 		}
     }
@@ -17,7 +19,8 @@ class Admin extends MY_Controller {
 		$this->overview();
 	}
 	
-	public function access_denied() {
+	public function access_denied() 
+	{
 		// Data for denied view
 		$main_data['lang'] = $this->lang_data;
 
@@ -28,7 +31,8 @@ class Admin extends MY_Controller {
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function overview() {
+	function overview() 
+	{
 
 		// Data for overview view
 		$this->load->model('User_model');

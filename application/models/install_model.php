@@ -1,5 +1,6 @@
 <?php
-class Install_model extends CI_Model {
+class Install_model extends CI_Model 
+{
     function __construct()
     {
         // Call the Model constructor
@@ -37,18 +38,23 @@ class Install_model extends CI_Model {
 		log_message('debug', "Install_model Class Initialized");
     }
  	
-	function create_sql_functions() {
+	function create_sql_functions() 
+	{
 		$arr = array();
 		$query = $this->db->query("SHOW FUNCTION STATUS");
-		foreach($query->result() as $r) {
-			if($r->Db == "medieteknik") {
+		foreach($query->result() as $r) 
+		{
+			if($r->Db == "medieteknik") 
+			{
 				$arr[] = $r->Name;
 			}
 		}
-		if(!in_array("get_primary_language_id", $arr)) {
+		if(!in_array("get_primary_language_id", $arr)) 
+		{
 			$query = $this->db->query("CREATE FUNCTION get_primary_language_id() RETURNS INT(5) RETURN @primary_language_id;");
 		}
-		if(!in_array("get_secondary_language_id", $arr)) {
+		if(!in_array("get_secondary_language_id", $arr)) 
+		{
 			$query = $this->db->query("CREATE FUNCTION get_secondary_language_id() RETURNS INT(5) RETURN @secondary_language_id;");
 		}
 	}
@@ -266,7 +272,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_forum_categories_table() {
+	function create_forum_categories_table() 
+	{
 		if(!$this->db->table_exists('forum_categories'))
 		{
 			$this->load->dbforge();
@@ -378,7 +385,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_forum_categories_descriptions_table() {
+	function create_forum_categories_descriptions_table() 
+	{
 		if(!$this->db->table_exists('forum_categories_descriptions'))
 		{
 			$this->load->dbforge();
@@ -552,7 +560,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_forum_topic_table() {
+	function create_forum_topic_table() 
+	{
 		if(!$this->db->table_exists('forum_topic'))
 		{
 			$this->load->dbforge();
@@ -566,7 +575,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_forum_reply_table() {
+	function create_forum_reply_table() 
+	{
 		if(!$this->db->table_exists('forum_reply'))
 		{
 			$this->load->dbforge();
@@ -588,7 +598,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_forum_reply_guest_table() {
+	function create_forum_reply_guest_table() 
+	{
 		if(!$this->db->table_exists('forum_reply_guest'))
 		{
 			$this->load->dbforge();
@@ -601,7 +612,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_privileges_table() {
+	function create_privileges_table() 
+	{
 		if(!$this->db->table_exists('privileges'))
 		{
 			$this->load->dbforge();
@@ -644,7 +656,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_users_privileges_table() {
+	function create_users_privileges_table() 
+	{
 		if(!$this->db->table_exists('users_privileges'))
 		{
 			$this->load->dbforge();
@@ -670,7 +683,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_images_table() {
+	function create_images_table() 
+	{
 		if(!$this->db->table_exists('images'))
 		{
 			$this->load->dbforge();
@@ -684,7 +698,8 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_news_images_table() {
+	function create_news_images_table() 
+	{
 		if(!$this->db->table_exists('news_images'))
 		{
 			$this->load->dbforge();
@@ -701,8 +716,10 @@ class Install_model extends CI_Model {
 	
 	
 	
-	function create_forum_categories_descriptions_language_view() {
-		if(!$this->db->table_exists('forum_categories_descriptions_language')) {
+	function create_forum_categories_descriptions_language_view() 
+	{
+		if(!$this->db->table_exists('forum_categories_descriptions_language')) 
+		{
 			$q = "CREATE OR REPLACE VIEW forum_categories_descriptions_language AS (SELECT e.cat_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.description,e.description) as description "; 
 			$q .= " FROM forum_categories_descriptions               e";
 			$q .= " LEFT OUTER JOIN forum_categories_descriptions o ON e.cat_id=o.cat_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
@@ -711,8 +728,10 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_news_translation_language_view() {
-		if(!$this->db->table_exists('news_translation_language')) {
+	function create_news_translation_language_view() 
+	{
+		if(!$this->db->table_exists('news_translation_language')) 
+		{
 			$q = "CREATE OR REPLACE VIEW news_translation_language AS (SELECT e.news_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.text,e.text) as text, e.last_edit "; 
 			$q .= " FROM news_translation               e";
 			$q .= " LEFT OUTER JOIN news_translation o ON e.news_id=o.news_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
@@ -721,8 +740,10 @@ class Install_model extends CI_Model {
 		}
 	}
 	
-	function create_groups_descriptions_language_view() {
-		if(!$this->db->table_exists('groups_descriptions_language')) {
+	function create_groups_descriptions_language_view() 
+	{
+		if(!$this->db->table_exists('groups_descriptions_language')) 
+		{
 			$q = "CREATE OR REPLACE VIEW groups_descriptions_language AS (SELECT e.group_id,e.lang_id,COALESCE(o.description,e.description) as description "; 
 			$q .= " FROM groups_descriptions               e";
 			$q .= " LEFT OUTER JOIN groups_descriptions o ON e.group_id=o.group_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
