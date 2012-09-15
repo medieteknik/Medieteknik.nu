@@ -24,7 +24,6 @@ class Admin_images extends MY_Controller {
 		$this->load->model('News_model');
 		$main_data['news_array'] = $this->News_model->admin_get_all_news_overview();
 		$main_data['lang'] = $this->lang_data;
-		//$profile_data['lang'] = $lang_data;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);

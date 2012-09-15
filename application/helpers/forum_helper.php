@@ -1,4 +1,7 @@
 <?php
+/**
+* The following functions are used in the forum
+*/
 
 function render_forum($cats) {
 	echo '<ul class="forum">';

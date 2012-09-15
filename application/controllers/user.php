@@ -1,12 +1,6 @@
 <?php 
 	
 class User extends MY_Controller {
-	
-	function __construct()
-    {
-        // Call the Model constructor
-        parent::__construct();
-    }
 
 	public function index()
 	{
@@ -62,12 +56,13 @@ class User extends MY_Controller {
 	
 	public function checklogin() {
 		if($this->input->post('username') != false && $this->input->post('password') != false && $this->login->validate($this->input->post('username'), $this->input->post('password'))){
+			
 			//success
 			redirect('user', 'refresh');
 		} else {
-			// fail
 			
-			echo $this->input->post('username') ." ". $this->input->post('password');
+			// fail
+			//echo $this->input->post('username') ." ". $this->input->post('password');
 			redirect('user/login', 'refresh');
 		}
 	}
