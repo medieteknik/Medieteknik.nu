@@ -32,8 +32,10 @@ class Admin extends MY_Controller {
 
 		// Data for overview view
 		$this->load->model('User_model');
+		$this->load->model('News_model');
 		$main_data['privileges'] = $this->User_model->get_user_privileges($this->login->get_id());
 		$main_data['lang'] = $this->lang_data;
+		$main_data['news_data'] = $this->News_model->admin_get_notifications();
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);

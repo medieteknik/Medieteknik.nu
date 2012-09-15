@@ -52,6 +52,7 @@ $lang['admin_addusers'] = "Add users";
 $lang['admin_addtranslation'] = "Add translation";
 $lang['admin_denied_title'] = "Access denied";
 $lang['admin_denied_message'] = "You need to be logged in and have permission to view the requested site.";
+$lang['admin_news_needsapproval'] = "news items need approval";
 
 // date
 $lang['date_yesterday'] = "Yesterday";

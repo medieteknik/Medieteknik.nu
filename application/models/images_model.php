@@ -24,7 +24,7 @@ class Images_model extends CI_Model {
 		
 	}
 	
-	function add_news_image(&$upload_data ) {
+	function add_news_image(&$upload_data) {
 		
 	}
 }

@@ -18,13 +18,13 @@ class Admin_news extends MY_Controller {
 		$this->load->helper('form');
 		
 		$this->languages = array	(
-													array(	'language_abbr' => 'se',
-															'language_name' => 'Svenska',
-															'id' => 1),
-													array(	'language_abbr' => 'en',
-															'language_name' => 'English',
-															'id' => 2)
-												);
+										array(	'language_abbr' => 'se',
+												'language_name' => 'Svenska',
+												'id' => 1),
+										array(	'language_abbr' => 'en',
+												'language_name' => 'English',
+												'id' => 2)
+									);
     }
 
 	public function index()
@@ -54,7 +54,7 @@ class Admin_news extends MY_Controller {
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/news_create',  $main_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/news_edit',  $main_data, true);					
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
@@ -66,7 +66,7 @@ class Admin_news extends MY_Controller {
 		// check if translations is added
 		foreach($this->languages as $lang) {
 			if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '') {
-				echo 'yes för ' . $lang['language_abbr'] . '<br>';
+				//echo 'yes för ' . $lang['language_abbr'] . '<br>';
 				array_push($translations, array("lang" => $lang['language_abbr'], "title" => $this->input->post('title_'.$lang['language_abbr']), "text" => $this->input->post('text_'.$lang['language_abbr'])));
 				$success = true;
 			}
@@ -93,28 +93,10 @@ class Admin_news extends MY_Controller {
 			if(is_numeric($this->input->post('img_size')) && $this->input->post('img_size') >= 1 && $this->input->post('img_size') <= 4) $size = $this->input->post('img_size'); 
 			if(is_numeric($this->input->post('img_position')) && $this->input->post('img_position') >= 1 && $this->input->post('img_position') <= 2) $position = $this->input->post('img_position'); 
 			
-			/*
-			echo 'date ' . $theTime . '<br>';
-			echo 'draft ' . $draft . '<br>';
-			echo 'approved ' . $approved . '<br>';
-			echo 'imgheight ' . $imgheight . '<br>';
-			*/
-			
 			$this->db->trans_start();
 			$news_id = $this->News_model->add_news(1, $translations, $theTime, $draft, $approved);
 			
-			if ( ! $this->upload->do_upload('img_file'))
-			{
-				/*
-				 * // probably no file set
-				$error = array('error' => $this->upload->display_errors());
-				echo '<pre>';
-				var_dump($error);
-				echo '</pre>';
-				*/
-			}
-			else
-			{
+			if ($this->upload->do_upload('img_file')) {
 				$data = array('upload_data' => $this->upload->data());
 				
 				$data = array(
@@ -134,41 +116,14 @@ class Admin_news extends MY_Controller {
 					'height' => $imgheight,
 					);
 				$this->db->insert('news_images', $data);
-				
-				/*
-				if ($this->db->trans_status() === FALSE) {
-					$this->db->trans_rollback();
-					return false;
-				} else {
-					$this->db->trans_commit();
-					echo "FUCK YEAH<br>";
-				}
-				*/
-				/*
-				if ($this->db->trans_status() === FALSE)
-				{
-					// generate an error... or use the log_message() function to log your error
-					echo "not OK<br>";
-				} else {
-					echo "It is okay <br>";
-				}
-				*/
-				
-				
-				/*
-				// it is working, handle the upload
-				echo '<pre>';
-				var_dump($data);
-				echo '</pre>';
-				echo $data['upload_data']['file_name'];
-				*/
-				
 			}
 			
 			$this->db->trans_complete();
 			
 			
 			redirect('admin_news', 'refresh');
+		} else {
+
 		}
 	}
 	
@@ -231,10 +186,7 @@ class Admin_news extends MY_Controller {
 		$this->db->where('news_id', $id);
 		$this->db->update('news_images', $data);
 		
-		if ( ! $this->upload->do_upload('img_file'))
-		{
-			
-		} else {
+		if ($this->upload->do_upload('img_file')) {
 			
 			$this->db->delete('news_images', array('news_id' => $id)); 
 			

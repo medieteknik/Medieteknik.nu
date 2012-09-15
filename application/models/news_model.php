@@ -261,6 +261,19 @@ ORDER BY sticky_order DESC, news.date DESC
 		//}
 		return $news_id;
 	}
+
+	/**
+	 *	Counts different admin notifications
+	 *
+	 *	@return An array with the counted results
+	 */
+	function admin_get_notifications() {
+		$this->db->select("SUM(news.approved=0) as news_unapproved");
+		$this->db->from("news");
+		$query = $this->db->get();
+		$res = $query->result();
+		return $res[0];
+	}
 	
 	/**
 	 * Update a translation of a specific news item

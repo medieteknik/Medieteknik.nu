@@ -52,6 +52,7 @@ $lang['admin_addusers'] = "Lägg till användare";
 $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";
 $lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
+$lang['admin_news_needsapproval'] = "nyheter behöver godkännas";
 
 // date
 $lang['date_yesterday'] = "Igår";
