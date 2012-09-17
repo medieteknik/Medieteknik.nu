@@ -5,7 +5,7 @@ echo '<!DOCTYPE html>
 <html lang="sv">
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="<?php echo $head_description; ?>">
+	<meta name="description" content="',$head_description,'">
 	<meta name="author" content="', $head_author, '">
 	
 	<title>', $head_title, '</title>
