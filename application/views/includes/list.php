@@ -5,12 +5,12 @@
 		foreach($items as $item) {
 			
 			$data = '';
-			/*
+			
 			if(isset($item['data']) && $item['data'] != '') {
-				$data = '<span>'.$item['data'].'</span>';
+				$data = '<span>'.text_strip($item['data']).'</span>';
 			}
-			*/
-			$text = $item['title'].$data;
+			
+			$text = text_strip($item['title']).$data;
 			
 			if(isset($item['href']) && $item['href'] != '') {
 				echo '<li>',anchor($item['href'], $text),'</li>';
