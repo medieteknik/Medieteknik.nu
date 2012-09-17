@@ -9,7 +9,8 @@ echo '<div class="main-box clearfix">',
 		'<p>',anchor('user/profile/'.$first->user_id,get_full_name($first)),'</p>
 	</div>
 ';
-foreach($replies as $reply) {
+foreach($replies as $reply) 
+{
 echo '
 	<div class="main-box clearfix">',
 		text_format($reply->reply),
@@ -18,9 +19,11 @@ echo '
 ';
 }
 
-if(isset($postform)) {
+if(isset($postform)) 
+{
 	echo '<div class="main-box clearfix">';
-	if(isset($guest)) {
+	if(isset($guest)) 
+	{
 		echo 'gäst formulär';
 	} else {
             

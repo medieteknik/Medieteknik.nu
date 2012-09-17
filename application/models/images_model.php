@@ -18,7 +18,6 @@ class Images_model extends CI_Model
 		$config['max_height']  = '1200';
 		$config['overwrite']  = FALSE;
 		$config['file_name']  = uniqid('news_');
-		
 		return $config;
 	}
 

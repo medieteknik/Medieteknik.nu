@@ -44,7 +44,7 @@ class Admin_news extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/news_overview',  $main_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/news_overview',  $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
@@ -71,7 +71,8 @@ class Admin_news extends MY_Controller
 		// check if translations is added
 		foreach($this->languages as $lang) 
 		{
-			if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '') {
+			if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '') 
+			{
 				//echo 'yes för ' . $lang['language_abbr'] . '<br>';
 				array_push($translations, array("lang" => $lang['language_abbr'], "title" => $this->input->post('title_'.$lang['language_abbr']), "text" => $this->input->post('text_'.$lang['language_abbr'])));
 				$success = true;
@@ -95,11 +96,26 @@ class Admin_news extends MY_Controller
 			
 			// get draft and approved setting
 			$draft = 0; $approved = 0; $imgheight = 150; $size = 1; $position = 1;
-			if($this->input->post('draft') == 1) $draft = 1;
-			if($this->input->post('approved') == 1) $approved = 1;
-			if(is_numeric($this->input->post('img_height')) && $this->input->post('img_height') >= 75 && $this->input->post('img_height') <= 400) $imgheight = $this->input->post('img_height'); 
-			if(is_numeric($this->input->post('img_size')) && $this->input->post('img_size') >= 1 && $this->input->post('img_size') <= 4) $size = $this->input->post('img_size'); 
-			if(is_numeric($this->input->post('img_position')) && $this->input->post('img_position') >= 1 && $this->input->post('img_position') <= 2) $position = $this->input->post('img_position'); 
+			if($this->input->post('draft') == 1) 
+			{
+				$draft = 1;
+			}
+			if($this->input->post('approved') == 1) 
+			{
+				$approved = 1;
+			}
+			if(is_numeric($this->input->post('img_height')) && $this->input->post('img_height') >= 75 && $this->input->post('img_height') <= 400) 
+			{
+				$imgheight = $this->input->post('img_height');
+			} 
+			if(is_numeric($this->input->post('img_size')) && $this->input->post('img_size') >= 1 && $this->input->post('img_size') <= 4) 
+			{
+				$size = $this->input->post('img_size');
+			}
+			if(is_numeric($this->input->post('img_position')) && $this->input->post('img_position') >= 1 && $this->input->post('img_position') <= 2) 
+			{
+				$position = $this->input->post('img_position');
+			}
 			
 			$this->db->trans_start();
 			$news_id = $this->News_model->add_news(1, $translations, $theTime, $draft, $approved);
@@ -175,11 +191,26 @@ class Admin_news extends MY_Controller
 			
 		// get draft and approved setting
 		$draft = 0; $approved = 0; $imgheight = 150; $size = 1; $position = 1;
-		if($this->input->post('draft') == 1) $draft = 1;
-		if($this->input->post('approved') == 1) $approved = 1;
-		if(is_numeric($this->input->post('img_height')) && $this->input->post('img_height') >= 75 && $this->input->post('img_height') <= 400) $imgheight = $this->input->post('img_height'); 
-		if(is_numeric($this->input->post('img_size')) && $this->input->post('img_size') >= 1 && $this->input->post('img_size') <= 4) $size = $this->input->post('img_size'); 
-		if(is_numeric($this->input->post('img_position')) && $this->input->post('img_position') >= 1 && $this->input->post('img_position') <= 2) $position = $this->input->post('img_position'); 
+		if($this->input->post('draft') == 1)
+		{
+			$draft = 1;
+		}
+		if($this->input->post('approved') == 1)
+		{
+			$approved = 1;
+		}
+		if(is_numeric($this->input->post('img_height')) && $this->input->post('img_height') >= 75 && $this->input->post('img_height') <= 400)
+		{
+			$imgheight = $this->input->post('img_height');
+		}
+		if(is_numeric($this->input->post('img_size')) && $this->input->post('img_size') >= 1 && $this->input->post('img_size') <= 4) 
+		{
+			$size = $this->input->post('img_size');
+		}
+		if(is_numeric($this->input->post('img_position')) && $this->input->post('img_position') >= 1 && $this->input->post('img_position') <= 2) 
+		{
+			$position = $this->input->post('img_position');
+		}
 			
 		$data = array(
                'draft' => $draft,
