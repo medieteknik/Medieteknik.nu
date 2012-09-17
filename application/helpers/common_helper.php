@@ -111,10 +111,15 @@ function _img_format($matches)
 
 function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) 
 {
+	// remove all html attempts
+	$text = preg_replace('/</','&lt;', $input);
+	$text = preg_replace('/>/','&gt;', $text);
+
 	//\r\n, \n\r, \n and \r
 	$patterns = array('/\r\n/', '/\n\r/', '/\r/', '/\n/');
 	$replacements = array('<br/>','<br/>','<br/>','<br/>');
-	$text = preg_replace($patterns,$replacements, $input);
+	$text = preg_replace($patterns,$replacements, $text);
+
 	
 	// bold and italics
 	$text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);
