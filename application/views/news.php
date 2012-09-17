@@ -10,7 +10,7 @@ foreach($news_array as $news_item)
 		$image->create($news_item->image_original_filename, 'zoom', news_size_to_px($news_item->size), $news_item->height);
 		
 
-		$img_div = '<img class="'.news_size_to_class($news_item->size).'" src="'.$image->get_filepath().'" />';
+		$img_div = '<img class="'.news_size_to_class($news_item->size).'" src="'.$image->get_filepath().'" alt="'.$news_item->title.'" />';
 		$news_class = news_size_to_class_invert($news_item->size);
 		$style = 'max-height:'.$news_item->height.'px; overflow: hidden;';
 	}

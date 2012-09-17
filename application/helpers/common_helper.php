@@ -137,7 +137,8 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 	// more than one (2-30) line break is converted to a paragraph
 	if($pre != '' && $post != '') 
 	{
-		return $pre.preg_replace('/(<br\/>){2,30}/',$post.$pre, $text).$post;
+		//return $pre.preg_replace('/(<br\/>){2,30}/',$post.$pre, $text).$post;
+		return preg_replace('/(<br\/>){2,30}/',$post.$pre, $text);
 	} else {
 		return $text;
 	}
