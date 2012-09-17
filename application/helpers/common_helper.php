@@ -109,7 +109,7 @@ function _img_format($matches)
 	return $im->get_img_tag();
 }
 
-function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) 
+function text_strip($input, $line_break = FALSE)
 {
 	// remove all html attempts
 	$text = preg_replace('/</','&lt;', $input);
@@ -117,8 +117,19 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 
 	//\r\n, \n\r, \n and \r
 	$patterns = array('/\r\n/', '/\n\r/', '/\r/', '/\n/');
-	$replacements = array('<br/>','<br/>','<br/>','<br/>');
+	$replacements = '';
+	if($line_break) 
+	{
+		$replacements = array('<br/>','<br/>','<br/>','<br/>');
+	}
 	$text = preg_replace($patterns,$replacements, $text);
+
+	return $text;
+}
+
+function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) 
+{
+	$text = text_strip($input, TRUE);
 
 	
 	// bold and italics

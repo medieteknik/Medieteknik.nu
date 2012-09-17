@@ -5,11 +5,11 @@
 		foreach($items as $item) {
 			
 			$data = '';
-			
+			/*
 			if(isset($item['data']) && $item['data'] != '') {
 				$data = '<span>'.$item['data'].'</span>';
 			}
-			
+			*/
 			$text = $item['title'].$data;
 			
 			if(isset($item['href']) && $item['href'] != '') {

@@ -4,7 +4,7 @@ render_forum($categories_array);
 
 $first = array_shift($replies);
 echo '<div class="main-box clearfix">',
-		'<h2>',$topic->topic,'</h2>',
+		'<h2>',text_strip($topic->topic),'</h2>',
 		text_format($first->reply),
 		'<p>',anchor('user/profile/'.$first->user_id,get_full_name($first)),'</p>
 	</div>
