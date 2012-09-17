@@ -11,7 +11,7 @@ if(count($topics_array) > 0)
 	
 	foreach($topics_array as $topic) 
 	{
-		echo '<li>',anchor('forum/thread/'.$topic->topic_id,$topic->topic),'</li>';
+		echo '<li>',anchor('forum/thread/'.$topic->topic_id,text_strip($topic->topic)),'</li>';
 	}
 	
 	echo '</ul>';
