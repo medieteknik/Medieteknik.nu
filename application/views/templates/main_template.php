@@ -10,6 +10,8 @@ echo '<!DOCTYPE html>
 	
 	<title>', $head_title, '</title>
 	
+	<link rel="stylesheet" href="', base_url(),'web/css/reset.min.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="', base_url(),'web/css/google_font.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="', base_url(),'web/css/style.css" type="text/css" media="screen">
 	
 	<link rel="shortcut icon" href="', base_url(), '/web/img/favicon.ico" />
