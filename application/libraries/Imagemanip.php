@@ -126,7 +126,7 @@ class Imagemanip
 	
 	private function set_orig_filename($string) {
 		$filename = '';
-		if(substr($string, -4) == '.jpg') $filename = $string; else $filename = $string.".jpg";
+		if(substr($string, -4) == '.jpg' || substr($string, -4) == '.png') $filename = $string; else $filename = $string.".jpg";
 		if(!file_exists($this->path_to_orig_directory.$filename)) {
 			$this->filename_original = 'unknown';
 		} else {
@@ -174,7 +174,13 @@ class Imagemanip
 					$use_crop = "fit";
 				}
 				
-				$image = imagecreatefromjpeg($this->get_filepath_orginal());
+				$image = NULL;
+				if(substr($this->get_filepath_orginal(), -4) == '.png') {
+					$image = imagecreatefrompng($this->get_filepath_orginal());
+				} else {
+					$image = imagecreatefromjpeg($this->get_filepath_orginal());
+				}
+				
 				if($use_crop != "no") {
 					$this->image_crop($image, $use_crop, $use_width, $use_height);
 				} 

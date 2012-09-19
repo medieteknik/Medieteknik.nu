@@ -127,8 +127,8 @@ class Admin_news extends MY_Controller
 				$data = array(
 					'user_id' => 1,
 					'image_original_filename' => $data['upload_data']['file_name'],
-					'image_title' => 'news_image',
-					'image_description' => 'news_image',
+					'width' => $data['upload_data']['image_width'],
+					'height' => $data['upload_data']['image_height'],
 					);
 				$this->db->insert('images', $data);
 				$images_id = $this->db->insert_id();

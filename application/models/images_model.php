@@ -12,7 +12,7 @@ class Images_model extends CI_Model
 	{
 		
 		$config['upload_path'] ='./user_content/images/original';
-		$config['allowed_types'] = 'jpg';
+		$config['allowed_types'] = 'jpg|png';
 		$config['max_size']	= '5000';
 		$config['max_width']  = '1920';
 		$config['max_height']  = '1200';

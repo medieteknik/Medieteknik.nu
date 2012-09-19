@@ -451,15 +451,16 @@ function get_images_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '50',
 		),
-		'image_title' => array(
-			'type' => 'VARCHAR',
-			'constraint' => '50',
+		'width' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
 		),
-		'image_description' => array(
-			'type' => 'VARCHAR',
-			'constraint' => '320',
+		'height' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
 		),
-		
 		);
 	return $fields;
 }
