@@ -1,7 +1,7 @@
 hej jonas
 fewewjkbfjkewbfjke fjewbfjkewbk
 
-jonas lägger till ny funkction
+jonas lägger till ny funkcion
 
 nutestar vi
 jkedbjkewbfjkwe
