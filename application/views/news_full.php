@@ -18,7 +18,7 @@ if($news->image_original_filename != "")
 echo '
 <div class="main-box news clearfix">',
 $lang_img,$img_div,
-'<h2>'.$news->title.'</h2>
+'<h2>'.text_strip($news->title).'</h2>
 <p>',readable_date($news->date,$lang),'</p>',
 text_format($news->text);
 if($news->last_edit != '0000-00-00 00:00:00') 
