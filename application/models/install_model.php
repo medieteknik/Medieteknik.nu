@@ -78,6 +78,7 @@ class Install_model extends CI_Model
 			$this->User_model->add_user("Emil", "Axelsson", "emiax775", "password");
 			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
 			$this->User_model->add_user("Anders", "Nord", "andno992", "password");
+			$this->User_model->add_user("Klas", "Eskilson", "klaes950", "password");
 		}
 	}
 	
