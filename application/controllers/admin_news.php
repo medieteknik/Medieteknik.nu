@@ -179,7 +179,9 @@ class Admin_news extends MY_Controller
 		// check if translations is added
 		foreach($this->languages as $lang) 
 		{
-			$this->News_model->update_translation($id, $lang['language_abbr'], $this->input->post('title_'.$lang['language_abbr']), $this->input->post('text_'.$lang['language_abbr']));
+			$theTitle = addslashes($this->input->post('title_'.$lang['language_abbr']));
+			$theText = addslashes($this->input->post('text_'.$lang['language_abbr']));
+			$this->News_model->update_translation($id, $lang['language_abbr'], $theTitle, $theText);
 		}
 		
 		// get the time
