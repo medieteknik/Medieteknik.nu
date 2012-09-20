@@ -14,7 +14,7 @@ html, body { background-color: #e8e8e9; text-align: center; font: 0.95em'Asap'; 
 
 #main-header h1 {
 	padding-top: 35px;
-	font-size: 1.3em;
+	font-size: 1.4em;
 }
 #main-header h2 {
 	font-size: 0.9em;
@@ -36,7 +36,7 @@ html, body { background-color: #e8e8e9; text-align: center; font: 0.95em'Asap'; 
 	padding-right: 30px;
 }
 #main-navigation ul li a {
-	color: #000;
+	color: #333;
 	text-decoration: none;
 }
 #main-navigation ul li a:hover {
@@ -76,14 +76,17 @@ a.main-box {
 .main-box h2 {
 	padding: 12px;
 	font-size: 1.3em;
+	color: #111;
 }
 
 .main-box.news h2 {
-	color: #111;
 }
 .main-box.news {
 	background-color: #f4f4f4;
-	color: #333;
+	color: #111;
+}
+a.main-box.news:hover {
+	background-color: #fafafa;
 }
 
 .main-box.featured h2 {
@@ -105,8 +108,7 @@ a.main-box {
 	line-height: 1.4em;	
 }
 .main-box ul {
-	font-size: 0.95em;	
-	/*padding: 0 12px 12px 12px;*/
+	font-size: 0.95em;
 	line-height: 1.4em;	
 }
 
@@ -172,6 +174,7 @@ ul.box-list li a {
 	padding: 10px;
 	margin: -10px;
 	color: #666;
+	text-decoration: none;
 }
 ul.box-list li a:hover {
 	color: #f57d20;
@@ -181,9 +184,14 @@ ul.box-list li span {
  	float: right;
 }
 
-
 ul.box-list li:nth-child(odd){
 	background-color: #eee;
+}
+ul.box-list li:nth-child(odd):hover{
+	background-color: #f0f0f0;
+}
+ul.box-list li:nth-child(even):hover{
+	background-color: #f7f7f7;
 }
 
 label {
@@ -207,22 +215,35 @@ ul.forum a {
 	display: block;
 	background-color: #333;
 	text-decoration: none;
-	padding: 7px;
+	padding: 12px;
+	font-size: 12pt;
 }
+
+ul.forum a:hover{
+	background-color: #373737;
+}
+
 ul.forum ul.forum {
-	padding-left: 15px;
-	padding-bottom: 15px;
+	/*margin-bottom: 20px;*/
 }
 
 ul.forum ul.forum a {
-	padding: 3px;
-	background-color: #ccc;
+	padding: 10px;
+	background: transparent;
 	color: #333;
+	font-size: 1.1em;
+	font-weight: normal;
+	border-bottom: 1px solid #ddd;
 }
 
 ul.forum ul.forum li:nth-child(odd) a {
-	background-color: #ddd;
-	color: #333;
+	background-color: #eee;}
+ul.forum ul.forum li a:hover{
+	background-color: #f7f7f7;
+	color: #f57d20;
+}
+ul.forum ul.forum li:nth-child(odd) a:hover{
+	background-color: #f1f1f1;
 }
 
 
@@ -231,8 +252,25 @@ ul.topics {
 }
 
 ul.topics a {
-	padding: 3px;
 	display: block;
+	text-decoration: none;
+	padding: 10px;
+	background: transparent;
+	color: #333;
+	font-size: 1.0em;
+	font-weight: normal;
+	border-bottom: 1px solid #ddd;
+}
+
+ul.topics li:nth-child(odd) a {
+	background-color: #eee;
+}
+ul.topics li a:hover{
+	background-color: #f7f7f7;
+	color: #f57d20;
+}
+ul.topics li:nth-child(odd) a:hover{
+	background-color: #f1f1f1;
 }
 
 .news_flag {
