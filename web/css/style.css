@@ -106,7 +106,7 @@ a.main-box {
 }
 .main-box ul {
 	font-size: 0.95em;	
-	padding: 0 12px 12px 12px;
+	/*padding: 0 12px 12px 12px;*/
 	line-height: 1.4em;	
 }
 
