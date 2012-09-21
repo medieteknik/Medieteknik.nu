@@ -89,6 +89,10 @@ a.main-box.news:hover {
 	background-color: #fafafa;
 }
 
+a.main-box.news.red:hover {
+	background-color: #ee8989;
+}
+
 .main-box.featured h2 {
 	color: #f57d20;
 }
