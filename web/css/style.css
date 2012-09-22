@@ -2,6 +2,13 @@
 @import url(http://reset5.googlecode.com/hg/reset.min.css);
 @import url(http://fonts.googleapis.com/css?family=Asap:400,400italic,700,700italic);
 */
+
+/*
+	import specific styles for easier handeling
+*/
+@import url('/web/css/profile.css');
+
+
 html, body { background-color: #e8e8e9; text-align: center; font: 0.95em'Asap'; }
 #main-header {
 	height: 118px;
