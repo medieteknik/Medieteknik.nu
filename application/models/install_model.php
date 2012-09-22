@@ -79,6 +79,7 @@ class Install_model extends CI_Model
 			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
 			$this->User_model->add_user("Anders", "Nord", "andno992", "password");
 			$this->User_model->add_user("Klas", "Eskilson", "klaes950", "password");
+			$this->User_model->add_user("Jonas", "Zeitler", "jonze168", "password");
 		}
 	}
 	
@@ -678,6 +679,8 @@ class Install_model extends CI_Model
 			$data = array('user_id' => 4,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
 			$data = array('user_id' => 5,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 6,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
 			
 			// news_post
