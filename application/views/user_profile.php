@@ -1,5 +1,10 @@
 <?php
 
+$button = "";
+if($is_logged_in) {
+	$button = "knappdata";
+}
+
 echo '
 <div class="main-box clearfix profile">
 	<h2>',get_full_name($user),'</h2>
