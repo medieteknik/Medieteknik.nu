@@ -3,19 +3,25 @@
 echo '
 <div class="main-box clearfix profile">
 	<h2>',get_full_name($user),'</h2>
-		<div class="profile-content">
-		<div class="profile-link">
-			<span class="link-descr">Web</span>
+	<div class="profile-content">
+		<a href="',$user->web,'" target="_blank" class="profile-link">
+			<span class="link-descr">Web</span> <br />
 			<span class="link-link">
-				<a href="',$user->web,'" target="_blank">',$user->web,'</a>
+				',$user->web,'
 			</span>
-		</div><!-- close .profile-link -->
-		<div class="profile-link">
+		</a>
+		<a href="',$user->linkedin,'" target="_blank" class="profile-link">
 			<span class="link-descr">Linkedin</span>
-			<span class="link-link">
-				<a href="',$user->linkedin,'" target="_blank">',$user->linkedin,'</a>
+			<span class="link-link"> <br />
+				',$user->linkedin,'
 			</span>
-		</div><!-- close .profile-link -->
+		</a>
+		<a href="http://twitter.com/',$user->twitter,'" target="_blank" class="profile-link">
+			<span class="link-descr">Twitter</span>
+			<span class="link-link"> <br />
+				@',$user->twitter,'
+			</span>
+		</a>
 		<p>',$user->presentation,'</p>
 	</div>
 </div><!-- close .main-box -->';
