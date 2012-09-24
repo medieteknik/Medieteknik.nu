@@ -59,6 +59,10 @@ function get_users_data_table_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '1000', 
 			),
+		'twitter' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '300', 
+			),
 		);
 	return $fields;
 }

@@ -127,6 +127,8 @@ class Install_model extends CI_Model
 			// inserting data
 			$data = array('users_id' => 1, 'web' => "http://www.jonasstrandstedt.se", 'presentation' => "Jag heter jonas");
 			$this->db->insert('users_data', $data);
+			$data = array('users_id' => 5, 'web' => "http://www.esklsn.net", 'presentation' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 'twitter' => 'eskilicious');
+			$this->db->insert('users_data', $data);
 		}
 	}
 	
@@ -706,6 +708,10 @@ class Install_model extends CI_Model
 			$data = array('user_id' => 2,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
 			$data = array('user_id' => 4,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 5,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 6,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
 			
 			// news_post
