@@ -32,7 +32,8 @@ function get_full_name($arr)
 
 function readable_date($date, &$lang, $short = FALSE) 
 {
-	if($lang == '') {
+	if($lang == '') 
+	{
 		$lang = array('date_today' => 'Idag', 'date_yesterday' => 'Igår');
 	}
 		

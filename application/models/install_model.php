@@ -9,6 +9,11 @@ class Install_model extends CI_Model
 		// check all required sql functions exist
 		$this->create_sql_functions();
 		
+		// drop all tables if ?drop is set in the address bar
+		if(isset($_GET['drop'])) {
+			$this->drop_tables();
+		}
+		
 		// check all tables one by one and fill them with content if necessary
 		$this->create_users_table();
 		$this->create_users_data_table();
@@ -33,10 +38,32 @@ class Install_model extends CI_Model
 		$this->create_forum_categories_descriptions_language_view();
 		$this->create_news_translation_language_view();
 		$this->create_groups_descriptions_language_view();
-
+		
 		// Log a debug message
 		log_message('debug', "Install_model Class Initialized");
     }
+	
+	function drop_tables() {
+		$this->load->dbforge();
+		$this->dbforge->drop_table('users');
+		$this->dbforge->drop_table('users_data');
+		$this->dbforge->drop_table('language');
+		$this->dbforge->drop_table('news');
+		$this->dbforge->drop_table('news_translation');
+		$this->dbforge->drop_table('news_sticky');
+		$this->dbforge->drop_table('groups');
+		$this->dbforge->drop_table('groups_descriptions');
+		$this->dbforge->drop_table('users_groups');
+		$this->dbforge->drop_table('forum_categories');
+		$this->dbforge->drop_table('forum_categories_descriptions');
+		$this->dbforge->drop_table('forum_topic');
+		$this->dbforge->drop_table('forum_reply');
+		$this->dbforge->drop_table('forum_reply_guest');
+		$this->dbforge->drop_table('privileges');
+		$this->dbforge->drop_table('users_privileges');
+		$this->dbforge->drop_table('images');
+		$this->dbforge->drop_table('news_images');
+	}
  	
 	function create_sql_functions() 
 	{
@@ -62,7 +89,7 @@ class Install_model extends CI_Model
 	function create_users_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('users'))
+		if(!$this->db->table_exists('users') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -78,13 +105,17 @@ class Install_model extends CI_Model
 			$this->User_model->add_user("Emil", "Axelsson", "emiax775", "password");
 			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
 			$this->User_model->add_user("Anders", "Nord", "andno992", "password");
+			$this->User_model->add_user("Jonas", "Zeitler", "jonze168", "password");
+			$this->User_model->add_user("Klas", "Eskison", "klaes950", "password");
+			$this->User_model->add_user("Simon", "Joelsson", "simjo407", "password");
+			$this->User_model->add_user("Martin", "Kierkegaard", "marki423", "password");
 		}
 	}
 	
 	function create_users_data_table()
 	{
 		// if the users_data table does not exist, create it
-		if(!$this->db->table_exists('users_data'))
+		if(!$this->db->table_exists('users_data') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -102,7 +133,7 @@ class Install_model extends CI_Model
 	function create_language_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('language'))
+		if(!$this->db->table_exists('language') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -123,7 +154,7 @@ class Install_model extends CI_Model
 	function create_news_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('news'))
+		if(!$this->db->table_exists('news') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -138,7 +169,7 @@ class Install_model extends CI_Model
 	function create_news_translation_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('news_translation'))
+		if(!$this->db->table_exists('news_translation') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -167,7 +198,7 @@ class Install_model extends CI_Model
 	function create_news_sticky_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('news_sticky'))
+		if(!$this->db->table_exists('news_sticky') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -189,7 +220,7 @@ class Install_model extends CI_Model
 	function create_groups_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('groups'))
+		if(!$this->db->table_exists('groups') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -221,7 +252,7 @@ class Install_model extends CI_Model
 	function create_groups_descriptions_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('groups_descriptions'))
+		if(!$this->db->table_exists('groups_descriptions') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -251,7 +282,7 @@ class Install_model extends CI_Model
 	function create_users_groups_table()
 	{	
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('users_groups'))
+		if(!$this->db->table_exists('users_groups') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -274,7 +305,7 @@ class Install_model extends CI_Model
 	
 	function create_forum_categories_table() 
 	{
-		if(!$this->db->table_exists('forum_categories'))
+		if(!$this->db->table_exists('forum_categories') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -387,7 +418,7 @@ class Install_model extends CI_Model
 	
 	function create_forum_categories_descriptions_table() 
 	{
-		if(!$this->db->table_exists('forum_categories_descriptions'))
+		if(!$this->db->table_exists('forum_categories_descriptions') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -562,7 +593,7 @@ class Install_model extends CI_Model
 	
 	function create_forum_topic_table() 
 	{
-		if(!$this->db->table_exists('forum_topic'))
+		if(!$this->db->table_exists('forum_topic') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -577,7 +608,7 @@ class Install_model extends CI_Model
 	
 	function create_forum_reply_table() 
 	{
-		if(!$this->db->table_exists('forum_reply'))
+		if(!$this->db->table_exists('forum_reply') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -600,7 +631,7 @@ class Install_model extends CI_Model
 	
 	function create_forum_reply_guest_table() 
 	{
-		if(!$this->db->table_exists('forum_reply_guest'))
+		if(!$this->db->table_exists('forum_reply_guest') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -614,7 +645,7 @@ class Install_model extends CI_Model
 	
 	function create_privileges_table() 
 	{
-		if(!$this->db->table_exists('privileges'))
+		if(!$this->db->table_exists('privileges') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -658,7 +689,7 @@ class Install_model extends CI_Model
 	
 	function create_users_privileges_table() 
 	{
-		if(!$this->db->table_exists('users_privileges'))
+		if(!$this->db->table_exists('users_privileges') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -685,7 +716,7 @@ class Install_model extends CI_Model
 	
 	function create_images_table() 
 	{
-		if(!$this->db->table_exists('images'))
+		if(!$this->db->table_exists('images') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -700,7 +731,7 @@ class Install_model extends CI_Model
 	
 	function create_news_images_table() 
 	{
-		if(!$this->db->table_exists('news_images'))
+		if(!$this->db->table_exists('news_images') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php

@@ -17,7 +17,7 @@ $lang['menu_group'] = "Groups";
 $lang['menu_association'] = "Association";
 $lang['menu_forum'] = "Forum";
 $lang['menu_login'] = "Log in";
-$lang['menu_logout'] = "Log ut";
+$lang['menu_logout'] = "Log out";
 $lang['menu_admin'] = "Admin";
 
 // news
