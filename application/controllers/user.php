@@ -15,11 +15,11 @@ class User extends MY_Controller
 	
 	public function profile($id) 
 	{
-
 		// Data for forum view
 		$this->load->model('User_model');
 		$main_data['user'] = $this->User_model->get_user_profile($id);
 		$main_data['lang'] = $this->lang_data;
+		$main_data['is_logged_in'] = $this->login->is_logged_in() && $this->login->get_id() == $id;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
