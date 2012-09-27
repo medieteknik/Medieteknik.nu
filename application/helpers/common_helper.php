@@ -373,8 +373,6 @@ function profilelinks($option, $user)
 			break;
 	}
 
-
-
 	return '
 	<a href="'.$link.'"'.$extraparam.' class="profile-link '.$extraclass.'">
 		<span class="link-descr">'.$descr.'</span>

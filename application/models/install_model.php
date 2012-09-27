@@ -106,7 +106,7 @@ class Install_model extends CI_Model
 			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
 			$this->User_model->add_user("Anders", "Nord", "andno992", "password");
 			$this->User_model->add_user("Jonas", "Zeitler", "jonze168", "password");
-			$this->User_model->add_user("Klas", "Eskison", "klaes950", "password");
+			$this->User_model->add_user("Klas", "Eskilson", "klaes950", "password");
 			$this->User_model->add_user("Simon", "Joelsson", "simjo407", "password");
 			$this->User_model->add_user("Martin", "Kierkegaard", "marki423", "password");
 		}
@@ -127,7 +127,7 @@ class Install_model extends CI_Model
 			// inserting data
 			$data = array('users_id' => 1, 'web' => "http://www.jonasstrandstedt.se", 'presentation' => "Jag heter jonas");
 			$this->db->insert('users_data', $data);
-			$data = array('users_id' => 6, 'web' => "http://www.esklsn.net", 'presentation' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 'twitter' => 'eskilicious');
+			$data = array('users_id' => 6, 'web' => "http://www.esklsn.net", 'presentation' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 'twitter' => 'Eskilicious');
 			$this->db->insert('users_data', $data);
 		}
 	}
