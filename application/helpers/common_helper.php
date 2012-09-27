@@ -297,3 +297,89 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
     
     echo "</div>";
 }
+
+/**
+ * Display user-data-links
+ * @param 	string 	$option 	find out what link the user want
+ * @param 	string 	$option 	find out what link the user want
+ * @param 	string 	$option 	find out what link the user want
+ */
+
+function profilelinks($option, $user)
+{
+	// no errors, please
+	$extraparam = ' onclick="return false;"';
+	$extraclass = ' link-dis';
+
+	// Pretty genitive
+	if(substr($user->first_name, -1) == 's')
+		$first_name_genetive = $user->first_name;
+	else
+		$first_name_genetive = $user->first_name.'s';
+
+	//what do the user want?
+	switch ($option) {
+		case 'web':
+			$descr = 'Web';
+			if(!empty($user->web))
+			{
+				$link = $user->web;
+				$text = $user->web;
+				$extraparam = ' target="_blank"';
+				$extraclass = '';
+			}
+			else
+			{
+				$link = '#';
+				$text = $user->first_name.' har ingen webbplats.';
+			}
+			break;
+		case 'linkedin':
+			$descr = 'LinkedIn';
+			if(!empty($user->linkedin))
+			{
+				$link = $user->linkedin;
+				$text = 'Besök '.$first_name_genetive.' LinkedIn-profil';
+				$extraparam = ' target="_blank"';
+				$extraclass = 'profile-middle';
+			}
+			else
+			{
+				$link = '#';
+				$text = $user->first_name.' har inte LinkedIn.';
+				$extraclass .= ' profile-middle';
+			}
+			break;
+		case 'twitter':
+			$descr = 'Twitter';
+			if(!empty($user->twitter))
+			{
+				$link = 'http://twitter.com/'.$user->twitter;
+				$text = '@'.$user->twitter;
+				$extraparam = ' target="_blank"';
+				$extraclass = '';
+			}
+			else
+			{
+				$link = '#';
+				$text = $user->first_name.' har inte Twitter.';
+			}
+			break;
+		
+		default:
+			$descr = 'Default';
+			$link = '';
+			$text = '';
+			break;
+	}
+
+
+
+	return '
+	<a href="'.$link.'"'.$extraparam.' class="profile-link '.$extraclass.'">
+		<span class="link-descr">'.$descr.'</span>
+		<span class="link-link"> <br />
+			'.$text.'
+		</span>
+	</a>';
+}

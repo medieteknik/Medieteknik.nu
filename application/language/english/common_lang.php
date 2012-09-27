@@ -37,6 +37,8 @@ $lang['forum_nothreads'] = "No threads";
 // user
 $lang['user_username'] = "Username";
 $lang['user_password'] = "Password";
+$lang['edit_profile'] = "Edit profile";
+
 
 //groups 
 $lang['groups_title'] = "Groups";

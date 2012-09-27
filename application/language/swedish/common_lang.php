@@ -37,6 +37,7 @@ $lang['forum_nothreads'] = "Inga trådar";
 // user
 $lang['user_username'] = "Användarnamn";
 $lang['user_password'] = "Lösenord";
+$lang['edit_profile'] = "Redigera profil";
 
 //groups 
 $lang['groups_title'] = "Grupper";
