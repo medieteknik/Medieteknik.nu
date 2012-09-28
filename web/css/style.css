@@ -120,7 +120,13 @@ a.main-box.news.red:hover {
 }
 .main-box ul {
 	font-size: 0.95em;
-	line-height: 1.4em;	
+	line-height: 1.4em;
+}
+
+#main-right .main-box h2, form .main-box h2{
+	background: #f7f7f7;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 }
 
 
@@ -205,14 +211,6 @@ ul.box-list li:nth-child(even):hover{
 	background-color: #f7f7f7;
 }
 
-label {
-	display: inline-block;
-	width: 100px;
-}
-input[type=text] {
-	display: block;
-}
-
 .main-box.red {
 	background-color: #dc6060;
 	color: #fff;
@@ -283,6 +281,52 @@ ul.topics li a:hover{
 ul.topics li:nth-child(odd) a:hover{
 	background-color: #f1f1f1;
 }
+
+/*
+	edit news/post styles
+*/
+.main-box form{
+	padding: 0 0 12px 12px;
+}
+label{
+	display: inline-block;
+	width: 100px;
+	color: #555;
+	font-size: 1em;
+	margin: 5px 0 3px 0;
+}
+input[type=text] {
+	display: block;
+}
+
+
+/*
+	administrate news
+*/
+form .main-box{
+	padding-bottom: 12px;
+}
+form .main-box label{
+	margin: 5px 0 3px 12px;
+}
+form .main-box input{
+	padding-left: 5px;
+	margin-left: 12px;
+}
+form .main-box textarea{
+	padding: 5px;
+	margin-left: 12px;
+}
+form .main-box div *{
+	margin: 0;
+	padding: 0;
+}
+form .main-box div{
+	margin: 5px 0 3px 12px;
+	color: #777;
+	font-size: 1em;
+}
+
 
 .news_flag {
 	position: absolute;

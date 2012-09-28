@@ -132,6 +132,8 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 {
 	$text = text_strip($input, TRUE);
 
+	//wrap with paragraph
+	$text = $pre.$text.$post;
 	
 	// bold and italics
 	$text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);

@@ -130,7 +130,7 @@ foreach($arr as $t) {
               'name'        => 'text_'.$language_abbr,
               'id'          => 'text_'.$language_abbr,
               'rows'		=>	10,
-              'cols'		=>	90,
+              'cols'		=>	85,
             );
 	
 	echo '

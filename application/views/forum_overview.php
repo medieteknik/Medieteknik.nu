@@ -29,20 +29,23 @@ if(isset($postform))
 	echo '<div class="main-box clearfix">';
 	if(isset($guest)) 
 	{
-		echo 'gäst formulär';
+		echo 'Gästformulär';
 	} else {
             
-		echo '<h2>post topic</h2>',
+		echo '<h2>Post topic</h2>',
 		form_open('forum/post_topic'),
 		
 		form_hidden(array('cat_id' => $categories_array[0]->id)),
 		form_hidden(array('guest' => 0)),
 		
-		form_label($lang['misc_text'], 'topic'),
+		form_label($lang['misc_headline'], 'topic'),
 		form_input(array('name' => 'topic','id' => 'topic')),
 		
 		form_label($lang['misc_text'], 'reply'),
-		form_textarea(array('name' => 'reply','id' => 'reply')),
+		form_textarea(array('name' => 'reply',
+							'id' => 'reply',
+							'rows'	=>	10,
+							'cols'	=>	85)),
 		
 		form_submit('post', 'Send');
 		form_close();
