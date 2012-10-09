@@ -70,6 +70,7 @@ html, body { background-color: #e8e8e9; text-align: center; font: 0.95em'Asap'; 
 	box-shadow: 0px 1px 3px #aaa;
 	margin-bottom: 15px;
 	position: relative;
+	border-top: 1px solid #ddd;
 }
 
 a.main-box {
@@ -113,20 +114,14 @@ a.main-box.news.red:hover {
 #main-left .main-box .twoThirds { float: left; width: 500px; }
 #main-left .main-box .oneHalf { float: left; width: 375px; }
 
-.main-box p {
+.main-box p, .main-box ul{
 	font-size: 0.95em;	
 	padding: 0 12px 12px 12px;
-	line-height: 1.4em;	
-}
-.main-box ul {
-	font-size: 0.95em;
 	line-height: 1.4em;
+	list-style-type: none;
 }
-
-#main-right .main-box h2, form .main-box h2{
-	background: #f7f7f7;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+#main-right .main-box ul {
+	padding: 0;	
 }
 
 
@@ -216,7 +211,7 @@ ul.box-list li:nth-child(even):hover{
 	color: #fff;
 }
 
-ul.forum {
+ul.forum, ul.topics {
 	list-style: none;
 	padding: 0;
 }
@@ -230,10 +225,6 @@ ul.forum a {
 
 ul.forum a:hover{
 	background-color: #373737;
-}
-
-ul.forum ul.forum {
-	/*margin-bottom: 20px;*/
 }
 
 ul.forum ul.forum a {
@@ -253,11 +244,6 @@ ul.forum ul.forum li a:hover{
 }
 ul.forum ul.forum li:nth-child(odd) a:hover{
 	background-color: #f1f1f1;
-}
-
-
-ul.topics {
-	list-style: none;
 }
 
 ul.topics a {
@@ -295,14 +281,24 @@ label{
 	font-size: 1em;
 	margin: 5px 0 3px 0;
 }
-input[type=text] {
+input[type="text"], input[type="password"]{
 	display: block;
+}
+form input[type="submit"]{
+	display: block;
+	position: relative;
+	top: 5px;
+	min-width: 50px;
 }
 
 
 /*
 	administrate news
 */
+form h2{
+	background: #f7f7f7;
+	border-bottom: 1px solid #ddd;
+}
 form .main-box{
 	padding-bottom: 12px;
 }

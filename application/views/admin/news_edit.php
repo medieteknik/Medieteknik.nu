@@ -71,7 +71,7 @@ form_open_multipart($action),
 	} else {
 		echo form_hidden($lang['misc_approved'], array('name' => 'approved','id' => 'approved', 'value' => $news_approved));
 	}
-echo form_submit('save', $lang['misc_save']),
+echo '<div>', form_submit('save', $lang['misc_save']), '</div>',
 '</div>
 <div class="main-box clearfix">
 	<h2>'.$lang['misc_image'].'</h2>',
