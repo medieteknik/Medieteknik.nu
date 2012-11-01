@@ -24,10 +24,10 @@ if(isset($postform))
 	echo '<div class="main-box clearfix">';
 	if(isset($guest)) 
 	{
-		echo 'gäst formulär';
+		echo 'Gästformulär';
 	} else {
             
-		echo '<h2>post reply</h2>',
+		echo '<h2>Post reply</h2>',
 		form_open('forum/post_reply'),
 		
 		form_hidden(array('cat_id' => $categories_array[0]->id)),
@@ -35,7 +35,10 @@ if(isset($postform))
 		form_hidden(array('guest' => 0)),
 		
 		form_label($lang['misc_text'], 'reply'),
-		form_textarea(array('name' => 'reply','id' => 'reply')),
+		form_textarea(array('name' => 'reply',
+							'id' => 'reply',
+							'rows'	=>	10,
+							'cols'	=>	85)),
 		
 		form_submit('post', 'Send');
 		form_close();
