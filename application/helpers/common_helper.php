@@ -303,8 +303,8 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
 /**
  * Display user-data-links
  * @param 	string 	$option 	find out what link the user want
- * @param 	string 	$option 	find out what link the user want
- * @param 	string 	$option 	find out what link the user want
+ * @param 	string 	$user 		get the user
+ * @return 	string 	the desired link, styled and everything
  */
 
 function profilelinks($option, $user)
