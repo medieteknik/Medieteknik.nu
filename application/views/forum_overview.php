@@ -1,9 +1,10 @@
 <?php 
 
 //do_dump($categories_array);
-
+//do_dump($ancestors_array);
 
 echo '<div class="main-box clearfix">';
+if($ancestors_array) render_breadcrumbs($ancestors_array);
 render_forum($categories_array);
 if(count($topics_array) > 0) 
 {

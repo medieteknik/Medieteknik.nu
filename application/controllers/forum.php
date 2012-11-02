@@ -25,6 +25,7 @@ class Forum extends MY_Controller
 	
 	function category($id) 
 	{
+		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($id);
 		// Data for forum view
 		$main_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to($id, 2);
 		$main_data['lang'] = $this->lang_data;
@@ -99,6 +100,8 @@ class Forum extends MY_Controller
 		$main_data['replies'] = $this->Forum_model->get_replies($id);
 		$main_data['topic'] = $this->Forum_model->get_topic($id);
 		$main_data['lang'] = $this->lang_data;
+
+		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($main_data['topic']->cat_id);
 		$main_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to($main_data['topic']->cat_id, 1);
 		
 		if(count($main_data['categories_array']) == 1) 
