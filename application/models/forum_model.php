@@ -64,6 +64,34 @@ class Forum_model extends CI_Model
         return $result;
     }
     
+    /**
+     * Fetches all ancestors to category with $id
+     *  
+     * @param  integer 	$id sub-category id
+     * @return array 	$categoryAncestors
+     */
+    function get_all_categories_ancestors_to($id = 0)
+    {
+    	if($id)
+    	{
+	    	$this->db->select("id, title, sub_to_id");
+	    	$this->db->from("forum_categories");
+	    	$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
+	    	$this->db->where("forum_categories.id", $id);
+
+			$query = $this->db->get();
+			$categoryAncestors = $query->result();
+			
+			if($categoryAncestors[0]->sub_to_id != 0)
+			{
+				$categoryAncestors=array_merge($categoryAncestors, 
+					$this->get_all_categories_ancestors_to($categoryAncestors[0]->sub_to_id));
+			}
+
+			return $categoryAncestors;
+	 	} 
+    }
+
 	/**
 	 * Fetches all latest threads in a specific category
 	 *

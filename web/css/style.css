@@ -210,6 +210,30 @@ ul.box-list li:nth-child(even):hover{
 	background-color: #dc6060;
 	color: #fff;
 }
+/**
+ *	forum styles
+ */
+ul.breadcrumbs{
+	list-style: none;
+	float: right;
+	padding: 0;
+	margin-top: 12px;
+	padding-right: 12px;
+}
+ul.breadcrumbs li{
+	float: left;
+	margin: 0 2px 7px 2px;
+}
+ul.breadcrumbs li a{
+	text-decoration: none;
+	color: #ccc;
+}
+ul.breadcrumbs li a:hover{
+	color: #f57d20;
+}
+ul.breadcrumbs li .spacer{
+	color: #f57d20; 
+}
 
 ul.forum, ul.topics {
 	list-style: none;
@@ -268,9 +292,9 @@ ul.topics li:nth-child(odd) a:hover{
 	background-color: #f1f1f1;
 }
 
-/*
-	edit news/post styles
-*/
+/**
+ *	edit news/post styles
+ */
 .main-box form{
 	padding: 0 0 12px 12px;
 }

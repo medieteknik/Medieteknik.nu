@@ -1,5 +1,6 @@
 <?php 
 //do_dump($topic);
+render_breadcrumbs($ancestors_array);
 render_forum($categories_array);
 
 $first = array_shift($replies);
