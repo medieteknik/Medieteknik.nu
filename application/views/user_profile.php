@@ -15,10 +15,12 @@ echo '
 <div class="main-box clearfix profile">
 	<h2>',get_full_name($user),' ',$editbutton,'</h2>
 	<div class="profile-content">
-		',$web,'
-		',$linkedin,'
-		',$twitter,'
+		<div class="profile-links">
+			',$web,'
+			',$linkedin,'
+			',$twitter,'
+		</div>
+		<p>',$user->presentation,'</p>
 	</div>
-	<p>',$user->presentation,'</p>
 </div><!-- close .main-box -->';
-
+?>
