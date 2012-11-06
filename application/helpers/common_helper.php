@@ -303,7 +303,7 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
 /**
  * Display user-data-links
  * @param 	string 	$option 	find out what link the user want
- * @param 	string 	$user 		get the user
+ * @param 	string 	$user 		include the user
  * @return 	string 	the desired link, styled and everything
  */
 
@@ -321,65 +321,35 @@ function profilelinks($option, $user)
 
 	//what do the user want?
 	switch ($option) {
-		case 'web':
-			$descr = 'Web';
-			if(!empty($user->web))
-			{
-				$link = $user->web;
-				$text = $user->web;
-				$extraparam = ' target="_blank"';
-				$extraclass = '';
-			}
-			else
-			{
-				$link = '#';
-				$text = $user->first_name.' har ingen webbplats.';
-			}
-			break;
 		case 'linkedin':
-			$descr = 'LinkedIn';
 			if(!empty($user->linkedin))
-			{
-				$link = $user->linkedin;
-				$text = 'Besök '.$first_name_genetive.' LinkedIn-profil';
-				$extraparam = ' target="_blank"';
-				$extraclass = 'profile-middle';
-			}
-			else
-			{
-				$link = '#';
-				$text = $user->first_name.' har inte LinkedIn.';
-				$extraclass .= ' profile-middle';
-			}
+				return '
+				<a href="'.$user->linkedin.'" target="_blank" class="profile-link">
+					<span class="link-descr">LinkedIn</span>
+					<span class="link-link"> <br />
+						Besök '.$first_name_genetive.' LinkedIn-profil
+					</span>
+				</a>';
 			break;
 		case 'twitter':
-			$descr = 'Twitter';
 			if(!empty($user->twitter))
-			{
-				$link = 'http://twitter.com/'.$user->twitter;
-				$text = '@'.$user->twitter;
-				$extraparam = ' target="_blank"';
-				$extraclass = '';
-			}
-			else
-			{
-				$link = '#';
-				$text = $user->first_name.' har inte Twitter.';
-			}
+				return '
+				<a href="http://twitter.com/'.$user->twitter.'" target="_blank" class="profile-link">
+					<span class="link-descr">Twitter</span>
+					<span class="link-link"> <br />
+						@'.$user->twitter.'
+					</span>
+				</a>';
 			break;
 		
 		default:
-			$descr = 'Default';
-			$link = '';
-			$text = '';
-			break;
+			if(!empty($user->$option))
+				return '
+				<a href="'.$user->$option.'" target="_blank" class="profile-link">
+					<span class="link-descr">'.$option.'</span>
+					<span class="link-link"> <br />
+						'.$user->$option.'
+					</span>
+				</a>';
 	}
-
-	return '
-	<a href="'.$link.'"'.$extraparam.' class="profile-link '.$extraclass.'">
-		<span class="link-descr">'.$descr.'</span>
-		<span class="link-link"> <br />
-			'.$text.'
-		</span>
-	</a>';
 }
