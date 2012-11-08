@@ -37,7 +37,7 @@ $lang['forum_nothreads'] = "Inga trådar";
 // user
 $lang['user_username'] = "Användarnamn";
 $lang['user_password'] = "Lösenord";
-$lang['edit_profile'] = "Redigera profil";
+$lang['profile_edit'] = "Redigera profil";
 
 //groups 
 $lang['groups_title'] = "Grupper";
@@ -48,12 +48,14 @@ $lang['admin_addnews'] = "Skapa nyhet";
 $lang['admin_editnews'] = "Redigera nyhet";
 $lang['admin_adminnews'] = "Administrera nyheter";
 $lang['admin_editimages'] = "Redigera bilder";
-$lang['admin_editusers'] = "Redigera användare";
+$lang['admin_editusers'] = "Administrera användare";
+$lang['admin_edituser'] = "Redigera användare";
 $lang['admin_addusers'] = "Lägg till användare";
 $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";
 $lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
 $lang['admin_news_needsapproval'] = "nyheter behöver godkännas";
+$lang['user_overview'] = "Användarövesikt";
 
 // date
 $lang['date_yesterday'] = "Igår";
@@ -84,4 +86,5 @@ $lang['misc_lasteditdate'] = "Senast redigerad";
 $lang['misc_file'] = "Fil";
 $lang['misc_latestforum'] = "Nytt i forumet";
 $lang['misc_upcomingevents'] = "Kommande Event";
+$lang['misc_back'] = "Bakåt";
 

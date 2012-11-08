@@ -18,7 +18,7 @@ function render_forum($cats)
 }
 
 function render_breadcrumbs($cats){
-	$spacer = '<span class="spacer">>> </span>';
+	$spacer = '<span class="spacer">&rarr; </span>';
 	echo '<ul class="breadcrumbs clearfix">';
 	echo '<li>',anchor('forum/', 'Forum');
 	foreach(array_reverse($cats) as $key => $cat)

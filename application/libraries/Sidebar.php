@@ -59,6 +59,9 @@ class Sidebar
 		
 		if($this->CI->login->has_privilege('news_editor'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminnews'], 'href' => "admin_news"));
+
+		if($this->CI->login->has_privilege('admin'))
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin_user"));
 		
 		/*	
 		if($this->CI->login->has_privilege('news_editor'))

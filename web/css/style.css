@@ -133,6 +133,10 @@ a.main-box.news.red:hover {
     visibility: hidden;
 }
 
+.width-50 {
+	width: 50%;
+}
+
 .filter-bar {
 	font-size: 0.95em;
 	margin-bottom: 15px; 

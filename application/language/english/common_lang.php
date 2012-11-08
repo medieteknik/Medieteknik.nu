@@ -37,7 +37,7 @@ $lang['forum_nothreads'] = "No threads";
 // user
 $lang['user_username'] = "Username";
 $lang['user_password'] = "Password";
-$lang['edit_profile'] = "Edit profile";
+$lang['profile_edit'] = "Edit profile";
 
 
 //groups 
@@ -49,12 +49,14 @@ $lang['admin_addnews'] = "Create news";
 $lang['admin_editnews'] = "Edit news";
 $lang['admin_adminnews'] = "Admin news";
 $lang['admin_editimages'] = "Edit images";
-$lang['admin_editusers'] = "Edit users";
+$lang['admin_editusers'] = "Admin users";
+$lang['admin_edituser'] = "Edit user";
 $lang['admin_addusers'] = "Add users";
 $lang['admin_addtranslation'] = "Add translation";
 $lang['admin_denied_title'] = "Access denied";
 $lang['admin_denied_message'] = "You need to be logged in and have permission to view the requested site.";
 $lang['admin_news_needsapproval'] = "news items need approval";
+$lang['user_overview'] = "User overview";
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -85,3 +87,4 @@ $lang['misc_lasteditdate'] = "Last edited";
 $lang['misc_file'] = "File";
 $lang['misc_latestforum'] = "Latest in the forum";
 $lang['misc_upcomingevents'] = "Upcoming Events";
+$lang['misc_back'] = "Back";

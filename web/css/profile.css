@@ -54,6 +54,11 @@
 			-webkit-box-shadow: 0 1px 3px #aaa;
 			box-shadow: 0 1px 3px #aaa;
 		}
+				.profile h2 a.disabled {
+					-moz-box-shadow: 0  #aaa;
+					-webkit-box-shadow: 0 #aaa;
+					box-shadow: 0 #aaa;
+				}
 			.profile h2 a:hover {
 				color:#9f4b0a;
 				border-color:#838383;
