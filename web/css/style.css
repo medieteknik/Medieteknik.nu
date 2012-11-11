@@ -329,6 +329,11 @@ form input[type="submit"]{
 	-webkit-box-shadow: 0 1px 3px #aaa;
 	box-shadow: 0 1px 3px #aaa;
 }
+	form input[type="submit"].disabled {
+		-moz-box-shadow: 0  #aaa;
+		-webkit-box-shadow: 0 #aaa;
+		box-shadow: 0 #aaa;
+	}
 	form input[type="submit"]:hover {
 		color:#9f4b0a;
 		border-color:#838383;
@@ -367,6 +372,9 @@ form .main-box div *{
 	margin: 0;
 	padding: 0;
 }
+	form .main-box div input[type="submit"]{
+		padding:5px;
+	}
 form .main-box div{
 	margin: 5px 0 3px 12px;
 	color: #777;
