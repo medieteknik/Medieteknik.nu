@@ -3,26 +3,26 @@
 * The following functions are used by many classes, therefore the name common helpers
 */
 
-function encrypt_password($password) 
+function encrypt_password($password)
 {
 	$salt = 'MT_sillystring_as_sal';
 	if(CRYPT_SHA512 == 1)
 	{
 		return substr(crypt($password, '$6$rounds=10000$'.$salt.'$'),33);
 	}
-	if (CRYPT_SHA256 == 1) 
+	if (CRYPT_SHA256 == 1)
 	{
 	    return substr(crypt($password, '$5$rounds=10000$'.$salt.'$'),33);
 	}
-	if (CRYPT_MD5 == 1) 
+	if (CRYPT_MD5 == 1)
 	{
 	    return substr(crypt($password, '$1$'.$salt.'$'),12);
 	}
-	
+
 	return false;
 }
 
-function get_full_name($arr) 
+function get_full_name($arr)
 {
 	$fullname = '';
 	if(isset($arr->first_name)) $fullname .= $arr->first_name;
@@ -30,22 +30,22 @@ function get_full_name($arr)
 	return trim($fullname);
 }
 
-function readable_date($date, &$lang, $short = FALSE) 
+function readable_date($date, &$lang, $short = FALSE)
 {
-	if($lang == '') 
+	if($lang == '')
 	{
 		$lang = array('date_today' => 'Idag', 'date_yesterday' => 'Igår');
 	}
-		
+
 	$theDate = new DateTime($date);
 	$today = new DateTime(date("Y-m-d 24:00:00"));
 	$interval = $theDate->diff($today);
 	$n = $interval->format("%d"); // get total number of days that differ (always positive number)
-	
+
 	$string = '';
-	if($short) 
+	if($short)
 	{
-		switch($n) 
+		switch($n)
 		{
 			case 0:
 				$string = $theDate->format('H:i');
@@ -58,7 +58,7 @@ function readable_date($date, &$lang, $short = FALSE)
 				break;
 		}
 	} else {
-		switch($n) 
+		switch($n)
 		{
 			case 0:
 				$string = $lang['date_today'] . " " . $theDate->format('H:i');
@@ -71,11 +71,11 @@ function readable_date($date, &$lang, $short = FALSE)
 				break;
 		}
 	}
-	
+
 	return $string;
 }
 
-function compact_name($name) 
+function compact_name($name)
 {
 	$string = strtolower($name);
 	$string = preg_replace("/(å|ä)/","a",$string);
@@ -83,7 +83,7 @@ function compact_name($name)
 	return preg_replace("/[^A-Za-z0-9_]/","_",strtolower($string));
 }
 
-function uncompact_name($name) 
+function uncompact_name($name)
 {
 	$string = preg_replace("/^_*/", "", $name);
 	$string = preg_replace("/_*$/", "", $string);
@@ -92,7 +92,7 @@ function uncompact_name($name)
 	return preg_replace("/o/i", "(o|ö){1}", $string);
 }
 
-function _img_format($matches) 
+function _img_format($matches)
 {
 	$c = count($matches);
 	$id = $matches[1];
@@ -102,10 +102,10 @@ function _img_format($matches)
 		$w = 130;
 	if($c > 3)
 		$h = $matches[3];
-	else 
+	else
 		$h = 75;
-		
-	
+
+
 	$im = new imagemanip($id, 'zoom', $w, $h);
 	return $im->get_img_tag();
 }
@@ -119,7 +119,7 @@ function text_strip($input, $line_break = FALSE)
 	//\r\n, \n\r, \n and \r
 	$patterns = array('/\r\n/', '/\n\r/', '/\r/', '/\n/');
 	$replacements = '';
-	if($line_break) 
+	if($line_break)
 	{
 		$replacements = array('<br/>','<br/>','<br/>','<br/>');
 	}
@@ -128,33 +128,33 @@ function text_strip($input, $line_break = FALSE)
 	return $text;
 }
 
-function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE) 
+function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 {
 	$text = text_strip($input, TRUE);
 
 	//wrap with paragraph
 	$text = $pre.$text.$post;
-	
+
 	// bold and italics
 	$text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);
 	$text = preg_replace('/\[i\](.*)\[\/i\]/','<i>${1}</i>', $text);
-	
-	if($xtravaganza === TRUE) 
+
+	if($xtravaganza === TRUE)
 	{
 		// URL
 		$in		=array('`((?:https?|ftp)://\S+[[:alnum:]]/?)`si','`((?<!//)(www\.\S+[[:alnum:]]/?))`si');
 		$out	=array('<a href="$1"  rel=nofollow>$1</a> ','<a href="http://$1" rel=\'nofollow\'>$1</a>');
 		$text = preg_replace($in,$out,$text);
-		
+
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+)\]/','_img_format', $text);
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+)]/','_img_format', $text);
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+) h=(\d+)]/','_img_format', $text);
 	} else {
 		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
 	}
-	
+
 	// more than one (2-30) line break is converted to a paragraph
-	if($pre != '' && $post != '') 
+	if($pre != '' && $post != '')
 	{
 		//return $pre.preg_replace('/(<br\/>){2,30}/',$post.$pre, $text).$post;
 		return preg_replace('/(<br\/>){2,30}/',$post.$pre, $text);
@@ -163,9 +163,9 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 	}
 }
 
-function news_size_to_class($size) 
+function news_size_to_class($size)
 {
-	switch($size) 
+	switch($size)
 	{
 		case 1:
 			return "oneThird";
@@ -175,12 +175,12 @@ function news_size_to_class($size)
 			return "twoThirds";
 		default:
 			return "";
-		
+
 	}
 }
-function news_size_to_class_invert($size) 
+function news_size_to_class_invert($size)
 {
-	switch($size) 
+	switch($size)
 	{
 		case 1:
 			return "twoThirds";
@@ -190,12 +190,12 @@ function news_size_to_class_invert($size)
 			return "oneThird";
 		default:
 			return "";
-		
+
 	}
 }
-function news_size_to_px($size) 
+function news_size_to_px($size)
 {
-	switch($size) 
+	switch($size)
 	{
 		case 1:
 			return 250;
@@ -207,13 +207,13 @@ function news_size_to_px($size)
 			return 750;
 		default:
 			return "";
-		
+
 	}
 }
 
-function lang_id_to_imgpath($id) 
+function lang_id_to_imgpath($id)
 {
-	switch($id) 
+	switch($id)
 	{
 		case 1:
 			return base_url().'web/img/flags/se.png';
@@ -221,20 +221,20 @@ function lang_id_to_imgpath($id)
 			return base_url().'web/img/flags/gb.png';
 		default:
 			return "";
-		
+
 	}
 }
 
 /**
- * Better GI than print_r or var_dump -- but, unlike var_dump, you can only dump one variable.  
+ * Better GI than print_r or var_dump -- but, unlike var_dump, you can only dump one variable.
  * Added htmlentities on the var content before echo, so you see what is really there, and not the mark-up.
- * 
+ *
  * Also, now the output is encased within a div block that sets the background color, font style, and left-justifies it
  * so it is not at the mercy of ambient styles.
  *
  * Inspired from:     PHP.net Contributions
  * Stolen from:       [highstrike at gmail dot com]
- * Modified by:       stlawson *AT* JoyfulEarthTech *DOT* com 
+ * Modified by:       stlawson *AT* JoyfulEarthTech *DOT* com
  *
  * @param mixed $var  -- variable to dump
  * @param string $var_name  -- name of variable (optional) -- displayed in printout making it easier to sort out what variable is what in a complex output
@@ -246,7 +246,7 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
     $do_dump_indent = "<span style='color:#666666;'>|</span> &nbsp;&nbsp; ";
     $reference = $reference.$var_name;
     $keyvar = 'the_do_dump_recursion_protection_scheme'; $keyname = 'referenced_object_name';
-    
+
     // So this is always visible and always left justified and readable
     echo "<div style='text-align:left; background-color:white; font: 100% monospace; color:black;'>";
 
@@ -296,8 +296,18 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
 
         $var = $var[$keyvar];
     }
-    
+
     echo "</div>";
+}
+
+/**
+ * Return valid URL
+ * @param 	string 	$url 	the url to be corrected
+ * @return 	string
+ */
+function valid_url($url = '')
+{
+	return preg_replace("(?i)\b(?:http[s]?://)?(?(?=www.)www.)(?:[-a-z\d]+\.)+[a-z]{2,4}", "", $url);
 }
 
 /**
@@ -309,9 +319,9 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
 
 function profilelinks($option, $user)
 {
-	// no errors, please
-	$extraparam = ' onclick="return false;"';
-	$extraclass = ' link-dis';
+	// is the thing we want empty? end function!
+	if(empty($user->$option))
+		return '';
 
 	// Pretty genitive
 	if(substr($user->first_name, -1) == 's')
@@ -319,37 +329,20 @@ function profilelinks($option, $user)
 	else
 		$first_name_genetive = $user->first_name.'s';
 
-	//what do the user want?
-	switch ($option) {
-		case 'linkedin':
-			if(!empty($user->linkedin))
-				return '
-				<a href="'.$user->linkedin.'" target="_blank" class="profile-link">
-					<span class="link-descr">LinkedIn</span>
-					<span class="link-link"> <br />
-						Besök '.$first_name_genetive.' LinkedIn-profil
-					</span>
-				</a>';
-			break;
-		case 'twitter':
-			if(!empty($user->twitter))
-				return '
-				<a href="http://twitter.com/'.$user->twitter.'" target="_blank" class="profile-link">
-					<span class="link-descr">Twitter</span>
-					<span class="link-link"> <br />
-						@'.$user->twitter.'
-					</span>
-				</a>';
-			break;
-		
-		default:
-			if(!empty($user->$option))
-				return '
-				<a href="'.$user->$option.'" target="_blank" class="profile-link">
-					<span class="link-descr">'.$option.'</span>
-					<span class="link-link"> <br />
-						'.$user->$option.'
-					</span>
-				</a>';
-	}
+	//set default link
+	$return = '<a href="'.($option == 'twitter' ? "https://twitter.com/" : "").
+			$user->$option.'" target="_blank" class="profile-link">
+			<span class="link-descr">'.$option.'</span>
+			<span class="link-link"> <br />';
+
+	//what do the user want? adapt link text.
+	if($option == 'linkedin')
+		$return .= 'Besök '.$first_name_genetive.' LinkedIn-profil';
+	elseif($option == 'twitter')
+		$return .= '@'.$user->twitter;
+	else
+		$return .= $user->$option;
+
+	//return the stuff!
+	return $return;
 }
