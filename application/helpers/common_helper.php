@@ -343,6 +343,8 @@ function profilelinks($option, $user)
 	else
 		$return .= $user->$option;
 
+	$return .= '</span></a>';
+
 	//return the stuff!
 	return $return;
 }
