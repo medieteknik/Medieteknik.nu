@@ -1,5 +1,8 @@
 <?php
 
+if($user->id == 0)
+	redirect('error_page/user/?msg=notfound', 'refresh');
+
 $editbutton = "";
 $editstyle = "";
 

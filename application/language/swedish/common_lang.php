@@ -38,8 +38,15 @@ $lang['forum_nothreads'] = "Inga trådar";
 $lang['user_username'] = "Användarnamn";
 $lang['user_password'] = "Lösenord";
 $lang['profile_edit'] = "Redigera profil";
+$lang['user_firstname'] = "Förnamn";
+$lang['user_lastname'] = "Efternamn";
+$lang['user_name'] = "Namn";
+$lang['user_lukasid'] = "LukasID";
+$lang['user_userid'] = "Användarid";
+$lang['user_disabled'] = "avstängd";
+$lang['user_disabled_exp'] = "Den här användaren är avstängd.";
 
-//groups 
+//groups
 $lang['groups_title'] = "Grupper";
 $lang['groups_nomatch'] = "Ingen grupp matchade ditt sökkriterium";
 
@@ -48,9 +55,17 @@ $lang['admin_addnews'] = "Skapa nyhet";
 $lang['admin_editnews'] = "Redigera nyhet";
 $lang['admin_adminnews'] = "Administrera nyheter";
 $lang['admin_editimages'] = "Redigera bilder";
+$lang['admin_listusers'] = "Lista användare";
 $lang['admin_editusers'] = "Administrera användare";
 $lang['admin_edituser'] = "Redigera användare";
+	$lang['admin_edituser_drama'] = "Dramatiska rutan";
 $lang['admin_addusers'] = "Lägg till användare";
+$lang['admin_addusers_success'] = "Användare tillagd!";
+$lang['admin_addusers_error'] = "Kunde inte lägga till användare. Säker på att du inte glömde att skriva in något?";
+	$lang['admin_addusers_error_lid'] = "LukasID does allready exist or is written wrong.";
+	$lang['admin_addusers_error_fname'] = "Enter a first name.";
+	$lang['admin_addusers_error_lname'] = "Enter a last name.";
+	$lang['admin_addusers_error_pwd'] = "Password to short.";
 $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";
 $lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
@@ -87,4 +102,10 @@ $lang['misc_file'] = "Fil";
 $lang['misc_latestforum'] = "Nytt i forumet";
 $lang['misc_upcomingevents'] = "Kommande Event";
 $lang['misc_back'] = "Bakåt";
+$lang['misc_page'] = "Sida";
+$lang['misc_of'] = "av";
 
+// error
+$lang['error_error'] = "Fel!";
+$lang['error_common'] = "Ett fel uppstod. Vänligen försök igen senare.";
+$lang['error_user_notfound'] = "Kunde inte hitta användaren. Säker på att du skrev rätt?";

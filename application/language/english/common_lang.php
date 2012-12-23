@@ -38,9 +38,16 @@ $lang['forum_nothreads'] = "No threads";
 $lang['user_username'] = "Username";
 $lang['user_password'] = "Password";
 $lang['profile_edit'] = "Edit profile";
+$lang['user_firstname'] = "First name";
+$lang['user_lastname'] = "Last name";
+$lang['user_name'] = "Name";
+$lang['user_lukasid'] = "LukasID";
+$lang['user_userid'] = "User ID";
+$lang['user_disabled'] = "disabled";
+$lang['user_disabled_exp'] = "This user is currently disabled.";
 
 
-//groups 
+//groups
 $lang['groups_title'] = "Groups";
 $lang['groups_nomatch'] = "No groups matched your search criteria";
 
@@ -49,9 +56,17 @@ $lang['admin_addnews'] = "Create news";
 $lang['admin_editnews'] = "Edit news";
 $lang['admin_adminnews'] = "Admin news";
 $lang['admin_editimages'] = "Edit images";
+$lang['admin_listusers'] = "List users";
 $lang['admin_editusers'] = "Admin users";
 $lang['admin_edituser'] = "Edit user";
+	$lang['admin_edituser_drama'] = "Drama area";
 $lang['admin_addusers'] = "Add users";
+$lang['admin_addusers_success'] = "User added!";
+$lang['admin_addusers_error'] = "User could not be added! Sure you did not forget anything?";
+	$lang['admin_addusers_error_lid'] = "LukasID does allready exist or is written wrong.";
+	$lang['admin_addusers_error_fname'] = "Enter a first name.";
+	$lang['admin_addusers_error_lname'] = "Enter a last name.";
+	$lang['admin_addusers_error_pwd'] = "Password to short.";
 $lang['admin_addtranslation'] = "Add translation";
 $lang['admin_denied_title'] = "Access denied";
 $lang['admin_denied_message'] = "You need to be logged in and have permission to view the requested site.";
@@ -88,3 +103,10 @@ $lang['misc_file'] = "File";
 $lang['misc_latestforum'] = "Latest in the forum";
 $lang['misc_upcomingevents'] = "Upcoming Events";
 $lang['misc_back'] = "Back";
+$lang['misc_page'] = "Page";
+$lang['misc_of'] = "of";
+
+// error
+$lang['error_error'] = "Error!";
+$lang['error_common'] = "An error occured, please try again later.";
+$lang['error_user_notfound'] = "User could not be found. Are you sure you typed everything in correctly?";
