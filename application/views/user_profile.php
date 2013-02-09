@@ -1,17 +1,11 @@
 <?php
-
 if($user->id == 0)
 	redirect('error_page/user/?msg=notfound', 'refresh');
 
 $editbutton = "";
-$editstyle = "";
-
 
 if($is_logged_in) {
-	if(isset($_GET['edit'])){
-	}
-	$editbutton = '<a href="?edit" onclick="return false;">'.$lang['profile_edit'].'</a>';
-	$editstyle = '';
+	$editbutton = anchor('/user/edit_profile/', $lang['profile_edit']);
 }
 
 echo '

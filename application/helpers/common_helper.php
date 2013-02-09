@@ -301,13 +301,14 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
 }
 
 /**
- * Return valid URL
- * @param 	string 	$url 	the url to be corrected
- * @return 	string
+ * Check url
+ * @param 	string 	$url 	the url to be checked
+ * @return 	bool
  */
 function valid_url($url = '')
 {
-	return preg_replace("(?i)\b(?:http[s]?://)?(?(?=www.)www.)(?:[-a-z\d]+\.)+[a-z]{2,4}", "", $url);
+	$regex = "!/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))/";
+	return preg_match($regex, $url);
 }
 
 /**

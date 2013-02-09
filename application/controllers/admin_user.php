@@ -44,7 +44,7 @@ class Admin_user extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/user_start',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/user/start',  $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
@@ -64,46 +64,59 @@ class Admin_user extends MY_Controller
 
 		// Data for overview view
 		$main_data['user_list'] = $this->User_model->get_all_users($currentview['rowsperpage'], $page, $option);
-		$main_data['user_num'] = $this->User_model->count_all_users();
+		$main_data['user_num'] = $this->User_model->count_all_users($option);
 		$main_data['lang'] = $this->lang_data;
 		$main_data['currentview'] = $currentview;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/user_list',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/user/list',  $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
 
 	function edit_user($id, $do = '')
 	{
+		$this->load->model('User_model');
+
 		if($do == 'edit')
 		{
+			$web = $this->input->post('web');
+			$li = $this->input->post('linkedin');
+			$twitter = $this->input->post('twitter');
+			$presentation = $this->input->post('presentation');
+			$firstname = $this->input->post('firstname');
+			$lastname = $this->input->post('lastname');
+			$lukasid = $this->input->post('lukasid');
+			$password = $this->input->post('password');
 
+			$main_data['edit_data'] = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, '');
+			$main_data['edit_user'] = $this->User_model->edit_user($id, $firstname, $lastname, $lukasid, $password);
 		}
-		elseif($do == 'disable')
+		elseif($do == 'chstatus')
 		{
-
+			$main_data['chstatus'] = $this->User_model->disableswitch($id);
 		}
 
 		// Data for overview view
-		$this->load->model('User_model');
 		$main_data['user'] = $this->User_model->get_user_profile($id);
 		$main_data['lang'] = $this->lang_data;
+		$main_data['whattodo'] = $do;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/user_edit',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/user/edit',  $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
 
 	function user_add($do = '')
 	{
+		$main_data['lang'] = $this->lang_data;
+		$this->load->model('User_model');
+
 		if($do == 'create') // if form is sent
 		{
-			$main_data['lang'] = $this->lang_data;
-			$this->load->model('User_model');
 
 			$fn = $this->input->post('firstname');
 			$ln = $this->input->post('lastname');
@@ -137,24 +150,36 @@ class Admin_user extends MY_Controller
 			}
 
 			$main_data['status'] = $createuser;
-
-			$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-			$template_data['main_content'] = $this->load->view('admin/user_add',  $main_data, true);
-			$template_data['sidebar_content'] =  $this->sidebar->get_standard();
-			$this->load->view('templates/main_template',$template_data);
-
 		}
-		else{
-			// Data for overview view
-			$this->load->model('User_model');
-			$main_data['lang'] = $this->lang_data;
 
-			// composing the views
-			$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-			$template_data['main_content'] = $this->load->view('admin/user_add',  $main_data, true);
-			$template_data['sidebar_content'] =  $this->sidebar->get_standard();
-			$this->load->view('templates/main_template',$template_data);
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/user/add',  $main_data, true);
+		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function user_search($do = '', $search = '')
+	{
+		$main_data['lang'] = $this->lang_data;
+		$this->load->model('User_model');
+		$this->load->library('table');
+
+		if($do == 'run') // if form is sent
+		{
+			redirect('/admin_user/user_search/find/'.$this->input->post('search'), 'refresh');
 		}
+		elseif($do == 'find')
+		{
+			$main_data['result'] = $this->User_model->search_user($search);
+			$main_data['query'] = $search;
+		}
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu', $this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/user/search',  $main_data, true);
+		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
 	}
 
 }
