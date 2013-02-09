@@ -468,6 +468,14 @@ function get_images_fields()
 			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
+		'image_title' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'image_description' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
 		);
 	return $fields;
 }

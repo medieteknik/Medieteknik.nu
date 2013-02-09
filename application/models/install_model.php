@@ -731,6 +731,7 @@ class Install_model extends CI_Model
 			$this->dbforge->create_table('images');
 
 			log_message('info', "Created table: images");
+			
 
 		}
 	}
