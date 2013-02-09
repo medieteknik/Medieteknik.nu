@@ -60,17 +60,6 @@ $presentation = array(
 			'rows'		=> '4',
 			'cols'		=> '70'
 		);
-$confdel = array(
-			'name'		=> 'confirm',
-			'id'		=> 'confirm',
-			'value'		=> 'confirm',
-			'checked'	=> false
-		);
-$confirm_liuid = array(
-			'name'			=> 'confirm_liuid',
-			'id'			=> 'confirm_liuid',
-			'placeholder'	=> 'Bekräfta med LiU-id'
-		);
 
 if($whattodo !== '')
 {

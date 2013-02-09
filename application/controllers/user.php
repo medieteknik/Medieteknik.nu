@@ -32,9 +32,23 @@ class User extends MY_Controller
 	{
 		$id = $this->login->get_id();
 		$this->load->helper('form');
+		// load user model
+		$this->load->model('User_model');
+
+		if($do == 'runedit')
+		{
+			$main_data['run'] = true;
+
+			$web = $this->input->post('web');
+			$li = $this->input->post('linkedin');
+			$twitter = $this->input->post('twitter');
+			$presentation = $this->input->post('presentation');
+			$gravatar = $this->input->post('gravatar');
+
+			$main_data['status'] = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, $gravatar);
+		}
 
 		// Data for user view
-		$this->load->model('User_model');
 		$main_data['user'] = $this->User_model->get_user_profile($id);
 		$main_data['lang'] = $this->lang_data;
 

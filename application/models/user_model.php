@@ -228,28 +228,29 @@ class User_model extends CI_Model
 	 * Edit user data
 	 *
 	 * @param  integer	$id			The user id
-	 * @param  integer	$img		The chosen img-id for the user.
+	 * @param  integer	$gravatar	The chosen gravatar email for the user.
 	 * @param  string	$web		The user web adress
 	 * @param  string	$linkedin	The user LinkedIn-profile
 	 * @param  string	$twitter	The users Twitter-id
 	 * @param  string	$presentation 	The user presentation text
 	 * @return boole
 	 */
-	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $img = '')
+	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $gravatar = '')
 	{
 		// fixing and trimming
 		$twitter = preg_replace("/[^0-9A-Za-z_]/", "", $twitter );
 		$web = prep_url($web);
 		$linkedin = prep_url($linkedin);
 		$presentation = trim($presentation);
+		$gravatar = strtolower(trim($gravatar));
 
 		// validate
-		if(strlen($web) <= 300 && strlen($twitter) <= 300 && strlen($img) <= 255 &&
+		if(strlen($web) <= 300 && strlen($twitter) <= 300 && strlen($gravatar) <= 255 &&
 			strlen($linkedin) <= 300 && strlen($presentation) <= 1000)
 		{
 			//set data to be updated/inserted
 			$data = array(
-						'gravatar' => $img,
+						'gravatar' => $gravatar,
 						'web' => $web,
 						'linkedin' => $linkedin,
 						'presentation' => $presentation,

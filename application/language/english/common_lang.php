@@ -46,6 +46,7 @@ $lang['user_userid'] = "User ID";
 $lang['user_disabled'] = "disabled";
 $lang['user_disabled_exp'] = "This user is currently disabled.";
 $lang['user_login_fail'] = "Could not log in. Pleas check you login credentials and try again.";
+$lang['user_gravatar'] = 'Medieteknik.nu uses Gravatar to provide profile pictures. Go get a Gravatar account at <a href="http://gravatar.com" target="_blank">gravatar.com</a>.';
 
 
 //groups
