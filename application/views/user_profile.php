@@ -9,14 +9,16 @@ if($is_logged_in) {
 }
 
 echo '
-<div class="main-box clearfix profile">
-	<h2>',get_full_name($user),' ',$editbutton,'</h2>
+<div class="main-box clearfix profile">',
+gravatarimg($user, 81, ' style="margin:10px 10px 0; float: left;"'),
+	'<h2>',get_full_name($user),' ',$editbutton,'</h2>
 	<div class="profile-content">
 		<div class="profile-links">
 			',profilelinks('web', $user),'
 			',profilelinks('linkedin', $user),'
 			',profilelinks('twitter', $user),'
 		</div>
+		<div class="clearfix"></div>
 		<p>',$user->presentation,'</p>
 	</div>
 </div><!-- close .main-box -->';
