@@ -732,6 +732,23 @@ class Install_model extends CI_Model
 
 			log_message('info', "Created table: images");
 			
+			//get and insert sample images in db
+			$dir = 'user_content/images/original/';
+			if ($handle = opendir($dir)) {
+				while (false !== ($file = readdir($handle))) {
+					if(preg_match('/(.jpg|.png)$/i', $file)){
+						$img_size = getimagesize($dir.$file);
+						$data = array(	'user_id' => 1,
+										'image_original_filename' => $file,
+										'width' => $img_size[0],
+										'height' => $img_size[1],
+										'image_title' => 'news_image',
+										'image_description' => 'news_image');
+						$this->db->insert('images', $data);
+					}
+				}
+				closedir($handle);
+			}
 
 		}
 	}
