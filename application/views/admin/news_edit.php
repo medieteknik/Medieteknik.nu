@@ -73,7 +73,7 @@ form_open_multipart($action),
 	}
 echo '<div>', form_submit('save', $lang['misc_save']), '</div>',
 '</div>
-<div class="main-box clearfix">
+<div class="main-box clearfix" id="image-edit">
 	<h2>'.$lang['misc_image'].'</h2>',
 	$image_div,
 	'<div>',
@@ -152,3 +152,6 @@ form_submit('delete', 'Delete'),
 form_close(),
 '</div>
 ';
+
+echo "<script src='".base_url()."/web/js/libs/jquery.min.js'></script>
+<script src='".base_url()."/web/js/load_images.js'></script>";

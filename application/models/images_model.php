@@ -30,4 +30,20 @@ class Images_model extends CI_Model
 	{
 		
 	}
+
+	function get_images($limit = 0){
+		$this->db->select('image_original_filename');
+		$this->db->from('images');
+		if($limit){
+			$this->db->limit($limit);
+		}
+		$query = $this->db->get();
+		$result = $query->result();
+		foreach($result as &$res){
+			$image = new imagemanip();
+			$image->create($res->image_original_filename, 'zoom', 100, 100);
+			$res = $image->get_img_tag();
+		}
+		return $result;
+	}
 }
