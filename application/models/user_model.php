@@ -244,12 +244,12 @@ class User_model extends CI_Model
 		$presentation = trim($presentation);
 
 		// validate
-		if(strlen($web) <= 300 && strlen($twitter) <= 300 &&
+		if(strlen($web) <= 300 && strlen($twitter) <= 300 && strlen($img) <= 255 &&
 			strlen($linkedin) <= 300 && strlen($presentation) <= 1000)
 		{
 			//set data to be updated/inserted
 			$data = array(
-						'image_id' => $img,
+						'gravatar' => $img,
 						'web' => $web,
 						'linkedin' => $linkedin,
 						'presentation' => $presentation,
