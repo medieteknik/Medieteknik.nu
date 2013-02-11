@@ -13,14 +13,17 @@ class User_model extends CI_Model
 	 *
 	 * @param  string	$lukasid	The lukas-id of the user, for example abcde123
 	 * @param  string	$password	The password in clear text
+	 * @param  bool 	$login		Wether or not we require user to be active
 	 * @return bool
 	 */
-	function validate($lukasid = '', $password = '')
+	function validate($lukasid = '', $password = '', $login = TRUE)
 	{
 		$lid = preg_replace("/(@.*)/", "", $lukasid);
 
 		$this->db->where('lukasid', $lid);
 		$this->db->where('password_hash', encrypt_password($password));
+		if($login)
+			$this->db->where('disabled', 0);
 		$query = $this->db->get('users');
 		if($query->num_rows == 1)
 		{
@@ -67,6 +70,7 @@ class User_model extends CI_Model
 	 *
 	 * @param  integer	$pagination	Pagination or not. If so, how many results per page?
 	 * @param  integer	$page	The current page.
+	 * @param  string	$option	What to get. All users, disabled user, enabled users?
 	 * @return array
 	 */
     function get_all_users($pagination = 0, $page = 0, $option = 'all')
@@ -89,8 +93,13 @@ class User_model extends CI_Model
 	 *
 	 * @return integer
 	 */
-    function count_all_users()
+    function count_all_users($option = '')
     {
+    	if ($option == 'disabled')
+    		$this->db->where('disabled !=', '0');
+    	elseif ($option == 'active')
+    		$this->db->where('disabled', '0');
+
         $query = $this->db->get('users');
         return $query->num_rows();
     }
@@ -219,38 +228,33 @@ class User_model extends CI_Model
 	 * Edit user data
 	 *
 	 * @param  integer	$id			The user id
-	 * @param  integer	$img		The chosen img-id for the user.
+	 * @param  integer	$gravatar	The chosen gravatar email for the user.
 	 * @param  string	$web		The user web adress
 	 * @param  string	$linkedin	The user LinkedIn-profile
 	 * @param  string	$twitter	The users Twitter-id
 	 * @param  string	$presentation 	The user presentation text
-	 * @return mixed 				true if success, array of bool if fail
+	 * @return boole
 	 */
-	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $img = '')
+	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $gravatar = '')
 	{
-		//check if the user exists, quit function if not
-		if(!userid_exists($id))
-			return false;
-
 		// fixing and trimming
 		$twitter = preg_replace("/[^0-9A-Za-z_]/", "", $twitter );
-		$web = valid_url($web);
-		$linkedin = valid_url($linkedin);
+		$web = prep_url($web);
+		$linkedin = prep_url($linkedin);
 		$presentation = trim($presentation);
+		$gravatar = strtolower(trim($gravatar));
 
 		// validate
-		if(strlen($web) <= 300 && (preg_match("(?i)\b(?:http[s]?://)?(?(?=www.)www.)(?:[-a-z\d]+\.)+[a-z]{2,4}", $web)
-			|| strlen($web) == 0) && strlen($twitter) <= 300 &&
+		if(strlen($web) <= 300 && strlen($twitter) <= 300 && strlen($gravatar) <= 255 &&
 			strlen($linkedin) <= 300 && strlen($presentation) <= 1000)
 		{
 			//set data to be updated/inserted
 			$data = array(
-					'users_id' => $id,
-					'image_id' => $img,
-					'web' => $web,
-					'linkedin' => $linkedin,
-					'presentation' => $presentation,
-					'twitter' => $twitter
+						'gravatar' => $gravatar,
+						'web' => $web,
+						'linkedin' => $linkedin,
+						'presentation' => $presentation,
+						'twitter' => $twitter
 					);
 
 			// search for user data
@@ -259,15 +263,135 @@ class User_model extends CI_Model
 
 			// update or insert?
 			if($find->num_rows == 1) // update
+			{
+				$this->db->where('users_id', $id);
 				$q = $this->db->update('users_data', $data);
+			}
 			else // insert
+			{
+				$data['users_id'] = $id;
 				$q = $this->db->insert('users_data', $data);
+			}
 
 			// return result from query
 			return $q;
 		}
 		else
 			return false;
+	}
+
+	/**
+	 * Edit user
+	 *
+	 * @param  integer	$id			The user id
+	 * @param  string	$fname		First name
+	 * @param  string	$lname 		Last name
+	 * @param  string	$liuid 		LiU-id of user
+	 * @param  string	$password 	Password, uncrypted
+	 * @return bool
+	 */
+	function edit_user($id, $fname = '', $lname = '', $liuid = '', $password = '')
+	{
+		// fixing and trimming
+		$fn = trim(preg_replace("/[^A-Za-z]/", "", $fname ));
+		$ln = trim(preg_replace("/[^A-Za-z]/", "", $lname ));
+		$lid = trim(preg_replace("/[^A-Za-z0-9]/", "", $liuid ));
+		$pwd = trim($password);
+
+		// check lengths
+		if((strlen($lid) == 8 || strlen($lid) == 0) && (strlen($pwd) > 5 || strlen($pwd) == 0))
+		{
+			// if userid exists, edit user
+			if($this->userid_exists($id))
+			{
+				// set data
+				$data = array();
+				if(!empty($fn))
+					$data['first_name'] = $fn;
+				if(!empty($ln))
+					$data['last_name'] = $ln;
+				if(!empty($lid))
+					$data['lukasid'] = $lid;
+				if(!empty($pwd))
+					$data['password_hash'] = encrypt_password($pwd);
+
+				// update user
+				$this->db->where('id', $id);
+				return $this->db->update('users', $data);
+			}
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+
+	/**
+	 * Changes a users status to deactivated, if activated and the other way around
+	 *
+	 * @param  integer	$id			The user id
+	 * @return bool
+	 */
+	function disableswitch($id)
+	{
+		$this->db->select("disabled");
+		$this->db->from("users");
+		$this->db->where('id', $id);
+		$get = $this->db->get();
+		$result = $get->result();
+
+		if($result[0]->disabled == 0)
+			$data['disabled'] = 1;
+		else
+			$data['disabled'] = 0;
+
+		$q = $this->db->update('users', $data, 'id ='.$id);
+
+		return $q;
+	}
+
+	/**
+	 * Search through users
+	 *
+	 * @param  string	$search			The search string. Searches first name, last name, lukasid.
+	 * @return array
+	 */
+	function search_user($search)
+	{
+		$this->db->select("*");
+		$this->db->from("users");
+		$this->db->like('lukasid', $search);
+		$this->db->or_like('first_name', $search);
+		$this->db->or_like('last_name', $search);
+		$get = $this->db->get();
+
+		return $get->result();
+	}
+
+	/**
+	 * Remove a user from the database
+	 *
+	 * @param 	int 	$id 		The user to be removed
+	 * @param 	string 	$liuid 		LiU-id must match user id
+	 * @return 	bool
+	 */
+	function remove_user($id, $liuid)
+	{
+		$this->db->where('id', $id);
+		$this->db->where('lukasid', $liuid);
+
+		$this->db->from("users");
+		// count user results
+		if($this->db->count_all_results() == 1)
+		{
+			// delete user
+			$del1 = $this->db->delete('users', array('id' => $id, 'lukasid' => $liuid));
+			// delete user data
+			$del2 = $this->db->delete('users_data', array('users_id' => $id));
+
+			return ($del1 && $del2);
+		}
+		return false;
 	}
 }
 

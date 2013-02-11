@@ -6,6 +6,33 @@
 /*
 	import specific styles for easier handeling
 */
+/*
+
+anchor styles
+
+*/
+a.button {
+  background: #E8E8E9;
+  border: 1px solid #aeaeaf;
+  border-radius: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 70%;
+  padding: 5px;
+  font-weight: normal;
+  -moz-box-shadow: 0 1px 3px #aaaaaa;
+  -webkit-box-shadow: 0 1px 3px #aaaaaa;
+  box-shadow: 0 1px 3px #aaaaaa; }
+  a.button:hover {
+    color: #9f4b0a;
+    border-color: #838383; }
+  a.button:active {
+    color: #333;
+    border-color: #838383;
+    -moz-box-shadow: 0 1px 1px #aaaaaa;
+    -webkit-box-shadow: 0 1px 1px #aaaaaa;
+    box-shadow: 0 1px 1px #aaaaaa; }
+
 html, body {
   background-color: #e8e8e9;
   text-align: center;
@@ -245,7 +272,7 @@ span.smallnotice {
 .main-box table {
   width: 726px;
   /* ursäkta hårdkodningen */
-  margin: 0 12px; }
+  margin: 0 12px 12px; }
 
 td, th {
   padding: 5px; }
@@ -353,7 +380,6 @@ ul.topics li:nth-child(odd) a:hover {
 
 label {
   display: inline-block;
-  width: 100px;
   color: #555;
   font-size: 1em;
   margin: 5px 0 3px 0; }

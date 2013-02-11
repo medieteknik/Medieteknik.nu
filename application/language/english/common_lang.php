@@ -45,6 +45,8 @@ $lang['user_lukasid'] = "LukasID";
 $lang['user_userid'] = "User ID";
 $lang['user_disabled'] = "disabled";
 $lang['user_disabled_exp'] = "This user is currently disabled.";
+$lang['user_login_fail'] = "Could not log in. Pleas check you login credentials and try again.";
+$lang['user_gravatar'] = 'Medieteknik.nu uses Gravatar to provide profile pictures. Go get a Gravatar account at <a href="http://gravatar.com" target="_blank">gravatar.com</a>.';
 
 
 //groups
@@ -60,6 +62,12 @@ $lang['admin_listusers'] = "List users";
 $lang['admin_editusers'] = "Admin users";
 $lang['admin_edituser'] = "Edit user";
 	$lang['admin_edituser_drama'] = "Drama area";
+	$lang['admin_edituser_deactivate'] = "Deactivate user";
+	$lang['admin_edituser_activate'] = "Activate user";
+	$lang['admin_edituser_delete'] = "Delete user";
+	$lang['admin_edituser_delete_error'] = "Could not delete the user. Please make sure everything is filled in correctly.";
+	$lang['admin_edituser_confdelete'] = "I understand that deleting the user is something that cannot be undone.";
+$lang['admin_searchusers'] = "Search users";
 $lang['admin_addusers'] = "Add users";
 $lang['admin_addusers_success'] = "User added!";
 $lang['admin_addusers_error'] = "User could not be added! Sure you did not forget anything?";
@@ -101,6 +109,9 @@ $lang['misc_position'] = "Position";
 $lang['misc_width'] = "Width";
 $lang['misc_height'] = "Height";
 $lang['misc_save'] = "Save";
+$lang['misc_search'] = "Search";
+$lang['misc_searchresult'] = "Search results";
+$lang['misc_searchhits'] = "hits";
 $lang['misc_postdate'] = "Post date";
 $lang['misc_lasteditdate'] = "Last edited";
 $lang['misc_file'] = "File";
@@ -110,6 +121,8 @@ $lang['misc_back'] = "Back";
 $lang['misc_page'] = "Page";
 $lang['misc_of'] = "of";
 $lang['misc_last_update'] = "Last update";
+$lang['misc_done'] = "Done!";
+$lang['misc_gotopage'] = "Go to page";
 
 // error
 $lang['error_error'] = "Error!";

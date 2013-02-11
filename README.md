@@ -2,7 +2,8 @@
 
 1. License
 2. File-Tree
-3. Contact information
+3. Technical notes
+4. Contact information
 
 ## 1. License
 ===========================================
@@ -45,10 +46,16 @@ THE SOFTWARE.
 /web/js						All our javascript files
 /web/js/libs				All library javascript files as backup if google is down(?)
 
-## 3. Contact Information
+
+## 3. Technical notes
+===========================================
+The system uses SASS, read more and get started at http://sass-lang.com. With ruby, simply
+run <code>gem install sass</code>.
+
+## 4. Contact Information
 ===========================================
 Questions about the system:
 	webbchef@medieteknik.nu
-	
+
 Questions about content on medieteknik.nu
 	styrelsen@medieteknik.nu

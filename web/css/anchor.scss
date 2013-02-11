@@ -1,0 +1,29 @@
+/*
+
+anchor styles
+
+*/
+a.button {
+	background: #E8E8E9;
+	border: 1px solid #AEAEAF;
+	border-radius: 3px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 70%;
+	padding:5px;
+	font-weight: normal;
+	-moz-box-shadow: 0 1px 3px #aaa;
+	-webkit-box-shadow: 0 1px 3px #aaa;
+	box-shadow: 0 1px 3px #aaa;
+	&:hover {
+		color:#9f4b0a;
+		border-color:#838383;
+	}
+	&:active {
+		color:#333;
+		border-color:#838383;
+		-moz-box-shadow: 0 1px 1px #aaa;
+		-webkit-box-shadow: 0 1px 1px #aaa;
+		box-shadow: 0 1px 1px #aaa;
+	}
+}

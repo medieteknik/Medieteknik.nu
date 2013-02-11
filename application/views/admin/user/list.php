@@ -22,8 +22,18 @@ foreach ($user_list as $user)
 
 echo '
 <div class="main-box clearfix profile">
-	<h2>'.$lang['user_overview'].'</h2>';
-	echo $this->table->generate();
-	echo '<p>'.$lang['misc_page'].' '.($currentview['page'] + 1).' '.$lang['misc_of'].' '.$totalpages.'</p>';
+	<h2>'.$lang['user_overview'].'</h2>',
+	(isset($_GET['confdel']) ? '<p class="notice">'.$lang['misc_done'].'</p>' : ''),
+	$this->table->generate(),
+	'<p>'.$lang['misc_page'].' '.($currentview['page'] + 1).' '.$lang['misc_of'].' '.$totalpages.'.';
+
+	// pagination
+	if($totalpages > 1)
+	{
+		echo $lang['misc_gotopage'].' ';
+		for($page = 0; $page < $totalpages; $page++)
+			echo anchor('admin_user/user_list/'.$currentview['option'].'/'.$page, $page+1).' ';
+	}
+	echo '</p>';
 echo'</div><!-- close .main-box -->';
 ?>

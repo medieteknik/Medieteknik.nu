@@ -311,13 +311,14 @@ function do_dump(&$var, $var_name = NULL, $indent = NULL, $reference = NULL)
 }
 
 /**
- * Return valid URL
- * @param 	string 	$url 	the url to be corrected
- * @return 	string
+ * Check url
+ * @param 	string 	$url 	the url to be checked
+ * @return 	bool
  */
 function valid_url($url = '')
 {
-	return preg_replace("(?i)\b(?:http[s]?://)?(?(?=www.)www.)(?:[-a-z\d]+\.)+[a-z]{2,4}", "", $url);
+	$regex = "!/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))/";
+	return preg_match($regex, $url);
 }
 
 /**
@@ -356,5 +357,22 @@ function profilelinks($option, $user)
 	$return .= '</span></a>';
 
 	//return the stuff!
+	return $return;
+}
+
+/**
+ * Return gravatar img
+ * @param 	user 	$user 	the user
+ * @param 	int 	$size 	size of image [1, 2048]
+ * @param 	string 	$extra 	any desired extra html
+ * @param 	string 	$fallback 	gravatar fallback url
+ * @param 	bool 	$img 	if you want a img-tag
+ * @return 	string 	the desired link, styled and everything
+ */
+function gravatarimg($user, $size = 80, $extra = '', $fallback = 'mm', $img = true)
+{
+	$return = 'http://www.gravatar.com/avatar/'.md5($user->gravatar).'?s='.$size.'&d='.$fallback;
+	if($img)
+		return '<img src="'.$return.'" '.$extra.'/>';
 	return $return;
 }
