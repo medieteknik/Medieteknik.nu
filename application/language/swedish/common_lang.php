@@ -71,6 +71,10 @@ $lang['admin_denied_title'] = "Nekad åtkomst";
 $lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
 $lang['admin_news_needsapproval'] = "nyheter behöver godkännas";
 $lang['user_overview'] = "Användarövesikt";
+$lang['admin_adminpage'] = "Administrera sidor";
+$lang['admin_editpage'] = "Redigera sidor";
+$lang['admin_addpage'] = "Skapa sida";
+$lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här";
 
 // date
 $lang['date_yesterday'] = "Igår";
@@ -104,6 +108,7 @@ $lang['misc_upcomingevents'] = "Kommande Event";
 $lang['misc_back'] = "Bakåt";
 $lang['misc_page'] = "Sida";
 $lang['misc_of'] = "av";
+$lang['misc_last_update'] = "Uppdaterades senast";
 
 // error
 $lang['error_error'] = "Fel!";

@@ -505,3 +505,61 @@ function get_news_images_fields()
 		);
 	return $fields;
 }
+
+function get_page_fields()
+{
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'link_sort' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'published' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'name' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+	);
+	return $fields;
+}
+
+function get_page_content_fields()
+{
+	$fields = array(
+		'page_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'lang_id' => array(
+			'type' => 'INT',
+			'constraint' => 5, 
+			'unsigned' => TRUE,
+		),
+		'last_edit' => array(
+			'type' => 'DATETIME',
+		),
+		'link_name' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'header' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'content' => array(
+			'type' => 'TEXT',
+		),
+	);
+	return $fields;
+}

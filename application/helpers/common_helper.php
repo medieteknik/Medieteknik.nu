@@ -92,6 +92,16 @@ function uncompact_name($name)
 	return preg_replace("/o/i", "(o|ö){1}", $string);
 }
 
+function _local_linker($matches)
+{
+	$c = count($matches);
+	//var_dump($matches);
+	if($c > 2)
+		return anchor($matches[1],$matches[2]);
+		//return "matches[1]=" .$matches[1]. " matches[2]=".$matches[2];
+	return "nomatch";
+}
+
 function _img_format($matches)
 {
 	$c = count($matches);
@@ -144,7 +154,7 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 		// URL
 		$in		=array('`((?:https?|ftp)://\S+[[:alnum:]]/?)`si','`((?<!//)(www\.\S+[[:alnum:]]/?))`si');
 		$out	=array('<a href="$1"  rel=nofollow>$1</a> ','<a href="http://$1" rel=\'nofollow\'>$1</a>');
-		$text = preg_replace($in,$out,$text);
+		$text = preg_replace_callback("/\(([a-zA-Z\/]+)\|([a-zA-Z\s]+)\)/",'_local_linker',$text);
 
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+)\]/','_img_format', $text);
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+)]/','_img_format', $text);

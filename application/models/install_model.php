@@ -33,11 +33,14 @@ class Install_model extends CI_Model
 		$this->create_users_privileges_table();
 		$this->create_images_table();
 		$this->create_news_images_table();
+		$this->create_page_table();
+		$this->create_page_content_table();
 		
 		// check all views exist
 		$this->create_forum_categories_descriptions_language_view();
 		$this->create_news_translation_language_view();
 		$this->create_groups_descriptions_language_view();
+		$this->create_page_content_language_view();
 		
 		// Log a debug message
 		log_message('debug', "Install_model Class Initialized");
@@ -63,6 +66,8 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('users_privileges');
 		$this->dbforge->drop_table('images');
 		$this->dbforge->drop_table('news_images');
+		$this->dbforge->drop_table('page');
+		$this->dbforge->drop_table('page_content');
 	}
  	
 	function create_sql_functions() 
@@ -751,6 +756,52 @@ class Install_model extends CI_Model
 		}
 	}
 	
+	function create_page_table()
+	{
+		if(!$this->db->table_exists('page') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_page_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('page');
+			
+			log_message('info', "Created table: page");
+			
+		}
+	}
+	function create_page_content_table()
+	{
+		if(!$this->db->table_exists('page_content') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_page_content_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('page_id',true);
+			$this->dbforge->add_key('lang_id',true);
+			$this->dbforge->create_table('page_content');
+			
+			log_message('info', "Created table: page_content");
+			
+			$this->load->model("Page_model");
+			$translations = array(
+									array("lang" => "se", "header" => "Utbildningen", "content" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
+									array("lang" => "en", "header" => "Education", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
+								);
+			$this->Page_model->add_page("education", $translations, 1);
+			
+			$translations = array(
+									array("lang" => "en", "header" => "Assosciation", "content" => "Lorizzle (about/assosciation/board|Styret) bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
+								);
+			$this->Page_model->add_page("assosciation", $translations, 1);
+			$translations = array(
+									array("lang" => "en", "header" => "Board", "content" => "Lorizzle  bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
+								);
+			$this->Page_model->add_page("assosciation/board", $translations, 1);
+
+		}
+	}
+	
 	
 	
 	function create_forum_categories_descriptions_language_view() 
@@ -784,6 +835,18 @@ class Install_model extends CI_Model
 			$q = "CREATE OR REPLACE VIEW groups_descriptions_language AS (SELECT e.group_id,e.lang_id,COALESCE(o.description,e.description) as description "; 
 			$q .= " FROM groups_descriptions               e";
 			$q .= " LEFT OUTER JOIN groups_descriptions o ON e.group_id=o.group_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
+			$q .= " WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))";
+			$this->db->query($q);
+		}
+	}
+	
+	function create_page_content_language_view() 
+	{
+		if(!$this->db->table_exists('page_content_language')) 
+		{
+			$q = "CREATE OR REPLACE VIEW page_content_language AS (SELECT e.page_id,e.lang_id,COALESCE(o.header,e.header) as header, COALESCE(o.content,e.content) as content, COALESCE(o.last_edit,e.last_edit) as last_edit  "; 
+			$q .= " FROM page_content               e";
+			$q .= " LEFT OUTER JOIN page_content o ON e.page_id=o.page_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
 			$q .= " WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))";
 			$this->db->query($q);
 		}

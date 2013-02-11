@@ -72,6 +72,10 @@ $lang['admin_denied_title'] = "Access denied";
 $lang['admin_denied_message'] = "You need to be logged in and have permission to view the requested site.";
 $lang['admin_news_needsapproval'] = "news items need approval";
 $lang['user_overview'] = "User overview";
+$lang['admin_adminpage'] = "Admin pages";
+$lang['admin_editpage'] = "Edit page";
+$lang['admin_addpage'] = "Add page";
+$lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -105,6 +109,7 @@ $lang['misc_upcomingevents'] = "Upcoming Events";
 $lang['misc_back'] = "Back";
 $lang['misc_page'] = "Page";
 $lang['misc_of'] = "of";
+$lang['misc_last_update'] = "Last update";
 
 // error
 $lang['error_error'] = "Error!";

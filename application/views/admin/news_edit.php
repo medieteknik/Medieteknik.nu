@@ -101,6 +101,7 @@ if(isset($news) && $news != false) {
 	$arr = $languages;
 }
 
+//do_dump($arr);
 foreach($arr as $t) {
 	
 	$t_title = '';
