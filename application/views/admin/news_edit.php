@@ -39,13 +39,14 @@ $news_height = 100;
 
 // hack so that the same view can be used for both create and edit
 $image_div = "";
-$action = 'admin_news/add_news';
+$action = 'admin_news/edit_news/0';
 if(isset($news) && $news != false) {
 	$post_date['value'] = $news->date;
 	$draft['checked'] = ($news->draft == 1);
 	$approved['checked'] = ($news->approved == 1);
 	$news_approved = $news->approved;
 	$news_size = $news->size;
+	$news_position = $news->position;
 	$news_height = ($news->height == '') ? $news_height : $news->height;
 	$action = 'admin_news/edit_news/'.$id;
 	

@@ -22,7 +22,7 @@ class Images_model extends CI_Model
 		return $config;
 	}
 
-	function add_image(&$upload_data, $userid, $title = '', $description = '') 
+	function add_uploaded_image(&$upload_data, $userid, $title = '', $description = '') 
 	{
 		//do_dump($upload_data);
 		$temp_path = 'user_content/images/original/';
@@ -71,6 +71,34 @@ class Images_model extends CI_Model
 		$this->db->insert('images', $data);
 		$images_id = $this->db->insert_id();
 		return $images_id;
+	}
+
+	function add_or_replace_news_image($news_id, $images_id, $size, $position, $height)
+	{
+		$query = $this->db->get_where('news_images', array('news_id' => $news_id), 1, 0);
+		if ($query->num_rows() == 0) 
+		{
+			$data = array(
+				'news_id' => $news_id,
+				'images_id' => $images_id,
+				'size' => $size,
+				'position' => $position,
+				'height' => $height,
+				);
+			$this->db->insert('news_images', $data);
+		} else {
+			$data = array(
+				'size' => $size,
+				'position' => $position,
+				'height' => $height,
+				);
+			if ($images_id != 0) {
+				$data['images_id'] = $images_id;
+			}
+
+			$this->db->where('news_id', $news_id);
+			$this->db->update('news_images', $data); 
+		}
 	}
 	
 
