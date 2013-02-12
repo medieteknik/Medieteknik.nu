@@ -35,6 +35,9 @@ class User extends MY_Controller
 		// load user model
 		$this->load->model('User_model');
 
+		if(!$this->login->is_logged_in())
+			show_404();
+
 		if($do == 'runedit')
 		{
 			$main_data['run'] = true;
