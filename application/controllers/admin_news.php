@@ -144,12 +144,8 @@ class Admin_news extends MY_Controller
 			}
 			
 			$this->db->trans_complete();
-			
-			
-			redirect('admin_news', 'refresh');
-		} else {
-
-		}
+		} 
+		redirect('admin_news', 'refresh');
 	}
 	
 	function edit($id) 

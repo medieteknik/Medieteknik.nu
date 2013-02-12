@@ -762,6 +762,7 @@ class Install_model extends CI_Model
 				}
 				closedir($handle);
 			}
+			
 
 		}
 	}

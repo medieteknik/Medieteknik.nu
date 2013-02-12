@@ -1,6 +1,7 @@
 <?php 
 foreach($news_array as $news_item) 
 {
+	//do_dump($news_item);
 	$img_div = "";
 	$news_class = "";
 	$style = "";
