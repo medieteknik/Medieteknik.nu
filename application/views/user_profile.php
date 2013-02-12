@@ -19,7 +19,7 @@ gravatarimg($user, 81, ' style="margin:10px 10px 0; float: left;"'),
 			',profilelinks('twitter', $user),'
 		</div>
 		<div class="clearfix"></div>
-		<p>',$user->presentation,'</p>
+		<p>',text_format($user->presentation),'</p>
 	</div>
 </div><!-- close .main-box -->';
 ?>

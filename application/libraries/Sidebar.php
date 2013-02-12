@@ -22,7 +22,18 @@ class Sidebar
 	public function get_about() {
 		$upcomingevents['title'] = $this->lang_data['menu_about'] ;
 		$upcomingevents['items'] = array(	array('title' => "Om utbildningen", 'href' => 'about/education'),
-											array('title' => "Om sektionen", 'href' => 'about/assosciation'));
+											);
+		
+		return $this->CI->load->view('includes/list', $upcomingevents, true);	
+	}
+	
+	public function get_association() {
+		$upcomingevents['title'] = $this->lang_data['menu_about'] ;
+		$upcomingevents['items'] = array(	array('title' => "Om sektionen", 'href' => 'association'),
+											array('title' => "Webbgruppen", 'href' => 'association/web'),
+											array('title' => "Wiki", 'href' => 'http://wiki.medieteknik.nu/'),
+											array('title' => "LiU Alumn-inloggning", 'href' => 'https://alumni.liu.se/public/start/start.asp'),
+											);
 		
 		return $this->CI->load->view('includes/list', $upcomingevents, true);	
 	}

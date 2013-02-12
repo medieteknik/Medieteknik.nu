@@ -43,6 +43,7 @@ $route['404_override'] = '';
 
 // language url
 $route['(\w{2})/about/(.*)'] = 'about/page/$2';
+$route['(\w{2})/association/(.*)'] = 'association/page/$2';
 $route['(\w{2})/(.*)'] = '$2';
 $route['(\w{2})'] = $route['default_controller'];
 

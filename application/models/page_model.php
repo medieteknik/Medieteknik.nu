@@ -23,6 +23,19 @@ class Page_model extends CI_Model
 		$this->db->join("page_content_language", 'page.id = page_content_language.page_id', '');
 		$this->db->where("name",$name);
 		$query = $this->db->get();
+		
+		
+		if ($query->num_rows() == 0) 
+		{
+			$this->db->select("*");
+			$this->db->from("page");
+			$this->db->join("page_content_language", 'page.id = page_content_language.page_id', '');
+			$this->db->where("name","404");
+			$query = $this->db->get();
+		}
+		
+		
+		
         return $query->result();
     }
 	

@@ -22,8 +22,9 @@ class Install_model extends CI_Model
 		$this->create_news_translation_table();
 		$this->create_news_sticky_table();
 		$this->create_groups_table();
-		$this->create_users_groups_table();
 		$this->create_groups_descriptions_table();
+		$this->create_groups_year_table();
+		$this->create_users_groups_year_table();
 		$this->create_forum_categories_table();
 		$this->create_forum_categories_descriptions_table();
 		$this->create_forum_topic_table();
@@ -56,7 +57,8 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('news_sticky');
 		$this->dbforge->drop_table('groups');
 		$this->dbforge->drop_table('groups_descriptions');
-		$this->dbforge->drop_table('users_groups');
+		$this->dbforge->drop_table('groups_year');
+		$this->dbforge->drop_table('users_groups_year');
 		$this->dbforge->drop_table('forum_categories');
 		$this->dbforge->drop_table('forum_categories_descriptions');
 		$this->dbforge->drop_table('forum_topic');
@@ -131,6 +133,8 @@ class Install_model extends CI_Model
 
 			// inserting data
 			$data = array('users_id' => 1, 'web' => "http://www.jonasstrandstedt.se", 'presentation' => "Jag heter jonas");
+			$this->db->insert('users_data', $data);
+			$data = array('users_id' => 5, 'gravatar' => 'jonasemanuelzeitler@gmail.com');
 			$this->db->insert('users_data', $data);
 			$data = array('users_id' => 6, 'web' => "http://www.klaseskilson.se", 'presentation' => "Jag heter Klas och pillar med den här sidan lite.", 'twitter' => 'Eskilicious', 'gravatar' => 'klas.eskilson@gmail.com');
 			$this->db->insert('users_data', $data);
@@ -237,22 +241,6 @@ class Install_model extends CI_Model
 
 			log_message('info', "Created table: groups");
 
-			$data = array(
-			   'group_name' => "Styrelsen",
-			);
-			$this->db->insert('groups', $data);
-
-			$data = array(
-			   'sub_to_id' => 1,
-			   'group_name' => "Styrelsen 2011/2012",
-			);
-			$this->db->insert('groups', $data);
-
-			$data = array(
-			   'sub_to_id' => 0,
-			   'group_name' => "gamla styrelsen såatteh",
-			);
-			$this->db->insert('groups', $data);
 		}
 	}
 
@@ -265,48 +253,68 @@ class Install_model extends CI_Model
 			// the table configurations from /application/helpers/create_tables_helper.php
 			$this->dbforge->add_field(get_groups_descriptions_fields()); 	// get_user_table_fields() returns an array with the fields
 			$this->dbforge->add_key('lang_id',true);						// set the primary keys
-			$this->dbforge->add_key('group_id',true);
+			$this->dbforge->add_key('groups_id',true);
 			$this->dbforge->create_table('groups_descriptions');
 
 			log_message('info', "Created table: groups_descriptions");
+		}
+	}
+	
+	function create_groups_year_table()
+	{
+		// if the users table does not exist, create it
+		if(!$this->db->table_exists('groups_year') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_groups_year_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);						// set the primary keys
+			$this->dbforge->create_table('groups_year');
 
-			$data = array(
-			   'group_id' => 1,
-			   'lang_id' => 1,
-			   'description' => "Medietekniksektionens styrelse är studenter invalda för att sköta sektionen under ett år."
-			);
-			$this->db->insert('groups_descriptions', $data);
+			log_message('info', "Created table: groups_year");
 
-			$data = array(
-			   'group_id' => 1,
-			   'lang_id' => 2,
-			   'description' => "The Media Technology association board is elected students bla bla bla."
-			);
-			$this->db->insert('groups_descriptions', $data);
 		}
 	}
 
-	function create_users_groups_table()
+	function create_users_groups_year_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('users_groups') || isset($_GET['drop']))
+		if(!$this->db->table_exists('users_groups_year') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
 			$this->dbforge->add_field(get_users_groups_fields()); 	// get_user_table_fields() returns an array with the fields
 			$this->dbforge->add_key('user_id',true);						// set the primary keys
-			$this->dbforge->add_key('group_id',true);
-			$this->dbforge->create_table('users_groups');
+			$this->dbforge->add_key('groups_year_id',true);						// set the primary keys
+			$this->dbforge->create_table('users_groups_year');
 
-			log_message('info', "Created table: users_groups");
-
-			$data = array(
-			   'user_id' => 1,
-			   'group_id' => 1,
-			   'position' => "Studienämndsordförande",
-			   'email' => "snordf@medieteknik.nu",
+			log_message('info', "Created table: users_groups_year");
+			
+			
+			$this->load->model("Group_model");
+			$translations = array(
+									array("lang" => "se", "name" => "Styrelsen", "description" => "Styrelsen is teh shit."),
+									array("lang" => "en", "name" => "The Board", "description" => "The Board is hard."),
+								);
+			$id = $this->Group_model->add_group($translations);
+			$user_list = array(
+								array("user_id" => 1, "position" => "Studienämndsordförande"),
+								array("user_id" => 5, "position" => "Ordförande"),
 			);
-			$this->db->insert('users_groups', $data);
+			$this->Group_model->add_group_year($id, 2011, 2012, $user_list);
+			
+			$translations = array(
+									array("lang" => "se", "name" => "Webbgruppen", "description" => "Om några är grymma så är det webbgruppen"),
+									array("lang" => "en", "name" => "Web development group", "description" => "If someone os cruel, then its the spider-web group."),
+								);
+			$id =$this->Group_model->add_group($translations);
+			
+			$user_list = array(
+								array("user_id" => 1, "position" => "Coder", "email" => "jonst184@student.liu.se"),
+								array("user_id" => 5, "position" => "Ajax master"),
+								array("user_id" => 6, "position" => "HTML/CSS Guru"),
+			);
+			$this->Group_model->add_group_year($id, 2012, 2013, $user_list);
 		}
 	}
 
@@ -802,20 +810,27 @@ class Install_model extends CI_Model
 			log_message('info', "Created table: page_content");
 			
 			$this->load->model("Page_model");
+			
+			$translations = array(
+									array("lang" => "se", "header" => "Sidan finns inte", "content" => "Sidan du försökte nå finns inte. Var god rapportera till webbansvarige."),
+									array("lang" => "en", "header" => "The page does not exist", "content" => "The page you tried to reach does not exist. Please report to the webmaster."),
+								);
+			$this->Page_model->add_page("404", $translations, 1);
+			
 			$translations = array(
 									array("lang" => "se", "header" => "Utbildningen", "content" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
 									array("lang" => "en", "header" => "Education", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
-			$this->Page_model->add_page("education", $translations, 1);
+			$this->Page_model->add_page("about/education", $translations, 1);
 			
 			$translations = array(
-									array("lang" => "en", "header" => "Assosciation", "content" => "Lorizzle (about/assosciation/board|Styret) bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
+									array("lang" => "en", "header" => "Association", "content" => "Lorizzle (association/board|Styret) bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
-			$this->Page_model->add_page("assosciation", $translations, 1);
+			$this->Page_model->add_page("association/overview", $translations, 1);
 			$translations = array(
 									array("lang" => "en", "header" => "Board", "content" => "Lorizzle  bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
-			$this->Page_model->add_page("assosciation/board", $translations, 1);
+			$this->Page_model->add_page("association/board", $translations, 1);
 
 		}
 	}
@@ -850,9 +865,9 @@ class Install_model extends CI_Model
 	{
 		if(!$this->db->table_exists('groups_descriptions_language'))
 		{
-			$q = "CREATE OR REPLACE VIEW groups_descriptions_language AS (SELECT e.group_id,e.lang_id,COALESCE(o.description,e.description) as description ";
+			$q = "CREATE OR REPLACE VIEW groups_descriptions_language AS (SELECT e.groups_id,e.lang_id,COALESCE(o.description,e.description) as description,COALESCE(o.name,e.name) as name ";
 			$q .= " FROM groups_descriptions               e";
-			$q .= " LEFT OUTER JOIN groups_descriptions o ON e.group_id=o.group_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
+			$q .= " LEFT OUTER JOIN groups_descriptions o ON e.groups_id=o.groups_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
 			$q .= " WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))";
 			$this->db->query($q);
 		}

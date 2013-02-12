@@ -10,7 +10,7 @@ class About extends MY_Controller
 	
 	public function page()
 	{
-		$string = "";
+		$string = "about/";
 		$numargs = func_num_args();
 		$arg_list = func_get_args();
 		for ($i = 0; $i < $numargs; $i++) {

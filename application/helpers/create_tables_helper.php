@@ -183,16 +183,10 @@ function get_groups_fields()
 			'unsigned' => TRUE,
 			'auto_increment' => TRUE
 		),
-		'sub_to_id' => array(
-			'type' => 'INT',
-			'constraint' => 5,
+		'official' => array(
+			'type' => 'TINYINT',
 			'unsigned' => TRUE,
-			'default' => 0,
 		),
-		'group_name' => array(
-			'type' => 'VARCHAR',
-			'constraint' => '50',
-			),
 		);
 	return $fields;
 }
@@ -200,7 +194,7 @@ function get_groups_fields()
 function get_groups_descriptions_fields()
 {
 	$fields = array(
-		'group_id' => array(
+		'groups_id' => array(
 			'type' => 'INT',
 			'constraint' => 5,
 			'unsigned' => TRUE,
@@ -209,11 +203,43 @@ function get_groups_descriptions_fields()
 			'type' => 'INT',
 			'constraint' => 5,
 			'unsigned' => TRUE,
-			),
+		),
+		'name' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
 		'description' => array(
 			'type' => 'VARCHAR',
-			'constraint' => '300',
-			),
+			'constraint' => '600',
+		),
+		);
+	return $fields;
+}
+
+function get_groups_year_fields()
+{
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'groups_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'start_year' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'stop_year' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
 		);
 	return $fields;
 }
@@ -226,7 +252,7 @@ function get_users_groups_fields()
 			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
-		'group_id' => array(
+		'groups_year_id' => array(
 			'type' => 'INT',
 			'constraint' => 5,
 			'unsigned' => TRUE,
@@ -237,7 +263,7 @@ function get_users_groups_fields()
 		),
 		'email' => array(
 			'type' => 'VARCHAR',
-			'constraint' => '320',
+			'constraint' => '320'
 		),
 		);
 	return $fields;
