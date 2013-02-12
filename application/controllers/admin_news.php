@@ -78,14 +78,13 @@ class Admin_news extends MY_Controller
 				$success = true;
 			}
 		}
-		
+		$success = true;
 		if($success) 
 		{
 			$this->load->model("Images_model");
 	
-			$config = $this->Images_model->news_get_config();
+			$config = $this->Images_model->get_config();
 			$this->load->library('upload', $config);
-			
 			
 			// get the time
 			$theTime = date("Y-m-d H:i",time());
@@ -122,16 +121,7 @@ class Admin_news extends MY_Controller
 			
 			if ($this->upload->do_upload('img_file')) 
 			{
-				$data = array('upload_data' => $this->upload->data());
-				
-				$data = array(
-					'user_id' => 1,
-					'image_original_filename' => $data['upload_data']['file_name'],
-					'width' => $data['upload_data']['image_width'],
-					'height' => $data['upload_data']['image_height'],
-					);
-				$this->db->insert('images', $data);
-				$images_id = $this->db->insert_id();
+				$images_id = $this->Images_model->add_image($this->upload->data(), $this->login->get_id(), 'News', 'News');
 				
 				$data = array(
 					'news_id' => $news_id,
@@ -141,6 +131,8 @@ class Admin_news extends MY_Controller
 					'height' => $imgheight,
 					);
 				$this->db->insert('news_images', $data);
+			} else {
+				//echo $this->upload->display_errors('<p>', '</p>');
 			}
 			
 			$this->db->trans_complete();
@@ -167,7 +159,7 @@ class Admin_news extends MY_Controller
 	function edit_news($id) 
 	{
 		$this->load->model("Images_model");
-		$config = $this->Images_model->news_get_config();
+		$config = $this->Images_model->get_config();
 		$this->load->library('upload', $config);
 		
 		$this->db->trans_start();
@@ -233,16 +225,7 @@ class Admin_news extends MY_Controller
 			
 			$this->db->delete('news_images', array('news_id' => $id)); 
 			
-			$data = array('upload_data' => $this->upload->data());
-				
-			$data = array(
-				'user_id' => 1,
-				'image_original_filename' => $data['upload_data']['file_name'],
-				'image_title' => 'news_image',
-				'image_description' => 'news_image',
-				);
-			$this->db->insert('images', $data);
-			$images_id = $this->db->insert_id();
+			$images_id = $this->Images_model->add_image($this->upload->data(), $this->login->get_id(), 'News', 'News');
 			
 			$data = array(
 				'news_id' => $id,
