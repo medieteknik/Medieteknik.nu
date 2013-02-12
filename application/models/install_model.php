@@ -839,7 +839,7 @@ class Install_model extends CI_Model
 	
 	function create_forum_categories_descriptions_language_view() 
 	{
-		if(!$this->db->table_exists('forum_categories_descriptions_language'))
+		if(!$this->db->table_exists('forum_categories_descriptions_language') || isset($_GET['drop']))
 		{
 			$q = "CREATE OR REPLACE VIEW forum_categories_descriptions_language AS (SELECT e.cat_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.description,e.description) as description ";
 			$q .= " FROM forum_categories_descriptions               e";
@@ -851,7 +851,7 @@ class Install_model extends CI_Model
 
 	function create_news_translation_language_view()
 	{
-		if(!$this->db->table_exists('news_translation_language'))
+		if(!$this->db->table_exists('news_translation_language') || isset($_GET['drop']))
 		{
 			$q = "CREATE OR REPLACE VIEW news_translation_language AS (SELECT e.news_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.text,e.text) as text, e.last_edit ";
 			$q .= " FROM news_translation               e";
@@ -863,7 +863,7 @@ class Install_model extends CI_Model
 
 	function create_groups_descriptions_language_view()
 	{
-		if(!$this->db->table_exists('groups_descriptions_language'))
+		if(!$this->db->table_exists('groups_descriptions_language') || isset($_GET['drop']))
 		{
 			$q = "CREATE OR REPLACE VIEW groups_descriptions_language AS (SELECT e.groups_id,e.lang_id,COALESCE(o.description,e.description) as description,COALESCE(o.name,e.name) as name ";
 			$q .= " FROM groups_descriptions               e";
@@ -875,7 +875,7 @@ class Install_model extends CI_Model
 	
 	function create_page_content_language_view() 
 	{
-		if(!$this->db->table_exists('page_content_language')) 
+		if(!$this->db->table_exists('page_content_language') || isset($_GET['drop'])) 
 		{
 			$q = "CREATE OR REPLACE VIEW page_content_language AS (SELECT e.page_id,e.lang_id,COALESCE(o.header,e.header) as header, COALESCE(o.content,e.content) as content, COALESCE(o.last_edit,e.last_edit) as last_edit  "; 
 			$q .= " FROM page_content               e";
