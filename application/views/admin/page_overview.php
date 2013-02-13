@@ -4,8 +4,7 @@ echo '
 	<h2>',$lang['admin_addpage'],'</h2>
 	<p>',anchor('admin_page/create', $lang['admin_createnewpagebyclicking']),'</p>
 </div>
-<h2>',$lang['menu_archive'],'</h2>		
-';
+<h2>',$lang['menu_archive'],'</h2>';
 
 
 

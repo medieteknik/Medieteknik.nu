@@ -34,7 +34,8 @@ class Images_model extends CI_Model
 		$height = $upload_data['image_height'];
 
 		$image = NULL;
-		if(strcasecmp($ext, '.png') == 0) {
+		if(strcasecmp($ext, '.png') == 0) 
+		{
 			$image = imagecreatefrompng($orig_filepath);
 		} else {
 			$image = imagecreatefromjpeg($orig_filepath);
@@ -52,7 +53,8 @@ class Images_model extends CI_Model
 			$docrop = true;
 		}
 
-		if ($docrop) {
+		if ($docrop) 
+		{
 			$this->image_crop($image, $width, $height);
 		}
 
@@ -67,9 +69,12 @@ class Images_model extends CI_Model
 			'image_original_filename' => $new_filename,
 			'width' => $width,
 			'height' => $height,
+			'image_title' => $title,
+			'image_description' => $description,
 			);
 		$this->db->insert('images', $data);
 		$images_id = $this->db->insert_id();
+		
 		return $images_id;
 	}
 

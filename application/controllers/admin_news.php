@@ -17,6 +17,7 @@ class Admin_news extends MY_Controller
 		
 		// access granted, loading modules
 		$this->load->model('News_model');
+		$this->load->model("Images_model");
 		$this->load->helper('form');
 		
 		$this->languages = array	(
@@ -55,6 +56,7 @@ class Admin_news extends MY_Controller
 		$main_data['lang'] = $this->lang_data;
 		$main_data['is_editor'] = true;
 		$main_data['languages'] = $this->languages;
+		$main_data['images_array'] = $this->Images_model->get_all_images();
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -70,6 +72,7 @@ class Admin_news extends MY_Controller
 		$main_data['lang'] = $this->lang_data;
 		$main_data['is_editor'] = true;
 		$main_data['id'] = $id;
+		$main_data['images_array'] = $this->Images_model->get_all_images();
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -81,7 +84,6 @@ class Admin_news extends MY_Controller
 	
 	function edit_news($id) 
 	{
-		$this->load->model("Images_model");
 		$config = $this->Images_model->get_config();
 		$this->load->library('upload', $config);
 		
