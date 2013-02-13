@@ -244,7 +244,7 @@ class Imagemanip
 					$thumb .= "&".$filter;
 			}
 		}
-		$this->filename_thumb = md5($thumb).".jpg";
+		$this->filename_thumb = substr($this->filename_original,0,-4)."_".md5($thumb).".jpg";
 	}
 	
 	

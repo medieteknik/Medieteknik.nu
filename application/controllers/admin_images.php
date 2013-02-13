@@ -13,6 +13,7 @@ class Admin_images extends MY_Controller
 			redirect('/admin/access_denied', 'refresh');
 		}
 		
+		$this->load->model('Images_model');
     }
 
 	public function index()
@@ -24,14 +25,29 @@ class Admin_images extends MY_Controller
 	{
 
 		// Data for overview view
-		$this->load->model('News_model');
-		$main_data['news_array'] = $this->News_model->admin_get_all_news_overview();
+		$main_data['image_array'] = $this->Images_model->get_all_images();
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/news_overview',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/images_overview',  $main_data, true);
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function add_image()
+	{
+		
+	}
+
+	function upload()
+	{
+
+	}
+
+	function delete($id)
+	{
+		$this->Images_model->delete_image($id);
+		redirect('admin_images', 'refresh');
 	}
 }

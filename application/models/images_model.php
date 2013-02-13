@@ -73,6 +73,22 @@ class Images_model extends CI_Model
 		return $images_id;
 	}
 
+	function delete_image($id)
+	{
+		$query = $this->db->get_where('images', array('id' => $id), 1, 0);
+		if ($query->num_rows() == 1) 
+		{
+			$res = $query->result();
+			$res = $res[0];
+			foreach (glob('user_content/images/generated_cache/'.substr($res->image_original_filename, 0, -4)."*") as $filename) {
+				unlink($filename);
+			}
+			unlink('user_content/images/original/'.$res->image_original_filename);
+		}
+		$this->db->delete('images', array('id' => $id)); 
+		$this->db->delete('news_images', array('images_id' => $id)); 
+	}
+
 	function add_or_replace_news_image($news_id, $images_id, $size, $position, $height)
 	{
 		$query = $this->db->get_where('news_images', array('news_id' => $news_id), 1, 0);
@@ -99,6 +115,20 @@ class Images_model extends CI_Model
 			$this->db->where('news_id', $news_id);
 			$this->db->update('news_images', $data); 
 		}
+	}
+
+	function get_all_images(){
+		$this->db->select('*');
+		$this->db->from('images');
+		$query = $this->db->get();
+		$result = $query->result();
+
+		foreach($result as &$res){
+			$image = new imagemanip($res->image_original_filename, 'zoom', 100, 100);
+			$res->image = $image;
+		}
+
+		return $result;
 	}
 	
 
