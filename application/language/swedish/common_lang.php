@@ -125,6 +125,8 @@ $lang['misc_of'] = "av";
 $lang['misc_last_update'] = "Uppdaterades senast";
 $lang['misc_done'] = "Klart!";
 $lang['misc_gotopage'] = "Gå till sida";
+$lang['misc_title'] = "Titel";
+$lang['misc_description'] = "Beskrivning";
 
 // error
 $lang['error_error'] = "Fel!";

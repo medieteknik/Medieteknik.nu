@@ -126,6 +126,8 @@ $lang['misc_of'] = "of";
 $lang['misc_last_update'] = "Last update";
 $lang['misc_done'] = "Done!";
 $lang['misc_gotopage'] = "Go to page";
+$lang['misc_title'] = "Title";
+$lang['misc_description'] = "Description";
 
 // error
 $lang['error_error'] = "Error!";

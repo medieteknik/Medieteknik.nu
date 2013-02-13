@@ -95,11 +95,9 @@ function uncompact_name($name)
 function _local_linker($matches)
 {
 	$c = count($matches);
-	//var_dump($matches);
 	if($c > 2)
 		return anchor($matches[1],$matches[2]);
-		//return "matches[1]=" .$matches[1]. " matches[2]=".$matches[2];
-	return "nomatch";
+	return "";
 }
 
 function _img_format($matches)
@@ -114,7 +112,9 @@ function _img_format($matches)
 		$h = $matches[3];
 	else
 		$h = 75;
-
+	
+	//$CI = & get_instance();
+	//$CI->load->model('Images_model');
 
 	$im = new imagemanip($id, 'zoom', $w, $h);
 	return $im->get_img_tag();

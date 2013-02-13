@@ -745,7 +745,7 @@ class Install_model extends CI_Model
 
 			log_message('info', "Created table: images");
 			
-			/*
+			
 			//get and insert sample images in db
 			$dir = 'user_content/images/original/';
 			if ($handle = opendir($dir)) {
@@ -763,7 +763,7 @@ class Install_model extends CI_Model
 				}
 				closedir($handle);
 			}
-			*/
+			
 		}
 	}
 
