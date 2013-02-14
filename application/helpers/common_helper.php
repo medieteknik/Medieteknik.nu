@@ -104,6 +104,7 @@ function _img_format($matches)
 {
 	$c = count($matches);
 	$id = $matches[1];
+	$align = "";
 	if($c > 2)
 		$w = $matches[2];
 	else
@@ -112,12 +113,15 @@ function _img_format($matches)
 		$h = $matches[3];
 	else
 		$h = 75;
+	if ($c > 4) {
+		$align = 'align="'.$matches[4].'"';
+	}
 	
 	//$CI = & get_instance();
 	//$CI->load->model('Images_model');
 
 	$im = new imagemanip($id, 'zoom', $w, $h);
-	return $im->get_img_tag();
+	return $im->get_img_tag($align);
 }
 
 function text_strip($input, $line_break = FALSE)
@@ -159,6 +163,7 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+)\]/','_img_format', $text);
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+)]/','_img_format', $text);
 		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+) h=(\d+)]/','_img_format', $text);
+		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+) h=(\d+) (left|right)]/','_img_format', $text);
 	} else {
 		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
 	}
