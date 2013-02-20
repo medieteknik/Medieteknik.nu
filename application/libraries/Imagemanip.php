@@ -95,18 +95,18 @@ class Imagemanip
 	}
 	
 	public function set_width($w) {
-		if($this->width_original == 0 || $w <= $this->width_original){
+		if($w > 30){
 			$this->width = $w;
 		} else {
-			$this->width = 1;
+			$this->width = 30;
 		}
 	}
 	
 	public function set_height($h) {
-		if($this->height_original == 0 || $h <= $this->height_original){
+		if($h > 30){
 			$this->height = $h;
 		} else {
-			$this->height = 1;
+			$this->height = 30;
 		}
 	}
 	
@@ -149,13 +149,13 @@ class Imagemanip
 			if(!is_writable($this->path_to_thumb_directory)) {
 				return false;
 			}
+			
 			if($this->get_filepath_orginal() == "unknown") {
 				$image = imagecreatetruecolor($this->width,$this->height);
 				$white = imagecolorallocate($image, 220, 220, 220);
 				imagefill($image, 0, 0, $white);
 				$this->image_tag($image, "Not found", 3, 100, "gray");
 			} else {
-				
 				$use_crop = $this->crop;
 				$use_width = $this->width;
 				$use_height = $this->height;
@@ -204,14 +204,15 @@ class Imagemanip
 				if($this->tag != '') {
 					$this->image_tag($image, $this->tag, 5, 20, "white", "gray");
 				}
-				
 			}
 			
 			imagejpeg($image, $this->path_to_thumb_directory.$this->filename_thumb, 90);
 			imagedestroy($image);
 			
+			
 		}
 		return true;
+
 		
 	}
 	
@@ -253,6 +254,7 @@ class Imagemanip
 	FILTERS
 	*/
 	private function image_tag(&$image, $text, $pos = 1, $size = 20, $col = "white", $bgcolor = "none") {
+		
 		$width = imagesx($image);
 		$height = imagesy($image);
 		$font_size = $size;
@@ -273,6 +275,7 @@ class Imagemanip
 				$color = imagecolorallocate($image, 255, 255, 255);
 				break;
 		}
+
 		while(true) {
 			$arr = imagettfbbox($font_size, 0, $font, $text);
 			$text_width = $arr[2] - $arr[0];

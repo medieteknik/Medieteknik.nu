@@ -25,6 +25,7 @@ class Install_model extends CI_Model
 		$this->create_groups_descriptions_table();
 		$this->create_groups_year_table();
 		$this->create_users_groups_year_table();
+		$this->create_groups_year_images_table();
 		$this->create_forum_categories_table();
 		$this->create_forum_categories_descriptions_table();
 		$this->create_forum_topic_table();
@@ -58,6 +59,7 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('groups');
 		$this->dbforge->drop_table('groups_descriptions');
 		$this->dbforge->drop_table('groups_year');
+		$this->dbforge->drop_table('groups_year_images');
 		$this->dbforge->drop_table('users_groups_year');
 		$this->dbforge->drop_table('forum_categories');
 		$this->dbforge->drop_table('forum_categories_descriptions');
@@ -197,9 +199,9 @@ class Install_model extends CI_Model
 									array("lang" => "en", "title" => "Sticky News!", "text" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->News_model->add_news(1, $translations, "2012-01-06");
-			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Bilder", "text" => "Bild1 = [img id=news_4ff898bae87bb]
-			Bild2 = [img id=news_4ff898bae87bb w=200]
-			Bild3 = [img id=news_4ff898bae87bb w=150 h=100]"), "2012-01-06");
+			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Bilder", "text" => "[img align=left id=5124141247590 w=150 h=100]Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit.
+
+[img align=right id=5124141247590 w=250 h=200]Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo http://www.google.se/ . Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."), "2012-01-06");
 			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Utkast!", "text" => "Ett utkast mtf!"), "2012-10-06", 1);
 
 
@@ -293,7 +295,7 @@ class Install_model extends CI_Model
 			
 			$this->load->model("Group_model");
 			$translations = array(
-									array("lang" => "se", "name" => "Styrelsen", "description" => "Styrelsen is teh shit."),
+									array("lang" => "se", "name" => "Styrelsen", "description" => "Styrelsen is teh shit. Läs mer om våra (association/committee|utskott)"),
 									array("lang" => "en", "name" => "The Board", "description" => "The Board is hard."),
 								);
 			$id = $this->Group_model->add_group($translations);
@@ -315,6 +317,44 @@ class Install_model extends CI_Model
 								array("user_id" => 6, "position" => "HTML/CSS Guru"),
 			);
 			$this->Group_model->add_group_year($id, 2012, 2013, $user_list);
+			$user_list = array(
+								array("user_id" => 1, "position" => "Coder", "email" => "jonst184@student.liu.se"),
+			);
+			$this->Group_model->add_group_year($id, 2011, 2012, $user_list);
+
+			$translations = array(
+									array("lang" => "se", "name" => "Mette", "description" => "Mette är en förening för alla tjejer som studerar Medieteknik på Campus Norrköping. Vårt mål är att främja gemenskapen mellan alla tjejer på MT-programmet. Under skolåret anordnar vi olika roliga aktiviteter, vissa är enbart för MT-tjejer medan andra aktiviteter är till för alla som pluggar MT, kille som tjej. Mette är även med och anordnar sittningen Ladies Night i mars där alla flickor som vill kan träffas och äta god mat och kolla på gycklande pojkar."),
+								);
+			$id = $this->Group_model->add_group($translations);
+			$user_list = array(
+								array("user_id" => 1, "position" => "Tjej? Nope."),
+			);
+			$this->Group_model->add_group_year($id, 2012, 2013, $user_list);
+
+			$translations = array(
+									array("lang" => "se", "name" => "Medieteknikdagarna", "description" => "Arbetsmarknadsdagar, se http://www.medieteknikdagarna.se/"),
+								);
+			$id = $this->Group_model->add_group($translations);
+			$user_list = array(
+								array("user_id" => 1, "position" => "Projektassistent"),
+			);
+			$this->Group_model->add_group_year($id, 2010, 2011, $user_list);
+		}
+	}
+
+	function create_groups_year_images_table()
+	{
+		// if the users table does not exist, create it
+		if(!$this->db->table_exists('groups_year_images') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_groups_year_images_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('groups_year_id',true);						// set the primary keys
+			$this->dbforge->add_key('images_id',true);						// set the primary keys
+			$this->dbforge->create_table('groups_year_images');
+
+			log_message('info', "Created table: groups_year_images");
 		}
 	}
 
@@ -838,6 +878,63 @@ class Install_model extends CI_Model
 									array("lang" => "en", "header" => "Association", "content" => "Lorizzle (association/board|Styret) bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->Page_model->add_page("association/overview", $translations, 1);
+
+			$translations = array(
+									array("lang" => "se", "header" => "Utskott", "content" => "Mycket av den verksamhet som sker inom sektionen sker inom de olika utskott eller grupper som finns i anslutning till sektionen. Dessa grupper leds av respektive styrelsemedlem för just det området. Men det finns även några andra som inte är direkt kopplade till styrelsen utan snarare till sektionen.
+
+##Styrelseutskott
+###Event-utskottet
+Event-utskottet har hand om försäljningen i MT-shopen, samt designar och ser till att det finns nya, tuffa produkter. Utskottet har tidigare bl.a.tagit fram en mössa med MT-kuberna på samt ett fint joggingset, hoodie och byxa, med ett otroligt tjusigt MT-märke på.
+
+Det är även vi som anordnar förSAFT och SAFT (SektionsAktivas FesT) på hösten resp. vårkanten. Detta är mycket trevliga tillställningar där alla sektionsaktiva innom MT får chansen att lära känna varandra.
+
+Utskottet är även med och planerar och anordnar sektionspubar på Trappan. Vi försöker även vara på hugget när det gäller saker som kan gynna rekryteringen.
+
+###Midsommarphestutskottet
+Vi som är med i Midsommarphestutskottet ansvarar för att fixa en så bra sittning som möjligt för studenterna på Medieteknik. Midsommarphesten är en relativt stor sittning med runt 120 sittande och för att den ska bli så bra som möjligt krävs en hel del jobb, något som oftast också är väldigt roligt! Bland annat fixar vi ett fint märke, gör en affisch, målar ett lakan, kollar priser, bokar lokal, köper in allt och organiserar samtidigt som vi i gruppen har trevligt tillsammans.
+
+###Näringslivsutskottet
+Näringslivsutskottet (NLU) skapar nya och tar tillvara på redan tagna kontakter med näringslivet. Det är vi som ser till att företaget vet vilka vi är och hur bra vi är på det vi kan! I år har utskottet tagit fram en ny företagsfolder som är tänkt att fungera som ett informerande komplement till traditionella ansökningshandlingar, t ex när man söker examensarbete och jobb. Företagsfoldern finns med start i april till försäljning i MT-shoppen. Utskottet har också anordnat företagskvällar och studiebesök hos företag i området.
+
+###PR- & Medieutskottet
+Utskottet jobbar främst med det interna och externa informationsflödet inom medietekniksektionen. Bland annat genom att se till att medietekniks Lithaniansida fylls med reportage och information samt skapar intressanta MT-relevanta reportage till hemsidan.
+
+###Rekryteringsutskottet
+Utskottet jobbar främst med nya och gamla idéer för att öka söktrycket till medietekniksprogrammet i Norrköping. Utskottet har bra kontakt med kommunikatörerna på skolan och ser till att ha den mest uppdaterade informationen om hemmissioneringen.
+
+Under verksamhetsåret 12/13 så jobbar utskottet med tre större uppgifter:
+
+Medieteknikbroschyren – En broschyr som representanter från utbildningen ska ha möjlighet att dela ut vid olika event eller hemmissioneringar. Broschyren ska ha relevant information om just medietekniska programmet i Norrköping.
+
+”Det här är MT” – Ett nyskapat projekt där rekryteringsutskottet har möjlighet att skapa ett rekryteringsevent för att synas på gymnasieskolor och basår. Eventets syfte är att öka söktrycket för just medietekniksutbildningen samt se till rätt bild av medieteknik syns utåt. 
+
+Medietekniks rekryteringsfilm – Ett nyskapat projekt där filmintresserade studenter på medieteknik skapar en film avsedd för rekrytering inom medietekniksektionen. Filmen ska också kunna användas på mässor och event för att göra reklam för just medieteknik i Norrköping.
+
+
+###Webbutskottet
+Utskottet ansvarar för utvecklingen av medieteknik.nu sidan, i form av funktionalitet och grafisk utformning. Samt underhåll under verksamhetsåret och dess innehåll.
+
+##Övriga grupper
+###Arbetsmiljöombudet
+Arbetsmiljöombudets uppgift består av två delar; den fysiska och den psykiska arbetsmiljön. För den fysiska delen möts alla arbetsmiljöombud från sektionerna i Norrköping en gång i månaden och uppdateras om vad som händer på fronten. Här tas även nya förslag upp som sedan skickas vidare till beslutsorganen. Så om du har ett förslag är det bara att kontakta mig så för jag vidare det, eller tar kontakt med de parter den gäller. Exempel på fysisk arbetsmiljö är problem med lokaler, framkomlighet m.m. Min roll i den psykiska arbetsmiljön är att ge råd på hur du ska gå tillväga med ditt problem rent byråkratiskt samt ge direktiv om vem du skall kontakta om du vill prata med någon. Detta gäller då trakasserier, mobbing m.m. Mer information om arbetsmiljö och arbetsmiljöombud hittas på denna sida: https://www.student.liu.se/arbetsmiljo?l=sv 
+
+###Jämställdhetsansvarig
+Jämställdhetsansvarig inom Medietekniksektionen är Jenny Yu
+
+###Resultat av jämställdhetsformuläret
+Lärarformuläret[br]
+Jämställdhetsplan 2006
+
+###MTD-gruppen
+Är gruppen av hårt arbetande studenter som ser till att MTs årliga branschdag 'Medieteknikdagarna' blir den bästa någonsin, år efter år!
+
+Se mer på http://www.medieteknikdagarna.se/
+
+
+###Valberedningen
+Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram förslag på nästa års styrelse."),
+								);
+			$this->Page_model->add_page("association/committee", $translations, 1);
 
 		}
 	}

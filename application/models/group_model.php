@@ -10,9 +10,11 @@ class Group_model extends CI_Model
     
     function get_all_groups()
     {
-		$this->db->select("*");
+		$this->db->select("groups.id, groups_descriptions_language.name, groups_descriptions_language.description,  COUNT(groups_year.groups_id) as count");
 		$this->db->from("groups");
-		$this->db->order_by("group_name ASC");
+		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.groups_id", "");
+		$this->db->join("groups_year", "groups.id = groups_year.groups_id", "left");
+		$this->db->group_by("groups.id");
 		$query = $this->db->get();
 		
         return $query->result();
@@ -31,9 +33,37 @@ class Group_model extends CI_Model
 		{
 			$res->members = $this->get_group_members($res->id);
 		}
-			
-        return $result;
+		
+		return $result;
 	}
+	function admin_get_group($id)
+	{
+		$this->db->select("groups.id, groups_descriptions.name, groups_descriptions.description, language.language_name, language.language_abbr");
+		$this->db->from("groups");
+		$this->db->from("language");
+		$this->db->join("groups_descriptions", 'groups_descriptions.groups_id = groups.id AND groups_descriptions.lang_id = language.id', 'left');
+		$this->db->where("groups.id",$id);
+		$query = $this->db->get();
+		$translations = $query->result();
+
+		$this->db->select("*");
+		$this->db->from("groups");
+		$this->db->where("groups.id",$id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		$news_array = $query->result();
+		$news = $news_array[0];
+		$news->translations = array();
+		foreach($translations as $t) 
+		{
+			array_push($news->translations, $t);
+		}
+
+		return $news;
+	}
+
+
+
 	
 	function get_group_members($id)
 	{

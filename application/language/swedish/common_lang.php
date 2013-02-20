@@ -81,11 +81,16 @@ $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";
 $lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
 $lang['admin_news_needsapproval'] = "nyheter behöver godkännas";
-$lang['user_overview'] = "Användarövesikt";
+$lang['user_overview'] = "Användaröversikt";
 $lang['admin_adminpage'] = "Administrera sidor";
 $lang['admin_editpage'] = "Redigera sidor";
 $lang['admin_addpage'] = "Skapa sida";
 $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här";
+$lang['admin_admingroups'] = "Administrera grupper";
+	$lang['groups_overview'] = "Grupp översikt";
+	$lang['groups_id'] = "Grupp id";
+	$lang['groups_year_count'] = "Antal årgångar";
+	$lang['admin_createnewgroupbyclicking'] = "Skapa en ny grupp genom att klicka här";
 
 // date
 $lang['date_yesterday'] = "Igår";

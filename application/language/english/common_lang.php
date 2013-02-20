@@ -87,6 +87,11 @@ $lang['admin_adminpage'] = "Admin pages";
 $lang['admin_editpage'] = "Edit page";
 $lang['admin_addpage'] = "Add page";
 $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
+$lang['admin_admingroups'] = "Admin groups";
+	$lang['groups_overview'] = "Group overview";
+	$lang['groups_id'] = "Group id";
+	$lang['groups_year_count'] = "Number of years";
+	$lang['admin_createnewgroupbyclicking'] = "Create a new group by clicking here";
 
 // date
 $lang['date_yesterday'] = "Yesterday";

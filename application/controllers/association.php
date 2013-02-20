@@ -5,7 +5,7 @@ class Association extends MY_Controller
 	
 	public function index()
 	{
-		$this->page("overview");
+		$this->page("board");
 	}
 	
 	public function page()

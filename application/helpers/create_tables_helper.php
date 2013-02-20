@@ -244,6 +244,23 @@ function get_groups_year_fields()
 	return $fields;
 }
 
+function get_groups_year_images_fields()
+{
+	$fields = array(
+		'groups_year_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'images_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		);
+	return $fields;
+}
+
 function get_users_groups_fields()
 {
 	$fields = array(
