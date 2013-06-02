@@ -1,9 +1,10 @@
 #README - medieteknik.nu
 
 1. License
-2. Technical notes
-3. Demo/Dev URL
-4. Contact information
+2. Developing medieteknik.nu
+3. Technical notes
+4. Demo/Dev URL
+5. Contact information
 
 ## 1. License
 The license for Codeigniter can be found in "license_CodeIgniter.txt"
@@ -28,14 +29,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-## 2. Technical notes
+## 2. Developing medieteknik.nu
+This application in developed for the Student Association for Media Technology at Linköping University.
+To get started developing this application, please refer to [the Get started wiki page](https://github.com/medieteknik/Medieteknik.nu/wiki/Get-started-with-the-development-of-medieteknik.nu).
+
+## 3. Technical notes
 The system uses SASS, read more and get started at http://sass-lang.com. With ruby, simply
 run <code>gem install sass</code>.
 
-## 3. Demo/Dev URL
+## 4. Demo/Dev URL
 [http://dev.medieteknik.nu/](http://dev.medieteknik.nu/)
 
-## 4. Contact Information
+## 5. Contact Information
 Questions about the system:
 	webbchef@medieteknik.nu
 
