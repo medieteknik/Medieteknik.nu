@@ -1,9 +1,8 @@
 #README - medieteknik.nu
 
 1. License
-2. File-Tree
-3. Technical notes
-4. Contact information
+2. Technical notes
+3. Contact information
 
 ## 1. License
 The license for Codeigniter can be found in "license_CodeIgniter.txt"
@@ -28,30 +27,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-
-## 2. File-Tree
-See http://ellislab.com/codeigniter/user-guide/ for documentation about CodeIgniter.
-
-/application				This is our system files
-/application/controllers 	All the controllers, the logic of the website, is put here
-/application/models			All the models with the database functions is put here
-/application/views			All the views (HTML) is found here
-/application/views/includes	The views that are used in many controllers (not content specific) is put here
-
-/system						The Codeigniter system files, no need to change anything here
-
-/web						All the web data content such as images and javascript
-/web/css					All css files
-/web/img					All image files
-/web/js						All our javascript files
-/web/js/libs				All library javascript files as backup if google is down(?)
-
-
-## 3. Technical notes
+## 2. Technical notes
 The system uses SASS, read more and get started at http://sass-lang.com. With ruby, simply
 run <code>gem install sass</code>.
 
-## 4. Contact Information
+## 3. Contact Information
 Questions about the system:
 	webbchef@medieteknik.nu
 
