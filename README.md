@@ -30,7 +30,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 ## 2. Developing medieteknik.nu
-This application in developed for the Student Association for Media Technology at Linköping University.
+This application in developed for the Students Association for Media Technology at Linköping University.
 To get started developing this application, please refer to [the Get started wiki page](https://github.com/medieteknik/Medieteknik.nu/wiki/Get-started-with-the-development-of-medieteknik.nu).
 
 ## 3. Technical notes
