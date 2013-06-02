@@ -2,7 +2,8 @@
 
 1. License
 2. Technical notes
-3. Contact information
+3. Demo/Dev URL
+4. Contact information
 
 ## 1. License
 The license for Codeigniter can be found in "license_CodeIgniter.txt"
@@ -31,7 +32,10 @@ THE SOFTWARE.
 The system uses SASS, read more and get started at http://sass-lang.com. With ruby, simply
 run <code>gem install sass</code>.
 
-## 3. Contact Information
+## 3. Demo/Dev URL
+[http://dev.medieteknik.nu/](http://dev.medieteknik.nu/)
+
+## 4. Contact Information
 Questions about the system:
 	webbchef@medieteknik.nu
 
