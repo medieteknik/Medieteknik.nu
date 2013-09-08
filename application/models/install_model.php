@@ -34,6 +34,7 @@ class Install_model extends CI_Model
 		$this->create_privileges_table();
 		$this->create_users_privileges_table();
 		$this->create_images_table();
+		$this->create_documents_table();
 		$this->create_news_images_table();
 		$this->create_page_table();
 		$this->create_page_content_table();
@@ -69,6 +70,7 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('privileges');
 		$this->dbforge->drop_table('users_privileges');
 		$this->dbforge->drop_table('images');
+		$this->dbforge->drop_table('documents');
 		$this->dbforge->drop_table('news_images');
 		$this->dbforge->drop_table('page');
 		$this->dbforge->drop_table('page_content');
@@ -804,6 +806,39 @@ class Install_model extends CI_Model
 				closedir($handle);
 			}
 			
+		}
+	}
+
+	function create_documents_table() {
+		// if the documents table does not exist, create it
+		if(!$this->db->table_exists('documents') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_documents_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);					// set the primary key
+			$this->dbforge->create_table('documents');
+
+			log_message('info', "Created table: documents");
+
+			//get and insert sample pdfs in db
+			$dir = 'user_content/documents';
+			if ($handle = opendir($dir)) {
+				while (false !== ($file = readdir($handle))) {
+					if(preg_match('/(.pdf)$/i', $file)){
+						$data = array(	
+							'user_id' => 1,
+							'document_original_filename' => $file,
+							'document_title' => 'sample_document',
+							'document_description' => 'sample_document',
+							'group_id' => 1,
+							'is_public' => true
+						);
+						$this->db->insert('documents', $data);
+					}
+				}
+				closedir($handle);
+			}
 		}
 	}
 
