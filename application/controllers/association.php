@@ -35,6 +35,11 @@ class Association extends MY_Controller
 				$main_data['groups'] = $this->Group_model->get_group(2);
 				$template_data['main_content'] = $this->load->view('group_overview',  $main_data, true);
 				break;
+			case "association/documents":
+				$this->load->model('Documents_model');
+				$main_data['documents'] = $this->Documents_model->get_all_documents_for_group(1);
+				$template_data['main_content'] = $this->load->view('documents_view',  $main_data, true);
+				break;
 			default:
 				$main_data['content'] = $this->Page_model->get_page_by_name($string);
 				$template_data['main_content'] = $this->load->view('about_page',  $main_data, true);
