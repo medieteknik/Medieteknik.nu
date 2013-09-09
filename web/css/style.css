@@ -1,5 +1,5 @@
 @import url("/web/css/profile.css");
-@import url("/web/css/documents.css");
+@import url("documents.css");
 /*
 @import url(http://reset5.googlecode.com/hg/reset.min.css);
 @import url(http://fonts.googleapis.com/css?family=Asap:400,400italic,700,700italic);
@@ -475,7 +475,7 @@ i.-icon-document {
   float: left;
   width: 32px;
   height: 32px;
-  background: url("/web/img/icons/linedpaper32.png");
+  background: url("../img/icons/linedpaper32.png");
   background-size: cover;
   display: block; 
 }

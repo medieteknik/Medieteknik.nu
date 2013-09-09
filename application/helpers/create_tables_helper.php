@@ -557,6 +557,9 @@ function get_documents_fields()
 			'type' => 'TINYINT',
 			'unsigned' => TRUE,
 		),
+		'upload_date' => array(
+			'type' => 'TIMESTAMP'
+		),
 		);
 	return $fields;
 }
