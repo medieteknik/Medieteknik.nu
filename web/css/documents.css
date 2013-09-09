@@ -1,4 +1,42 @@
+.main-box ul.document-list {
+	padding: 0 0 0 0;
+}
+
+ul.document-list a {
+	text-decoration: none;
+	color: #111;
+	display: block;
+}
+
+ul.document-list a:hover {
+	color: #f57d20;
+}
+
+ul.document-list i {
+	margin-top: 3px;
+}
+
+ul.document-list li:nth-child(odd) {
+  background-color: #eee;
+}
+
+ul.document-list li:nth-child(odd):hover {
+  background-color: #f0f0f0; 
+}
+
+ul.document-list li:nth-child(even):hover {
+  background-color: #f7f7f7; 
+}
+
 li.document {
-	color: #f00;
-	font-weight: bold;
+	padding: 5px 10px;
+}
+
+li.document h4 {
+	font-weight: normal;
+	font-size: 11pt;
+}
+
+li.document small {
+	font-size: 9pt;
 }
