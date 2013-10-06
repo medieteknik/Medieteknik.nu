@@ -33,6 +33,29 @@ class User_model extends CI_Model
 
 	}
 
+		 /**
+	 * Return query if there is a user with that lukasid
+	 *
+	 * @param  string	$lukasid	The lukas-id of the user, for example abcde123
+	 * @param  string	$password	The password in clear text
+	 * @param  bool 	$login		Wether or not we require user to be active
+	 * @return bool
+	 */
+	function get_user($lukasid = '', $login = TRUE)
+	{
+		$lid = preg_replace("/(@.*)/", "", $lukasid);
+
+		$this->db->where('lukasid', $lid);
+		if($login)
+			$this->db->where('disabled', 0);
+		$query = $this->db->get('users');
+		if($query->num_rows == 1)
+		{
+			return $query;
+		}
+		return false;
+	}
+
 	/**
 	 * Checks if the user has any of the specified privileges
 	 *

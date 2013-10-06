@@ -120,6 +120,7 @@ class Install_model extends CI_Model
 			$this->User_model->add_user("Klas", "Eskilson", "klaes950", "password");
 			$this->User_model->add_user("Simon", "Joelsson", "simjo407", "password");
 			$this->User_model->add_user("Martin", "Kierkegaard", "marki423", "password");
+			$this->User_model->add_user("Mikael", "Zackrisson", "mikza835", "password");
 		}
 	}
 
@@ -141,6 +142,8 @@ class Install_model extends CI_Model
 			$data = array('users_id' => 5, 'gravatar' => 'jonasemanuelzeitler@gmail.com');
 			$this->db->insert('users_data', $data);
 			$data = array('users_id' => 6, 'web' => "http://www.klaseskilson.se", 'presentation' => "Jag heter Klas och pillar med den här sidan lite.", 'twitter' => 'Eskilicious', 'gravatar' => 'klas.eskilson@gmail.com');
+			$this->db->insert('users_data', $data);
+			$data = array('users_id' => 9, 'gravatar' => 'micke.zackrisson@gmail.com');
 			$this->db->insert('users_data', $data);
 		}
 	}
