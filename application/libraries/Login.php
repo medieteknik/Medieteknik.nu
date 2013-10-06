@@ -41,6 +41,7 @@ class Login
 		return false;
 	}
 	
+	/*
 	public function validate($name = '', $pwd = '') {
 		$this->CI->load->model('User_model');
 		$query = $this->CI->User_model->validate($name, $pwd);
@@ -70,6 +71,7 @@ class Login
 			return false;
 		}
 	}
+	*/
 	
 	public function get_id() {
 		return $this->CI->session->userdata('id');
@@ -77,6 +79,36 @@ class Login
 	
 	public function get_lukasid() {
 		return $this->CI->session->userdata('lukasid');
+	}
+
+	public function login($lid) {
+		$this->CI->load->model('User_model');
+		$query = $this->CI->User_model->get_user($lid);
+		
+		if($query) // if the user's credentials validated...
+		{
+			$result = $query->result();
+			$result = $result[0];
+			
+			if($this->CI->User_model->has_privilege($result->id, "admin")) { 
+				$admin = true;
+			} else {
+				$admin = false;
+			}
+			
+			$data = array(
+				'id' => $result->id,
+				'lukasid' => $result->lukasid,
+				'is_logged_in' => true,
+				'is_admin' => ($admin === true) ? true : false,
+			);
+			$this->CI->session->set_userdata($data);
+			return true;
+		}
+		else // incorrect username or password
+		{
+			return false;
+		}
 	}
 	
 	public function logout() {
@@ -88,6 +120,7 @@ class Login
 		);
 		$this->CI->session->set_userdata($data);
 		$this->CI->session->sess_destroy();
+		$this->CI->cas->logout();
 	}
 	
 	/*
