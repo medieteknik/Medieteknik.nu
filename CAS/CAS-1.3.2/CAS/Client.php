@@ -2770,7 +2770,7 @@ class CAS_Client
         }
 
         //Nödvändig fix av någon anledning
-        $text_response = substr($text_response, 2) . ">";
+        //$text_response = substr($text_response, 2) . ">";
 
         // create new DOMDocument object
         $dom = new DOMDocument();
