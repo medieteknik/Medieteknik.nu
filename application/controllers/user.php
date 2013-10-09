@@ -81,6 +81,12 @@ class User extends MY_Controller
 
 	public function login($attempt = '')
 	{
+
+		$this->cas->force_auth();
+		$this->checklogin();
+
+		//old login form, before use of CAS:
+		/*
 		$this->load->helper('form');
 
 		// Data for login view
@@ -92,6 +98,7 @@ class User extends MY_Controller
 		$template_data['main_content'] = $this->load->view('login_view',  $main_data, true);
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
+		*/
 	}
 
 	public function logout()
@@ -100,6 +107,7 @@ class User extends MY_Controller
 		redirect('user/login', 'refresh');
 	}
 
+	/*
 	public function checklogin()
 	{
 		if($this->input->post('username') != false && $this->input->post('password') != false && $this->login->validate($this->input->post('username'), $this->input->post('password')))
@@ -110,6 +118,23 @@ class User extends MY_Controller
 			// fail
 			//echo $this->input->post('username') ." ". $this->input->post('password');
 			redirect('user/login/'.$this->input->post('username'), 'refresh');
+		}
+	}
+	*/
+
+	public function checklogin()
+	{
+		$user = $this->cas->user();
+
+		if($this->login->login($user->userlogin))
+		{
+			//success
+			redirect('user', 'refresh');
+		} else {
+			// fail, there is no such user in database
+			//echo $this->input->post('username') ." ". $this->input->post('password');
+			$this->login->logout();
+			//redirect('user/login/'.$this->input->post('username'), 'refresh');
 		}
 	}
 

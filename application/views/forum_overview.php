@@ -17,22 +17,18 @@ if(count($topics_array) > 0)
 	
 	echo '</ul>';
 	
-	
-	//do_dump($thread_array);
-} else if(isset($postform)) 
+
+} else if($posting_allowed === true) 
 {
 	echo '<p>Inga trådar</p>';
 }
 echo '</div>';
 
-if(isset($postform)) 
+if($posting_allowed === true) 
 {
 	echo '<div class="main-box clearfix">';
-	if(isset($guest)) 
+	if($is_logged_in) 
 	{
-		echo 'Gästformulär';
-	} else {
-            
 		echo '<h2>Post topic</h2>',
 		form_open('forum/post_topic'),
 		
@@ -50,7 +46,12 @@ if(isset($postform))
 		
 		form_submit('post', 'Send');
 		form_close();
+	} else if (!$is_logged_in && !$guest_allowed)
+	{
+		echo '<p>Du måste vara inloggad för att skriva i den här forumdelen</p>';
+	} else if(!$is_logged_in && $guest_allowed)
+	{
+		echo '<p>Gästforumlär</p>';
 	}
 	echo '</div>';
-
 }

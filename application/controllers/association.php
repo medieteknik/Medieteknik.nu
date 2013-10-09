@@ -5,7 +5,7 @@ class Association extends MY_Controller
 	
 	public function index()
 	{
-		$this->page("overview");
+		$this->page("board");
 	}
 	
 	public function page()
@@ -34,6 +34,12 @@ class Association extends MY_Controller
 				$this->load->model('Group_model');
 				$main_data['groups'] = $this->Group_model->get_group(2);
 				$template_data['main_content'] = $this->load->view('group_overview',  $main_data, true);
+				break;
+			case "association/documents":
+				$this->load->model('Documents_model');
+				$main_data['documents'] = $this->Documents_model->get_all_documents_for_group(1);
+				$main_data['group'] = "Medietekniksektionen";
+				$template_data['main_content'] = $this->load->view('documents_view',  $main_data, true);
 				break;
 			default:
 				$main_data['content'] = $this->Page_model->get_page_by_name($string);

@@ -22,18 +22,22 @@ class Sidebar
 	public function get_about() {
 		$upcomingevents['title'] = $this->lang_data['menu_about'] ;
 		$upcomingevents['items'] = array(	array('title' => "Om utbildningen", 'href' => 'about/education'),
+											array('title' => "Kurser", 'href' => 'about/courses'),
+											array('title' => "Sökande", 'href' => 'about/applicant'),
 											);
 		
 		return $this->CI->load->view('includes/list', $upcomingevents, true);	
 	}
 	
 	public function get_association() {
-		$upcomingevents['title'] = $this->lang_data['menu_about'] ;
-		$upcomingevents['items'] = array(	array('title' => "Om sektionen", 'href' => 'association'),
-											array('title' => "Webbgruppen", 'href' => 'association/web'),
-											array('title' => "Wiki", 'href' => 'http://wiki.medieteknik.nu/'),
-											array('title' => "LiU Alumn-inloggning", 'href' => 'https://alumni.liu.se/public/start/start.asp'),
-											);
+		$upcomingevents['title'] = $this->lang_data['menu_association'] ;
+		$upcomingevents['items'] = array(	
+			array('title' => "Om sektionen", 'href' => 'association'),
+			array('title' => "Webbgruppen", 'href' => 'association/web'),
+			array('title' => "Wiki", 'href' => 'http://wiki.medieteknik.nu/'),
+			array('title' => "LiU Alumn-inloggning", 'href' => 'https://alumni.liu.se/public/start/start.asp'),
+			array('title' => "Protokoll och stadgar", 'href' => 'association/documents')
+		);
 		
 		return $this->CI->load->view('includes/list', $upcomingevents, true);	
 	}
@@ -76,6 +80,12 @@ class Sidebar
 		
 		if($this->CI->login->has_privilege('admin'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminpage'], 'href' => "admin_page"));
+
+		if($this->CI->login->has_privilege('admin'))
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminimages'], 'href' => "admin_images"));
+
+		if($this->CI->login->has_privilege('admin'))
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admingroups'], 'href' => "admin_groups"));
 		
 		/*	
 		if($this->CI->login->has_privilege('news_editor'))

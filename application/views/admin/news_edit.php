@@ -39,13 +39,14 @@ $news_height = 100;
 
 // hack so that the same view can be used for both create and edit
 $image_div = "";
-$action = 'admin_news/add_news';
+$action = 'admin_news/edit_news/0';
 if(isset($news) && $news != false) {
 	$post_date['value'] = $news->date;
 	$draft['checked'] = ($news->draft == 1);
 	$approved['checked'] = ($news->approved == 1);
 	$news_approved = $news->approved;
 	$news_size = $news->size;
+	$news_position = $news->position;
 	$news_height = ($news->height == '') ? $news_height : $news->height;
 	$action = 'admin_news/edit_news/'.$id;
 	
@@ -92,6 +93,19 @@ echo '<div>', form_submit('save', $lang['misc_save']), '</div>',
 		form_upload($img_file),
 	'</div>
 </div>';
+//do_dump($image_array);
+if (count($images_array) > 0) {
+	echo '<div class="main-box clearfix">';
+	foreach($images_array as $img) {
+		echo 
+		'<div class="image_overview" style="display: inline-block; width: 110px; height: 150px; overflow:hidden; clear:both;">',
+			$img->image->get_img_tag(),
+			'<input type="text" value="[img id=',substr($img->image_original_filename, 0, -4),' w=150 h=100]" disabled="disabled" style="width: 100px;" />',
+		'</div>';
+	}
+	echo '</div>';	
+}
+
 
 // hack so that the same view can be used for both create and edit
 $arr = '';

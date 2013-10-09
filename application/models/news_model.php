@@ -18,7 +18,7 @@ class News_model extends CI_Model
 		// check if approved to see not approved news
 		$admin = $this->login->has_privilege('news_editor');
 		
-		$this->db->select("users.first_name, users.last_name, news_images.*, images.*");
+		$this->db->select("users.first_name, users.last_name, news_images.*, images.image_original_filename");
 		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");

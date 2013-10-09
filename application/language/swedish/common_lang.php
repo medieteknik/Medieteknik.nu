@@ -57,6 +57,9 @@ $lang['admin_addnews'] = "Skapa nyhet";
 $lang['admin_editnews'] = "Redigera nyhet";
 $lang['admin_adminnews'] = "Administrera nyheter";
 $lang['admin_editimages'] = "Redigera bilder";
+$lang['admin_adminimages'] = "Administrera bilder";
+$lang['admin_addimage'] = "Ladda upp bild";
+$lang['admin_addimagebyclickinghere'] = "Klicka här för att ladda upp en ny bild till biblioteket";
 $lang['admin_listusers'] = "Lista användare";
 $lang['admin_editusers'] = "Administrera användare";
 $lang['admin_edituser'] = "Redigera användare";
@@ -78,11 +81,16 @@ $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";
 $lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
 $lang['admin_news_needsapproval'] = "nyheter behöver godkännas";
-$lang['user_overview'] = "Användarövesikt";
+$lang['user_overview'] = "Användaröversikt";
 $lang['admin_adminpage'] = "Administrera sidor";
 $lang['admin_editpage'] = "Redigera sidor";
 $lang['admin_addpage'] = "Skapa sida";
 $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här";
+$lang['admin_admingroups'] = "Administrera grupper";
+	$lang['groups_overview'] = "Grupp översikt";
+	$lang['groups_id'] = "Grupp id";
+	$lang['groups_year_count'] = "Antal årgångar";
+	$lang['admin_createnewgroupbyclicking'] = "Skapa en ny grupp genom att klicka här";
 
 // date
 $lang['date_yesterday'] = "Igår";
@@ -122,6 +130,8 @@ $lang['misc_of'] = "av";
 $lang['misc_last_update'] = "Uppdaterades senast";
 $lang['misc_done'] = "Klart!";
 $lang['misc_gotopage'] = "Gå till sida";
+$lang['misc_title'] = "Titel";
+$lang['misc_description'] = "Beskrivning";
 
 // error
 $lang['error_error'] = "Fel!";
