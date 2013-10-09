@@ -3,11 +3,11 @@
 class Login
 {
 	protected $CI;
-	
+
 	public function __construct() {
 		$this->CI = & get_instance();
 	}
-	
+
 	function is_logged_in() {
 		$is_logged_in = $this->CI->session->userdata('is_logged_in');
 		if(!isset($is_logged_in) || $is_logged_in !== true)
@@ -27,12 +27,12 @@ class Login
 		}
 		return false;
 	}
-	
+
 	public function has_privilege($privileges) {
 		if(!isset($privileges)) {
 			return false;
 		}
-		
+
 		if($this->is_logged_in()) {
 			$id = $this->CI->session->userdata('id');
 			$this->CI->load->model('User_model');
@@ -40,22 +40,22 @@ class Login
 		}
 		return false;
 	}
-	
+
 	public function validate($name = '', $pwd = '') {
 		$this->CI->load->model('User_model');
 		$query = $this->CI->User_model->validate($name, $pwd);
-		
+
 		if($query) // if the user's credentials validated...
 		{
 			$result = $query->result();
 			$result = $result[0];
-			
-			if($this->CI->User_model->has_privilege($result->id, "admin")) { 
+
+			if($this->CI->User_model->has_privilege($result->id, "admin")) {
 				$admin = true;
 			} else {
 				$admin = false;
 			}
-			
+
 			$data = array(
 				'id' => $result->id,
 				'lukasid' => $result->lukasid,
@@ -70,15 +70,15 @@ class Login
 			return false;
 		}
 	}
-	
+
 	public function get_id() {
 		return $this->CI->session->userdata('id');
 	}
-	
+
 	public function get_lukasid() {
 		return $this->CI->session->userdata('lukasid');
 	}
-	
+
 	public function logout() {
 		$data = array(
 			'id' => 0,
@@ -89,22 +89,22 @@ class Login
 		$this->CI->session->set_userdata($data);
 		$this->CI->session->sess_destroy();
 	}
-	
+
 	/*
 	 * // old validate
 	public function validate($name = '', $pwd = '', $admin = false) {
 		$this->CI->load->model('User_model');
 		$query = $this->CI->User_model->validate($name, $pwd);
-		
+
 		if($query) // if the user's credentials validated...
 		{
 			$result = $query->result();
 			$result = $result[0];
-			
-			if($admin === true && !$this->CI->User_model->has_privilege($result->id, "admin")) { 
+
+			if($admin === true && !$this->CI->User_model->has_privilege($result->id, "admin")) {
 				return false;
 			}
-			
+
 			$data = array(
 				'id' => $result->id,
 				'lukasid' => $result->lukasid,
@@ -119,7 +119,7 @@ class Login
 			return false;
 		}
 	}
-	
+
 	*/
-	
+
 }

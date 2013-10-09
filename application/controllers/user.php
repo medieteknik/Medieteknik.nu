@@ -15,8 +15,13 @@ class User extends MY_Controller
 
 	public function profile($id)
 	{
-		// Data for user view
+		// model for user handeling
 		$this->load->model('User_model');
+
+		if(!$this->User_model->id_exists($id))
+			show_404();
+
+		// Data for user view
 		$main_data['user'] = $this->User_model->get_user_profile($id);
 		$main_data['lang'] = $this->lang_data;
 		$main_data['is_logged_in'] = $this->login->is_logged_in() && $this->login->get_id() == $id;

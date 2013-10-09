@@ -1,9 +1,9 @@
 <?php
-if($user->id == 0)
-	redirect('error_page/user/?msg=notfound', 'refresh');
 
+// empty variable
 $editbutton = "";
 
+// check if user is viewing it's own profile
 if($is_logged_in) {
 	$editbutton = anchor('/user/edit_profile/', $lang['profile_edit']);
 }

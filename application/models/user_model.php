@@ -393,5 +393,18 @@ class User_model extends CI_Model
 		}
 		return false;
 	}
+
+	/**
+	 * Check if a specific user_id exists
+	 *
+	 * @param 	int 	$id 		The id to be searched for
+	 * @return 	bool
+	 */
+	function id_exists($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->from("users");
+		return $this->db->count_all_results();
+	}
 }
 
