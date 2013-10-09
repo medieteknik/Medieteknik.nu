@@ -286,7 +286,7 @@ table tbody tr:nth-child(odd):hover {
 table tbody tr:nth-child(even):hover {
   background-color: #f7f7f7; }
 
-table i.-icon-pen {
+tr i.-icon-pen {
   width: 16px;
   height: 16px;
   margin: 0;
