@@ -771,6 +771,8 @@ class Install_model extends CI_Model
 			$this->db->insert('users_privileges', $data);
 			$data = array('user_id' => 6,'privilege_id' => 1);
 			$this->db->insert('users_privileges', $data);
+			$data = array('user_id' => 9,'privilege_id' => 1);
+			$this->db->insert('users_privileges', $data);
 
 			// news_post
 			$data = array('user_id' => 3,'privilege_id' => 4);
