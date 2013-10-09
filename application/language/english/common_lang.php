@@ -58,6 +58,9 @@ $lang['admin_addnews'] = "Create news";
 $lang['admin_editnews'] = "Edit news";
 $lang['admin_adminnews'] = "Admin news";
 $lang['admin_editimages'] = "Edit images";
+$lang['admin_adminimages'] = "Admin images";
+$lang['admin_addimage'] = "Add image";
+$lang['admin_addimagebyclickinghere'] = "Click here to add a new image to the library";
 $lang['admin_listusers'] = "List users";
 $lang['admin_editusers'] = "Admin users";
 $lang['admin_edituser'] = "Edit user";
@@ -84,6 +87,11 @@ $lang['admin_adminpage'] = "Admin pages";
 $lang['admin_editpage'] = "Edit page";
 $lang['admin_addpage'] = "Add page";
 $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
+$lang['admin_admingroups'] = "Admin groups";
+	$lang['groups_overview'] = "Group overview";
+	$lang['groups_id'] = "Group id";
+	$lang['groups_year_count'] = "Number of years";
+	$lang['admin_createnewgroupbyclicking'] = "Create a new group by clicking here";
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -123,6 +131,8 @@ $lang['misc_of'] = "of";
 $lang['misc_last_update'] = "Last update";
 $lang['misc_done'] = "Done!";
 $lang['misc_gotopage'] = "Go to page";
+$lang['misc_title'] = "Title";
+$lang['misc_description'] = "Description";
 
 // error
 $lang['error_error'] = "Error!";

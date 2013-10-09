@@ -95,29 +95,60 @@ function uncompact_name($name)
 function _local_linker($matches)
 {
 	$c = count($matches);
-	//var_dump($matches);
 	if($c > 2)
 		return anchor($matches[1],$matches[2]);
-		//return "matches[1]=" .$matches[1]. " matches[2]=".$matches[2];
-	return "nomatch";
+	return "";
 }
 
 function _img_format($matches)
 {
-	$c = count($matches);
-	$id = $matches[1];
-	if($c > 2)
-		$w = $matches[2];
-	else
-		$w = 130;
-	if($c > 3)
-		$h = $matches[3];
-	else
-		$h = 75;
+	$id = "";
+	$w = 130;
+	$h = 75;
+	$align = "";
 
+	$settings_array = explode(" ", trim($matches[1]));
 
-	$im = new imagemanip($id, 'zoom', $w, $h);
-	return $im->get_img_tag();
+	for ($i=0; $i < count($settings_array); $i++) { 
+		$setting = explode("=",$settings_array[$i],2);
+		switch(strtolower($setting[0]))
+		{
+			case "id":
+			case "filename":
+			case "file":
+			case "original":
+				if(strlen($setting[1]) >0) 
+				{
+					$id = $setting[1];
+				}
+				break;
+			case "w":
+				if(is_numeric($setting[1]) && $setting[1] >0) 
+				{
+					$w = $setting[1];
+				}
+				break;
+			case "h":
+				if(is_numeric($setting[1]) && $setting[1] >0)
+					$h = $setting[1];
+				break;
+			case "align":
+				if(strtolower($setting[1]) == "left" || strtolower($setting[1]) == "right")
+					$align = 'align="'.$setting[1].'"';
+				break;
+		}
+	}
+
+	// error check
+	if ($id == "")
+	{
+		$im = new imagemanip("unknown", 'zoom', $w, $h);
+	} else {
+		$im = new imagemanip($id, 'zoom', $w, $h);
+	}
+
+	
+	return $im->get_img_tag($align);
 }
 
 function text_strip($input, $line_break = FALSE)
@@ -127,11 +158,11 @@ function text_strip($input, $line_break = FALSE)
 	$text = preg_replace('/>/','&gt;', $text);
 
 	//\r\n, \n\r, \n and \r
-	$patterns = array('/\r\n/', '/\n\r/', '/\r/', '/\n/');
+	$patterns = array("/\r\n/", "/\n\r/", "/\r/", "/\n/");
 	$replacements = '';
 	if($line_break)
 	{
-		$replacements = array('<br/>','<br/>','<br/>','<br/>');
+		$replacements = array("\n","\n","\n","\n");
 	}
 	$text = preg_replace($patterns,$replacements, $text);
 
@@ -143,7 +174,11 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 	$text = text_strip($input, TRUE);
 
 	//wrap with paragraph
-	$text = $pre.$text.$post;
+	//$text = $pre.$text.$post;
+	//$text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9]+.*)\n/","\n".$pre."$2".$post."\n", $text);
+	
+	$text = preg_replace("/(\[br\]\n?)/","<br/>", $text);
+	$text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9].*)(\n|$)/","\n".$pre."$2".$post."\n", $text);
 
 	// bold and italics
 	$text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);
@@ -152,25 +187,24 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 	if($xtravaganza === TRUE)
 	{
 		// URL
-		$in		=array('`((?:https?|ftp)://\S+[[:alnum:]]/?)`si','`((?<!//)(www\.\S+[[:alnum:]]/?))`si');
-		$out	=array('<a href="$1"  rel=nofollow>$1</a> ','<a href="http://$1" rel=\'nofollow\'>$1</a>');
+		$text = preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $text);
+
 		$text = preg_replace_callback("/\(([a-zA-Z\/]+)\|([a-zA-Z\s]+)\)/",'_local_linker',$text);
 
-		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+)\]/','_img_format', $text);
-		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+)]/','_img_format', $text);
-		$text = preg_replace_callback('/\[img id=([a-zA-Z0-9\_]+) w=(\d+) h=(\d+)]/','_img_format', $text);
+		// headlines
+		$text = preg_replace("/(\n####)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h4>$2</h4>\n",$text);
+		$text = preg_replace("/(\n###)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h3>$2</h3>\n",$text);
+		$text = preg_replace("/(\n##)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h2>$2</h2>\n",$text);
+		$text = preg_replace("/(\n#)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h1>$2</h1>\n",$text);
+
+		$text = preg_replace_callback('/\[img((?:\s+[a-zA-Z]+=[a-zA-Z0-9\_]+)*)\s*\]/','_img_format', $text);
 	} else {
 		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
 	}
+	
+	
+	return $text;
 
-	// more than one (2-30) line break is converted to a paragraph
-	if($pre != '' && $post != '')
-	{
-		//return $pre.preg_replace('/(<br\/>){2,30}/',$post.$pre, $text).$post;
-		return preg_replace('/(<br\/>){2,30}/',$post.$pre, $text);
-	} else {
-		return $text;
-	}
 }
 
 function news_size_to_class($size)

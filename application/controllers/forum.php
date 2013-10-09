@@ -31,23 +31,18 @@ class Forum extends MY_Controller
 		$main_data['lang'] = $this->lang_data;
 		
 		$main_data['topics_array'] = $this->Forum_model->get_topics($id);
-		
+	
 		if(count($main_data['categories_array']) == 1) 
 		{
 			$c = $main_data['categories_array'][0];
-			
-			if($c->posting_allowed == 1) 
-			{
-				
-				if($this->login->is_logged_in()) 
-				{
-					$main_data['postform'] = TRUE;
-				} else if(!$this->login->is_logged_in() && $c->guest_allowed == 1) 
-				{
-					$main_data['postform'] = TRUE;
-					$main_data['guest'] = TRUE;
-				}
-			}
+			$main_data['posting_allowed'] = $c->posting_allowed == 1;
+			$main_data['is_logged_in'] = $this->login->is_logged_in();
+			$main_data['guest_allowed'] = $c->guest_allowed == 1;
+		} else {
+
+			$main_data['posting_allowed'] = false;
+			$main_data['is_logged_in'] = $this->login->is_logged_in();
+			$main_data['guest_allowed'] =false;
 		}
 
 		// composing the views

@@ -7,13 +7,15 @@ foreach($groups as $group)
 	echo 	'<div class="main-box clearfix">
 				<h2>',$group->name,'</h2>',
 				text_format($group->description);
-	echo '<ul class="user-list">';
+	echo '<ul class = "clearfix">';
 	foreach($group->members as $member) {
-		echo 	gravatarimg($member, 50),
-				'<li>',
-					anchor('user/profile/'.$member->user_id, get_full_name($member)),' - ', $member->position,
-				'</li>';
+		echo '<li class = "clearfix">';
+		echo 	gravatarimg($member, 81, ' style="margin:10px 10px 0; float: left;"'),
+				'<p>',
+					get_full_name($member),' - ', $member->position,
+				'</p>';
+		echo '</li>';
 	}
-	echo '</ul><!-- .user-list -->';
+	echo '</ul>';
 	echo '</div>';
 }

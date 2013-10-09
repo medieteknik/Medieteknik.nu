@@ -244,6 +244,23 @@ function get_groups_year_fields()
 	return $fields;
 }
 
+function get_groups_year_images_fields()
+{
+	$fields = array(
+		'groups_year_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'images_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		);
+	return $fields;
+}
+
 function get_users_groups_fields()
 {
 	$fields = array(
@@ -501,6 +518,47 @@ function get_images_fields()
 		'image_description' => array(
 			'type' => 'VARCHAR',
 			'constraint' => '50',
+		),
+		);
+	return $fields;
+}
+
+function get_documents_fields()
+{
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'document_original_filename' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'document_title' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'document_description' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'group_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+		),
+		'is_public' => array(
+			'type' => 'TINYINT',
+			'unsigned' => TRUE,
+		),
+		'upload_date' => array(
+			'type' => 'TIMESTAMP'
 		),
 		);
 	return $fields;

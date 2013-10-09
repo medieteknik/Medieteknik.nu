@@ -10,9 +10,11 @@ class Group_model extends CI_Model
 
     function get_all_groups()
     {
-		$this->db->select("*");
+		$this->db->select("groups.id, groups_descriptions_language.name, groups_descriptions_language.description,  COUNT(groups_year.groups_id) as count");
 		$this->db->from("groups");
-		$this->db->order_by("group_name ASC");
+		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.groups_id", "");
+		$this->db->join("groups_year", "groups.id = groups_year.groups_id", "left");
+		$this->db->group_by("groups.id");
 		$query = $this->db->get();
 
         return $query->result();

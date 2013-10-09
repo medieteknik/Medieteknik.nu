@@ -1,72 +1,70 @@
 /*
-
-	Profile-specific styles
-
+Profile-specific styles
 */
 
 .profile {
 }
-	.profile-content {
-		padding:0;
-	}
-		.profile-content p {
-			padding: 12px 0;
-			clear: both;
-		}
-		.profile-content a.profile-link {
-			display: block;
-			height: 32px;
-			width: 195px;
-			float: left;
-			background: #E8E8E9;
-			border: 1px solid #AEAEAF;
-			border-radius: 2px;
-			padding: 3px;
-			margin: 5px;
-			overflow: hidden;
-			text-decoration: none;
-		}
-			.profile-links {
-				padding: 0 12px;
-			}
-				.profile-links:first-child a {
-					margin-left: 0;
-				}
-			.profile-content a .link-descr {
-				text-transform: uppercase;
-				font-size: 70%;
-				color: #AEAEAF;
-			}
-			.profile-content a.link-dis span.link-link {
-				color: #AEAEAF;
-			}
-		.profile h2 a {
-			float:right;
-			background: #E8E8E9;
-			border: 1px solid #AEAEAF;
-			border-radius: 3px;
-			text-decoration: none;
-			text-transform: uppercase;
-			font-size: 70%;
-			padding:5px;
-			font-weight: normal;
-			-moz-box-shadow: 0 1px 3px #aaa;
-			-webkit-box-shadow: 0 1px 3px #aaa;
-			box-shadow: 0 1px 3px #aaa;
-		}
-				.profile h2 a.disabled {
-					-moz-box-shadow: 0  #aaa;
-					-webkit-box-shadow: 0 #aaa;
-					box-shadow: 0 #aaa;
-				}
-			.profile h2 a:hover {
-				color:#9f4b0a;
-				border-color:#838383;
-			}
-			.profile h2 a:active {
-				color:#333;
-				border-color:#838383;
-				-moz-box-shadow: 0 1px 1px #aaa;
-				-webkit-box-shadow: 0 1px 1px #aaa;
-				box-shadow: 0 1px 1px #aaa;
-			}
+.profile-content {
+	padding:0;
+}
+.profile-content p {
+	padding: 12px 0;
+	clear: both;
+}
+.profile-content a.profile-link {
+	display: block;
+	height: 32px;
+	width: 195px;
+	float: left;
+	background: #E8E8E9;
+	border: 1px solid #AEAEAF;
+	border-radius: 2px;
+	padding: 3px;
+	margin: 5px;
+	overflow: hidden;
+	text-decoration: none;
+}
+.profile-links {
+	padding: 0 12px;
+}
+.profile-links:first-child a {
+	margin-left: 0;
+}
+.profile-content a .link-descr {
+	text-transform: uppercase;
+	font-size: 70%;
+	color: #AEAEAF;
+}
+.profile-content a.link-dis span.link-link {
+	color: #AEAEAF;
+}
+.profile h2 a {
+	float:right;
+	background: #E8E8E9;
+	border: 1px solid #AEAEAF;
+	border-radius: 3px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 70%;
+	padding:5px;
+	font-weight: normal;
+	-moz-box-shadow: 0 1px 3px #aaa;
+	-webkit-box-shadow: 0 1px 3px #aaa;
+	box-shadow: 0 1px 3px #aaa;
+}
+.profile h2 a.disabled {
+	-moz-box-shadow: 0  #aaa;
+	-webkit-box-shadow: 0 #aaa;
+	box-shadow: 0 #aaa;
+}
+.profile h2 a:hover {
+	color:#9f4b0a;
+	border-color:#838383;
+}
+.profile h2 a:active {
+	color:#333;
+	border-color:#838383;
+	-moz-box-shadow: 0 1px 1px #aaa;
+	-webkit-box-shadow: 0 1px 1px #aaa;
+	box-shadow: 0 1px 1px #aaa;
+}
