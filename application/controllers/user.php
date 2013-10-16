@@ -33,6 +33,40 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
+	public function new_user($do = '')
+	{
+		$user = $this->cas->user();
+		$this->load->helper('form');
+		$this->load->model('User_model');
+
+		if($do == 'create')
+		{
+			$firstname = $this->input->post('firstname');
+			$lastname = $this->input->post('lastname');
+			
+			if($this->User_model->add_user($firstname, $lastname, $user->userlogin, ''))
+			{
+				$this->login();
+			}
+			else
+				$main_data['error'] = true;
+
+
+
+			
+		}
+
+		// Data for user view
+		$main_data['user'] = $user->userlogin;
+		$main_data['lang'] = $this->lang_data;
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('user_new',  $main_data, true);
+		$template_data['sidebar_content'] = $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
+	}
+
 	public function edit_profile($do = '')
 	{
 		$id = $this->login->get_id();
@@ -133,7 +167,8 @@ class User extends MY_Controller
 		} else {
 			// fail, there is no such user in database
 			//echo $this->input->post('username') ." ". $this->input->post('password');
-			$this->login->logout();
+			$this->new_user();
+			//$this->login->logout();
 			//redirect('user/login/'.$this->input->post('username'), 'refresh');
 		}
 	}

@@ -219,10 +219,10 @@ class User_model extends CI_Model
 	function add_user($fname = '', $lname = '', $lukasid ='', $password = '')
 	{
 		// fixing and trimming
-		$fn = trim(preg_replace("/[^A-Za-z]/", "", $fname ));
-		$ln = trim(preg_replace("/[^A-Za-z]/", "", $lname ));
+		$fn = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $fname ));
+		$ln = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $lname ));
 		$lid = trim(preg_replace("/[^A-Za-z0-9]/", "", $lukasid ));
-		$pwd = trim($password);
+		$pwd = 'password';
 
 		// check lengths
 		if(strlen($fn) > 0 && strlen($ln) > 0 && strlen($lid) == 8 && strlen($pwd) > 5)
