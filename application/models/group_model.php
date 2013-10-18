@@ -212,23 +212,40 @@ class Group_model extends CI_Model
 		return FALSE;
 	}
 
+	/**
+	 * add a year to a group
+	 * @param 	integer $groups_id 	the id of the group to add the year to
+	 * @param 	integer $start_year	the start year
+	 * @param 	integer $stop_year	the end year
+	 * @param 	array 	$user_list	list of users
+	 * @return 	integer 			the id for the created group year
+	 */
 	function add_group_year($groups_id, $start_year, $stop_year, $user_list = array())
 	{
+		// check if group exists, return false if not
 		$query = $this->db->get_where('groups', array('id' => $groups_id), 1, 0);
 		if ($query->num_rows() == 0)
 			return false;
 
+		// group id exists, create group year
 		$data = array(	'groups_id' 	=> $groups_id,
-						'start_year'		=> $start_year,
+						'start_year'	=> $start_year,
 						'stop_year'		=> $stop_year,
 					);
 		$query = $this->db->insert('groups_year', $data);
-		$group_year_id = $this->db->insert_id();
-		$this->add_users_to_group_year($group_year_id, $user_list);
-		return $group_year_id;
 
+		// get id from from insert query
+		$group_year_id = $this->db->insert_id();
+		// add users to group year
+		$this->add_users_to_group_year($group_year_id, $user_list);
+
+		// return the created group year id
+		return $group_year_id;
 	}
 
+	/**
+	 * add users to a year group
+	 */
 	function add_users_to_group_year($groups_year_id, $user_list = array())
 	{
 		$list = $user_list;
