@@ -17,6 +17,6 @@ foreach($page_array as $page) {
 	
 	$content = '<h2>'.$page->name.'</h2>';
 	
-	echo anchor('admin_page/edit/'.$page->id, $content, array("class" => "main-box news clearfix" . $classes, "title" => $lang['news_editthenews'] ));
+	echo anchor('admin_page/edit/'.$page->id, $content, array("class" => "main-box news clearfix" . $classes, "title" => $lang['news_editthepage'] ));
 }
 			

@@ -30,6 +30,9 @@ $lang['news_tothenews'] = "Till nyheten";
 $lang['news_editthenews'] = "Redigera nyheten";
 $lang['news_lastedit'] = "Senast redigerad";
 
+//page
+$lang['page_editthepage'] = "Redigera nyheten";
+
 // forum
 $lang['forum_forum'] = "Forum";
 $lang['forum_nothreads'] = "Inga trådar";
@@ -75,7 +78,7 @@ $lang['admin_addusers_success'] = "Användare tillagd!";
 $lang['admin_addusers_error'] = "Kunde inte lägga till användare. Säker på att du inte glömde att skriva in något?";
 	$lang['admin_addusers_error_lid'] = "LukadID:t finns redan eller är skrivet fel. Det ska vara på formen AAABB123.";
 	$lang['admin_addusers_error_fname'] = "Skriv in ett förnamn.";
-	$lang['admin_addusers_error_lname'] = "Skriv in ett efternamn.";
+	$lang['admin_addusers_error_lname'] = "Skriv in ett efternamn."; 
 	$lang['admin_addusers_error_pwd'] = "Lösenordet är för kort.";
 $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";
@@ -87,9 +90,10 @@ $lang['admin_editpage'] = "Redigera sidor";
 $lang['admin_addpage'] = "Skapa sida";
 $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här";
 $lang['admin_admingroups'] = "Administrera grupper";
-	$lang['groups_overview'] = "Grupp översikt";
-	$lang['groups_id'] = "Grupp id";
-	$lang['groups_year_count'] = "Antal årgångar";
+	$lang['admin_editgroups'] = "Redigera grupp";
+	$lang['admin_groups_overview'] = "Grupp översikt";
+	$lang['admin_groups_id'] = "Grupp id";
+	$lang['admin_groups_year_count'] = "Antal årgångar";
 	$lang['admin_createnewgroupbyclicking'] = "Skapa en ny grupp genom att klicka här";
 
 // date
