@@ -8,7 +8,7 @@ $lang['head_description'] = "Media Technology association official website";
 $lang['head_author'] = "Media Technology Assosciation web group";
 
 // menu
-$lang['menu_news'] = "News";
+$lang['menu_news'] = "News";	
 $lang['menu_about'] = "Media Technology";
 $lang['menu_archive'] = "Archive";
 $lang['menu_wiki'] = "Wiki";
@@ -29,6 +29,9 @@ $lang['news_author'] = "Author";
 $lang['news_tothenews'] = "To the news";
 $lang['news_editthenews'] = "Edit the news";
 $lang['news_lastedit'] = "Last edit";
+
+//page
+$lang['page_editthepage'] = "Edit the page";
 
 // forum
 $lang['forum_forum'] = "Forum";
@@ -88,9 +91,10 @@ $lang['admin_editpage'] = "Edit page";
 $lang['admin_addpage'] = "Add page";
 $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
 $lang['admin_admingroups'] = "Admin groups";
-	$lang['groups_overview'] = "Group overview";
-	$lang['groups_id'] = "Group id";
-	$lang['groups_year_count'] = "Number of years";
+	$lang['admin_editgroups'] = "Edit group";
+	$lang['admin_groups_overview'] = "Group overview";
+	$lang['admin_groups_id'] = "Group id";
+	$lang['admin_groups_year_count'] = "Number of years";
 	$lang['admin_createnewgroupbyclicking'] = "Create a new group by clicking here";
 
 // date
