@@ -10,11 +10,12 @@ class Group_model extends CI_Model
 
     function get_all_groups()
     {
-		$this->db->select("groups.id, groups_descriptions_language.name, groups_descriptions_language.description,  COUNT(groups_year.groups_id) as count");
+    	$this->db->select("groups.id, groups.official, groups_descriptions_language.name, groups_descriptions_language.description,  COUNT(groups_year.groups_id) as count");
 		$this->db->from("groups");
 		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.groups_id", "");
 		$this->db->join("groups_year", "groups.id = groups_year.groups_id", "left");
 		$this->db->group_by("groups.id");
+		
 		$query = $this->db->get();
 
         return $query->result();
@@ -22,7 +23,7 @@ class Group_model extends CI_Model
 
 	function get_group($id)
 	{
-		$this->db->select("groups.id, groups_descriptions_language.name, groups_descriptions_language.description");
+		$this->db->select("groups.id, groups.official, groups_descriptions_language.name, groups_descriptions_language.description");
 		$this->db->from("groups");
 		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.groups_id", "");
 		$this->db->where("groups.id", $id);
@@ -35,6 +36,42 @@ class Group_model extends CI_Model
 		}
 
         return $result;
+	}
+
+	/**
+	 * fetches a specific page, admin-style => more data included
+	 *
+	 * @param  integer	$id		The ID of the news item
+	 * @return array 	
+	 */ 
+	function admin_get_group($id)
+    {
+		$this->db->select("*");
+		$this->db->from("groups");
+		$this->db->from("language");
+		$this->db->join("groups_descriptions", 'groups_descriptions.groups_id = groups.id AND groups_descriptions.lang_id = language.id', 'left');
+		$this->db->where("groups.id",$id);
+		$query = $this->db->get();
+		$translations = $query->result();
+		
+		$this->db->select("groups.id, groups.official, groups_descriptions_language.name");
+		$this->db->from("groups");
+		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.groups_id", "");
+		$this->db->where("groups.id",$id);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		$group_array = $query->result();
+		$group = $group_array[0];
+		
+		$group->translations = array();
+		
+		foreach($translations as $t) 
+		{
+			array_push($group->translations, $t);
+		}
+		
+		return $group;
+		
 	}
 
 	function get_group_members($id)
@@ -123,7 +160,7 @@ class Group_model extends CI_Model
 			$lang_abbr = $translation["lang_abbr"];
 			$title = $translation["name"];
 			$text = $translation["description"];
-			$theSuccess = $this->update_translation($group_id, $lang_abbr, $title, $text);
+			$theSuccess = $this->update_group_translation($group_id, $lang_abbr, $title, $text);
 			if(!$theSuccess)
 			{
 				$success = $theSuccess;
@@ -149,7 +186,7 @@ class Group_model extends CI_Model
 	 * @param  string	$text			The text of the news item translation
 	 * @return bool		True or false depending on success or failure
 	 */
-	function update_translation($news_id, $lang_abbr, $title, $text)
+	function update_group_translation($news_id, $lang_abbr, $title, $text)
 	{
 		$theTitle = trim($title);
 		$theText = trim($text);
@@ -274,6 +311,19 @@ class Group_model extends CI_Model
 		}
 
 		$this->db->insert_batch('users_groups_year', $list);
+	}
+
+	function delete_group($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('groups');
+
+		$this->db->where('groups_id', $id);
+		$this->db->delete('groups_descriptions');
+
+		$this->db->where('groups_id', $id);
+		$this->db->delete('groups_year');
+
 	}
 }
 
