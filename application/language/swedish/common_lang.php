@@ -90,10 +90,13 @@ $lang['admin_editpage'] = "Redigera sidor";
 $lang['admin_addpage'] = "Skapa sida";
 $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här";
 $lang['admin_admingroups'] = "Administrera grupper";
-	$lang['admin_editgroups'] = "Redigera grupp";
+	$lang['admin_addgroup'] = "Skapa grupp";
+	$lang['admin_editgroup'] = "Redigera grupp";
 	$lang['admin_groups_overview'] = "Grupp översikt";
 	$lang['admin_groups_id'] = "Grupp id";
 	$lang['admin_groups_year_count'] = "Antal årgångar";
+	$lang['admin_groups_official'] = "Officiella grupper";
+	$lang['admin_groups_unofficial'] = "Inofficiella grupper";
 	$lang['admin_createnewgroupbyclicking'] = "Skapa en ny grupp genom att klicka här";
 
 // date
@@ -112,6 +115,7 @@ $lang['misc_right'] = "Höger";
 $lang['misc_left'] = "Vänster";
 $lang['misc_approved'] = "Godkänd";
 $lang['misc_draft'] = "Utkast";
+$lang['misc_official'] = "Officiell";
 $lang['misc_published'] = "Publicerad";
 $lang['misc_pending'] = "Väntande";
 $lang['misc_image'] = "Bild";

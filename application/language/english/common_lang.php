@@ -91,10 +91,13 @@ $lang['admin_editpage'] = "Edit page";
 $lang['admin_addpage'] = "Add page";
 $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
 $lang['admin_admingroups'] = "Admin groups";
-	$lang['admin_editgroups'] = "Edit group";
+	$lang['admin_addgroup'] = "Add group";
+	$lang['admin_editgroup'] = "Edit group";
 	$lang['admin_groups_overview'] = "Group overview";
 	$lang['admin_groups_id'] = "Group id";
 	$lang['admin_groups_year_count'] = "Number of years";
+	$lang['admin_groups_official'] = "Official groups";
+	$lang['admin_groups_unofficial'] = "Unofficial groups";
 	$lang['admin_createnewgroupbyclicking'] = "Create a new group by clicking here";
 
 // date
@@ -113,6 +116,7 @@ $lang['misc_right'] = "Right";
 $lang['misc_left'] = "Left";
 $lang['misc_approved'] = "Approved";
 $lang['misc_draft'] = "Draft";
+$lang['misc_official'] = "Official";
 $lang['misc_published'] = "Published";
 $lang['misc_pending'] = "Pending";
 $lang['misc_image'] = "Image";
