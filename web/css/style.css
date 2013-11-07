@@ -467,7 +467,7 @@ form .main-box div {
 	icons
 */
 i.-icon-pen {
-  background: url("/web/img/icons/pencil32.png");
+  background: url("../img/icons/pencil32.png");
   background-size: cover;
   display: block;
 }
