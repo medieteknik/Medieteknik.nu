@@ -5,6 +5,7 @@ echo '
 		<li>', anchor("news",$menu_news), '</li>
 		<li>', anchor("about",$menu_about), '</li>
 		<li>', anchor("association",$menu_association), '</li>
+		<li>', anchor("mtd", $menu_mtd), '</li>
 		<li>', anchor("forum",$menu_forum), '</li>
 		<li>', anchor(substr(site_url(), 0, -2).'se'.uri_string(), $misc_swedish_native), '</li>
 		<li>', anchor(substr(site_url(), 0, -2).'en'.uri_string(), $misc_english_native), '</li>';
