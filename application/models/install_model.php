@@ -121,6 +121,7 @@ class Install_model extends CI_Model
 			$this->User_model->add_user("Simon", "Joelsson", "simjo407", "password");
 			$this->User_model->add_user("Martin", "Kierkegaard", "marki423", "password");
 			$this->User_model->add_user("Mikael", "Zackrisson", "mikza835", "password");
+			$this->User_model->add_user("Arg", "Mtare", "argmt123", "password");
 		}
 	}
 
@@ -679,12 +680,14 @@ class Install_model extends CI_Model
 
 			// inserting users
 			$this->load->model("Forum_model");
-			$this->Forum_model->create_topic(4, 1, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?
+			$this->Forum_model->create_topic(4, 10, 'Vart fan är nya hemsidan?', 'Vad håller webbchefen på med egentligen?', '2013-11-12 19:00:00');
+
+			$this->Forum_model->create_topic(4, 2, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?
 			Det viktiga är inte exakt dag utan på ett ungefär?
 
 			puss', '2011-12-12 11:00:00');
-			$this->Forum_model->create_topic(4, 2, 'LiU is the best.', 'its only a game.', '2011-12-12 12:00:00');
-			$this->Forum_model->add_reply(1, 2, 'Det har redan varit.', '2011-12-12 13:00:00');
+			$this->Forum_model->create_topic(4, 3, 'LiU is the best.', 'its only a game.', '2011-12-12 12:00:00');
+			$this->Forum_model->add_reply(2, 2, 'Det har redan varit.', '2011-12-12 13:00:00');
 		}
 	}
 
@@ -906,7 +909,7 @@ Medieteknik är en utbildning med tyngd­punkt på teknik, där basen är en ged
 
 ###En bransch i ständig förrändring
 Efter utbildningen står du inför en bred och varierad arbetsmarknad – medietekniker från Linköpings universitet arbetar till exempel med specialeffekter i Hollywood­filmer, 3D-visualisering av röntgenbilder, virtuella möbler till IKEA-katalogen, dator­spelsutveckling och med garanterad färg­kvalitet i trycksaker. Det finns också goda möjligheter att efter examen forska inom något favoritområde."),
-									array("lang" => "en", "header" => "Education", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
+									array("lang" => "en", "header" => "About Media Technology", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->Page_model->add_page("association/about", $translations, 1);
 
