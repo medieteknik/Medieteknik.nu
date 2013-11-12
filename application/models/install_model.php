@@ -899,6 +899,7 @@ class Install_model extends CI_Model
 								);
 			$this->Page_model->add_page("404", $translations, 1);
 
+
 			$translations = array(
 									array("lang" => "se", "header" => "Utbildningen", "content" => "Civilingenjör i medieteknik är en mångsidig utbildning med tyngdpunkten på teknik för en bransch i ständig förändring. Liksom alla traditionella civilingenjörsutbildningar, består medieteknik av en gedigen grund i matematik och teknik. Styrkan ligger i vår unika förmåga att vara allsidiga, samtidigt som vi själva har möjligheten att välja vår egen profil och utveckla spetskompetens inom visualisering, grafisk teknik, ljud och video.
 
@@ -911,6 +912,12 @@ class Install_model extends CI_Model
 									array("lang" => "en", "header" => "Education", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->Page_model->add_page("about/education", $translations, 1);
+
+			$translations = array(
+									array("lang" => "se", "header" => "Medieteknikdagarna", "content" => "Det borde man gå på. Läs mer på http://medieteknikdagarna.se/"),
+									array("lang" => "en", "header" => "Media Technology Days", "content" => "You should go to it. Read more http://medieteknikdagarna.se/"),
+								);
+			$this->Page_model->add_page("mtd", $translations, 1);
 
 			/*
 			$translations = array(
