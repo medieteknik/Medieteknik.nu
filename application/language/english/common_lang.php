@@ -10,6 +10,7 @@ $lang['head_author'] = "Media Technology Assosciation web group";
 // menu
 $lang['menu_news'] = "News";	
 $lang['menu_about'] = "Media Technology";
+$lang['menu_mtd'] = "Media Technology Days";
 $lang['menu_archive'] = "Archive";
 $lang['menu_wiki'] = "Wiki";
 $lang['menu_users'] = "List Users";
