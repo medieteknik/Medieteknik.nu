@@ -3,7 +3,6 @@ echo '
 <nav id="main-navigation" class="clearfix">
 	<ul>
 		<li>', anchor("news",$menu_news), '</li>
-		<li>', anchor("about",$menu_about), '</li>
 		<li>', anchor("association",$menu_association), '</li>
 		<li>', anchor("mtd", $menu_mtd), '</li>
 		<li>', anchor("forum",$menu_forum), '</li>
@@ -23,6 +22,8 @@ echo '
 ';
 
 /*
+<li>', anchor("about",$menu_about), '</li>
+
 
 <li>', anchor("test", 'Test'), '</li>
 <li>', anchor("http://wiki.medieteknik.nu/",$menu_wiki), '</li>

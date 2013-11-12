@@ -3,7 +3,7 @@
 
 foreach($groups as $group)
 {
-	do_dump($group);
+	//do_dump($group);
 	echo 	'<div class="main-box clearfix">
 				<h2>',$group->name,'</h2>',
 				text_format($group->description);

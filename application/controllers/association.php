@@ -5,7 +5,7 @@ class Association extends MY_Controller
 	
 	public function index()
 	{
-		$this->page("board");
+		$this->page("about");
 	}
 	
 	public function page()
@@ -24,7 +24,10 @@ class Association extends MY_Controller
 		$main_data['name'] = $string;
 		$main_data['lang'] = $this->lang_data;
 		switch($string) 
-		{
+		{	case "association/about":
+				$main_data['content'] = $this->Page_model->get_page_by_name($string);
+				$template_data['main_content'] = $this->load->view('about_page',  $main_data, true);
+				break;
 			case "association/board":
 				$this->load->model('Group_model');
 				$main_data['groups'] = $this->Group_model->get_group(1);
