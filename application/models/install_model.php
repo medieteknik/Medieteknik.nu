@@ -300,13 +300,12 @@ class Install_model extends CI_Model
 
 			$this->load->model("Group_model");
 			$translations = array(
-									array("lang" => "se", "name" => "Styrelsen", "description" => "Styrelsen is teh shit. Läs mer om våra (association/committee|utskott)"),
+									array("lang" => "se", "name" => "Styrelsen", "description" => "Medietekniksektionen skall bevaka MT-studentens intressen när det gäller såväl studierna som profilering mot näringslivet. Här kommer sektionsstyrelsen in i bilden som sektionens verkställande organ. Kontakta oss på info@medieteknik.nu. Läs mer om våra (association/committee|utskott)"),
 									array("lang" => "en", "name" => "The Board", "description" => "The Board is hard."),
 								);
 			$id = $this->Group_model->add_group($translations);
 			$user_list = array(
-								array("user_id" => 1, "position" => "Studienämndsordförande"),
-								array("user_id" => 5, "position" => "Ordförande"),
+								array("user_id" => 9, "position" => "Webbchef"),
 			);
 			$this->Group_model->add_group_year($id, 2011, 2012, $user_list);
 
@@ -896,6 +895,20 @@ class Install_model extends CI_Model
 									array("lang" => "en", "header" => "The page does not exist", "content" => "The page you tried to reach does not exist. Please report to the webmaster."),
 								);
 			$this->Page_model->add_page("404", $translations, 1);
+
+			$translations = array(
+									array("lang" => "se", "header" => "Om Medieteknik", "content" => "[b]Medieteknikområdet handlar om tekniken bakom medierna och om att omvandla informationsflöden så att de passar våra sinnen. Våra tidigare studenter gör idag allt från specialeffekter i Hollywoodfilmer till virtuella möbler för IKEA.[/b]
+
+										Information i alla dess former spelar en allt viktigare roll i det moderna samhället. Helt nya medier växer fram och äldre medier för­ändras. Gränserna mellan medierna sud­das dessutom ut allt mer, till exempel surfar du, twittrar, chattar, ser på tv och lyssnar på musik med mobilen. Idag kan vi också med datorgrafik och visualisering simulera och animera komplicerade förlopp och struk­turer, för användning i specialeffekter för film och video, i spel och flygsimulatorer och i utbildningsverktyg för kirurger. Ett annat område i utveckling är publicering av information, från tryckteknik till elek­troniska medier. Det här är några exempel som visar på bredden i medieteknikområdet. Vid Linköpings universitet pågår det stän­digt forskning inom visuell informations­teknik och vid Norrköpings stolthet, Visualiseringscenter C, samlas framstående forskare från hela världen.
+
+###Att kommunicera effektivt
+Medieteknik är en utbildning med tyngd­punkt på teknik, där basen är en gedigen grund i matematik, fysik, programmering och informationsteknik. Du får spetskom­petens inom områden som 3D-datorgrafik, information och vetenskaplig visualisering, avancerad kamerateknik och VR-teknik. Samtidigt får du breda kunskaper om ut­formning och utveckling av digitala medier, grafisk teknik, projektledning samt interak­tion mellan människa och teknik. Genom muntliga och skriftliga projektredovisningar utvecklar du förmågan att kommunicera effektivt. De fyra sista terminerna väljer du ett specialområde att fördjupa dig i.
+
+###En bransch i ständig förrändring
+Efter utbildningen står du inför en bred och varierad arbetsmarknad – medietekniker från Linköpings universitet arbetar till exempel med specialeffekter i Hollywood­filmer, 3D-visualisering av röntgenbilder, virtuella möbler till IKEA-katalogen, dator­spelsutveckling och med garanterad färg­kvalitet i trycksaker. Det finns också goda möjligheter att efter examen forska inom något favoritområde."),
+									array("lang" => "en", "header" => "Education", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
+								);
+			$this->Page_model->add_page("association/about", $translations, 1);
 
 			$translations = array(
 									array("lang" => "se", "header" => "Utbildningen", "content" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
