@@ -32,7 +32,6 @@ class Sidebar
 	public function get_association() {
 		$upcomingevents['title'] = $this->lang_data['menu_association'] ;
 		$upcomingevents['items'] = array(
-			array('title' => "Om Medieteknik", 'href' => 'association'),
 			array('title' => "Styrelsen", 'href' => 'association/board'),
 			array('title' => "Utskott", 'href' => 'association/committee'),
 			array('title' => "Webbgruppen", 'href' => 'association/web'),
