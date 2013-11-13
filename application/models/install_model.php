@@ -682,11 +682,11 @@ class Install_model extends CI_Model
 			$this->load->model("Forum_model");
 			$this->Forum_model->create_topic(4, 10, 'Vart fan är nya hemsidan?', 'Vad håller webbchefen på med egentligen?', '2013-11-12 19:00:00');
 
-			$this->Forum_model->create_topic(4, 2, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?
+			$this->Forum_model->create_topic(4, 1, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?
 			Det viktiga är inte exakt dag utan på ett ungefär?
 
 			puss', '2011-12-12 11:00:00');
-			$this->Forum_model->create_topic(4, 3, 'LiU is the best.', 'its only a game.', '2011-12-12 12:00:00');
+			$this->Forum_model->create_topic(4, 2, 'LiU is the best.', 'its only a game.', '2011-12-12 12:00:00');
 			$this->Forum_model->add_reply(2, 2, 'Det har redan varit.', '2011-12-12 13:00:00');
 		}
 	}
