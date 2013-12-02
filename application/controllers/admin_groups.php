@@ -38,7 +38,7 @@ class Admin_groups extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups_overview',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/overview',  $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
@@ -51,8 +51,24 @@ class Admin_groups extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups_edit',  $main_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);					
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function list_members($groups_year_id)
+	{
+		$this->load->library('table');
+
+		// Data for overview view
+		$main_data['member_list'] = $this->Group_model->get_group_members_year($groups_year_id);
+		$main_data['groups_year_id'] = $groups_year_id;
+		$main_data['lang'] = $this->lang_data;
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/list_members',  $main_data, true);
+		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
 	
@@ -69,9 +85,46 @@ class Admin_groups extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups_edit',  $main_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);					
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function edit_member($groups_year_id, $user_id = 0, $do = '')
+	{
+		if($do == 'edit')
+		{
+			$position = $this->input->post('position');
+			$email = $this->input->post('email');
+	
+			$main_data['edit_member'] = $this->Group_model->edit_member($groups_year_id, $user_id, $position, $email);
+		}
+		elseif($do == 'chstatus')
+		{
+			$main_data['chstatus'] = $this->Group_model->disableswitch($id);
+		}
+		elseif($do == 'delete')
+		{
+			$this->Group_model->remove_member($groups_year_id, $user_id);
+			redirect('admin_groups/group_list/'.$groups_year_id, 'refresh');
+		}
+
+		// Data for overview view
+		$main_data['members'] = $this->Group_model->get_group_year_member($groups_year_id, $user_id);
+		$main_data['groups_year_id'] = $groups_year_id;
+		$main_data['lang'] = $this->lang_data;
+		$main_data['whattodo'] = $do;
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/edit_member',  $main_data, true);
+		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function add_member($do = '')
+	{
+
 	}
 	
 	function edit_group($id)
