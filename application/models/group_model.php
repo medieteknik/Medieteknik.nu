@@ -91,6 +91,52 @@ class Group_model extends CI_Model
 		return $result;
 	}
 
+	function get_group_members_year($groups_year_id)
+	{
+		$this->db->select("groups_year.start_year, groups_year.stop_year");
+		$this->db->select("users.first_name, users.last_name");
+		$this->db->select("users_groups_year.position, users_groups_year.email, users_groups_year.user_id");
+		$this->db->select("users_data.gravatar");
+		$this->db->from("groups");
+		$this->db->join("groups_year", "groups_year.groups_id = groups.id", 'left');
+		$this->db->join("users_groups_year", "users_groups_year.groups_year_id = groups_year.id", 'left');
+		$this->db->join("users", "users.id = users_groups_year.user_id", 'left');
+		$this->db->join("users_data", "users_data.users_id = users.id", 'left');
+		$this->db->where("users_groups_year.groups_year_id", $groups_year_id);
+		$query = $this->db->get();
+		$result = $query->result();
+		return $result;
+	}
+
+	function get_group_year_member($groups_year_id, $user_id)
+	{
+		$this->db->select("groups_year.start_year, groups_year.stop_year");
+		$this->db->select("users.first_name, users.last_name");
+		$this->db->select("users_groups_year.position, users_groups_year.email, users_groups_year.user_id");
+		$this->db->select("users_data.gravatar");
+		$this->db->from("groups");
+		$this->db->join("groups_year", "groups_year.groups_id = groups.id", 'left');
+		$this->db->join("users_groups_year", "users_groups_year.groups_year_id = groups_year.id", 'left');
+		$this->db->join("users", "users.id = users_groups_year.user_id", 'left');
+		$this->db->join("users_data", "users_data.users_id = users.id", 'left');
+		$this->db->where("users_groups_year.groups_year_id", $groups_year_id);
+		$this->db->where("users_groups_year.user_id", $user_id);
+		$query = $this->db->get();
+		$result = $query->result();
+		return $result;
+	}
+
+	function get_group_years($id)
+	{
+		$this->db->select("groups_year.id, groups_year.start_year, groups_year.stop_year");
+		$this->db->from("groups_year");
+		$this->db->where("groups_year.groups_id", $id);
+		$this->db->order_by("groups_year.start_year", "asc");
+		$query = $this->db->get();
+		$result = $query->result();
+		return $result;
+	}
+
 	function get_group_name($name, $lang = 'se')
 	{
 		if (preg_match ('/[^A-Za-z0-9_]/i', $name))
@@ -108,6 +154,11 @@ class Group_model extends CI_Model
 		$query = $this->db->get();
 
 	    return $query->result();
+	}
+
+	function edit_member($groups_year_id, $user_id, $position, $email)
+	{
+		return true;
 	}
 
 	/**
@@ -311,6 +362,11 @@ class Group_model extends CI_Model
 		}
 
 		$this->db->insert_batch('users_groups_year', $list);
+	}
+
+	function remove_member($groups_year_id, $user_id)
+	{
+
 	}
 
 	function delete_group($id)
