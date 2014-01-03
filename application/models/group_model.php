@@ -156,11 +156,6 @@ class Group_model extends CI_Model
 	    return $query->result();
 	}
 
-	function edit_member($groups_year_id, $user_id, $position, $email)
-	{
-		return true;
-	}
-
 	/**
 	 * Create a new news
 	 *
@@ -308,8 +303,11 @@ class Group_model extends CI_Model
 	 * @param 	array 	$user_list	list of users
 	 * @return 	integer 			the id for the created group year
 	 */
-	function add_group_year($groups_id, $start_year, $stop_year, $user_list = array())
+	function add_group_year($groups_id, $start_year = 0, $stop_year = 0, $user_list = array())
 	{
+		if($start_year == 0 || $stop_year == 0)
+			return false;
+		
 		// check if group exists, return false if not
 		$query = $this->db->get_where('groups', array('id' => $groups_id), 1, 0);
 		if ($query->num_rows() == 0)
@@ -325,7 +323,8 @@ class Group_model extends CI_Model
 		// get id from from insert query
 		$group_year_id = $this->db->insert_id();
 		// add users to group year
-		$this->add_users_to_group_year($group_year_id, $user_list);
+		if(!empty($user_list))
+			$this->add_users_to_group_year($group_year_id, $user_list);
 
 		// return the created group year id
 		return $group_year_id;
@@ -352,21 +351,68 @@ class Group_model extends CI_Model
 		foreach($list as &$l)
 		{
 			$arr_keys = array_keys($l);
-			if(!in_array("position",$arr_keys) || !in_array("user_id",$arr_keys)) {
+			if(!in_array("user_id",$arr_keys)) {
 				return false;
 			}
 			if(!in_array("email",$arr_keys)) {
 				$l['email'] = '';
 			}
+			if(!in_array("position",$arr_keys)) {
+				$l['position'] = '';
+			}
+
 			$l['groups_year_id'] = $groups_year_id;
+
+			$query = $this->db->get_where('users_groups_year', array('groups_year_id' => $groups_year_id, 'user_id' => $l['user_id']), 1, 0);
+			if ($query->num_rows() != 0)
+				return false;
 		}
 
-		$this->db->insert_batch('users_groups_year', $list);
+		return $this->db->insert_batch('users_groups_year', $list);
+	}
+
+	function update_member_info($groups_year_id, $user_id, $position, $email)
+	{
+		$thePosition = trim($position);
+		$theEmail = trim($email);
+
+		// check if the user exists in the group
+		$this->db->where('groups_year_id', $groups_year_id);
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get('users_groups_year');
+		if($query->num_rows != 1)
+		{
+			//Should be one user with that user_id in that group
+			return false;
+		}
+		else
+		{
+			$data = array(	'position'		=> $thePosition,
+							'email'		=> $theEmail,
+						);
+			$this->db->where('groups_year_id', $groups_year_id);
+			$this->db->where('user_id', $user_id);
+			$this->db->update('users_groups_year', $data);
+			return true;
+		}
+
+		return false;
 	}
 
 	function remove_member($groups_year_id, $user_id)
 	{
+		$this->db->where('groups_year_id', $groups_year_id);
+		$this->db->where('user_id', $user_id);
+		$this->db->delete('users_groups_year');
+	}
 
+	function remove_groups_year($groups_year_id)
+	{
+		$this->db->where('id', $groups_year_id);
+		$this->db->delete('groups_year');
+
+		$this->db->where('groups_year_id', $groups_year_id);
+		$this->db->delete('users_groups_year');
 	}
 
 	function delete_group($id)

@@ -38,9 +38,10 @@ if(isset($page) && $page != false) {
 	$arr = $languages;
 }
 
-//do_dump($arr);
+//do_dump($page);
+do_dump($arr);
 foreach($arr as $t) {
-	
+
 	$t_title = '';
 	$t_text = '';
 	$language_abbr = '';
