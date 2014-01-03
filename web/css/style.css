@@ -297,6 +297,17 @@ tr i.-icon-pen {
 tr:hover i.-icon-pen {
   opacity: 1; }
 
+tr i.-icon-adduser {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  opacity: 0; }
+
+tr:hover i.-icon-adduser {
+  opacity: 1; }
+
+
 /**
  *	forum styles
  */
@@ -468,6 +479,11 @@ form .main-box div {
 */
 i.-icon-pen {
   background: url("../img/icons/pencil32.png");
+  background-size: cover;
+  display: block;
+}
+i.-icon-adduser {
+  background: url("../img/icons/userplus32.png");
   background-size: cover;
   display: block;
 }
