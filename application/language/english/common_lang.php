@@ -95,11 +95,20 @@ $lang['admin_admingroups'] = "Admin groups";
 	$lang['admin_addgroup'] = "Add group";
 	$lang['admin_editgroup'] = "Edit group";
 	$lang['admin_groups_overview'] = "Group overview";
+	$lang['admin_groups_position'] = "Position";
 	$lang['admin_groups_id'] = "Group id";
 	$lang['admin_groups_year_count'] = "Number of years";
+	$lang['admin_groups_add_year'] = "Add year";
+	$lang['admin_groups_startyear'] = "Start year";
+	$lang['admin_groups_stopyear'] = "End year";
+	$lang['admin_groups_editmembers'] = "Edit members";
+	$lang['admin_groups_editmember'] = "Edit member";
+	$lang['admin_groups_deletemember'] = "Delete member";
 	$lang['admin_groups_official'] = "Official groups";
 	$lang['admin_groups_unofficial'] = "Unofficial groups";
 	$lang['admin_createnewgroupbyclicking'] = "Create a new group by clicking here";
+	$lang['admin_addmemberbyclicking'] = "Add new member by clicking here";
+	$lang['admin_addasmember'] = "Add as member";
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -142,6 +151,7 @@ $lang['misc_done'] = "Done!";
 $lang['misc_gotopage'] = "Go to page";
 $lang['misc_title'] = "Title";
 $lang['misc_description'] = "Description";
+$lang['misc_delete'] = "Delete";
 
 // error
 $lang['error_error'] = "Error!";

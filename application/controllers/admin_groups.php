@@ -13,6 +13,7 @@ class Admin_groups extends MY_Controller
 		}
 		// access granted, loading modules and helpers
 		$this->load->model('Group_model');
+		$this->load->model('User_model');
 		$this->load->helper('form');
 
 		$this->languages = array	(
@@ -56,12 +57,13 @@ class Admin_groups extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function list_members($groups_year_id)
+	function list_members($groups_year_id, $group_id)
 	{
 		$this->load->library('table');
 
 		// Data for overview view
 		$main_data['member_list'] = $this->Group_model->get_group_members_year($groups_year_id);
+		$main_data['group_id'] = $group_id;
 		$main_data['groups_year_id'] = $groups_year_id;
 		$main_data['lang'] = $this->lang_data;
 
@@ -90,28 +92,25 @@ class Admin_groups extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function edit_member($groups_year_id, $user_id = 0, $do = '')
+	function edit_member($groups_year_id, $group_id, $user_id = 0, $do = '')
 	{
 		if($do == 'edit')
 		{
 			$position = $this->input->post('position');
 			$email = $this->input->post('email');
 	
-			$main_data['edit_member'] = $this->Group_model->edit_member($groups_year_id, $user_id, $position, $email);
-		}
-		elseif($do == 'chstatus')
-		{
-			$main_data['chstatus'] = $this->Group_model->disableswitch($id);
+			$main_data['edit_member'] = $this->Group_model->update_member_info($groups_year_id, $user_id, $position, $email);
 		}
 		elseif($do == 'delete')
 		{
 			$this->Group_model->remove_member($groups_year_id, $user_id);
-			redirect('admin_groups/group_list/'.$groups_year_id, 'refresh');
+			redirect('admin_groups/list_members/'.$groups_year_id.'/'.$group_id, 'refresh');
 		}
 
 		// Data for overview view
 		$main_data['members'] = $this->Group_model->get_group_year_member($groups_year_id, $user_id);
 		$main_data['groups_year_id'] = $groups_year_id;
+		$main_data['group_id'] = $group_id;
 		$main_data['lang'] = $this->lang_data;
 		$main_data['whattodo'] = $do;
 
@@ -122,9 +121,44 @@ class Admin_groups extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function add_member($do = '')
+	function add_member($groups_year_id = 0, $group_id = 0, $do = '', $user_id = 0)
 	{
+		if($groups_year_id == 0)
+		{
+			//typ show_404
+		}
 
+		$main_data['lang'] = $this->lang_data;
+		$this->load->library('table');
+
+		$main_data['groups_year_id'] = $groups_year_id;
+		$main_data['group_id'] = $group_id;
+
+		if($do == 'search') // if form is sent
+		{
+			$main_data['result'] = $this->User_model->search_user($this->input->post('search'));
+			$main_data['query'] = $this->input->post('search');
+		}
+		else if($do == 'add')
+		{
+			if($user_id != 0)
+			{
+				$user = array(
+					array("user_id" => $user_id),
+				);
+
+				$createuser = $this->Group_model->add_users_to_group_year($groups_year_id, $user);
+
+				$main_data['user_added'] = $user_id;
+				$main_data['status'] = $createuser;
+			}
+		}
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/add_member',  $main_data, true);
+		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
 	}
 	
 	function edit_group($id)
@@ -169,6 +203,46 @@ class Admin_groups extends MY_Controller
 
 		$this->db->trans_complete();
 		redirect('admin_groups', 'refresh');
+	}
+
+	function remove_year($groups_year_id = 0)
+	{
+		if($groups_year_id == 0)
+		{
+			show_404();
+		}
+
+		$this->Group_model->remove_groups_year($groups_year_id);
+
+		redirect('admin_groups', 'refresh');
+	}
+
+	function add_year($group_id = 0, $do = '')
+	{
+		$main_data['lang'] = $this->lang_data;
+
+		if($do == 'create') // if form is sent
+		{
+			$startyear = $this->input->post('startyear');
+			$stopyear = $this->input->post('stopyear');
+
+			$main_data['entered'] = array(
+										'start' => $stopyear,
+										'stop' => $stopyear,
+									);
+
+			$createuser = $this->Group_model->add_group_year($group_id, $startyear, $stopyear);
+
+			$main_data['status'] = $createuser;
+		}
+
+		$main_data['group_id'] = $group_id;
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/add',  $main_data, true);
+		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
 	}
 
 	function delete($id = 0)

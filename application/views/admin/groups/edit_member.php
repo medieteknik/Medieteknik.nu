@@ -1,7 +1,7 @@
 <?php
 
 $member = $members[0];
-do_dump($member);
+//do_dump($member);
 
 if($member->user_id == 0)
 	redirect('error_page/user/?msg=notfound-adm', 'refresh');
@@ -19,7 +19,6 @@ $email = array(
 			'value'			=> $member->email,
 			'maxlength'		=> '100',
 			'size'			=> '50',
-			'placeholder'	=> 'http://'
 		);
 
 if($whattodo !== '')
@@ -45,10 +44,10 @@ if($whattodo !== '')
 }
 
 //begin with information form
-echo form_open('admin_groups/edit_group_member/'.$groups_year_id.'/'.$member->user_id.'/edit'),'
+echo form_open('admin_groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/edit'),'
 <div class="main-box clearfix profile">
 	<h2>'.$lang['admin_groups_editmember'].' <em>'.get_full_name($member).'</em>
-	'.anchor('admin_user/user_list', '&larr; '.$lang['misc_back']).'</h2>';
+	'.anchor('admin_groups/list_members/'.$groups_year_id.'/'.$group_id, '&larr; '.$lang['misc_back']).'</h2>';
 
 	echo '<div class="row">';
 		echo '<div class="col-2">',
@@ -70,11 +69,11 @@ form_close();
 ?>
 <div class="main-box clearfix">
 	<h3>
-		<?php echo $lang['admin_edituser_drama']; ?>
+		<?php echo $lang['admin_edituser_drama']; ?>	
 	</h3>
 	<p>
 		<?php
-			echo anchor('admin_groups/edit_group_member/'.$groups_year_id.'/'.$member->user_id.'/delete', $lang['admin_groups_deletemember'], 'class="button"');
+			echo anchor('admin_groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/delete', $lang['admin_groups_deletemember'], 'class="button"');
 		?>
 	</p>
 </div>

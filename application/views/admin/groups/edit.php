@@ -36,6 +36,8 @@ if(isset($group) && $group != false) {
 }
 
 foreach($arr as $t) {
+	//do_dump($t);
+
 	$t_name = '';
 	$t_description = '';
 	$language_abbr = '';
@@ -65,6 +67,8 @@ foreach($arr as $t) {
               'rows'		=>	10,
               'cols'		=>	85,
             );
+
+	//do_dump($name);
 	
 	echo '
 	<div class="main-box clearfix">
@@ -77,21 +81,23 @@ foreach($arr as $t) {
 }
 echo form_close();
 
+echo '<div class="main-box clearfix profile">';
 
+if(isset($id))
+{
+	//Lista år
+	$group_years = $this->Group_model->get_group_years($id);
+	//do_dump($group_years);
+	echo '<h2>'.$lang['admin_groups_editmembers'].'</h2>
+		<ul class="box-list">';
+			foreach($group_years as $group_year)
+				echo '<li>'.anchor("admin_groups/list_members/".$group_year->id.'/'.$id, $group_year->start_year.'/'.$group_year->stop_year).'</li>';
 
-//Lista år
-$group_years = $this->Group_model->get_group_years($id);
-//do_dump($group_years);
-echo '
-<div class="main-box clearfix profile">
-	<h2>'.$lang['admin_groups_editmembers'].'</h2>
-	<ul class="box-list">';
-		foreach($group_years as $group_year)
-			echo '<li>'.anchor("admin_groups/list_members/".$group_year->id, $group_year->start_year.'/'.$group_year->stop_year).'</li>';
+		echo '</ul>
+	<p>',anchor('admin_groups/add_year/'.$id, $lang['admin_createnewgroupbyclicking']),'</p>';
+}
 
-	echo '</ul>
-
-</div><!-- close .main-box -->';
+echo '</div><!-- close .main-box -->';
 
 //Ta bort grupp
 echo '
