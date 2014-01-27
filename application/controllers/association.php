@@ -36,7 +36,7 @@ class Association extends MY_Controller
 				break;
 			case "association/documents":
 				$this->load->model('Documents_model');
-				$main_data['documents'] = $this->Documents_model->get_all_documents_for_group(1);
+				$main_data['document_types'] = $this->Documents_model->get_all_documents_for_group(1);
 				$main_data['group'] = "Medietekniksektionen";
 				$template_data['main_content'] = $this->load->view('documents_view',  $main_data, true);
 				break;
