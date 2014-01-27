@@ -14,6 +14,9 @@ echo '<!DOCTYPE html>
 	<link rel="stylesheet" href="', base_url(),'web/css/google_font.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="', base_url(),'web/css/style.css" type="text/css" media="screen">
 
+    <!--    Load DropZone        -->
+    <link rel="stylesheet" href="',base_url(), 'web/css/dropzone.css" type="text/css" />
+
 	<link rel="shortcut icon" href="', base_url(), '/web/img/favicon.ico" />
 	<link rel="apple-touch-icon" href="', base_url(), 'web/img/apple-touch-icon/apple-touch-icon-precomposed.png" />
 	<link rel="apple-touch-icon" sizes="72x72" href="', base_url(). 'web/img/apple-touch-icon/apple-touch-icon-72x72-precomposed.png" />

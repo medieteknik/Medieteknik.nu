@@ -1,4 +1,5 @@
 <?php
+do_dump($group);
 
 // prepare all the data
 $official = array(		'name'        => 'official',
