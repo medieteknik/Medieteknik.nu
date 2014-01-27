@@ -532,7 +532,12 @@ function get_documents_fields()
 			'unsigned' => TRUE,
 			'auto_increment' => TRUE
 		),
-		'user_id' => array(
+			'type' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+			'user_id' => array(
 			'type' => 'INT',
 			'constraint' => 5,
 			'unsigned' => TRUE,
@@ -559,6 +564,23 @@ function get_documents_fields()
 		),
 		'upload_date' => array(
 			'type' => 'TIMESTAMP'
+		),
+		);
+	return $fields;
+}
+
+function get_document_types_fields()
+{
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'document_type' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '30',
 		),
 		);
 	return $fields;
