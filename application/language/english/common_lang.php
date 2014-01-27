@@ -57,12 +57,23 @@ $lang['user_gravatar'] = 'Medieteknik.nu uses Gravatar to provide profile pictur
 $lang['groups_title'] = "Groups";
 $lang['groups_nomatch'] = "No groups matched your search criteria";
 
+//documents
+$lang['document_protocol'] = 'Protocol';
+$lang['document_association_meetings'] = 'Association meetings';
+$lang['document_protocol_normal'] = 'Board meeting';
+$lang['document_documents_meeting_autumn'] = 'Autumn meeting';
+$lang['document_documents_meeting_spring'] = 'Spring meeting';
+$lang['document_directional_document'] = 'Directional documents';
+
+
 // admin
 $lang['admin_addnews'] = "Create news";
 $lang['admin_editnews'] = "Edit news";
 $lang['admin_adminnews'] = "Admin news";
 $lang['admin_editimages'] = "Edit images";
 $lang['admin_adminimages'] = "Admin images";
+$lang['admin_admingroups'] = "Admin groups";
+$lang['admin_admindocuments'] = "Admin documents";
 $lang['admin_addimage'] = "Add image";
 $lang['admin_addimagebyclickinghere'] = "Click here to add a new image to the library";
 $lang['admin_listusers'] = "List users";
@@ -91,7 +102,6 @@ $lang['admin_adminpage'] = "Admin pages";
 $lang['admin_editpage'] = "Edit page";
 $lang['admin_addpage'] = "Add page";
 $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
-$lang['admin_admingroups'] = "Admin groups";
 	$lang['admin_addgroup'] = "Add group";
 	$lang['admin_editgroup'] = "Edit group";
 	$lang['admin_groups_overview'] = "Group overview";
