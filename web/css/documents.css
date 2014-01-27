@@ -14,6 +14,7 @@ ul.document-list a:hover {
 
 ul.document-list i {
 	margin-top: 3px;
+	margin-right: 5px;
 }
 
 ul.document-list li:nth-child(odd) {
@@ -38,5 +39,5 @@ li.document h4 {
 }
 
 li.document small {
-	font-size: 9pt;
+	font-size: 10pt;
 }
