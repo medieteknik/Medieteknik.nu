@@ -35,6 +35,7 @@ class Install_model extends CI_Model
 		$this->create_users_privileges_table();
 		$this->create_images_table();
 		$this->create_documents_table();
+		$this->create_document_types_table();
 		$this->create_news_images_table();
 		$this->create_page_table();
 		$this->create_page_content_table();
@@ -71,6 +72,7 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('users_privileges');
 		$this->dbforge->drop_table('images');
 		$this->dbforge->drop_table('documents');
+		$this->dbforge->drop_table('document_types');
 		$this->dbforge->drop_table('news_images');
 		$this->dbforge->drop_table('page');
 		$this->dbforge->drop_table('page_content');
@@ -834,9 +836,10 @@ class Install_model extends CI_Model
 					if(preg_match('/(.pdf)$/i', $file)){
 						$data = array(
 							'user_id' => 1,
+							'type' => 2,
 							'document_original_filename' => $file,
-							'document_title' => 'sample_document',
-							'document_description' => 'sample_document',
+							'document_title' => str_replace('.pdf', "", $file),
+							'document_description' => 'Document description',
 							'group_id' => 1,
 							'is_public' => true
 						);
@@ -847,6 +850,51 @@ class Install_model extends CI_Model
 			}
 		}
 	}
+
+	function create_document_types_table()
+	{
+		if(!$this->db->table_exists('document_types') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_document_types_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);
+			$this->dbforge->create_table('document_types');
+
+			log_message('info', "Created table: document_types");
+
+			$data = array(
+			   	'document_type' => 'protocol',
+			);
+			$this->db->insert('document_types', $data);
+
+			// $data = array(
+			//    	'document_type' => 'protocol_autumn',
+			// );
+			// $this->db->insert('document_types', $data);
+
+			// $data = array(
+			//    	'document_type' => 'protocol_spring',
+			// );
+			// $this->db->insert('document_types', $data);
+
+			$data = array(
+			   	'document_type' => 'directional_document',
+			);
+			$this->db->insert('document_types', $data);
+			
+			$data = array(
+			   	'document_type' => 'documents_meeting_autumn',
+			);
+			$this->db->insert('document_types', $data);
+
+			$data = array(
+			   	'document_type' => 'documents_meeting_spring',
+			);
+			$this->db->insert('document_types', $data);			
+		}
+	}
+
 
 	function create_news_images_table()
 	{
