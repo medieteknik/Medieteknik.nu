@@ -113,6 +113,7 @@ echo '
 <h2>Dokumentarkiv för ' . $group . '</h2>
 <ul class = "document-list clearfix">';
 
+$do_dump($document_types);
 foreach ($document_types as $type) {
 	echo '<h3>'.$lang['document_'.$type->document_type].'</h3>';
 	foreach ($type->documents as $doc) {
