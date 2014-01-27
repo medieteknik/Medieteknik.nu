@@ -56,12 +56,22 @@ $lang['user_gravatar'] = 'Vi använder oss av Gravatar för att tillhandahålla 
 $lang['groups_title'] = "Grupper";
 $lang['groups_nomatch'] = "Ingen grupp matchade ditt sökkriterium";
 
+//documents
+$lang['document_protocol'] = 'Protokoll';
+$lang['document_association_meetings'] = 'Styrelsemöten';
+$lang['document_protocol_normal'] = 'Styrelsemöte';
+$lang['document_documents_meeting_autumn'] = 'Höstmöte';
+$lang['document_documents_meeting_spring'] = 'Vårmöte';
+$lang['document_directional_document'] = 'Styrdokument';
+
 // admin
 $lang['admin_addnews'] = "Skapa nyhet";
 $lang['admin_editnews'] = "Redigera nyhet";
 $lang['admin_adminnews'] = "Administrera nyheter";
 $lang['admin_editimages'] = "Redigera bilder";
 $lang['admin_adminimages'] = "Administrera bilder";
+$lang['admin_admingroups'] = "Administrera grupper";
+$lang['admin_admindocuments'] = "Administrera dokument";
 $lang['admin_addimage'] = "Ladda upp bild";
 $lang['admin_addimagebyclickinghere'] = "Klicka här för att ladda upp en ny bild till biblioteket";
 $lang['admin_listusers'] = "Lista användare";
@@ -90,7 +100,6 @@ $lang['admin_adminpage'] = "Administrera sidor";
 $lang['admin_editpage'] = "Redigera sidor";
 $lang['admin_addpage'] = "Skapa sida";
 $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här";
-$lang['admin_admingroups'] = "Administrera grupper";
 	$lang['admin_addgroup'] = "Skapa grupp";
 	$lang['admin_editgroup'] = "Redigera grupp";
 	$lang['admin_groups_overview'] = "Grupp översikt";
