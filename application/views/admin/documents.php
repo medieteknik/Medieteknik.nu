@@ -43,7 +43,15 @@ echo '
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		$('#title').val("Styrelsemöte");
+	    var now = new Date();
+	 
+	    var day = ("0" + now.getDate()).slice(-2);
+	    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+	    $('#date').val(today);	    
+	    $('#title').val("Styrelsemöte");
 	    $('#description').val("Protokoll från styrelsemötet " + $('#date').val());
 
 	    $('#type').change(function() {
@@ -98,9 +106,7 @@ echo '
 			</select></br>
 			<?php echo $lang['misc_title'].': ' ?><input id="title" type="text" size = "50" name="title" disabled="disabled"/>
 			<?php echo $lang['misc_description'].': ' ?><input id="description" type="text" size = "50" name="description" disabled="disabled"/>
-			<input id="date" type="date" name="date" value=<?php echo $theTime = date("Y-m-d H:i",time());?>>
-		
-
+			<input id="date" type="date" name="upload_date">
 </form></br>
 <?php
 //List documents
