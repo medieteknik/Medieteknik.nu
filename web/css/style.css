@@ -514,6 +514,28 @@ form .main-box div {
   -webkit-box-shadow: 0 1px 1px #aaaaaa;
   box-shadow: 0 1px 1px #aaaaaa; }
 
+select.document {
+  outline: none;
+  -webkit-appearance: none;
+  font: 1.0em'Asap';
+  font-weight: bold;
+  color: #111;
+  cursor: pointer;
+  border: solid 1px;
+  border-color: #f4f4f4;
+  border-radius: 3px;
+  margin-left: -2px;
+  margin-bottom: 0px;
+  min-width: 180px;
+  box-sizing: border-box; 
+  background: #f4f4f4 url('../img/icons/dropdown_triangle.png') no-repeat scroll right center;
+}
+select.document:hover, select.document:active {
+  /*color: #f57d20;*/ /*Fult när ikonen inte ändrar färg*/
+  background-color: #fafafa;
+  border-color: #c0c0c0;
+}
+
 .dropzone-outer{
   padding-bottom: 200px;
   position: relative;
