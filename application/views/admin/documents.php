@@ -133,7 +133,7 @@ foreach($protocols as $protocols_docs)
 		$dropdown_uri = '';				
 	else if(sizeof($uri) == 3) 		//admin_documents/overview
 		$dropdown_uri = 'overview/';
-	else if(sizeof($uri) == 2) 	//admin_documents
+	else if(sizeof($uri) == 2) 		//admin_documents
 		$dropdown_uri = 'admin_documents/overview/';
 
 	foreach($document_years_array as $year)
