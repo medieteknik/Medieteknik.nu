@@ -19,13 +19,6 @@ class Admin_documents extends MY_Controller
 
 	public function index()
 	{
-			// $protocol_year = date("Y",time());
-			// $month = date("m", time());
-
-			// if($month < 6)
-			// 	$protocol_year--;
-
-			// redirect("admin_documents/overview/$protocol_year", 'refresh');
 		$this->overview();
 	}
 	
@@ -39,9 +32,7 @@ class Admin_documents extends MY_Controller
 			if($month < 6)
 				$protocol_year--;
 
-			// redirect("admin_documents/overview/$protocol_year", 'refresh');
 		}
-
 		$main_data['config'] = $this->Documents_model->get_config();
 		$main_data['document_years_array'] = $this->Documents_model->get_document_years(2005);
 
