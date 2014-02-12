@@ -84,7 +84,7 @@ class Install_model extends CI_Model
 		$query = $this->db->query("SHOW FUNCTION STATUS");
 		foreach($query->result() as $r)
 		{
-			if($r->Db == "medieteknik")
+			if($r->Db == $this->db->database)
 			{
 				$arr[] = $r->Name;
 			}
