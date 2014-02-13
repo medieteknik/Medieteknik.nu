@@ -2743,7 +2743,6 @@ class CAS_Client
      */
     public function validateCAS20(&$validate_url,&$text_response,&$tree_response)
     {
-        echo "VALIDATE";
         phpCAS::traceBegin();
         phpCAS::trace($text_response);
         $result = false;
@@ -2769,8 +2768,8 @@ class CAS_Client
             $result = false;
         }
 
-        //Nödvändig fix av någon anledning
-        //$text_response = substr($text_response, 2) . ">";
+        //Nödvändig fix på min (Mikael) localhost av någon anledning
+        $text_response = substr($text_response, 2) . ">";
 
         // create new DOMDocument object
         $dom = new DOMDocument();
