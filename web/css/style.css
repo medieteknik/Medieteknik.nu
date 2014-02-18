@@ -35,10 +35,12 @@ a.button {
     box-shadow: 0 1px 1px #aaaaaa; }
 
 html, body {
+  height: 100%;
   background-color: #e8e8e9;
   text-align: center;
   font: 0.95em'Asap'; }
 
+/* Header */
 #main-header {
   height: 118px;
   background-color: #f4f4f4;
@@ -58,6 +60,137 @@ html, body {
   padding-top: 10px;
   margin-right: 25px;
   float: left; }
+
+/* Footer */
+#main-footer {
+  border-top: 1px solid #aaaaaa;
+  height: 120px;
+  margin-top: 30px;
+  background-color: #e8e8e9;/*#f4f4f4;*/
+  color: #666; }
+
+#main-footer h1 {
+  padding: 12px 0px 12px 0px;
+  font-size: 0.9em;
+}
+
+#main-footer a {
+  color: #666;
+  text-decoration:none;
+  line-height: 160%;
+}
+
+#main-footer a:hover {
+  color: #f57d20; }
+
+#main-footer .left{
+  padding-top: 12px;
+  float: left;
+  width:50%;
+}
+
+#main-footer .left .block{
+  float: left;
+  width:50%;
+  display:block;
+}
+
+#main-footer .right{
+  padding-top: 28px;
+  float: right;
+  width:50%;
+}
+
+#main-footer .right .facebook{
+  background: #dcdcdc url('../img/facebook.png') center center no-repeat;
+  display: block;
+  margin-right: 15px;
+  float: right;
+  width: 65px;
+  height: 65px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#main-footer .right .twitter{
+  background: #dcdcdc url('../img/twitter.png') center center no-repeat;
+  display: block;
+  margin-right: 15px;
+  float: right;
+  width: 65px;
+  height: 65px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#main-footer .right .linkedin{
+  background: #dcdcdc url('../img/linkedin.png') center center no-repeat;
+  display: block;
+  margin-right: 15px;
+  float: right;
+  width: 65px;
+  height: 65px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#main-footer .right .facebook:hover {
+  background: #c0c0c0 url('../img/facebook.png') center center no-repeat;
+}
+
+#main-footer .right .twitter:hover {
+  background: #c0c0c0 url('../img/twitter.png') center center no-repeat;
+}
+
+#main-footer .right .linkedin:hover {
+  background: #c0c0c0 url('../img/linkedin.png') center center no-repeat;
+}
+
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height + margin*/
+  margin-bottom: -150px; 
+}
+
+.page-wrap:after {
+  margin-top: 30px;
+  height: 120px;
+  content: "";
+  display: block;
+}
 
 .wrapper {
   margin: 0 auto 0 auto;
