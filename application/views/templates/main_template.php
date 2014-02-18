@@ -25,33 +25,55 @@ echo '<!DOCTYPE html>
 <body>
 <!-- END head -->
 
-<!-- START header -->
-<header id="main-header">
-	<div class="wrapper">
-		',anchor("/","<img id=\"main-header-logo\" src=\"".base_url()."web/img/mt-logo-header.png\" alt=\"Medieteknik.nu\" />"),'
-		<h1>Civilingenjör i Medieteknik</h1>
-		<h2>Tekniska högskolan vid Linköpings Universitet</h2>
-	</div>
-</header>
-<!-- END header -->
+<div class="page-wrap">
+	<!-- START header -->
+	<header id="main-header">
+		<div class="wrapper">
+			',anchor("/","<img id=\"main-header-logo\" src=\"".base_url()."web/img/mt-logo-header.png\" alt=\"Medieteknik.nu\" />"),'
+			<h1>Civilingenjör i Medieteknik</h1>
+			<h2>Tekniska högskolan vid Linköpings Universitet</h2>
+		</div>
+	</header>
+	<!-- END header -->
 
-<!-- START main -->
-<div class="wrapper">',
-	$menu,
-	'<div id="main-content">
-		<div id="main-left">',
-			$main_content,
-		'</div>
-		<div id="main-right">',
-			$sidebar_content.
-		'</div>
+	<!-- START main -->
+	<div class="wrapper">',
+		$menu,
+		'<div id="main-content" class="clearfix">
+			<div id="main-left">',
+				$main_content,
+			'</div>
+			<div id="main-right">',
+				$sidebar_content.
+			'</div>
+		</div>
 	</div>
+	<!-- END main -->
 </div>
-<!-- END main -->
+
+<!-- START footer -->
+<footer id="main-footer">
+	<div class="wrapper">
+		<div class="left">
+			<div class="block">
+				<h1>KONTAKT</h1><a href="mailto:info@medieteknik.nu">info@medieteknik.nu</a>
+			</div>
+			<div class="block">
+			 	<h1>INFORMATION</h1>',anchor("/about-website", "Om hemsidan"),'<br>',
+			 	anchor("","Kakor"),'
+			</div>
+		</div>
+		<div class="right">
+			<a href="http://www.linkedin.com/groups?gid=5159466" class="linkedin"></a>
+			<a href="https://www.facebook.com/mtsektionen" class="facebook"></a>
+			<a href="http://twitter.com/mtsektionen" class="twitter"></a>			
+		</div>
+	</div>
+</footer>
+<!-- END footer -->
 
 </body>
-</html>
-';
+</html>';
 
 /*
 	<!-- JavaScript at the bottom for fast page loading -->
