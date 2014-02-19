@@ -56,16 +56,16 @@ echo '<!DOCTYPE html>
 	<div class="wrapper">
 		<div class="left">
 			<div class="block">
-				<h1>KONTAKT</h1><a href="mailto:info@medieteknik.nu">info@medieteknik.nu</a>
+				<h1>',$lang['footer_contact'],'</h1><a href="mailto:info@medieteknik.nu">info@medieteknik.nu</a>
 			</div>
 			<div class="block">
-			 	<h1>INFORMATION</h1>',anchor("/about-website", "Om hemsidan"),'<br>',
-			 	anchor("","Kakor"),'
+			 	<h1>',$lang['footer_info'],'</h1>',anchor("/about/website", $lang['footer_aboutsite']),'<br>',
+			 	anchor("/about/cookies", $lang['footer_cookies']),'
 			</div>
 		</div>
 		<div class="right">
-			<a href="http://www.linkedin.com/groups?gid=5159466" class="linkedin"></a>
-			<a href="https://www.facebook.com/mtsektionen" class="facebook"></a>
+			<a href="http://linkedin.com/groups?gid=5159466" class="linkedin"></a>
+			<a href="http://facebook.com/mtsektionen" class="facebook"></a>
 			<a href="http://twitter.com/mtsektionen" class="twitter"></a>			
 		</div>
 	</div>
