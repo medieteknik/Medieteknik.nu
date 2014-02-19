@@ -14,6 +14,10 @@ echo '<!DOCTYPE html>
 	<link rel="stylesheet" href="', base_url(),'web/css/google_font.css" type="text/css" media="screen">
 	<link rel="stylesheet" href="', base_url(),'web/css/style.css" type="text/css" media="screen">
 
+	<!-- load less -->
+	<link rel="stylesheet/less" type="text/css" href="', base_url(),'web/css/style.less" />
+	<script src="', base_url(),'web/js/libs/less.js" type="text/javascript"></script>
+
     <!--    Load DropZone        -->
     <link rel="stylesheet" href="',base_url(), 'web/css/dropzone.css" type="text/css" />
 
@@ -66,7 +70,7 @@ echo '<!DOCTYPE html>
 		<div class="right">
 			<a href="http://linkedin.com/groups?gid=5159466" class="linkedin"></a>
 			<a href="http://facebook.com/mtsektionen" class="facebook"></a>
-			<a href="http://twitter.com/mtsektionen" class="twitter"></a>			
+			<a href="http://twitter.com/mtsektionen" class="twitter"></a>
 		</div>
 	</div>
 </footer>
