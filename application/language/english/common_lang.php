@@ -7,6 +7,14 @@ $lang['head_title'] = "Master of Science in Media Technology and Engineering";
 $lang['head_description'] = "Media Technology association official website";
 $lang['head_author'] = "Media Technology Assosciation web group";
 
+// header
+
+// footer
+$lang['footer_contact'] = "CONTACT";
+$lang['footer_info'] = "INFORMATION";
+$lang['footer_aboutsite'] = "About the website";
+$lang['footer_cookies'] = "About cookies";
+
 // menu
 $lang['menu_news'] = "News";	
 $lang['menu_about'] = "Media Technology";

@@ -7,6 +7,14 @@ $lang['head_title'] = "Civilingenjör i Medieteknik";
 $lang['head_description'] = "Medietekniksektionens officiella hemsida";
 $lang['head_author'] = "Medietekniks Webbutskott";
 
+// header
+
+// footer
+$lang['footer_contact'] = "KONTAKT";
+$lang['footer_info'] = "INFORMATION";
+$lang['footer_aboutsite'] = "Om hemsidan";
+$lang['footer_cookies'] = "Om kakor";
+
 // menu
 $lang['menu_news'] = "Nyheter";
 $lang['menu_about'] = "Medieteknik";
