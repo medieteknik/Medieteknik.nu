@@ -32,11 +32,13 @@ class Association extends MY_Controller
 		{	case "association/board":
 				$this->load->model('Group_model');
 				$main_data['groups'] = $this->Group_model->get_group(1);
+				$main_data['group_years'] = $this->Group_model->get_group_years(1);
 				$template_data['main_content'] = $this->load->view('group_overview',  $main_data, true);
 				break;
 			case "association/web":
 				$this->load->model('Group_model');
 				$main_data['groups'] = $this->Group_model->get_group(2);
+				$main_data['group_years'] = $this->Group_model->get_group_years(2);
 				$template_data['main_content'] = $this->load->view('group_overview',  $main_data, true);
 				break;
 			case "association/documents":

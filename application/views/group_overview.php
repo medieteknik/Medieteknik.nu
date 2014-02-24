@@ -1,5 +1,6 @@
 <?php
 
+$most_recent_group = end($group_years);
 
 foreach($groups as $group)
 {
@@ -9,12 +10,16 @@ foreach($groups as $group)
 				text_format($group->description);
 	echo '<ul class = "clearfix">';
 	foreach($group->members as $member) {
-		echo '<li class = "clearfix">';
-		echo 	gravatarimg($member, 81, ' style="margin:10px 10px 0; float: left;"'),
-				'<p>',
-					get_full_name($member),' - ', $member->position,
-				'</p>';
-		echo '</li>';
+		// Show only member of this year (most recent year)
+		if($member->start_year == $most_recent_group->start_year)
+		{
+			echo '<li class = "clearfix">';
+			echo 	gravatarimg($member, 81, ' style="margin:10px 10px 0; float: left;"'),
+					'<p>',
+						get_full_name($member),' - ', $member->position,
+					'</p>';
+			echo '</li>';
+		}
 	}
 	echo '</ul>';
 	echo '</div>';
