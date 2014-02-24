@@ -219,6 +219,11 @@ a.main-header-language:hover{
 #main-navigation {
   padding: 20px 10px 20px 10px; }
 
+#main-navigation .right{
+  float: right;
+  padding-right: 0;
+}
+
 #main-navigation ul li {
   float: left;
   padding-right: 30px; }
