@@ -11,9 +11,9 @@ echo '
 		//<li>', anchor(substr(site_url(), 0, -2).'en'.uri_string(), $misc_english_native), '</li>';
 		if($this->login->is_logged_in()) {
 			echo '<li>',anchor('user','Profil'),'</li>';
-			echo '<li>',anchor('user/logout',$menu_logout),'</li>';
+			echo '<li class="right">',anchor('user/logout',$menu_logout),'</li>';
 		} else {
-			echo '<li>',anchor('user/login',$menu_login),'</li>';
+			echo '<li class="right">',anchor('user/login',$menu_login),'</li>';
 		}
 		
 echo '		
