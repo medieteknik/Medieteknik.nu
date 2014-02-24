@@ -61,6 +61,24 @@ html, body {
   margin-right: 25px;
   float: left; }
 
+.main-header-language{
+  float: right;
+  padding-top: 10px;
+}
+
+#header-flag-img{
+  vertical-align: baseline;
+}
+
+a.main-header-language{
+  color: #666;
+  text-decoration: none;
+}
+
+a.main-header-language:hover{
+  color: #f57d20;
+}
+
 /* Footer */
 #main-footer {
   border-top: 1px solid #aaaaaa;
