@@ -68,6 +68,7 @@ html, body {
 
 #header-flag-img{
   vertical-align: baseline;
+  padding-left: 10px;
 }
 
 a.main-header-language{

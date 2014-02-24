@@ -32,9 +32,9 @@ echo '<!DOCTYPE html>
 
 			// Language select
 			if(substr(site_url(), -2, 2)=='en')
-				echo anchor(substr(site_url(), 0, -2).'se'.uri_string(), $misc_swedish_native."&nbsp&nbsp&nbsp<img id='header-flag-img' src=\"".base_url()."web/img/flags/se.png\"/>","class = main-header-language");
+				echo anchor(substr(site_url(), 0, -2).'se'.uri_string(), $misc_swedish_native."<img id='header-flag-img' src=\"".base_url()."web/img/flags/se.png\"/>","class = main-header-language");
 			else
-				echo anchor(substr(site_url(), 0, -2).'en'.uri_string(), $misc_english_native."&nbsp&nbsp&nbsp<img id='header-flag-img' src=\"".base_url()."web/img/flags/gb.png\"/>","class = main-header-language");
+				echo anchor(substr(site_url(), 0, -2).'en'.uri_string(), $misc_english_native."<img id='header-flag-img' src=\"".base_url()."web/img/flags/gb.png\"/>","class = main-header-language");
 
 			echo anchor("/","<img id=\"main-header-logo\" src=\"".base_url()."web/img/mt-logo-header.png\" alt=\"Medieteknik.nu\" />"),'
 			<h1>Civilingenjör i Medieteknik</h1>
