@@ -10,10 +10,13 @@ $lang['head_author'] = "Medietekniks Webbutskott";
 // header
 
 // footer
-$lang['footer_contact'] = "KONTAKT";
-$lang['footer_info'] = "INFORMATION";
+$lang['footer_contact'] = "Kontakt";
+$lang['footer_info'] = "Information";
 $lang['footer_aboutsite'] = "Om hemsidan";
 $lang['footer_cookies'] = "Om kakor";
+$lang['footer_follow'] = "Följ oss";
+$lang['footer_mtliu'] = "Medieteknik på liu.se";
+
 
 // menu
 $lang['menu_menu'] = "Meny";
