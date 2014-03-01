@@ -203,7 +203,7 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 	}
 
 
-	return $text;
+	return auto_link($text);
 
 }
 
