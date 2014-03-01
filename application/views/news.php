@@ -30,20 +30,21 @@ foreach($news_array as $news_item)
 	$news_story = text_format($news_item->text, '<p>','</p>', FALSE);
 	?>
 	<div class="main-box news clearfix">
-		<h1>
+		<h2>
 			<?php echo anchor('news/view/'.$news_item->id, $news_item->title, array("title" => $lang['news_tothenews'])); ?>
 			<?php
 			if($news_item->draft)
 				echo '<span class="label label-default">'.$lang['misc_draft'].'</span>';
 			?>
-		</h1>
-		<h2>
+			<img src="<?php echo lang_id_to_imgpath($news_item->lang_id); ?>" class="img-circle pull-right" />
+		</h2>
+		<h3>
 			Publicerad
 			<i class="date" title="<?php echo $news_item->date; ?>">
 				<?php echo readable_date($news_item->date, $lang); ?>
 			</i>
 			av <?php echo anchor('user/profile/'.$news_item->userid, $news_item->first_name.' '.$news_item->last_name); ?>
-		</h2>
+		</h3>
 		<?php echo $news_story; ?>
 	</div>
 	<?php
