@@ -118,7 +118,7 @@ class User extends MY_Controller
 		// force auth using cas
 		$this->cas->force_auth();
 		// check this login and pass along redir param
-		$this->checklogin(base64_decode($redir));
+		$this->checklogin(base64_decode(urldecode($redir)));
 
 		//old login form, before use of CAS:
 		/*

@@ -28,30 +28,29 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><?php echo anchor("news", $menu_news); ?></li>
+				<li><?php echo anchor("", $menu_home); ?></li>
+				<li><?php echo anchor("news/archive", $menu_news); ?></li>
 				<li><?php echo anchor("about", $menu_about); ?></li>
 				<li><?php echo anchor("association", $menu_association); ?></li>
 				<li><?php echo anchor("mtd", $menu_mtd); ?></li>
 				<li><?php echo anchor("forum", $menu_forum); ?></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right visible-xs"><!--
-				<li><?php echo anchor(substr(site_url(), 0, -2).'se'.uri_string(), $misc_swedish_native); ?></li>
-				<li><?php echo anchor(substr(site_url(), 0, -2).'en'.uri_string(), $misc_english_native); ?></li> -->
+
 				<?php
+				$class = ' class="visible-xs"';
 				// Language select
 				if(substr(site_url(), -2, 2)=='en')
-					echo '<li>'.anchor(substr(site_url(), 0, -2).'se'.uri_string(),
+					echo '<li'.$class.'>'.anchor(substr(site_url(), 0, -2).'se'.uri_string(),
 						"<img src=\"".base_url()."web/img/flags/se_big.png\" class=\"img-circle\"/>".$misc_swedish_native).'</li>';
 				else
-					echo '<li>'.anchor(substr(site_url(), 0, -2).'en'.uri_string(),
+					echo '<li'.$class.'>'.anchor(substr(site_url(), 0, -2).'en'.uri_string(),
 						"<img src=\"".base_url()."web/img/flags/gb_big.png\" class=\"img-circle\"/>".$misc_english_native).'</li>';
 
 				// login/logout
 				if($this->login->is_logged_in())
-					echo '<li>'.anchor('user/logout',$menu_logout).'</li>';
+					echo '<li'.$class.'>'.anchor('user/logout',$menu_logout).'</li>';
 				else
 				{
-					echo '<li>'.anchor('user/login/redir/'.base64_encode(uri_string()),$menu_login).'</li>';
+					echo '<li'.$class.'>'.anchor('user/login/redir/'.urlencode(base64_encode(uri_string())),$menu_login).'</li>';
 				}
 				?>
 			</ul>

@@ -32,6 +32,7 @@ $lang['menu_forum'] = "Forum";
 $lang['menu_login'] = "Log in";
 $lang['menu_logout'] = "Log out";
 $lang['menu_admin'] = "Admin";
+$lang['menu_home'] = "Home";
 
 // news
 $lang['news_news'] = "News";
@@ -174,6 +175,7 @@ $lang['misc_gotopage'] = "Go to page";
 $lang['misc_title'] = "Title";
 $lang['misc_description'] = "Description";
 $lang['misc_delete'] = "Delete";
+$lang['misc_readmore'] = "Read more";
 
 // error
 $lang['error_error'] = "Error!";

@@ -32,6 +32,7 @@ $lang['menu_forum'] = "Forum";
 $lang['menu_login'] = "Logga in";
 $lang['menu_logout'] = "Logga ut";
 $lang['menu_admin'] = "Admin";
+$lang['menu_home'] = "Hem";
 
 // news
 $lang['news_news'] = "Nyheter";
@@ -172,6 +173,7 @@ $lang['misc_gotopage'] = "Gå till sida";
 $lang['misc_title'] = "Titel";
 $lang['misc_description'] = "Beskrivning";
 $lang['misc_delete'] = "Radera";
+$lang['misc_readmore'] = "Fortsätt läsa";
 
 // error
 $lang['error_error'] = "Fel!";

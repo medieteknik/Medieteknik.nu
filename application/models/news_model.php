@@ -1,5 +1,5 @@
 <?php
-class News_model extends CI_Model 
+class News_model extends CI_Model
 {
 
     function __construct()
@@ -7,18 +7,18 @@ class News_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
     }
-    
+
 	/**
 	 * Fetches latest news
 	 *
-	 * @return array 	
-	 */ 
+	 * @return array
+	 */
     function get_latest_news()
     {
 		// check if approved to see not approved news
 		$admin = $this->login->has_privilege('news_editor');
-		
-		$this->db->select("users.first_name, users.last_name, news_images.*, images.image_original_filename");
+
+		$this->db->select("users.first_name, users.last_name, users.id as userid, news_images.*, images.image_original_filename");
 		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
@@ -27,8 +27,8 @@ class News_model extends CI_Model
 		$this->db->join("news_sticky", 'news.id = news_sticky.news_id', 'left');
 		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
 		$this->db->join("images", 'news_images.images_id = images.id', 'left');
-		
-		if(!$admin) 
+
+		if(!$admin)
 		{
 			// not admin, forces news to be approved and not draft
 			$this->db->where("news.draft",0);
@@ -39,18 +39,53 @@ class News_model extends CI_Model
 		$query = $this->db->get();
         return $query->result();
     }
-    
+
+	/**
+	 * Fetches latest news in a paged fashion
+	 * @param  integer $page  the current page
+	 * @param  integer $limit
+	 * @return array
+	 */
+    function get_paged_news($page = 1, $limit = 10)
+    {
+    	$page--;
+		// check if approved to see not approved news
+		$admin = $this->login->has_privilege('news_editor');
+
+		$this->db->select("users.first_name, users.last_name, users.id as userid, news_images.*, images.image_original_filename");
+		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
+		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
+		$this->db->from("news");
+		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
+		$this->db->join("users", 'news.user_id = users.id', '');
+		$this->db->join("news_sticky", 'news.id = news_sticky.news_id', 'left');
+		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
+		$this->db->join("images", 'news_images.images_id = images.id', 'left');
+
+		if(!$admin)
+		{
+			// not admin, forces news to be approved and not draft
+			$this->db->where("news.draft",0);
+			$this->db->where("news.approved",1);
+		}
+		$this->db->where("DATE(news.date) <= DATE(NOW())");
+		$this->db->order_by("sticky_order DESC, news.date DESC");
+		$this->db->limit($limit, $page*$limit);
+		$query = $this->db->get();
+        return $query->result();
+    }
+
 	/**
 	 * Fetches a specific news item
 	 *
 	 * @param  integer	$id		The ID of the news item
-	 * @return array 	
-	 */ 
+	 * @return array
+	 */
     function get_news($id)
     {
 		// check if approved to see not approved news
 		$admin = $this->login->has_privilege('news_editor');
-		
+
 		$this->db->select("users.first_name, users.last_name, news_images.*, images.*");
 		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id, news_translation_language.last_edit");
 		$this->db->from("news");
@@ -59,26 +94,26 @@ class News_model extends CI_Model
 		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
 		$this->db->join("images", 'news_images.images_id = images.id', 'left');
 		$this->db->where("news.id",$id);
-		
-		if(!$admin) 
+
+		if(!$admin)
 		{
 			// not admin, forces news to be approved and not draft
 			$this->db->where("news.draft",0);
 			$this->db->where("news.approved",1);
 		}
-		
+
 		$this->db->limit(1);
 		$query = $this->db->get();
 		$res = $query->result();
         return $res[0];
 	}
-	
+
 	/**
 	 * fetches a specific news item, admin-style => more data included
 	 *
 	 * @param  integer	$id		The ID of the news item
-	 * @return array 	
-	 */ 
+	 * @return array
+	 */
 	function admin_get_news($id)
     {
 		$this->db->select("news.*, language.language_name, language.language_abbr, news_translation.*");
@@ -88,7 +123,7 @@ class News_model extends CI_Model
 		$this->db->where("news.id",$id);
 		$query = $this->db->get();
 		$translations = $query->result();
-		
+
 		$this->db->select("news.*, news_images.height, news_images.position, news_images.size, news_images.images_id, images.image_original_filename");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
@@ -100,25 +135,25 @@ class News_model extends CI_Model
 		$query = $this->db->get();
 		$news_array = $query->result();
 		$news = $news_array[0];
-		
+
 		$news->translations = array();
-		foreach($translations as $t) 
+		foreach($translations as $t)
 		{
-			if($t->id == $news->id) 
+			if($t->id == $news->id)
 			{
 				array_push($news->translations, $t);
 			}
 		}
-		
+
 		return $news;
 	}
-	
+
 	/**
 	 * Fetches all news for the admin overview
 	 *
-	 * @return array 	
-	 */ 
-	function admin_get_all_news_overview() 
+	 * @return array
+	 */
+	function admin_get_all_news_overview()
 	{
 		$this->db->select("news.*, language.language_name, language.language_abbr, news_translation.*");
 		$this->db->from("news");
@@ -126,7 +161,7 @@ class News_model extends CI_Model
 		$this->db->join("news_translation", 'news_translation.news_id = news.id AND news_translation.lang_id = language.id', 'left');
 		$query = $this->db->get();
 		$translations = $query->result();
-		
+
 		$this->db->select("news.*, news_images.height, news_images.position, news_images.size, news_images.images_id, images.image_original_filename");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
@@ -136,7 +171,7 @@ class News_model extends CI_Model
 		$this->db->order_by("sticky_order DESC, news.date DESC");
 		$query = $this->db->get();
 		$news_array = $query->result();
-		
+
 		foreach($news_array as $news) {
 			$news->translations = array();
 			foreach($translations as $t) {
@@ -147,7 +182,7 @@ class News_model extends CI_Model
 		}
 		return $news_array;
 	}
-	
+
 	/**
 	 * Create a new news
 	 *
@@ -157,22 +192,22 @@ class News_model extends CI_Model
 	 * @param  integer	$draft			Specify if the news item is a draft, 1 = Draft, 0 = Not draft
 	 * @param  integer	$approved		Specify if the news item is approved, 1 = Approved, 0 = Not approved
 	 * @param  integer	$group_id		The id of the group the user belongs to when posting
-	 * @return The news id 	
-	 */ 
-	function add_news($user_id, $translations = array(), $post_date = '', $draft = 0, $approved = 1, $group_id = 0) 
+	 * @return The news id
+	 */
+	function add_news($user_id, $translations = array(), $post_date = '', $draft = 0, $approved = 1, $group_id = 0)
 	{
-		if(!is_array($translations)) 
+		if(!is_array($translations))
 		{
 			return false;
 		}
 		$arr_keys = array_keys($translations);
-		if(!is_numeric($arr_keys[0])) 
+		if(!is_numeric($arr_keys[0]))
 		{
 			$theTranslations = array($translations);
 		} else {
 			$theTranslations = $translations;
 		}
-		foreach($theTranslations as &$translation) 
+		foreach($theTranslations as &$translation)
 		{
 			$arr_keys = array_keys($translation);
 			if((!in_array("lang_abbr",$arr_keys) && !in_array("lang",$arr_keys)) || !in_array("title",$arr_keys) || !in_array("text",$arr_keys)) {
@@ -182,20 +217,20 @@ class News_model extends CI_Model
 				$translation["lang_abbr"] = $translation["lang"];
 			}
 		}
-		
+
 		$this->db->where('id', $user_id);
 		$query = $this->db->get('users');
-		if($query->num_rows != 1) 
+		if($query->num_rows != 1)
 		{
 			return false;
 		}
-		
-		if(is_numeric($group_id) && $group_id > 0) 
+
+		if(is_numeric($group_id) && $group_id > 0)
 		{
 			$this->db->where('user_id', $user_id);
 			$this->db->where('group_id', $group_id);
 			$query = $this->db->get('users_groups');
-			if($query->num_rows != 1) 
+			if($query->num_rows != 1)
 			{
 				$theGroup = 0;
 			} else {
@@ -204,17 +239,17 @@ class News_model extends CI_Model
 		} else {
 			$theGroup = 0;
 		}
-		
+
 		$theTime = strtotime($post_date);
 		if($theTime === false) {
 			$theTime = date("Y-m-d H:i:s", time());
 		} else {
 			$theTime = date("Y-m-d H:i:s", $theTime);
 		}
-		
+
 		//if($use_transaction)
 		$this->db->trans_begin();
-			
+
 		$data = array(
 		   'user_id' => $user_id,
 		   'group_id' => $theGroup,
@@ -224,23 +259,23 @@ class News_model extends CI_Model
 		);
 		$this->db->insert('news', $data);
 		$news_id = $this->db->insert_id();
-		
+
 		$success = true;
-		foreach($theTranslations as &$translation) 
-		{ 
+		foreach($theTranslations as &$translation)
+		{
 			$lang_abbr = $translation["lang_abbr"];
 			$title = $translation["title"];
 			$text = $translation["text"];
 			$theSuccess = $this->update_translation($news_id, $lang_abbr, $title, $text);
-			if(!$theSuccess) 
+			if(!$theSuccess)
 			{
 				$success = $theSuccess;
 			}
-			
+
 		}
-		
+
 		//if($use_transaction) {
-			if ($this->db->trans_status() === FALSE || !$success) 
+			if ($this->db->trans_status() === FALSE || !$success)
 			{
 				$this->db->trans_rollback();
 				return false;
@@ -256,7 +291,7 @@ class News_model extends CI_Model
 	 *
 	 *	@return An array with the counted results
 	 */
-	function admin_get_notifications() 
+	function admin_get_notifications()
 	{
 		$this->db->select("SUM(news.approved=0) as news_unapproved");
 		$this->db->from("news");
@@ -264,7 +299,7 @@ class News_model extends CI_Model
 		$res = $query->result();
 		return $res[0];
 	}
-	
+
 	/**
 	 * Update a translation of a specific news item
 	 *
@@ -273,47 +308,47 @@ class News_model extends CI_Model
 	 * @param  string	$title			The title of the news item translation
 	 * @param  string	$text			The text of the news item translation
 	 * @return bool		True or false depending on success or failure
-	 */ 
-	function update_translation($news_id, $lang_abbr, $title, $text) 
+	 */
+	function update_translation($news_id, $lang_abbr, $title, $text)
 	{
 		$theTitle = trim($title);
 		$theText = trim($text);
-		
+
 		// check if the news exists
 		$this->db->where('id', $news_id);
 		$query = $this->db->get('news');
-		if($query->num_rows != 1) 
+		if($query->num_rows != 1)
 		{
 			return false;
 		}
-		
+
 		// check if the language exists
 		$this->db->where('language_abbr', $lang_abbr);
 		$query = $this->db->get('language');
-		if($query->num_rows != 1) 
+		if($query->num_rows != 1)
 		{
 			return false;
 		}
 		$lang_id = $query->result(); $lang_id = $lang_id[0]->id;
-		
+
 		// if both title and text is null then delete the translation
-		if($theTitle == '' && $theText == '') 
+		if($theTitle == '' && $theText == '')
 		{
 			$this->db->delete('news_translation', array('news_id' => $news_id, 'lang_id' => $lang_id));
 			return true;
-		} 
-		
+		}
+
 		// if one of the title and the text is null then exit
-		if($theTitle == '' || $theText == '') 
+		if($theTitle == '' || $theText == '')
 		{
 			return false;
 		}
-		
+
 		$query = $this->db->get_where('news_translation', array('news_id' => $news_id, 'lang_id' => $lang_id), 1, 0);
-		if ($query->num_rows() == 0) 
+		if ($query->num_rows() == 0)
 		{
 			// A record does not exist, insert one.
-			$data = array(	'news_id' 	=> $news_id, 
+			$data = array(	'news_id' 	=> $news_id,
 							'lang_id' 	=> $lang_id,
 							'title'		=> $theTitle,
 							'text'		=> $theText,
@@ -321,7 +356,7 @@ class News_model extends CI_Model
 						);
 			$query = $this->db->insert('news_translation', $data);
 			// Check to see if the query actually performed correctly
-			if ($this->db->affected_rows() > 0) 
+			if ($this->db->affected_rows() > 0)
 			{
 				return TRUE;
 			}

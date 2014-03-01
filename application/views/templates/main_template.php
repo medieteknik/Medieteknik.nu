@@ -71,7 +71,7 @@
 								}
 								else
 								{
-									echo anchor('user/login/redir/'.base64_encode(uri_string()),$menu_login);
+									echo anchor('user/login/redir/'.urlencode(base64_encode(uri_string())),$menu_login);
 								}
 								?>
 							</div>

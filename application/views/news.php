@@ -1,7 +1,7 @@
 <?php
 foreach($news_array as $news_item)
 {
-	//do_dump($news_item);
+	// do_dump($news_item);
 	$img_div = "";
 	$news_class = "main-box";
 	$style = "";
@@ -9,7 +9,6 @@ foreach($news_array as $news_item)
 	{
 		$image = new imagemanip();
 		$image->create($news_item->image_original_filename, 'zoom', news_size_to_px($news_item->size), $news_item->height);
-
 
 		$img_div = '<img class="'.news_size_to_class($news_item->size).'" src="'.$image->get_filepath().'" alt="'.$news_item->title.'" />';
 		$news_class = news_size_to_class_invert($news_item->size);
@@ -26,5 +25,28 @@ foreach($news_array as $news_item)
 	} else {
 		$story = $news_div.$img_div;
 	}
-	echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => $lang['news_tothenews'] ));
+	// echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => $lang['news_tothenews'] ));
+
+	$news_story = text_format($news_item->text, '<p>','</p>', FALSE);
+	?>
+	<div class="main-box news clearfix">
+		<h1>
+			<?php echo anchor('news/view/'.$news_item->id, $news_item->title, array("title" => $lang['news_tothenews'])); ?>
+			<?php
+			if($news_item->draft)
+				echo '<span class="label label-default">'.$lang['misc_draft'].'</span>';
+			?>
+		</h1>
+		<h2>
+			Publicerad
+			<i class="date" title="<?php echo $news_item->date; ?>">
+				<?php echo readable_date($news_item->date, $lang); ?>
+			</i>
+			av <?php echo anchor('user/profile/'.$news_item->userid, $news_item->first_name.' '.$news_item->last_name); ?>
+		</h2>
+		<?php echo $news_story; ?>
+	</div>
+	<?php
 }
+
+do_dump($news_array);
