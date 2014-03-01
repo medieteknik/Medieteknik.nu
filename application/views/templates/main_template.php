@@ -92,21 +92,12 @@
 				</div>
 				<div class="container">
 					<div class="row">
-						<div class="col-sm-9" id="main-content">
+						<div class="col-sm-8 col-md-9" id="main-content">
 							<?php echo $main_content; ?>
 						</div>
-						<div class="col-sm-3" id="sidebar-content">
+						<div class="col-sm-4 col-md-3" id="sidebar-content">
 							<?php echo $sidebar_content; ?>
 						</div>
-					</div>
-				</div>
-
-				<div id="main-content" class="clearfix">
-					<div id="main-left">
-
-					</div>
-					<div id="main-right">
-
 					</div>
 				</div>
 			</div>
@@ -116,21 +107,37 @@
 		<!-- START footer -->
 		<footer id="main-footer">
 			<div class="wrapper">
-				<div class="left">
-					<div class="block">
-						<h1><?php echo $lang['footer_contact']; ?></h1>
-						<a href="mailto:info@medieteknik.nu">info@medieteknik.nu</a>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-3">
+							<h1><?php echo $lang['footer_contact']; ?></h1>
+							<p>
+								<a href="mailto:info@medieteknik.nu" target="_blank">info@medieteknik.nu</a>
+							</p>
+							<p>
+								MT-sektionen<br />
+								Kårhuset Trappan<br />
+								601 74 Norrköping<br />
+								Sweden
+							</p>
+						</div>
+						<div class="col-sm-3">
+							<h1><?php echo $lang['footer_info']; ?></h1>
+							<p>
+								<?php echo anchor("/about/website", $lang['footer_aboutsite']); ?><br>
+								<?php echo anchor("/about/cookies", $lang['footer_cookies']); ?>
+							</p>
+							<p>
+								<?php echo anchor('http://liu.se/medieteknik', $lang['footer_mtliu'], 'target="_blank"'); ?>
+							</p>
+						</div>
+						<div class="col-sm-3 col-sm-offset-3" id="follow">
+							<h1><?php echo $lang['footer_follow']; ?></h1>
+							<a href="http://linkedin.com/groups?gid=5159466" class="linkedin" target="_blank"></a>
+							<a href="http://facebook.com/mtsektionen" class="facebook" target="_blank"></a>
+							<a href="http://twitter.com/mtsektionen" class="twitter" target="_blank"></a>
+						</div>
 					</div>
-					<div class="block">
-					 	<h1><?php echo $lang['footer_info']; ?></h1>
-					 	<?php echo anchor("/about/website", $lang['footer_aboutsite']); ?><br>
-					 	<?php echo anchor("/about/cookies", $lang['footer_cookies']); ?>
-					</div>
-				</div>
-				<div class="right">
-					<a href="http://linkedin.com/groups?gid=5159466" class="linkedin"></a>
-					<a href="http://facebook.com/mtsektionen" class="facebook"></a>
-					<a href="http://twitter.com/mtsektionen" class="twitter"></a>
 				</div>
 			</div>
 		</footer>

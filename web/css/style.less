@@ -30,6 +30,7 @@ Table of contents
 @darkbg: 	#333333;
 @fontcolor: #111111;
 @headfont: 	#666666;
+@shadowcolor: #AAAAAA;
 
 /********* RESPONSIVE VARS *******/
 @screen-sm-min: 768px;
@@ -40,11 +41,11 @@ Table of contents
 /**********************************
  * 2. MIXINS
  *********************************/
-.transition (@time: 2s) {
-	-webkit-transition: @time all ease-in-out;
-	   -moz-transition: @time all ease-in-out;
-		 -o-transition: @time all ease-in-out;
-			transition: @time all ease-in-out;
+.transition (@time: 2s, @what: all, @effect: ease-in-out) {
+	-webkit-transition: @time @what @effect;
+	   -moz-transition: @time @what @effect;
+		 -o-transition: @time @what @effect;
+			transition: @time @what @effect;
 }
 
 .boxshadow (@dim, @color)
@@ -54,6 +55,14 @@ Table of contents
 			box-shadow: @dim @color;
 }
 
+.rounded (@dim)
+{
+	-webkit-border-radius: @dim;
+	   -moz-border-radius: @dim;
+		-ms-border-radius: @dim;
+		 -o-border-radius: @dim;
+			border-radius: @dim;
+}
 
 /**********************************
  * 3. FONT FACES
@@ -106,7 +115,7 @@ body {
 	background-color: @contentbg;
 	color: @headfont;
 	padding: 0 0 10px;
-	.boxshadow(0 1px 3px, #aaa);
+	.boxshadow(0 1px 3px, @shadowcolor);
 
 	h1 {
 		padding-top: 20px;
@@ -183,6 +192,7 @@ body {
 	.main-box {
 		padding: 0 15px;
 		background: @contentbg;
+		.boxshadow(0px 1px 3px, @shadowcolor);
 	}
 }
 
@@ -191,6 +201,64 @@ body {
 		padding-bottom: 30px;
 	}
 }
+/************ FOOTER ***************/
+#main-footer {
+	border-top: 1px solid @shadowcolor;
+	height: 120px;
+	margin-top: 30px;
+	background-color: #e8e8e9;/*#f4f4f4;*/
+	color: @headfont;
+
+	h1 {
+		padding: 12px 0;
+		font-size: 0.9em;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	a {
+		color: @headfont;
+		text-decoration: none;
+		line-height: 160%;
+
+		&:hover {
+			color: @orange;
+		}
+	}
+
+	#follow {
+		margin-bottom: 10px;
+
+		h1  {
+			padding-bottom: 6px;
+		}
+
+		a {
+			display: block;
+			margin-right: 15px;
+			float: left;
+			width: 65px;
+			height: 65px;
+			.rounded(50px);
+			.transition(0.3s);
+			background: #dcdcdc center center no-repeat;
+
+			&.twitter {
+				background-image: url('../img/twitter.png');
+			}
+			&.facebook {
+				background-image: url('../img/facebook.png');
+			}
+			&.linkedin {
+				background-image: url('../img/linkedin.png');
+			}
+
+			&:hover {
+				background-color: #c0c0c0;
+			}
+		}
+	}
+}
+
 
 /**********************************
  * 6. RESPONSIVE
