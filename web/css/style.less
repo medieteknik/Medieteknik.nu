@@ -1,24 +1,232 @@
+/**
+ * Welcome to the layout of medieteknik.nu
+ *
+ * This file is written in Less. It's a nice way to extend the old and boring techniques
+ * vanilla CSS provides. Please read more about less att lesscss.org.
+ *
+ */
+
+/**********************************
+Table of contents
+
+1. Variables
+2. Mixins
+3. Font faces
+4. Typography
+5. General layout
+6. Responsive fixes
+7. Anchors and such
+8. More specific stuff
+9. Misc things
+*/
+
+/**********************************
+ * 1. VARIABLES
+ *********************************/
+@orange: 	#FF7D00;
+@gray: 		#A6A6A6;
+@contentbg:	#f4f4f4;
+@bodybg: 	#E8E8E9;
+@darkbg: 	#333333;
+@fontcolor: #111111;
+@headfont: 	#666666;
+
+/********* RESPONSIVE VARS *******/
+@screen-sm-min: 768px;
+@screen-md-min: 992px;
+@screen-lg-min: 1200px;
+
+
+/**********************************
+ * 2. MIXINS
+ *********************************/
+.transition (@time: 2s) {
+	-webkit-transition: @time all ease-in-out;
+	   -moz-transition: @time all ease-in-out;
+		 -o-transition: @time all ease-in-out;
+			transition: @time all ease-in-out;
+}
+
+.boxshadow (@dim, @color)
+{
+	-webkit-box-shadow: @dim @color;
+	   -moz-box-shadow: @dim @color;
+			box-shadow: @dim @color;
+}
+
+
+/**********************************
+ * 3. FONT FACES
+ *********************************/
 @font-face {
-  font-family: 'Asap';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Asap'), local('Asap-Regular'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/nvGvEwsMAvkIa6w2U-PXffesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+	font-family: 'Asap';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Asap'), local('Asap-Regular'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/nvGvEwsMAvkIa6w2U-PXffesZW2xOQ-xsNqO47m55DA.woff) format('woff');
 }
 @font-face {
-  font-family: 'Asap';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Asap Bold'), local('Asap-Bold'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/QGN0GG0540fyG6NL_PpOpgLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+	font-family: 'Asap';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Asap Bold'), local('Asap-Bold'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/QGN0GG0540fyG6NL_PpOpgLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
 }
 @font-face {
-  font-family: 'Asap';
-  font-style: italic;
-  font-weight: 400;
-  src: local('Asap Italic'), local('Asap-Italic'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/QnZU7dKCBgkkMBlac2djsOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+	font-family: 'Asap';
+	font-style: italic;
+	font-weight: 400;
+	src: local('Asap Italic'), local('Asap-Italic'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/QnZU7dKCBgkkMBlac2djsOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
 }
 @font-face {
-  font-family: 'Asap';
-  font-style: italic;
-  font-weight: 700;
-  src: local('Asap Bold Italic'), local('Asap-BoldItalic'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/_sVKdO-TLWvaH-ptGimJBbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+	font-family: 'Asap';
+	font-style: italic;
+	font-weight: 700;
+	src: local('Asap Bold Italic'), local('Asap-BoldItalic'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/_sVKdO-TLWvaH-ptGimJBbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+
+
+/**********************************
+ * 4. TYPOGRAPHY
+ *********************************/
+
+body {
+	font-family: 'Asap', 'Helvetica', 'Arial', sans-serif;
+}
+
+
+/**********************************
+ * 5. GENERAL LAYOUT
+ *********************************/
+
+body {
+	background-color: @bodybg;
+}
+
+/*********** HEADER **************/
+#main-header {
+	background-color: @contentbg;
+	color: @headfont;
+	padding: 0 0 10px;
+	.boxshadow(0 1px 3px, #aaa);
+
+	h1 {
+		padding-top: 20px;
+		font-size: 1.4em;
+		margin: 0;
+	}
+	h2 {
+		font-size: 0.9em;
+		padding-top: 3px;
+		padding-left: 2px;
+		margin: 0;
+	}
+	#main-header-logo {
+		margin-right: 25px;
+		margin-top: 10px;
+		float: left;
+	}
+	.header-box {
+		padding: 10px;
+		background: @bodybg;
+		line-height: 31px;
+
+		img {
+			margin-right: 5px;
+		}
+
+		a {
+			color: @headfont;
+			margin-right: 15px;
+
+			&:last-of-type {
+				margin-right: 0;
+			}
+			&:hover {
+				color: lighten(@headfont, 20%);
+				text-decoration: none;
+
+				img {
+					opacity: 0.8;
+				}
+			}
+		}
+
+		&#lang-control {
+			margin-left: 3px;
+		}
+	}
+}
+/************ MENU ***************/
+#main-nav {
+	background: none;
+	border: 0;
+
+	img {
+		margin-right: 5px;
+	}
+	a:hover {
+		color: @orange;
+	}
+	.navbar-brand {
+		padding-left: 15px;
+		padding-top: 9px;
+
+		&.logged-out
+		{
+			padding-top: 14px;
+		}
+	}
+}
+/************ MAIN ***************/
+#main-content {
+	padding: 0;
+
+	.main-box {
+		padding: 0 15px;
+		background: @contentbg;
+	}
+}
+
+.carousel-inner {
+	.container {
+		padding-bottom: 30px;
+	}
+}
+
+/**********************************
+ * 6. RESPONSIVE
+ * As of Bootstrap version 3.1.1, it's made with the thinking that mobile devices are default,
+ * and everything else an exception: "No media query since this is the default in Bootstrap"
+ *********************************/
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+	#main-header {
+		h1 {
+			padding-top: 35px;
+		}
+	}
+	/* fix for the ugly navigation padding on desktop */
+	#main-nav {
+		.container-fluid {
+			padding-left: 0;
+			padding-right: 0;
+		}
+		.navbar-collapse {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {}
+
+/**********************************
+ * 9. MISC
+ *********************************/
+
+.darkbg {
+	background: @darkbg;
+	color: @bodybg;
 }

@@ -16,7 +16,8 @@ $lang['footer_aboutsite'] = "About the website";
 $lang['footer_cookies'] = "About cookies";
 
 // menu
-$lang['menu_news'] = "News";	
+$lang['menu_menu'] = "Menu";
+$lang['menu_news'] = "News";
 $lang['menu_about'] = "Media Technology";
 $lang['menu_mtd'] = "Media Technology Days";
 $lang['menu_archive'] = "Archive";
