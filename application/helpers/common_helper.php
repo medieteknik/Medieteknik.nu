@@ -109,7 +109,7 @@ function _img_format($matches)
 
 	$settings_array = explode(" ", trim($matches[1]));
 
-	for ($i=0; $i < count($settings_array); $i++) { 
+	for ($i=0; $i < count($settings_array); $i++) {
 		$setting = explode("=",$settings_array[$i],2);
 		switch(strtolower($setting[0]))
 		{
@@ -117,13 +117,13 @@ function _img_format($matches)
 			case "filename":
 			case "file":
 			case "original":
-				if(strlen($setting[1]) >0) 
+				if(strlen($setting[1]) >0)
 				{
 					$id = $setting[1];
 				}
 				break;
 			case "w":
-				if(is_numeric($setting[1]) && $setting[1] >0) 
+				if(is_numeric($setting[1]) && $setting[1] >0)
 				{
 					$w = $setting[1];
 				}
@@ -147,7 +147,7 @@ function _img_format($matches)
 		$im = new imagemanip($id, 'zoom', $w, $h);
 	}
 
-	
+
 	return $im->get_img_tag($align);
 }
 
@@ -176,7 +176,7 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 	//wrap with paragraph
 	//$text = $pre.$text.$post;
 	//$text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9]+.*)\n/","\n".$pre."$2".$post."\n", $text);
-	
+
 	$text = preg_replace("/(\[br\]\n?)/","<br/>", $text);
 	$text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9].*)(\n|$)/","\n".$pre."$2".$post."\n", $text);
 
@@ -201,8 +201,8 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 	} else {
 		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
 	}
-	
-	
+
+
 	return $text;
 
 }
@@ -267,6 +267,24 @@ function lang_id_to_imgpath($id)
 			return "";
 
 	}
+}
+
+function news_excerpt($cont, $length = 200)
+{
+	$cont_notags = strip_tags($cont);
+	if(strlen($cont_notags) > $length)
+	{
+		$sub_excerpt = substr($cont_notags, 0, $length-5);
+		$excerpt_words = explode(' ', $sub_excerpt);
+		$excerpt_cut = -(strlen($excerpt_words[count($excerpt_words)-1]));
+
+		if($excerpt_cut < 0)
+			$cont_notags = substr($sub_excerpt, 0, $excerpt_cut);
+		else
+			$cont_notags = $sub_excerpt;
+	}
+
+	return $cont_notags;
 }
 
 /**

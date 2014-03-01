@@ -154,7 +154,7 @@ body {
 				text-decoration: none;
 
 				img {
-					opacity: 0.8;
+					opacity: 0.7;
 				}
 			}
 		}
@@ -174,6 +174,7 @@ body {
 	}
 	a:hover {
 		color: @orange;
+		border-color: @orange;
 	}
 	.navbar-brand {
 		padding-left: 15px;
@@ -199,6 +200,33 @@ body {
 .carousel-inner {
 	.container {
 		padding-bottom: 30px;
+	}
+}
+
+.news {
+	margin-bottom: 20px;
+
+	h1 {
+		margin-top: 15px;
+		font-size: 170%;
+		font-weight: bold;
+
+		a {
+			color: @headfont;
+
+			&:hover {
+				color: @fontcolor;
+				text-decoration: none;
+			}
+		}
+	}
+	h2 {
+		margin: 0 0 8px;
+		font-size: 110%;
+		color: @headfont;
+	}
+	p {
+		padding: 5px 0 5px;
 	}
 }
 /************ FOOTER ***************/
@@ -275,6 +303,14 @@ body {
 	}
 	/* fix for the ugly navigation padding on desktop */
 	#main-nav {
+		margin-left: -15px;
+
+		a {
+			padding-bottom: 5px;
+			border-bottom: 2px solid @bodybg;
+			text-decoration: none;
+			.transition(0.1s);
+		}
 		.container-fluid {
 			padding-left: 0;
 			padding-right: 0;
