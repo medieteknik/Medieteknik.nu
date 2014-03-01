@@ -43,7 +43,7 @@ class User extends MY_Controller
 		{
 			$firstname = $this->input->post('firstname');
 			$lastname = $this->input->post('lastname');
-			
+
 			if($this->User_model->add_user($firstname, $lastname, $user->userlogin, ''))
 			{
 				$this->login();
@@ -53,7 +53,7 @@ class User extends MY_Controller
 
 
 
-			
+
 		}
 
 		// Data for user view
@@ -113,11 +113,11 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	public function login($attempt = '')
+	public function login($attempt = '', $redir = '')
 	{
-
+		// force auth using cas
 		$this->cas->force_auth();
-		$this->checklogin();
+		$this->checklogin(base64_decode($redir));
 
 		//old login form, before use of CAS:
 		/*
@@ -156,14 +156,14 @@ class User extends MY_Controller
 	}
 	*/
 
-	public function checklogin()
+	public function checklogin($redir = '')
 	{
 		$user = $this->cas->user();
 
 		if($this->login->login($user->userlogin))
 		{
 			//success
-			redirect('user', 'refresh');
+			redirect($redir, 'refresh');
 		} else {
 			// fail, there is no such user in database
 			//echo $this->input->post('username') ." ". $this->input->post('password');

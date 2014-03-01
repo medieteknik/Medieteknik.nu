@@ -1,17 +1,102 @@
-@import url("/web/css/profile.css");
-@import url("documents.css");
-/*
-@import url(http://reset5.googlecode.com/hg/reset.min.css);
-@import url(http://fonts.googleapis.com/css?family=Asap:400,400italic,700,700italic);
-*/
-/*
-	import specific styles for easier handeling
-*/
-/*
 
-anchor styles
-
+/**********************************
+ * 3. FONT FACES
+ *********************************/
+@font-face {
+	font-family: 'Asap';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Asap'), local('Asap-Regular'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/nvGvEwsMAvkIa6w2U-PXffesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+@font-face {
+	font-family: 'Asap';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Asap Bold'), local('Asap-Bold'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/QGN0GG0540fyG6NL_PpOpgLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
+@font-face {
+	font-family: 'Asap';
+	font-style: italic;
+	font-weight: 400;
+	src: local('Asap Italic'), local('Asap-Italic'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/QnZU7dKCBgkkMBlac2djsOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+}
+@font-face {
+	font-family: 'Asap';
+	font-style: italic;
+	font-weight: 700;
+	src: local('Asap Bold Italic'), local('Asap-BoldItalic'), url(http://themes.googleusercontent.com/static/fonts/asap/v2/_sVKdO-TLWvaH-ptGimJBbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+/*
+Profile-specific styles
 */
+.profile {
+}
+.profile-content {
+  padding:0;
+}
+.profile-content p {
+  padding: 12px 0;
+  clear: both;
+}
+.profile-content a.profile-link {
+  display: block;
+  height: 32px;
+  width: 195px;
+  float: left;
+  background: #E8E8E9;
+  border: 1px solid #AEAEAF;
+  border-radius: 2px;
+  padding: 3px;
+  margin: 5px;
+  overflow: hidden;
+  text-decoration: none;
+}
+.profile-links {
+  padding: 0 12px;
+}
+.profile-links:first-child a {
+  margin-left: 0;
+}
+.profile-content a .link-descr {
+  text-transform: uppercase;
+  font-size: 70%;
+  color: #AEAEAF;
+}
+.profile-content a.link-dis span.link-link {
+  color: #AEAEAF;
+}
+.profile h2 a {
+  float:right;
+  background: #E8E8E9;
+  border: 1px solid #AEAEAF;
+  border-radius: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 70%;
+  padding:5px;
+  font-weight: normal;
+  -moz-box-shadow: 0 1px 3px #aaa;
+  -webkit-box-shadow: 0 1px 3px #aaa;
+  box-shadow: 0 1px 3px #aaa;
+}
+.profile h2 a.disabled {
+  -moz-box-shadow: 0  #aaa;
+  -webkit-box-shadow: 0 #aaa;
+  box-shadow: 0 #aaa;
+}
+.profile h2 a:hover {
+  color:#9f4b0a;
+  border-color:#838383;
+}
+.profile h2 a:active {
+  color:#333;
+  border-color:#838383;
+  -moz-box-shadow: 0 1px 1px #aaa;
+  -webkit-box-shadow: 0 1px 1px #aaa;
+  box-shadow: 0 1px 1px #aaa;
+}
+
+
 a.button {
   background: #E8E8E9;
   border: 1px solid #aeaeaf;
@@ -25,14 +110,14 @@ a.button {
   -webkit-box-shadow: 0 1px 3px #aaaaaa;
   box-shadow: 0 1px 3px #aaaaaa; }
   a.button:hover {
-    color: #9f4b0a;
-    border-color: #838383; }
+	color: #9f4b0a;
+	border-color: #838383; }
   a.button:active {
-    color: #333;
-    border-color: #838383;
-    -moz-box-shadow: 0 1px 1px #aaaaaa;
-    -webkit-box-shadow: 0 1px 1px #aaaaaa;
-    box-shadow: 0 1px 1px #aaaaaa; }
+	color: #333;
+	border-color: #838383;
+	-moz-box-shadow: 0 1px 1px #aaaaaa;
+	-webkit-box-shadow: 0 1px 1px #aaaaaa;
+	box-shadow: 0 1px 1px #aaaaaa; }
 
 html, body {
   height: 100%;
@@ -182,7 +267,7 @@ html, body {
 .page-wrap {
   min-height: 100%;
   /* equal to footer height + margin*/
-  margin-bottom: -150px; 
+  margin-bottom: -150px;
 }
 
 .page-wrap:after {
@@ -312,27 +397,27 @@ a.main-box.news.red:hover {
   margin: 0;
   padding: 0; }
   .main-box .row:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden; }
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden; }
   .main-box .row .col-2 {
-    width: 363px;
-    padding: 0;
-    float: left; }
+	width: 363px;
+	padding: 0;
+	float: left; }
   .main-box .row .col-3 {
-    width: 238px;
-    padding: 0;
-    float: left; }
+	width: 238px;
+	padding: 0;
+	float: left; }
   .main-box .row .col-4 {
-    width: 174px;
-    padding: 0;
-    float: left; }
+	width: 174px;
+	padding: 0;
+	float: left; }
   .main-box .row .col-3-4 {
-    width: 544px;
-    padding: 0;
-    float: left; }
+	width: 544px;
+	padding: 0;
+	float: left; }
 
 .filter-bar {
   font-size: 0.95em;
@@ -405,7 +490,7 @@ span.smallnotice {
   -webkit-border-radius: 2px; }
 
 /**
- *	table styles
+ *  table styles
  */
 .main-box table {
   width: 726px;
@@ -446,7 +531,7 @@ tr:hover i.-icon-adduser {
 
 
 /**
- *	forum styles
+ *  forum styles
  */
 ul.breadcrumbs {
   list-style: none;
@@ -522,7 +607,7 @@ ul.topics li:nth-child(odd) a:hover {
   background-color: #f1f1f1; }
 
 /**
- *	edit news/post styles
+ *  edit news/post styles
  */
 .main-box form {
   padding: 0px 0px 12px 12px; }
@@ -573,7 +658,7 @@ form input[type="submit"]:active {
   box-shadow: 0 1px 1px #aaaaaa; }
 
 /*
-	administrate news
+  administrate news
 */
 form h2 {
   background: #f7f7f7;
@@ -660,7 +745,7 @@ select.document {
   margin-left: -2px;
   margin-bottom: 0px;
   min-width: 180px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   background: #f4f4f4 url('../img/icons/dropdown_triangle.png') no-repeat scroll right center;
 }
 select.document:hover, select.document:active {
@@ -687,7 +772,7 @@ select.document:hover, select.document:active {
 
 
 /*
-	icons
+  icons
 */
 i.-icon-pen {
   background: url("../img/icons/pencil32.png");
@@ -705,7 +790,7 @@ i.-icon-document {
   height: 32px;
   background: url("../img/icons/linedpaper32.png");
   background-size: cover;
-  display: block; 
+  display: block;
 }
 
 
@@ -863,4 +948,47 @@ i.-icon-document {
 .dropzone .dz-preview:hover.dz-error .dz-error-message,
 .dropzone-previews .dz-preview:hover.dz-error .dz-error-message {
   display: block;
+}
+.main-box ul.document-list {
+  padding: 0 0 0 0;
+}
+
+ul.document-list a {
+  text-decoration: none;
+  color: #111;
+  display: block;
+}
+
+ul.document-list a:hover {
+  color: #f57d20;
+}
+
+ul.document-list i {
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+ul.document-list li:nth-child(odd) {
+  background-color: #eee;
+}
+
+ul.document-list li:nth-child(odd):hover {
+  background-color: #f0f0f0;
+}
+
+ul.document-list li:nth-child(even):hover {
+  background-color: #f7f7f7;
+}
+
+li.document {
+  padding: 5px 10px;
+}
+
+li.document h4 {
+  font-weight: normal;
+  font-size: 11pt;
+}
+
+li.document small {
+  font-size: 10pt;
 }

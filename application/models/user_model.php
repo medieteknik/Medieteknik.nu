@@ -33,11 +33,10 @@ class User_model extends CI_Model
 
 	}
 
-		 /**
+	/**
 	 * Return query if there is a user with that lukasid
 	 *
 	 * @param  string	$lukasid	The lukas-id of the user, for example abcde123
-	 * @param  string	$password	The password in clear text
 	 * @param  bool 	$login		Wether or not we require user to be active
 	 * @return bool
 	 */
@@ -54,6 +53,45 @@ class User_model extends CI_Model
 			return $query;
 		}
 		return false;
+	}
+
+	/**
+	 * Fetches the name of specified user
+	 *
+	 * @param  integer	$id	The id of the user
+	 * @return array 	if no user is found, user_id returns 0
+	 */
+    function get_user_name($id)
+    {
+    	$this->db->select('first_name, last_name');
+    	$this->db->where('id', $id);
+    	$query = $this->db->get('users');
+
+    	if($query && $query->num_rows() > 0)
+    		return $query->result_array();
+
+    	return false;
+	}
+
+	/**
+	 * Fetches the gravatar hash of specified user
+	 *
+	 * @param  integer	$id	The id of the user
+	 * @return array 	if no user is found, user_id returns 0
+	 */
+    function get_user_gravatar($id)
+    {
+    	$this->db->select('gravatar');
+    	$this->db->where('users_id', $id);
+    	$query = $this->db->get('users_data');
+
+    	if($query && $query->num_rows() > 0)
+    	{
+    		$result = $query->result_array();
+    		return md5(strtolower($result[0]['gravatar']));
+    	}
+
+    	return false;
 	}
 
 	/**

@@ -16,6 +16,7 @@ $lang['footer_aboutsite'] = "Om hemsidan";
 $lang['footer_cookies'] = "Om kakor";
 
 // menu
+$lang['menu_menu'] = "Meny";
 $lang['menu_news'] = "Nyheter";
 $lang['menu_about'] = "Medieteknik";
 $lang['menu_mtd'] = "Medieteknikdagarna";
@@ -97,7 +98,7 @@ $lang['admin_addusers_success'] = "Användare tillagd!";
 $lang['admin_addusers_error'] = "Kunde inte lägga till användare. Säker på att du inte glömde att skriva in något?";
 	$lang['admin_addusers_error_lid'] = "LukadID:t finns redan eller är skrivet fel. Det ska vara på formen AAABB123.";
 	$lang['admin_addusers_error_fname'] = "Skriv in ett förnamn.";
-	$lang['admin_addusers_error_lname'] = "Skriv in ett efternamn."; 
+	$lang['admin_addusers_error_lname'] = "Skriv in ett efternamn.";
 	$lang['admin_addusers_error_pwd'] = "Lösenordet är för kort.";
 $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";

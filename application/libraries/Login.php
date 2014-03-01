@@ -79,6 +79,25 @@ class Login
 		return $this->CI->session->userdata('lukasid');
 	}
 
+	public function get_name()
+	{
+		// load model and collect uid
+		$this->CI->load->model('User_model');
+		$id = $this->CI->session->userdata('id');
+		// get user
+		$user = $this->CI->User_model->get_user_name($id);
+
+		return $user[0]['first_name'].' '.$user[0]['last_name'];
+	}
+
+	public function get_gravatar()
+	{
+		// load model and collect uid
+		$this->CI->load->model('User_model');
+		$id = $this->CI->session->userdata('id');
+		return $this->CI->User_model->get_user_gravatar($id);
+	}
+
 	public function login($lid) {
 		$this->CI->load->model('User_model');
 		$query = $this->CI->User_model->get_user($lid);
