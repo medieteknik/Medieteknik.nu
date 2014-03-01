@@ -260,9 +260,9 @@ function lang_id_to_imgpath($id)
 	switch($id)
 	{
 		case 1:
-			return base_url().'web/img/flags/se.png';
+			return base_url().'web/img/flags/se_big.png';
 		case 2:
-			return base_url().'web/img/flags/gb.png';
+			return base_url().'web/img/flags/gb_big.png';
 		default:
 			return "";
 

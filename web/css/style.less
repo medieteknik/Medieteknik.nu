@@ -194,6 +194,10 @@ body {
 		padding: 0 15px;
 		background: @contentbg;
 		.boxshadow(0px 1px 3px, @shadowcolor);
+
+		h1, h2, h3, h4, h5, h6 {
+			font-weight: bold;
+		}
 	}
 }
 
@@ -206,10 +210,8 @@ body {
 .news {
 	margin-bottom: 20px;
 
-	h1 {
-		margin-top: 15px;
+	h2 {
 		font-size: 170%;
-		font-weight: bold;
 
 		a {
 			color: @headfont;
@@ -219,10 +221,14 @@ body {
 				text-decoration: none;
 			}
 		}
+		img {
+			opacity: 0.8;
+		}
 	}
-	h2 {
+	h3 {
 		margin: 0 0 8px;
 		font-size: 110%;
+		font-weight: normal !important;
 		color: @headfont;
 	}
 	p {
