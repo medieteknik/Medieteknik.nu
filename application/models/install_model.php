@@ -495,6 +495,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 1,
 				'lang_id' => 1,
 				'title' => 'Sökande',
+				'slug' => 'applicant',
 				'description' => 'I den här forumdelen kan gäster skriva och fråga om medieteknikprogrammet.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -502,6 +503,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 1,
 				'lang_id' => 2,
 				'title' => 'Applicant',
+				'slug' => 'applicant',
 				'description' => 'In this forum guests can post and ask questions about Media Technology',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -510,6 +512,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 2,
 				'lang_id' => 1,
 				'title' => 'Student',
+				'slug' => 'student',
 				'description' => 'Detta forum är avsett för studenter att prata om allt och inget',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -517,6 +520,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 2,
 				'lang_id' => 2,
 				'title' => 'Student',
+				'slug' => 'student',
 				'description' => 'This forum is for students',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -525,6 +529,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 3,
 				'lang_id' => 1,
 				'title' => 'Annonser och jobb',
+				'slug' => 'ads-and-jobs',
 				'description' => 'Här finns alla annonser och jobb samlade',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -532,6 +537,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 3,
 				'lang_id' => 2,
 				'title' => 'Ads and jobs',
+				'slug' => 'ads-and-jobs',
 				'description' => 'Here is all the ads and jobs',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -540,6 +546,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 4,
 				'lang_id' => 1,
 				'title' => 'Skolan',
+				'slug' => 'school',
 				'description' => 'Allt som rör kurser, plugg och annat skolreleterat.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -547,6 +554,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 4,
 				'lang_id' => 2,
 				'title' => 'School',
+				'slug' => 'school',
 				'description' => 'All about courses, studying and other school related topics.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -555,6 +563,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 5,
 				'lang_id' => 1,
 				'title' => 'Köp & sälj',
+				'slug' => 'buy-and-sell',
 				'description' => 'Känner du att du har för många prylar? Sälj överflödet här.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -562,6 +571,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 5,
 				'lang_id' => 2,
 				'title' => 'Buy & sell',
+				'slug' => 'buy-and-sell',
 				'description' => 'Too much stuff? Sell it here',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -570,6 +580,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 6,
 				'lang_id' => 1,
 				'title' => 'Arbete & fritid',
+				'slug' => 'work-and-leisure',
 				'description' => 'Om det gäller fest, sportande, jobb eller bara allmän fritid, skriv här.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -577,6 +588,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 6,
 				'lang_id' => 2,
 				'title' => 'Work & leisure',
+				'slug' => 'work-and-leisure',
 				'description' => 'Partying, partying yeah! Fun fun fun fun!',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -586,6 +598,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 7,
 				'lang_id' => 2,
 				'title' => 'Advanced Computer Graphics',
+				'slug' => 'acg',
 				'description' => 'This forum is for ACG students and topics about the Master program ACG.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -594,6 +607,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 8,
 				'lang_id' => 1,
 				'title' => 'Exjobb',
+				'slug' => 'thesis',
 				'description' => 'Annonser om exjobb här',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -601,6 +615,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 8,
 				'lang_id' => 2,
 				'title' => 'Thesis',
+				'slug' => 'thesis',
 				'description' => 'Ads about thesis here',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -609,6 +624,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 9,
 				'lang_id' => 1,
 				'title' => 'Övriga tjänster',
+				'slug' => 'other-services',
 				'description' => 'Andra jobberbjudanden.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -616,6 +632,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 9,
 				'lang_id' => 2,
 				'title' => 'Other Services',
+				'slug' => 'other-services',
 				'description' => 'Jobs',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -624,6 +641,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 10,
 				'lang_id' => 1,
 				'title' => 'Övriga annonser',
+				'slug' => 'other-advertisements',
 				'description' => 'Annonser',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -631,6 +649,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 10,
 				'lang_id' => 2,
 				'title' => 'Other advertisements',
+				'slug' => 'other-advertisements',
 				'description' => 'Ads',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -639,6 +658,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 11,
 				'lang_id' => 1,
 				'title' => 'Frågor & svar',
+				'slug' => 'questions-and-answers',
 				'description' => 'Undrar du något om hur det är att plugga medieteknik? Fråga här.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -646,6 +666,7 @@ class Install_model extends CI_Model
 			   	'cat_id' => 11,
 				'lang_id' => 2,
 				'title' => 'Questions & Answers',
+				'slug' => 'questions-and-answers',
 				'description' => 'Have a question about Medie Technology? Ask it here.',
 			);
 			$this->db->insert('forum_categories_descriptions', $data);
@@ -882,7 +903,7 @@ class Install_model extends CI_Model
 			   	'document_type' => 'directional_document',
 			);
 			$this->db->insert('document_types', $data);
-			
+
 			$data = array(
 			   	'document_type' => 'documents_meeting_autumn',
 			);
@@ -891,7 +912,7 @@ class Install_model extends CI_Model
 			$data = array(
 			   	'document_type' => 'documents_meeting_spring',
 			);
-			$this->db->insert('document_types', $data);			
+			$this->db->insert('document_types', $data);
 		}
 	}
 
@@ -1056,7 +1077,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 	{
 		if(!$this->db->table_exists('forum_categories_descriptions_language') || isset($_GET['drop']))
 		{
-			$q = "CREATE OR REPLACE VIEW forum_categories_descriptions_language AS (SELECT e.cat_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.description,e.description) as description ";
+			$q = "CREATE OR REPLACE VIEW forum_categories_descriptions_language AS (SELECT e.cat_id,e.lang_id,COALESCE(o.title,e.title) as title,COALESCE(o.slug,e.slug) as slug, COALESCE(o.description,e.description) as description ";
 			$q .= " FROM forum_categories_descriptions               e";
 			$q .= " LEFT OUTER JOIN forum_categories_descriptions o ON e.cat_id=o.cat_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
 			$q .= " WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))";

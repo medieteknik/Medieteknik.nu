@@ -187,9 +187,7 @@ body {
 	}
 }
 /************ MAIN ***************/
-#main-content {
-	padding: 0;
-
+.wrapper {
 	a {
 		color: darken(@orange, 10%);
 		.transition(0.1s);
@@ -198,6 +196,9 @@ body {
 			color: @orange;
 		}
 	}
+}
+#main-content {
+	padding: 0;
 
 	.main-box {
 		padding: 0 15px;
@@ -209,13 +210,11 @@ body {
 		}
 	}
 }
-
 .carousel-inner {
 	.container {
 		padding-bottom: 30px;
 	}
 }
-
 /************ NEWS ***************/
 .news {
 	margin-bottom: 20px;
@@ -243,6 +242,88 @@ body {
 	}
 	p {
 		padding: 5px 0 5px;
+	}
+}
+/************ FORUM **************/
+.forum-view {
+	h2 {
+		font-size: 150%;
+		margin: 15px 0 0;
+	}
+	h3 {
+		margin: 5px 0 15px;
+		font-size: 100%;
+		font-weight: normal !important;
+		// text-transform: uppercase;
+	}
+
+	ol.breadcrumb {
+		float: right;
+		padding-right: 0;
+		margin: 5px 0 0;
+		background: none;
+
+		a {
+			color: #ccc;
+
+			&:hover {
+				color: @orange;
+				text-decoration: none;
+			}
+		}
+
+		&>li+li:before {
+			color: lighten(#333, 30%);
+		}
+	}
+
+	ul.forum {
+		margin: 0 -15px;
+
+		a {
+			display: block;
+			background-color: #333;
+			text-decoration: none;
+			padding: 11px 15px;
+			font-size: 12pt;
+			color: @orange;
+
+			&:hover {
+				background-color: #373737;
+				color: darken(@orange, 10%);
+			}
+		}
+	}
+	ul.forum ul.forum, ul.topics {
+		margin: 0;
+
+		a {
+			display: block;
+			padding: 8px 15px;
+			background: transparent;
+			color: #333 !important;
+			font-size: 1.1em;
+			font-weight: normal;
+			border-bottom: 1px solid #dddddd;
+
+			&:hover {
+				background-color: #f7f7f7;
+				color: #f57d20 !important;
+			}
+			span {
+				font-style: Italic;
+			}
+		}
+		li:nth-child(odd) a {
+			background-color: #eee;
+
+			&:hover {
+				background-color: #f1f1f1;
+			}
+		}
+	}
+	ul.topics {
+		margin: 0 -15px;
 	}
 }
 /*********** SIDEBAR *************/
@@ -365,6 +446,9 @@ body {
 .darkbg {
 	background: @darkbg;
 	color: @bodybg;
+}
+p.bigmargin {
+	margin: 15px 0;
 }
 ul.box-list {
 	list-style: none;

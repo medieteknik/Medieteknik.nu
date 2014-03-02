@@ -29,6 +29,7 @@ class Forum extends MY_Controller
 			$id = $theid;
 		else
 			$id = $this->Forum_model->get_id_from_slug($theid);
+
 		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($id);
 		// Data for forum view
 		$main_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to($id, 2);
@@ -42,8 +43,9 @@ class Forum extends MY_Controller
 			$main_data['posting_allowed'] = $c->posting_allowed == 1;
 			$main_data['is_logged_in'] = $this->login->is_logged_in();
 			$main_data['guest_allowed'] = $c->guest_allowed == 1;
-		} else {
-
+		}
+		else
+		{
 			$main_data['posting_allowed'] = false;
 			$main_data['is_logged_in'] = $this->login->is_logged_in();
 			$main_data['guest_allowed'] =false;
@@ -113,7 +115,8 @@ class Forum extends MY_Controller
 				if($this->login->is_logged_in())
 				{
 					$main_data['postform'] = TRUE;
-				} else if(!$this->login->is_logged_in() && $c->guest_allowed == 1)
+				}
+				else if(!$this->login->is_logged_in() && $c->guest_allowed == 1)
 				{
 					$main_data['postform'] = TRUE;
 					$main_data['guest'] = TRUE;

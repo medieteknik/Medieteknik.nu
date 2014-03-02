@@ -50,7 +50,8 @@ $lang['page_editthepage'] = "Redigera nyheten";
 
 // forum
 $lang['forum_forum'] = "Forum";
-$lang['forum_nothreads'] = "Inga trådar";
+$lang['forum_nothreads'] = "Tyvärr har ingen skrivit något här ännu. Var först vettja!";
+$lang['forum_loginfirst'] = "Du måste vara inloggad för att skriva i den här forumdelen.";
 
 // user
 $lang['user_username'] = "Användarnamn";
@@ -175,6 +176,8 @@ $lang['misc_title'] = "Titel";
 $lang['misc_description'] = "Beskrivning";
 $lang['misc_delete'] = "Radera";
 $lang['misc_readmore'] = "Fortsätt läsa";
+$lang['misc_published'] = "Publicerad";
+$lang['misc_by'] = "Av";
 
 // error
 $lang['error_error'] = "Fel!";

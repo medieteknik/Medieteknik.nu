@@ -35,11 +35,11 @@
 			<img src="<?php echo lang_id_to_imgpath($news->lang_id); ?>" class="img-circle pull-right" />
 		</h1>
 		<h3>
-			Publicerad
+			<?php echo $lang['misc_published']; ?>
 			<i class="date" title="<?php echo $news->date; ?>">
 				<?php echo readable_date($news->date, $lang); ?>
 			</i>
-			av <?php echo anchor('user/profile/'.$news->userid, $news->first_name.' '.$news->last_name); ?>
+			<?php echo $lang['misc_by'].' '.anchor('user/profile/'.$news->userid, $news->first_name.' '.$news->last_name); ?>
 		</h3>
 		<?php echo $news_story; ?>
 	</div>

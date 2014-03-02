@@ -344,6 +344,10 @@ function get_forum_categories_descriptions_fields()
 			'type' => 'VARCHAR',
 			'constraint' => "50",
 		),
+		'slug' => array(
+			'type' => 'VARCHAR',
+			'constraint' => "50",
+		),
 		'description' => array(
 			'type' => 'VARCHAR',
 			'constraint' => "300",
@@ -624,18 +628,18 @@ function get_page_fields()
 	$fields = array(
 		'id' => array(
 			'type' => 'INT',
-			'constraint' => 5, 
+			'constraint' => 5,
 			'unsigned' => TRUE,
 			'auto_increment' => TRUE
 		),
 		'link_sort' => array(
 			'type' => 'INT',
-			'constraint' => 5, 
+			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
 		'published' => array(
 			'type' => 'INT',
-			'constraint' => 5, 
+			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
 		'name' => array(
@@ -651,12 +655,12 @@ function get_page_content_fields()
 	$fields = array(
 		'page_id' => array(
 			'type' => 'INT',
-			'constraint' => 5, 
+			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
 		'lang_id' => array(
 			'type' => 'INT',
-			'constraint' => 5, 
+			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
 		'last_edit' => array(

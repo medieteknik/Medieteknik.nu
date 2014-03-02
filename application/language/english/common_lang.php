@@ -50,7 +50,8 @@ $lang['page_editthepage'] = "Edit the page";
 
 // forum
 $lang['forum_forum'] = "Forum";
-$lang['forum_nothreads'] = "No threads";
+$lang['forum_nothreads'] = "Sorry, there is nothing posted in this forum. Add your voice!";
+$lang['forum_loginfirst'] = "Sorry, you need to log in to post a topic in this part of the forum.";
 
 // user
 $lang['user_username'] = "Username";
@@ -177,6 +178,8 @@ $lang['misc_title'] = "Title";
 $lang['misc_description'] = "Description";
 $lang['misc_delete'] = "Delete";
 $lang['misc_readmore'] = "Read more";
+$lang['misc_published'] = "Published";
+$lang['misc_by'] = "By";
 
 // error
 $lang['error_error'] = "Error!";
