@@ -92,5 +92,14 @@ foreach($news_array as $news_item)
 	// increment counter
 	$i++;
 }
-echo '</div><!-- /.row -->';
 //do_dump($news_array);
+?>
+</div><!-- /.row -->
+<div class="row">
+	<div class="col-sm-12">
+		<p>
+			<?php echo anchor('news/archive', $lang['news_more'].' &rarr;', 'class="pull-right"'); ?>
+		</p>
+	</div>
+</div>
+

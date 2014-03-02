@@ -50,4 +50,45 @@ foreach($news_array as $news_item)
 	<?php
 }
 
-do_dump($news_array);
+$total_pages = floor($news_count / $news_limit)+1;
+$prev_page = $news_page == 1 ? 1 : $news_page-1;
+$next_page = $news_page == $total_pages ? $total_pages : $news_page+1;
+
+$threshold = 3;
+?>
+<ul class="pagination center-block">
+	<li<?php echo $news_page == 1 ? ' class="disabled"' : '';?>>
+		<?php echo anchor('news/archive/page/'.$prev_page.'/'.$news_limit, '&laquo;'); ?>
+	</li>
+
+	<?php
+		$start = $news_page-$threshold > 0 ? $news_page-$threshold : 1;
+		$end = $news_page+$threshold <= $total_pages ? $news_page+$threshold : $total_pages;
+
+		if($news_page > $threshold+1)
+		{
+			echo '<li>'.anchor('news/archive/page/1/'.$news_limit, 1).'</li>';
+			echo '<li class="disabled">'.anchor('#', '...', 'onClick="return false;"');'</li>';
+		}
+
+		for($k = $start; $k <= $end; $k++)
+		{
+			?>
+			<li<?php echo $k == $news_page ? ' class="active"' : '';?>>
+				<?php echo anchor('news/archive/page/'.$k.'/'.$news_limit, $k); ?>
+			</li>
+			<?php
+		}
+
+		if($news_page < $total_pages-$threshold)
+		{
+			echo '<li class="disabled">'.anchor('#', '...', 'onClick="return false;"');'</li>';
+			echo '<li>'.anchor('news/archive/page/'.$total_pages.'/'.$news_limit, $total_pages).'</li>';
+		}
+	?>
+
+	<li<?php echo $news_page == $total_pages ? ' class="disabled"' : '';?>>
+		<?php echo anchor('news/archive/page/'.$next_page.'/'.$news_limit, '&raquo;'); ?>
+	</li>
+</ul>
+<?php

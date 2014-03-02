@@ -75,6 +75,21 @@ class News_model extends CI_Model
         return $query->result();
     }
 
+    /**
+     * count how many news that is available to the current user
+     * @return int the number of news
+     */
+    function get_news_count()
+    {
+    	if(!$this->login->has_privilege('news_editor'))
+    	{
+    		$this->db->where('draft', 0);
+    		$this->db->where('approved', 1);
+    	}
+    	$this->db->from('news');
+    	return $this->db->count_all_results();
+    }
+
 	/**
 	 * Fetches a specific news item
 	 *

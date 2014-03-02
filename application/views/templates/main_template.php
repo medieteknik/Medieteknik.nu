@@ -131,7 +131,7 @@
 								<?php echo anchor('http://liu.se/medieteknik', $lang['footer_mtliu'], 'target="_blank"'); ?>
 							</p>
 						</div>
-						<div class="col-sm-3 col-sm-offset-3" id="follow">
+						<div class="col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3" id="follow">
 							<h1><?php echo $lang['footer_follow']; ?></h1>
 							<a href="http://linkedin.com/groups?gid=5159466" class="linkedin" target="_blank"></a>
 							<a href="http://facebook.com/mtsektionen" class="facebook" target="_blank"></a>

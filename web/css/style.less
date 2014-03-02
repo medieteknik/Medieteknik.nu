@@ -190,6 +190,15 @@ body {
 #main-content {
 	padding: 0;
 
+	a {
+		color: darken(@orange, 10%);
+		.transition(0.1s);
+
+		&:hover {
+			color: @orange;
+		}
+	}
+
 	.main-box {
 		padding: 0 15px;
 		background: @contentbg;
@@ -207,6 +216,7 @@ body {
 	}
 }
 
+/************ NEWS ***************/
 .news {
 	margin-bottom: 20px;
 
@@ -214,7 +224,7 @@ body {
 		font-size: 170%;
 
 		a {
-			color: @headfont;
+			color: @headfont !important;
 
 			&:hover {
 				color: @fontcolor;
@@ -235,7 +245,23 @@ body {
 		padding: 5px 0 5px;
 	}
 }
-/************ FOOTER ***************/
+/*********** SIDEBAR *************/
+#sidebar-content {
+	.main-box {
+		padding: 0 15px;
+		background: @contentbg;
+		.boxshadow(0px 1px 3px, @shadowcolor);
+		margin: 0 0 15px;
+
+		h2, h3, h4 {
+			margin-top: 15px;
+		}
+		h2 {
+			font-size: 130%;
+		}
+	}
+}
+/*********** FOOTER **************/
 #main-footer {
 	border-top: 1px solid @shadowcolor;
 	height: 120px;
@@ -339,4 +365,58 @@ body {
 .darkbg {
 	background: @darkbg;
 	color: @bodybg;
+}
+ul.box-list {
+	list-style: none;
+	font-size: 0.90em;
+	margin: 0 -15px 0;
+
+	li {
+		padding: 10px 15px;
+		color: @headfont;
+
+		a {
+			display: block;
+			padding: 0;
+			margin: 0;
+			color: @headfont;
+			text-decoration: none;
+
+			&:hover {
+				color: @orange;
+			}
+		}
+		span {
+			float: right;
+		}
+
+		&:nth-child(odd) {
+			background-color: #eee;
+
+			&:hover {
+				background-color: #f0f0f0;
+			}
+		}
+		&:nth-child(even):hover {
+			background-color: #f7f7f7;
+		}
+	}
+}
+.pagination {
+	li.active a{
+		background: @gray;
+		border-color: @gray;
+
+		&:hover {
+			background: lighten(@gray, 10%);
+			border-color: lighten(@gray, 10%);
+		}
+	}
+	li a {
+		color: @orange;
+
+		&:hover {
+			color: darken(@orange, 10%);
+		}
+	}
 }

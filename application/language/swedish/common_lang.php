@@ -43,6 +43,7 @@ $lang['news_author'] = "Skribent";
 $lang['news_tothenews'] = "Till nyheten";
 $lang['news_editthenews'] = "Redigera nyheten";
 $lang['news_lastedit'] = "Senast redigerad";
+$lang['news_more'] = "Fler nyheter";
 
 //page
 $lang['page_editthepage'] = "Redigera nyheten";
