@@ -43,6 +43,7 @@ $lang['news_author'] = "Author";
 $lang['news_tothenews'] = "To the news";
 $lang['news_editthenews'] = "Edit the news";
 $lang['news_lastedit'] = "Last edit";
+$lang['news_more'] = "See more news";
 
 //page
 $lang['page_editthepage'] = "Edit the page";

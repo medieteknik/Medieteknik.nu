@@ -18,11 +18,14 @@ class News extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	public function archive($page = 1, $limit = 10)
+	public function archive($dummy = 'page', $page = 1, $limit = 10)
 	{
 		// Data for news view
 		$this->load->model('News_model');
 		$main_data['news_array'] = $this->News_model->get_paged_news($page, $limit);
+		$main_data['news_count'] = $this->News_model->get_news_count();
+		$main_data['news_limit'] = $limit;
+		$main_data['news_page'] = $page;
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
