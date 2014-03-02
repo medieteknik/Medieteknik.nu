@@ -414,17 +414,24 @@ function profilelinks($option, $user)
 
 /**
  * Return gravatar img
- * @param 	user 	$user 	the user
- * @param 	int 	$size 	size of image [1, 2048]
- * @param 	string 	$extra 	any desired extra html
- * @param 	string 	$fallback 	gravatar fallback url
- * @param 	bool 	$img 	if you want a img-tag
- * @return 	string 	the desired link, styled and everything
+ * @param 	string/obj 	$user 		the user
+ * @param 	int 	$size 			size of image [1, 2048]
+ * @param 	string 	$extra 			any desired extra html
+ * @param 	string 	$fallback 		gravatar fallback url
+ * @param 	bool 	$img 			if you want a img-tag
+ * @return 	string 					the desired link, styled and everything
  */
-function gravatarimg($user, $size = 80, $extra = '', $fallback = 'mm', $img = true)
+function gravatarimg($theuser, $size = 80, $extra = '', $fallback = 'mm', $img = true)
 {
-	$return = 'http://www.gravatar.com/avatar/'.md5($user->gravatar).'?s='.$size.'&d='.$fallback;
+	if(empty($theuser) || is_string($theuser))
+		$user = $theuser;
+	else
+		$user = $theuser->gravatar;
+
+	$return = 'http://www.gravatar.com/avatar/'.md5($user).'?s='.$size.'&d='.$fallback;
+
 	if($img)
 		return '<img src="'.$return.'" '.$extra.'/>';
+
 	return $return;
 }

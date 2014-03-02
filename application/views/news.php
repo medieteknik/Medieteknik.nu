@@ -39,11 +39,11 @@ foreach($news_array as $news_item)
 			<img src="<?php echo lang_id_to_imgpath($news_item->lang_id); ?>" class="img-circle pull-right" />
 		</h2>
 		<h3>
-			Publicerad
+			<?php echo $lang['misc_published']; ?>
 			<i class="date" title="<?php echo $news_item->date; ?>">
 				<?php echo readable_date($news_item->date, $lang); ?>
 			</i>
-			av <?php echo anchor('user/profile/'.$news_item->userid, $news_item->first_name.' '.$news_item->last_name); ?>
+			<?php echo $lang['misc_by'].' '.anchor('user/profile/'.$news_item->userid, $news_item->first_name.' '.$news_item->last_name); ?>
 		</h3>
 		<?php echo $news_story; ?>
 	</div>
