@@ -88,7 +88,7 @@ class User_model extends CI_Model
     	if($query && $query->num_rows() > 0)
     	{
     		$result = $query->result_array();
-    		return md5(strtolower($result[0]['gravatar']));
+    		return strtolower($result[0]['gravatar']);
     	}
 
     	return false;

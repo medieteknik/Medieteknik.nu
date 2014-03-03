@@ -374,45 +374,6 @@ function valid_url($url = '')
 }
 
 /**
- * Display user-data-links
- * @param 	string 	$option 	find out what link the user want
- * @param 	string 	$user 		include the user
- * @return 	string 	the desired link, styled and everything
- */
-
-function profilelinks($option, $user)
-{
-	// is the thing we want empty? end function!
-	if(empty($user->$option))
-		return '';
-
-	// Pretty genitive
-	if(substr($user->first_name, -1) == 's')
-		$first_name_genetive = $user->first_name;
-	else
-		$first_name_genetive = $user->first_name.'s';
-
-	//set default link
-	$return = '<a href="'.($option == 'twitter' ? "https://twitter.com/" : "").
-			$user->$option.'" target="_blank" class="profile-link">
-			<span class="link-descr">'.$option.'</span>
-			<span class="link-link"> <br />';
-
-	//what do the user want? adapt link text.
-	if($option == 'linkedin')
-		$return .= 'Besök '.$first_name_genetive.' LinkedIn-profil';
-	elseif($option == 'twitter')
-		$return .= '@'.$user->twitter;
-	else
-		$return .= $user->$option;
-
-	$return .= '</span></a>';
-
-	//return the stuff!
-	return $return;
-}
-
-/**
  * Return gravatar img
  * @param 	string/obj 	$user 		the user
  * @param 	int 	$size 			size of image [1, 2048]

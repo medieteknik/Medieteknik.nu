@@ -8,18 +8,23 @@ if($is_logged_in) {
 	$editbutton = anchor('/user/edit_profile/', $lang['profile_edit']);
 }
 
+$readweb = str_replace(array('http://', 'https://'), '', $user->web);
+
 echo '
 <div class="main-box clearfix profile">',
-gravatarimg($user, 81, ' style="margin:10px 10px 0; float: left;"'),
-	'<h2>',get_full_name($user),' ',$editbutton,'</h2>
-	<div class="profile-content">
-		<div class="profile-links">
-			',profilelinks('web', $user),'
-			',profilelinks('linkedin', $user),'
-			',profilelinks('twitter', $user),'
-		</div>
-		<div class="clearfix"></div>
-		<p>',text_format($user->presentation),'</p>
-	</div>
+	'<div class="row">',
+		'<div class="col-sm-3">',
+			'<p>',gravatarimg($user, 300, ' class="img-responsive img-circle"'),'</p>',
+		'</div>',
+		'<div class="col-sm-6">',
+			'<h3>',get_full_name($user),' ',$editbutton,'</h3>',
+			'<ul class="profilelinks list-inline">',
+				($user->linkedin ? '<li><a href="'.$user->linkedin.'" target="_blank">LinkedIn</a></li>': ''),
+				($user->twitter ? '<li><a href="https://twitter.com/'.$user->twitter.'" target="_blank">Twitter @'.$user->twitter.'</a></li>': ''),
+				($user->web ? '<li><a href="'.$user->web.'" target="_blank">'.$readweb.'</a></li>': ''),
+			'</ul>',
+			'<p>',text_format($user->presentation),'</p>',
+		'</div>',
+	'</div>','
 </div><!-- close .main-box -->';
 ?>
