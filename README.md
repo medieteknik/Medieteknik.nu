@@ -34,8 +34,7 @@ This application in developed for the Students Association for Media Technology 
 To get started developing this application, please refer to [the Get started wiki page](https://github.com/medieteknik/Medieteknik.nu/wiki/Get-started-with-the-development-of-medieteknik.nu).
 
 ## 3. Technical notes
-The system uses SASS, read more and get started at http://sass-lang.com. With ruby, simply
-run <code>gem install sass</code>.
+The system uses Less, currently being rendered on the run.
 
 ## 4. Demo/Dev URL
 [http://dev.medieteknik.nu/](http://dev.medieteknik.nu/)

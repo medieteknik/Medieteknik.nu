@@ -49,7 +49,8 @@
 				  );
 		$img = rand(0, count($photos)-1);
 		?>
-		<div class="item photo" style="background-image: url(<?php echo base_url().'web/img/campus/'.$photos[$img]['file']; ?>);">
+		<div class="item photo">
+			<div class="image" style="background-image: url(<?php echo base_url().'web/img/campus/'.$photos[$img]['file']; ?>);"></div>
 			<div class="carousel-caption">
 				<h1>Linköpings universitet &ndash; Campus Norrköping</h1>
 				<p class="lead">
