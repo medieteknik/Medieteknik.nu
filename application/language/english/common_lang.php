@@ -52,6 +52,11 @@ $lang['page_editthepage'] = "Edit the page";
 $lang['forum_forum'] = "Forum";
 $lang['forum_nothreads'] = "Sorry, there is nothing posted in this forum. Add your voice!";
 $lang['forum_loginfirst'] = "Sorry, you need to log in to post a topic in this part of the forum.";
+$lang['forum_answer'] = "Post reply";
+$lang['forum_submit'] = "Submit reply!";
+$lang['forum_guidelines'] = "Please keep a good tone in the forum. Don't write something you don't stand for.";
+$lang['forum_posttopic'] = "Post topic";
+$lang['forum_createtopic'] = "Submit topic!";
 
 // user
 $lang['user_username'] = "Username";

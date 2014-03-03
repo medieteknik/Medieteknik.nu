@@ -52,6 +52,11 @@ $lang['page_editthepage'] = "Redigera nyheten";
 $lang['forum_forum'] = "Forum";
 $lang['forum_nothreads'] = "Tyvärr har ingen skrivit något här ännu. Var först vettja!";
 $lang['forum_loginfirst'] = "Du måste vara inloggad för att skriva i den här forumdelen.";
+$lang['forum_answer'] = "Skriv ett svar";
+$lang['forum_submit'] = "Skicka svaret!";
+$lang['forum_guidelines'] = "Tänk på att hålla en god ton. Skriv inget du inte står för.";
+$lang['forum_posttopic'] = "Skapa ny tråd";
+$lang['forum_createtopic'] = "Skapa tråden!";
 
 // user
 $lang['user_username'] = "Användarnamn";

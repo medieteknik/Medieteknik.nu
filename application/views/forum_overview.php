@@ -33,26 +33,40 @@ echo '</div>';
 
 if($posting_allowed === true)
 {
-	echo '<div class="main-box clearfix">';
+	echo '<div class="main-box clearfix forum-view margin-top">';
 	if($is_logged_in)
 	{
-		echo '<h2>Post topic</h2>',
-		form_open('forum/post_topic'),
+		echo '<h2>'.$lang['forum_posttopic'].'</h2>';
 
-		form_hidden(array('cat_id' => $categories_array[0]->id)),
-		form_hidden(array('guest' => 0)),
+		echo '<div class="row">',
+			form_open('forum/post_topic'),
 
-		form_label($lang['misc_headline'], 'topic'),
-		form_input(array('name' => 'topic','id' => 'topic')),
-
-		form_label($lang['misc_text'], 'reply'),
-		form_textarea(array('name' => 'reply',
-							'id' => 'reply',
-							'rows'	=>	10,
-							'cols'	=>	85)),
-
-		form_submit('post', 'Send');
-		form_close();
+				form_hidden(array('cat_id' => $categories_array[0]->id)),
+				form_hidden(array('guest' => 0)),
+				'<div class="col-sm-8">',
+					// good praxis to allways add a label. Bootstraps' .sr-only will hide it since we use placeholders.
+					form_label($lang['misc_headline'], 'topic', array('class' => 'sr-only')),
+					'<p>',form_input(array('name' => 'topic',
+										   'id' => 'topic',
+										   'class'=> 'form-control',
+										   'placeholder' => $lang['misc_headline'],
+										   'required' => '')),
+					'</p>',
+					// good praxis to allways add a label. Bootstraps' .sr-only will hide it since we use placeholders.
+					form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
+					form_textarea(array('name' 		=> 'reply',
+										'id' 		=> 'reply',
+										'rows'		=>	6,
+										'class'		=> 'form-control',
+										'placeholder' => $lang['misc_text'].'...',
+										'required' 	=> '')),
+				'</p></div>',
+				'<div class="col-sm-4">',
+					'<p><input type="submit" name="post" value="',$lang['forum_createtopic'],'" class="btn btn-default form-control" /></p>',
+					'<p>',$lang['forum_guidelines'],'</p>',
+				'</div>',
+			form_close(),
+		'</div>';
 	}
 	else if (!$is_logged_in && !$guest_allowed)
 	{
