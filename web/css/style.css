@@ -264,7 +264,16 @@ a.main-box {
 .main-box h2 {
   padding: 12px;
   font-size: 1.3em;
-  color: #111; }
+  color: #111;}
+
+.main-box h2 a{
+  color: #111;
+  text-decoration: none;
+}
+
+.main-box h2 a:hover{
+  color: #f57d20;
+}
 
 .main-box h3 {
   margin: 12px 12px 6px;

@@ -38,6 +38,7 @@ $lang['news_author'] = "Skribent";
 $lang['news_tothenews'] = "Till nyheten";
 $lang['news_editthenews'] = "Redigera nyheten";
 $lang['news_lastedit'] = "Senast redigerad";
+$lang['news_readmore'] = "Läs mer";
 
 //page
 $lang['page_editthepage'] = "Redigera nyheten";
@@ -137,6 +138,7 @@ $lang['misc_english'] = "Engelska";
 $lang['misc_swedish_native'] = "Svenska";
 $lang['misc_english_native'] = "English";
 $lang['misc_headline'] = "Rubrik";
+$lang['misc_introduction'] = "Ingress";
 $lang['misc_text'] = "Text";
 $lang['misc_right'] = "Höger";
 $lang['misc_left'] = "Vänster";
