@@ -144,14 +144,13 @@
 		<!-- END footer -->
 		<!-- JavaScript at the bottom for fast page loading -->
 
-		<!-- Grab Google CDNs jQuery, with a protocol relative URL; fall back to local if offline -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+		<!-- Grab jQuery CDNs jQuery, with a protocol relative URL; fall back to local if offline -->
+		<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 		<script>window.jQuery || document.write('<script src="<?php echo base_url(); ?>web/js/libs/jquery.min.js"><\/script>')</script>
 
 		<!-- Load Bootstrap from it's CDN -->
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-		<!-- scripts concatenated and minified via ant build script-->
 		<script type="text/javascript" src="<?php echo base_url(); ?>web/js/script.js"></script>
 		<!-- end scripts-->
 	</body>
