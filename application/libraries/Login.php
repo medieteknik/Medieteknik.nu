@@ -94,7 +94,7 @@ class Login
 	{
 		// load model and collect uid
 		$this->CI->load->model('User_model');
-		$id = $this->CI->session->userdata('id');
+		$id = $this->get_id();
 		return $this->CI->User_model->get_user_gravatar($id);
 	}
 

@@ -62,10 +62,9 @@
 								{
 									// get gravatar
 									$gravatar = $this->login->get_gravatar();
-									$gravatar = 'http://www.gravatar.com/avatar/'.$gravatar.'?s=30';
 
 									// nice profile link with images and shit
-									$profile_link = '<img src="'.$gravatar.'" class="img-circle" />'.$this->login->get_name();
+									$profile_link = gravatarimg($gravatar, 30, ' class="img-circle"').$this->login->get_name();
 									echo anchor('user', $profile_link).
 										anchor('user/logout', $menu_logout);
 								}

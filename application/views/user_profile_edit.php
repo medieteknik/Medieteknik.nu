@@ -5,45 +5,47 @@ $twitter = array(
 			'name'		=> 'twitter',
 			'value'		=> $user->twitter,
 			'maxlength'	=> '100',
-			'size'		=> '50'
+			'class' 	=> 'form-control'
 		);
 $linkedin = array(
 			'id'			=> 'linkedin',
 			'name'			=> 'linkedin',
 			'value'			=> $user->linkedin,
 			'maxlength'		=> '100',
-			'size'			=> '50',
-			'placeholder'	=> 'http://linkedin.com/in/...'
+			'placeholder'	=> 'http://linkedin.com/in/...',
+			'class' 	=> 'form-control'
 		);
 $gravatar = array(
 			'id'			=> 'gravatar',
 			'name'			=> 'gravatar',
 			'value'			=> $user->gravatar,
 			'maxlength'		=> '254',
-			'size'			=> '40',
+			'placeholder'	=> 'mt@example.com',
+			'class' 		=> 'form-control'
 		);
 $web = array(
 			'id'			=> 'web',
 			'name'			=> 'web',
 			'value'			=> $user->web,
 			'maxlength'		=> '100',
-			'size'			=> '50',
-			'placeholder'	=> 'http://'
+			'placeholder'	=> 'http://...',
+			'class' 	=> 'form-control'
 		);
 $presentation = array(
 			'id'		=> 'presentation',
 			'name'		=> 'presentation',
 			'value'		=> $user->presentation,
 			'rows'		=> '4',
-			'cols'		=> '70'
+			'placeholder' => $lang['misc_text'],
+			'class' 	=> 'form-control'
 		);
 
 
-if(isset($run))
+if(isset($status) && strlen($status) > 0)
 {
-	if($status)
+	if ($status == 'success')
 		echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
-	else
+	else if ($status == 'fail')
 		echo '<div class="alert alert-danger">'.$lang['error_common'].'</div>';
 }
 
@@ -52,27 +54,37 @@ echo form_open('user/edit_profile/runedit'),
 '<div class="main-box clearfix profile">
 	<h2>Redigera konto</h2>',
 	'<div class="row">',
-		'<div class="col-2">',
-			form_label('Twitter', 'twitter'),
-			form_input($twitter),
-			form_label('LinkedIn', 'linkedin'),
-			form_input($linkedin),
-			form_label('Web', 'web'),
-			form_input($web),
-		'</div>',
-		'<div class="col-2">',
+		'<div class="col-sm-5">',
 			'<p>',
-			gravatarimg($user, 80, ' style="float:right;"'),
+				form_label('Twitter', 'twitter'),
+				form_input($twitter),
+			'</p><p>',
+				form_label('LinkedIn', 'linkedin'),
+				form_input($linkedin),
+			'</p><p>',
+				form_label('Web', 'web'),
+				form_input($web),
+			'</p>',
+		'</div>',
+		'<div class="col-sm-4">',
+			'<p>',
 			form_label('Gravatar-adress', 'gravatar'),
 			form_input($gravatar),
 			'</p><p>',$lang['user_gravatar'],'</p>',
 		'</div>',
+		'<div class="col-sm-3">',
+			gravatarimg($user, 300, ' class="img-responsive img-circle"'),
+		'</div>',
 	'</div>',
-	form_label('Presentation', 'presentation'),
-	'<div class="clearfix"></div>',
-	form_textarea($presentation),
-	'<div class="clearfix"></div>',
-	form_submit('save', $lang['misc_save']);
-
-echo '</div><!-- close .main-box -->',
+	'<div class="row">',
+		'<div class="col-sm-9"><p>',
+			form_label('Presentation', 'presentation'),
+			form_textarea($presentation),
+		'</p></div>',
+		'<div class="col-sm-3"><p>',
+			form_label('&nbsp;', 'presentation'),
+			'<input type="submit" name="save" value="',$lang['misc_save'],'" class="form-control btn btn-default" />',
+		'</p></div>',
+	'</div>',
+'</div><!-- close .main-box -->',
 form_close();
