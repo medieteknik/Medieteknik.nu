@@ -27,7 +27,7 @@ Table of contents
 @gray: 		#A6A6A6;
 @contentbg:	#f4f4f4;
 @bodybg: 	#E8E8E9;
-@darkbg: 	#333333;
+@darkbg: 	#222222;
 @fontcolor: #111111;
 @headfont: 	#666666;
 @shadowcolor: #AAAAAA;
@@ -62,6 +62,18 @@ Table of contents
 		-ms-border-radius: @dim;
 		 -o-border-radius: @dim;
 			border-radius: @dim;
+}
+
+.radialgradient(@inner, @outer)
+{
+	background: @inner;
+	background: -webkit-radial-gradient(center, ellipse cover, @inner 0%,@outer 100%);
+	background: -moz-radial-gradient(center, ellipse cover, @inner 0%, @outer 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@inner), color-stop(100%,@outer));
+	background: -o-radial-gradient(center, ellipse cover, @inner 0%,@outer 100%);
+	background: -ms-radial-gradient(center, ellipse cover, @inner 0%,@outer 100%);
+	background: radial-gradient(ellipse at center, @inner 0%,@outer 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@inner', endColorstr='@outer',GradientType=1 );
 }
 
 /**********************************
@@ -213,9 +225,37 @@ body {
 		}
 	}
 }
+/* Styles specific for the large carousel on index */
+#big-carousel {
+	.carousel-indicators {
+		bottom: 0;
+	}
+}
 .carousel-inner {
+	&>.item>img {
+		width: 100%;
+		height: auto;
+	}
+	.photo {
+		height: 508px;
+		background-position: center;
+		background-size: cover;
+
+		a {
+			color: #fff;
+			border-bottom: 1px dotted #fff;
+
+			&:hover {
+				text-decoration: none;
+				border-bottom: 1px solid #fff;
+			}
+		}
+		.carousel-caption {
+			text-shadow: 0 0 10px rgba(0,0,0,0.9) !important;
+		}
+	}
 	.container {
-		padding-bottom: 30px;
+		padding-bottom: 35px;
 	}
 }
 /************ NEWS ***************/
@@ -450,7 +490,8 @@ body {
  *********************************/
 
 .darkbg {
-	background: @darkbg;
+	// background: @darkbg;
+	.radialgradient(lighten(@darkbg, 20%), @darkbg);
 	color: @bodybg;
 }
 p.bigmargin {
