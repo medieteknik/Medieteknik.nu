@@ -75,6 +75,12 @@ Table of contents
 	background: radial-gradient(ellipse at center, @inner 0%,@outer 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@inner', endColorstr='@outer',GradientType=1 );
 }
+.filter (@filters)
+{
+	-webkit-filter: @filters;
+	   -mox-filter: @filters;
+			filter: @filters;
+}
 
 /**********************************
  * 3. FONT FACES
@@ -238,9 +244,14 @@ body {
 	}
 	.photo {
 		height: 508px;
-		background-position: center;
-		background-size: cover;
+		overflow: hidden;
 
+		.image {
+			background-position: center;
+			background-size: cover;
+			.filter(blur(5px) brightness(0.8));
+			height: 513px;
+		}
 		a {
 			color: #fff;
 			border-bottom: 1px dotted #fff;

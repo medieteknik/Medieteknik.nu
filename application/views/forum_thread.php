@@ -28,7 +28,7 @@ $first = array_shift($replies);
 foreach($replies as $reply)
 {
 	?>
-	<div class="main-box clearfix forum-view">
+	<div class="main-box clearfix forum-view margin-top" id="replyid-<?php echo $reply->id; ?>">
 		<p><?php echo text_format($reply->reply); ?></p>
 		<h3>
 			<?php
