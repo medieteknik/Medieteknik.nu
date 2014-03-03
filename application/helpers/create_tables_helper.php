@@ -148,6 +148,9 @@ function get_news_translation_table_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '100',
 		),
+		'introduction' => array(
+			'type' => 'TEXT',
+			),
 		'text' => array(
 			'type' => 'TEXT',
 			),

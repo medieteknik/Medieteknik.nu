@@ -19,7 +19,7 @@ class News_model extends CI_Model
 		$admin = $this->login->has_privilege('news_editor');
 		
 		$this->db->select("users.first_name, users.last_name, news_images.*, images.image_original_filename");
-		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
+		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.introduction, news_translation_language.text, news_translation_language.lang_id");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
@@ -52,7 +52,7 @@ class News_model extends CI_Model
 		$admin = $this->login->has_privilege('news_editor');
 		
 		$this->db->select("users.first_name, users.last_name, news_images.*, images.*");
-		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id, news_translation_language.last_edit");
+		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.introduction, news_translation_language.text, news_translation_language.lang_id, news_translation_language.last_edit");
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
 		$this->db->join("users", 'news.user_id = users.id', '');
@@ -175,7 +175,7 @@ class News_model extends CI_Model
 		foreach($theTranslations as &$translation) 
 		{
 			$arr_keys = array_keys($translation);
-			if((!in_array("lang_abbr",$arr_keys) && !in_array("lang",$arr_keys)) || !in_array("title",$arr_keys) || !in_array("text",$arr_keys)) {
+			if((!in_array("lang_abbr",$arr_keys) && !in_array("lang",$arr_keys)) || !in_array("title",$arr_keys) || !in_array("introduction",$arr_keys) || !in_array("text",$arr_keys)) {
 				return false;
 			}
 			if(!in_array("lang_abbr",$arr_keys) && in_array("lang",$arr_keys)){
@@ -230,8 +230,9 @@ class News_model extends CI_Model
 		{ 
 			$lang_abbr = $translation["lang_abbr"];
 			$title = $translation["title"];
+			$introduction = $translation["introduction"];
 			$text = $translation["text"];
-			$theSuccess = $this->update_translation($news_id, $lang_abbr, $title, $text);
+			$theSuccess = $this->update_translation($news_id, $lang_abbr, $title, $introduction, $text);
 			if(!$theSuccess) 
 			{
 				$success = $theSuccess;
@@ -271,12 +272,14 @@ class News_model extends CI_Model
 	 * @param  integer	$news_id		The ID of the news item
 	 * @param  string	$lang_abbr		The language translation abbreviation
 	 * @param  string	$title			The title of the news item translation
+	 * @param  string  	$introduction 	The introduction of the news item translation
 	 * @param  string	$text			The text of the news item translation
 	 * @return bool		True or false depending on success or failure
 	 */ 
-	function update_translation($news_id, $lang_abbr, $title, $text) 
+	function update_translation($news_id, $lang_abbr, $title, $introduction, $text) 
 	{
 		$theTitle = trim($title);
+		$theIntroduction = trim($introduction);
 		$theText = trim($text);
 		
 		// check if the news exists
@@ -297,14 +300,14 @@ class News_model extends CI_Model
 		$lang_id = $query->result(); $lang_id = $lang_id[0]->id;
 		
 		// if both title and text is null then delete the translation
-		if($theTitle == '' && $theText == '') 
+		if($theTitle == '' && $theIntroduction == '' && $theText == '') 
 		{
 			$this->db->delete('news_translation', array('news_id' => $news_id, 'lang_id' => $lang_id));
 			return true;
 		} 
 		
-		// if one of the title and the text is null then exit
-		if($theTitle == '' || $theText == '') 
+		// if one of the title, introduction or the text is null then exit
+		if($theTitle == '' || $theIntroduction == '' || $theText == '') 
 		{
 			return false;
 		}
@@ -316,6 +319,7 @@ class News_model extends CI_Model
 			$data = array(	'news_id' 	=> $news_id, 
 							'lang_id' 	=> $lang_id,
 							'title'		=> $theTitle,
+							'introduction' => $theIntroduction,
 							'text'		=> $theText,
 							'last_edit'	=> '0000-00-00 00:00:00',
 						);
@@ -329,11 +333,23 @@ class News_model extends CI_Model
 			// A record does exist, update it.
 			// update the translation, and if the texts have not been changed then dont update the last_edit field
 			$theTime = date("Y-m-d H:i:s", time());
-			$sql = 'UPDATE news_translation SET last_edit = IF(STRCMP(title, "'.$theTitle.'") = 0, IF(STRCMP(text, "'.$theText.'") = 0, last_edit, "'.$theTime.'"), "'.$theTime.'"), title = "'.$theTitle.'", text = "'.$theText.'" WHERE news_id = "'.$news_id.'" AND lang_id = "'.$lang_id.'" ';
+			$sql = 'UPDATE news_translation SET last_edit = IF(STRCMP(title, "'.$theTitle.'") = 0, IF(STRCMP(introduction, "'.$theIntroduction.'")= 0, IF(STRCMP(text, "'.$theText.'") = 0, last_edit, "'.$theTime.'"), "'.$theTime.'"), "'.$theTime.'"), title = "'.$theTitle.'",  introduction = "'.$theIntroduction.'", text = "'.$theText.'" WHERE news_id = "'.$news_id.'" AND lang_id = "'.$lang_id.'" ';
 			$this->db->query($sql);
 			return true;
 		}
 		return FALSE;
+	}
+
+	function delete_news($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('news');
+
+		$this->db->where('news_id', $id);
+		$this->db->delete('news_images');
+
+		$this->db->where('news_id', $id);
+		$this->db->delete('news_translation');
 	}
 }
 

@@ -18,12 +18,12 @@ if($news->image_original_filename != "")
 echo '
 <div class="main-box news clearfix">',
 $lang_img,$img_div,
-'<h2>'.text_strip($news->title).'</h2>
-<p>',readable_date($news->date,$lang),'</p>',
+'<h2>'.text_strip($news->title).'</h2>',
+text_format($news->introduction, '<p style="font-weight:bold;">','</p>', FALSE).
 text_format($news->text);
 if($news->last_edit != '0000-00-00 00:00:00') 
 {
-	echo '<p>',$lang['news_lastedit'],' ', readable_date($news->last_edit,$lang), '</p>';
+	echo '<p><i>',$lang['news_lastedit'],' ', readable_date($news->last_edit,$lang), '</i></p>';
 }
 //do_dump($news);
 echo '</div>';
