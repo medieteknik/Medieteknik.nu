@@ -79,17 +79,20 @@ class User extends MY_Controller
 
 		if($do == 'runedit')
 		{
-			$main_data['run'] = true;
-
 			$web = $this->input->post('web');
 			$li = $this->input->post('linkedin');
 			$twitter = $this->input->post('twitter');
 			$presentation = $this->input->post('presentation');
 			$gravatar = $this->input->post('gravatar');
 
-			$main_data['status'] = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, $gravatar);
+			$status = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, $gravatar);
+
+			// redirect to prevent accidental emptying of account info
+			redirect('user/edit_profile/'.($status ? 'success' : 'fail'), 'location');
 		}
 
+		// sent status info to view
+		$main_data['status'] = $do;
 		// Data for user view
 		$main_data['user'] = $this->User_model->get_user_profile($id);
 		$main_data['lang'] = $this->lang_data;
