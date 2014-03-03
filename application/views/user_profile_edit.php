@@ -1,12 +1,5 @@
 <?php
 
-// prepare input form
-$password = array(
-			'id'			=> 'password',
-			'name'			=> 'password',
-			'maxlength'		=> '100',
-			'size'			=> '50'
-		);
 $twitter = array(
 			'id'		=> 'twitter',
 			'name'		=> 'twitter',
@@ -48,12 +41,10 @@ $presentation = array(
 
 if(isset($run))
 {
-	echo '<div class="main-box clearfix">';
 	if($status)
-		echo '<p class="notice">'.$lang['misc_done'].'</p>';
+		echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
 	else
-		echo '<p class="notice red">'.$lang['error_common'].'</p>';
-	echo '</div>';
+		echo '<div class="alert alert-danger">'.$lang['error_common'].'</div>';
 }
 
 

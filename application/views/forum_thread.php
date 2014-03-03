@@ -45,27 +45,37 @@ foreach($replies as $reply)
 
 if(isset($postform))
 {
-	echo '<div class="main-box clearfix">';
+	echo '<div class="main-box clearfix forum-view margin-top">';
 	if(isset($guest))
 	{
 		echo 'Gästformulär';
-	} else {
+	}
+	else
+	{
+		echo '<h2>'.$lang['forum_answer'].'</h2>';
 
-		echo '<h2>Post reply</h2>',
-		form_open('forum/post_reply'),
+		echo '<div class="row">',
+			form_open('forum/post_reply'),
 
-		form_hidden(array('cat_id' => $categories_array[0]->id)),
-		form_hidden(array('topic_id' => $topic->id)),
-		form_hidden(array('guest' => 0)),
-
-		form_label($lang['misc_text'], 'reply'),
-		form_textarea(array('name' => 'reply',
-							'id' => 'reply',
-							'rows'	=>	10,
-							'cols'	=>	85)),
-
-		form_submit('post', 'Send');
-		form_close();
+				form_hidden(array('cat_id' => $categories_array[0]->id)),
+				form_hidden(array('topic_id' => $topic->id)),
+				form_hidden(array('guest' => 0)),
+				'<div class="col-sm-8"><p>',
+					// good praxis to allways add a label. Bootstraps' .sr-only will hide it since we use placeholders.
+					form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
+					form_textarea(array('name' => 'reply',
+										'id' => 'reply',
+										'rows'	=>	6,
+										'class' => 'form-control',
+										'placeholder' => $lang['misc_text'].'...',
+										'required' 	=> '')),
+				'</p></div>',
+				'<div class="col-sm-4">',
+					'<p><input type="submit" name="post" value="',$lang['forum_submit'],'" class="btn btn-default form-control" /></p>',
+					'<p>',$lang['forum_guidelines'],'</p>',
+				'</div>',
+			form_close(),
+		'</div>';
 	}
 	echo '</div>';
 
