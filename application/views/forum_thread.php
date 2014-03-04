@@ -71,7 +71,7 @@ if(isset($postform))
 										'required' 	=> '')),
 				'</p></div>',
 				'<div class="col-sm-4">',
-					'<p><input type="submit" name="post" value="',$lang['forum_submit'],'" class="btn btn-default form-control" /></p>',
+					'<p><input type="submit" name="post" value="',$lang['forum_submit'],'" class="btn btn-success form-control" /></p>',
 					'<p>',$lang['forum_guidelines'],'</p>',
 				'</div>',
 			form_close(),
