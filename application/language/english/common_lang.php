@@ -89,8 +89,13 @@ $lang['document_directional_document'] = 'Directional documents';
 
 // admin
 $lang['admin_addnews'] = "Create news";
-$lang['admin_editnews'] = "Edit news";
-$lang['admin_adminnews'] = "Admin news";
+	$lang['admin_editnews'] = "Edit news entry";
+	$lang['admin_adminnews'] = "Admin news";
+	$lang['admin_news_needsapproval'] = "news items need approval";
+	$lang['admin_news_drafts'] = "news drafts";
+	$lang['admin_news_published'] = "published news";
+	$lang['admin_news_create'] = "Create new news post";
+	$lang['admin_news_sticky'] = "Sticky post";
 $lang['admin_editimages'] = "Edit images";
 $lang['admin_adminimages'] = "Admin images";
 $lang['admin_admingroups'] = "Admin groups";
@@ -117,7 +122,6 @@ $lang['admin_addusers_error'] = "User could not be added! Sure you did not forge
 $lang['admin_addtranslation'] = "Add translation";
 $lang['admin_denied_title'] = "Access denied";
 $lang['admin_denied_message'] = "You need to be logged in and have permission to view the requested site.";
-$lang['admin_news_needsapproval'] = "news items need approval";
 $lang['user_overview'] = "User overview";
 $lang['admin_adminpage'] = "Admin pages";
 $lang['admin_editpage'] = "Edit page";
@@ -144,7 +148,7 @@ $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
 // date
 $lang['date_yesterday'] = "Yesterday";
 $lang['date_today'] = "Today";
-$lang['date_placeholder'] = "yyyy-mm-dd HH:mm";
+$lang['date_placeholder'] = "yyyy-mm-dd HH:mm (defaults now)";
 
 // misc
 $lang['misc_swedish'] = "Swedish";
@@ -184,8 +188,10 @@ $lang['misc_title'] = "Title";
 $lang['misc_description'] = "Description";
 $lang['misc_delete'] = "Delete";
 $lang['misc_readmore'] = "Read more";
-$lang['misc_published'] = "Published";
 $lang['misc_by'] = "By";
+$lang['misc_edit'] = "Edit";
+$lang['misc_createdby'] = "Created by";
+$lang['misc_created'] = "Created";
 
 // error
 $lang['error_error'] = "Error!";

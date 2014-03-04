@@ -87,8 +87,13 @@ $lang['document_directional_document'] = 'Styrdokument';
 
 // admin
 $lang['admin_addnews'] = "Skapa nyhet";
-$lang['admin_editnews'] = "Redigera nyhet";
-$lang['admin_adminnews'] = "Administrera nyheter";
+	$lang['admin_editnews'] = "Redigera nyhet";
+	$lang['admin_adminnews'] = "Administrera nyheter";
+	$lang['admin_news_needsapproval'] = "nyheter behöver godkännas";
+	$lang['admin_news_drafts'] = "nyheter är utkast";
+	$lang['admin_news_published'] = "publicerade nyheter";
+	$lang['admin_news_create'] = "Skapa ny nyhet";
+	$lang['admin_news_sticky'] = "Fastnålad nyhet";
 $lang['admin_editimages'] = "Redigera bilder";
 $lang['admin_adminimages'] = "Administrera bilder";
 $lang['admin_admingroups'] = "Administrera grupper";
@@ -115,7 +120,6 @@ $lang['admin_addusers_error'] = "Kunde inte lägga till användare. Säker på a
 $lang['admin_addtranslation'] = "Lägg till översättning";
 $lang['admin_denied_title'] = "Nekad åtkomst";
 $lang['admin_denied_message'] = "Sidan du försöker visa kräver att du är inloggad med korrekt behörighet.";
-$lang['admin_news_needsapproval'] = "nyheter behöver godkännas";
 $lang['user_overview'] = "Användaröversikt";
 $lang['admin_adminpage'] = "Administrera sidor";
 $lang['admin_editpage'] = "Redigera sidor";
@@ -142,7 +146,7 @@ $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här
 // date
 $lang['date_yesterday'] = "Igår";
 $lang['date_today'] = "Idag";
-$lang['date_placeholder'] = "åååå-mm-dd HH:mm";
+$lang['date_placeholder'] = "åååå-mm-dd HH:mm (defaults now)";
 
 // misc
 $lang['misc_swedish'] = "Svenska";
@@ -182,8 +186,10 @@ $lang['misc_title'] = "Titel";
 $lang['misc_description'] = "Beskrivning";
 $lang['misc_delete'] = "Radera";
 $lang['misc_readmore'] = "Fortsätt läsa";
-$lang['misc_published'] = "Publicerad";
 $lang['misc_by'] = "Av";
+$lang['misc_edit'] = "Redigera";
+$lang['misc_createdby'] = "Skapad av";
+$lang['misc_created'] = "Skapad";
 
 // error
 $lang['error_error'] = "Fel!";

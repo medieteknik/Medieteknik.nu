@@ -3,8 +3,9 @@
 // prepare all the data
 $post_date = array(		'name'        => 'post_date',
 						'id'          => 'post_date',
-						'value'       => '',
 						'placeholder' => $lang['date_placeholder'],
+						'class'		  => 'form-control',
+						'type' 		  => 'datetime-local'
 					);
 
 $img_height = array(	'name'        => 'img_height',
@@ -41,7 +42,7 @@ $news_height = 100;
 $image_div = "";
 $action = 'admin_news/edit_news/0';
 if(isset($news) && $news != false) {
-	$post_date['value'] = $news->date;
+	$post_date['value'] = date('Y-m-d\TH:i:s', strtotime($news->date)); // fix for datetime-local date format
 	$draft['checked'] = ($news->draft == 1);
 	$approved['checked'] = ($news->approved == 1);
 	$news_approved = $news->approved;
@@ -49,7 +50,7 @@ if(isset($news) && $news != false) {
 	$news_position = $news->position;
 	$news_height = ($news->height == '') ? $news_height : $news->height;
 	$action = 'admin_news/edit_news/'.$id;
-	
+
 	if($news->image_original_filename != "") {
 		$image = new imagemanip($news->image_original_filename, 'zoom', news_size_to_px($news->size), $news->height);
 		$image_div = '<div><img src="'.$image.'"/></div>';
@@ -59,22 +60,41 @@ if(isset($news) && $news != false) {
 
 
 // do all the printing
-echo 
+echo
 form_open_multipart($action),
 '<div class="main-box clearfix">
 	<h2>', $lang['admin_editnews'], '</h2>',
-	form_label($lang['misc_postdate'], 'post_date'),
-	form_input($post_date),
-	'<div>', form_checkbox($draft),form_label($lang['misc_draft'], 'draft'),'</div>';
-	
-	if($is_editor) {
-		echo '<div>', form_checkbox($approved),form_label($lang['misc_approved'], 'approved'), '</div>';
-	} else {
-		echo form_hidden($lang['misc_approved'], array('name' => 'approved','id' => 'approved', 'value' => $news_approved));
-	}
-echo '<div>', form_submit('save', $lang['misc_save']), '</div>',
-'</div>
-<div class="main-box clearfix" id="image-edit">
+	'<div class="row">',
+		'<div class="col-sm-4">',
+			'<label class="checkbox-inline">
+				',form_checkbox($draft),
+				' ',$lang['misc_draft'],
+			'</label>';
+
+			if($is_editor)
+			{
+				echo '<label class="checkbox-inline">',
+					form_checkbox($approved),
+					' ', $lang['misc_approved'],
+				'</label>';
+			}
+			else
+			{
+				echo form_hidden($lang['misc_approved'], array('name' => 'approved','id' => 'approved', 'value' => $news_approved));
+			}
+
+		echo '<p><input type="submit" name="save" id="save" value="',$lang['misc_save'],'" class="btn btn-success form-control" /></p>',
+		'</div>',
+		'<div class="col-sm-4">',
+			'<p>',
+				form_label($lang['misc_postdate'], 'post_date'),
+				form_input($post_date),
+			'</p>',
+		'</div>',
+	'</div>',
+'</div>';
+echo '
+<div class="main-box clearfix margin-top" id="image-edit">
 	<h2>'.$lang['misc_image'].'</h2>',
 	$image_div,
 	'<div>',
@@ -97,19 +117,19 @@ echo '<div>', form_submit('save', $lang['misc_save']), '</div>',
 if (count($images_array) > 0) {
 	echo '<div class="main-box clearfix">';
 	foreach($images_array as $img) {
-		echo 
+		echo
 		'<div class="image_overview" style="display: inline-block; width: 110px; height: 150px; overflow:hidden; clear:both;">',
 			$img->image->get_img_tag(),
 			'<input type="text" value="[img id=',substr($img->image_original_filename, 0, -4),' w=150 h=100]" disabled="disabled" style="width: 100px;" />',
 		'</div>';
 	}
-	echo '</div>';	
+	echo '</div>';
 }
 
 
 // hack so that the same view can be used for both create and edit
 $arr = '';
-if(isset($news) && $news != false) { 
+if(isset($news) && $news != false) {
 	$arr = $news->translations;
 } else {
 	$arr = $languages;
@@ -117,14 +137,14 @@ if(isset($news) && $news != false) {
 
 //do_dump($arr);
 foreach($arr as $t) {
-	
+
 	$t_title = '';
 	$t_text = '';
 	$language_abbr = '';
 	$language_name = '';
 
 	// hack so that the same view can be used for both create and edit
-	if(isset($news) && $news != false) { 
+	if(isset($news) && $news != false) {
 		$t_title = $t->title;
 		$t_text = $t->text;
 		$language_abbr = $t->language_abbr;
@@ -147,7 +167,7 @@ foreach($arr as $t) {
               'rows'		=>	10,
               'cols'		=>	85,
             );
-	
+
 	echo '
 	<div class="main-box clearfix">
 	<h2>',$language_name,'</h2>',
