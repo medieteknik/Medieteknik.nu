@@ -71,6 +71,7 @@ $lang['user_disabled'] = "avstängd";
 $lang['user_disabled_exp'] = "Den här användaren är avstängd.";
 $lang['user_login_fail'] = "Kunde inte logga in. Var vänlig kontrollera användarnamnet och lösenordet.";
 $lang['user_gravatar'] = 'Vi använder oss av Gravatar för att tillhandahålla visningsbilder. Skaffa en egen profilbild på <a href="http://gravatar.com" target="_blank">gravatar.com</a>.';
+$lang['profile_back'] = "Tillbaka till profil";
 
 //groups
 $lang['groups_title'] = "Grupper";

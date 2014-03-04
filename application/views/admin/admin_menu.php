@@ -5,6 +5,6 @@
 	echo anchor("group","Admin3");
 	echo anchor("main","Admin4");
 	echo anchor("forum","Admin5");
-	
+
 	?>
 </nav>
