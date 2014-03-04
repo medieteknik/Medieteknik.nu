@@ -229,6 +229,17 @@ body {
 		&.margin-top {
 			margin-top: 15px;
 		}
+
+		h4 img {
+			height: 18px;
+			width: auto;
+			margin-top: -3px;
+		}
+		h3 img {
+			height: 24px;
+			width: auto;
+			margin-top: -3px;
+		}
 	}
 }
 /* Styles specific for the large carousel on index */
@@ -389,6 +400,15 @@ body {
 	}
 	ul.topics {
 		margin: 0 -15px;
+	}
+}
+/************ ADMIN **************/
+.admin-news-entry {
+	// opacity: 0.8;
+
+	&:hover {
+		// opacity: 1;
+		background: #f7f7f7 !important;
 	}
 }
 /*********** SIDEBAR *************/
@@ -569,4 +589,8 @@ ul.box-list {
 			color: darken(@orange, 10%);
 		}
 	}
+}
+#main-content label.checkbox-inline {
+	margin-bottom: 3px;
+	margin-top: 2px;
 }
