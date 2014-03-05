@@ -65,12 +65,13 @@ $lang['profile_edit'] = "Edit profile";
 $lang['user_firstname'] = "First name";
 $lang['user_lastname'] = "Last name";
 $lang['user_name'] = "Name";
-$lang['user_lukasid'] = "LukasID";
+$lang['user_lukasid'] = "LiU-ID";
 $lang['user_userid'] = "User ID";
 $lang['user_disabled'] = "disabled";
 $lang['user_disabled_exp'] = "This user is currently disabled.";
 $lang['user_login_fail'] = "Could not log in. Pleas check you login credentials and try again.";
 $lang['user_gravatar'] = 'Medieteknik.nu uses Gravatar to provide profile pictures. Go get a Gravatar account at <a href="http://gravatar.com" target="_blank">gravatar.com</a>.';
+$lang['user_new'] = "New user";
 $lang['profile_back'] = "Back to profile";
 
 
@@ -104,6 +105,9 @@ $lang['admin_admindocuments'] = "Admin documents";
 $lang['admin_addimage'] = "Add image";
 $lang['admin_addimagebyclickinghere'] = "Click here to add a new image to the library";
 $lang['admin_listusers'] = "List users";
+	$lang['admin_listusers_disabled'] = "disabled users";
+	$lang['admin_listusers_unapproved'] = "users needs approval";
+	$lang['admin_listusers_total'] = "users total";
 $lang['admin_editusers'] = "Admin users";
 $lang['admin_edituser'] = "Edit user";
 	$lang['admin_edituser_drama'] = "Drama area";
@@ -112,6 +116,7 @@ $lang['admin_edituser'] = "Edit user";
 	$lang['admin_edituser_delete'] = "Delete user";
 	$lang['admin_edituser_delete_error'] = "Could not delete the user. Please make sure everything is filled in correctly.";
 	$lang['admin_edituser_confdelete'] = "I understand that deleting the user is something that cannot be undone.";
+	$lang['admin_edituser_newuser'] = "New user";
 $lang['admin_searchusers'] = "Search users";
 $lang['admin_addusers'] = "Add users";
 $lang['admin_addusers_success'] = "User added!";
@@ -193,6 +198,8 @@ $lang['misc_by'] = "By";
 $lang['misc_edit'] = "Edit";
 $lang['misc_createdby'] = "Created by";
 $lang['misc_created'] = "Created";
+$lang['misc_typeandenter'] = "Type and hit enter to search";
+$lang['misc_searchusers'] = "Search users";
 
 // error
 $lang['error_error'] = "Error!";

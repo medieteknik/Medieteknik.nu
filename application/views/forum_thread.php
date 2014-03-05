@@ -16,7 +16,7 @@ $first = array_shift($replies);
 	<h3>
 		<?php
 		$user = gravatarimg($first->gravatar, 30, 'class="img-circle"').' '.get_full_name($first);
-		echo $lang['misc_by'].' '.anchor('user/profile/'.$first->user_id, $user);
+		echo anchor('user/profile/'.$first->user_id, $user);
 		?>,
 		<a href="#replyid-<?php echo $first->id; ?>" title="<?php echo $first->reply_date; ?>">
 			<?php echo readable_date($first->reply_date, $lang); ?>
@@ -33,7 +33,7 @@ foreach($replies as $reply)
 		<h3>
 			<?php
 			$user = gravatarimg($reply->gravatar, 30, 'class="img-circle"').' '.get_full_name($reply);
-			echo $lang['misc_by'].' '.anchor('user/profile/'.$reply->user_id, $user);
+			echo anchor('user/profile/'.$reply->user_id, $user);
 			?>,
 			<a href="#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
 				<?php echo readable_date($reply->reply_date, $lang); ?>

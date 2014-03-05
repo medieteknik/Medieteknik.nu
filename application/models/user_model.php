@@ -467,5 +467,18 @@ class User_model extends CI_Model
 		$this->db->from("users");
 		return $this->db->count_all_results();
 	}
+
+	/**
+	 * get various admin notif
+	 * @return obj 	the notifications
+	 */
+	function admin_get_notifications()
+	{
+		$this->db->select("SUM(users.disabled=1) as disabled, COUNT(*) as total, SUM(users.new=1) as unapproved");
+		$query = $this->db->get("users");
+		$res = $query->result();
+
+		return $res[0];
+	}
 }
 
