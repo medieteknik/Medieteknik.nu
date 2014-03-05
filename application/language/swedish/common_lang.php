@@ -94,6 +94,7 @@ $lang['admin_addnews'] = "Skapa nyhet";
 	$lang['admin_news_published'] = "publicerade nyheter";
 	$lang['admin_news_create'] = "Skapa ny nyhet";
 	$lang['admin_news_sticky'] = "Fastnålad nyhet";
+	$lang['admin_news_delete'] = "Ta bort detta inlägg! (Endast utkast.)";
 $lang['admin_editimages'] = "Redigera bilder";
 $lang['admin_adminimages'] = "Administrera bilder";
 $lang['admin_admingroups'] = "Administrera grupper";
