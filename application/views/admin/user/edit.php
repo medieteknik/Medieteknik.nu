@@ -8,41 +8,35 @@ $lukasid = array(
 			'name'		=> 'lukasid',
 			'value'		=> $user->lukasid,
 			'maxlength'	=> '100',
-			'size'		=> '50'
+			'class' 	=> 'form-control'
 		);
 $firstname = array(
 			'id'		=> 'firstname',
 			'name'		=> 'firstname',
 			'value'		=> $user->first_name,
 			'maxlength'	=> '100',
-			'size'		=> '50'
+			'class' 	=> 'form-control'
 		);
 $lastname = array(
 			'id'		=> 'lastname',
 			'name'		=> 'lastname',
 			'value'		=> $user->last_name,
 			'maxlength'	=> '100',
-			'size'		=> '50'
-		);
-$password = array(
-			'id'			=> 'password',
-			'name'			=> 'password',
-			'maxlength'		=> '100',
-			'size'			=> '50'
+			'class' 	=> 'form-control'
 		);
 $twitter = array(
 			'id'		=> 'twitter',
 			'name'		=> 'twitter',
 			'value'		=> $user->twitter,
-			'maxlength'	=> '100',
-			'size'		=> '50'
+			'maxlength'	=> '15',
+			'class' 	=> 'form-control'
 		);
 $linkedin = array(
 			'id'			=> 'linkedin',
 			'name'			=> 'linkedin',
 			'value'			=> $user->linkedin,
 			'maxlength'		=> '100',
-			'size'			=> '50',
+			'class' 		=> 'form-control',
 			'placeholder'	=> 'http://linkedin.com/in/...'
 		);
 $web = array(
@@ -50,99 +44,120 @@ $web = array(
 			'name'			=> 'web',
 			'value'			=> $user->web,
 			'maxlength'		=> '100',
-			'size'			=> '50',
+			'class' 		=> 'form-control',
 			'placeholder'	=> 'http://'
+		);
+$gravatar = array(
+			'id'			=> 'gravatar',
+			'name'			=> 'gravatar',
+			'value'			=> $user->gravatar,
+			'maxlength'		=> '100',
+			'class' 		=> 'form-control'
 		);
 $presentation = array(
 			'id'		=> 'presentation',
 			'name'		=> 'presentation',
 			'value'		=> $user->presentation,
 			'rows'		=> '4',
-			'cols'		=> '70'
+			'class' 	=> 'form-control'
 		);
 
-if($whattodo !== '')
+
+if(!empty($message))
 {
-	echo '<div class="main-box clearfix">';
-
-	if($whattodo == 'chstatus')
-	{
-		if($chstatus)
-			echo '<p class="notice">'.$lang['misc_done'].'</p>';
-		else
-			echo '<p class="notice red">'.$lang['error_common'].'</p>';
-	}
-	if($whattodo == 'edit')
-	{
-		if($edit_data && $edit_user)
-			echo '<p class="notice">'.$lang['misc_done'].'</p>';
-		else
-			echo '<p class="notice red">'.$lang['error_common'].'</p>';
-	}
-
-
-	echo '</div>';
+	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
 }
-
-
-
-//begin with information form
-echo form_open('admin/user/edit_user/'.$user->id.'/edit'),'
-<div class="main-box clearfix profile">
-	<h2>'.$lang['admin_edituser'].' <em>'.get_full_name($user).'</em>
-	'.anchor('admin/user/user_list', '&larr; '.$lang['misc_back']).'</h2>';
-
-	echo '<div class="row">';
-		echo '<div class="col-2">',
-			form_label($lang['user_firstname'], 'firstname'),
-			form_input($firstname),
-			form_label($lang['user_lastname'], 'lastname'),
-			form_input($lastname),
-			form_label($lang['user_lukasid'], 'lukasid'),
-			form_input($lukasid),
-		'</div><!-- .col-2 -->';
-		echo '<div class="col-2">',
-			form_label('Twitter', 'twitter'),
-			form_input($twitter),
-			form_label('LinkedIn', 'linkedin'),
-			form_input($linkedin),
-			form_label('Web', 'web'),
-			form_input($web),
-		'</div><!-- .col-2 -->';
-	echo '</div><!-- .row -->',
-
-	form_label('Presentation', 'presentation'),
-	'<div class="clearfix"></div>',
-	form_textarea($presentation),
-	'<div class="clearfix"></div>',
-	form_submit('save', $lang['misc_save']);
-
-echo '</div><!-- close .main-box -->',
-form_close();
-
-//drama area
 ?>
-<div class="main-box clearfix">
+
+<?php echo form_open('admin/user/edit/'.$user->id.'/edit'); ?>
+<div class="main-box clearfix profile">
+	<h3>
+		<?php
+		echo $lang['admin_edituser'].' <em>'.get_full_name($user).'</em> <small>',
+			anchor('#', '&larr; '.$lang['misc_back'], array('onclick' => 'window.history.back(); return false;')).'</small>'; ?>
+	</h3>
 	<div class="row">
-		<div class="col-2">
-			<h3>
-				<?php echo $lang['admin_edituser_drama']; ?>
-			</h3>
+		<div class="col-sm-4">
+			<p>
+				<?php echo form_label('&nbsp;', 'save'); ?>
+				<input type="submit" value="<?php echo $lang['misc_save']; ?>" id="save" name="save" class="btn btn-success form-control" />
+			</p>
+		</div>
+		<div class="col-sm-4">
 			<p>
 				<?php
-					$text = ($user->disabled ? $lang['admin_edituser_activate'] : $lang['admin_edituser_deactivate']);
-					echo anchor('admin/user/edit_user/'.$user->id.'/chstatus', $text, 'class="button"');
+				echo form_label('&nbsp;', 'disable');
+				if($user->disabled)
+					echo '<input type="submit" value="'.$lang['admin_edituser_activate'].'" id="disable" name="disable" class="btn btn-info form-control" />';
+				else
+					echo '<input type="submit" value="'.$lang['admin_edituser_deactivate'].'" id="disable" name="disable" class="btn btn-danger form-control" />';
 				?>
 			</p>
-		</div><!-- .col-2 -->
-		<div class="col-2">
-			<h3>
-				<?php echo $lang['admin_edituser_delete']; ?>
-			</h3>
+		</div>
+		<div class="col-sm-4">
 			<p>
-				Kanske inte användbart? Kanske inte ska gå?
+				<?php
+				if($user->new)
+				{
+					echo form_label($lang['admin_edituser_approve_wat'], 'activate');
+					echo '<input type="submit" value="'.$lang['admin_edituser_approve'].'" id="activate" name="activate" class="btn btn-info form-control" />';
+				}
+				?>
 			</p>
-		</div><!-- .col-2 -->
+		</div>
 	</div>
-</div><!-- .row -->
-
+</div>
+<div class="main-box clearfix margin-top">
+	<h4><?php echo $lang['user_info']; ?></h4>
+	<div class="row">
+		<div class="col-sm-6">
+			<p>
+				<?php
+				echo form_label($lang['user_firstname'], 'firstname'), form_input($firstname);
+				?>
+			</p>
+			<p>
+				<?php
+				echo form_label($lang['user_lastname'], 'lastname'), form_input($lastname);
+				?>
+			</p>
+			<p>
+				<?php
+				echo form_label($lang['user_lukasid'], 'lukasid'), form_input($lukasid);
+				?>
+			</p>
+			<p>
+				<?php
+				echo form_label('Gravatar', 'gravatar'), form_input($gravatar);
+				?>
+			</p>
+		</div>
+		<div class="col-sm-6">
+			<p>
+				<?php
+				echo form_label('Twitter', 'twitter'), form_input($twitter);
+				?>
+			</p>
+			<p>
+				<?php
+				echo form_label('LinkedIn', 'linkedin'), form_input($linkedin);
+				?>
+			</p>
+			<p>
+				<?php
+				echo form_label('Web', 'web'), form_input($web);
+				?>
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<p>
+				<?php
+				echo  form_label('Presentation', 'presentation'), form_textarea($presentation);
+				?>
+			</p>
+		</div>
+	</div>
+</div>
+<?php echo form_close(); ?>

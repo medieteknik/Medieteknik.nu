@@ -72,6 +72,7 @@ $lang['user_disabled_exp'] = "This user is currently disabled.";
 $lang['user_login_fail'] = "Could not log in. Pleas check you login credentials and try again.";
 $lang['user_gravatar'] = 'Medieteknik.nu uses Gravatar to provide profile pictures. Go get a Gravatar account at <a href="http://gravatar.com" target="_blank">gravatar.com</a>.';
 $lang['user_new'] = "New user";
+$lang['user_info'] = "User information";
 $lang['profile_back'] = "Back to profile";
 
 
@@ -117,6 +118,8 @@ $lang['admin_edituser'] = "Edit user";
 	$lang['admin_edituser_delete_error'] = "Could not delete the user. Please make sure everything is filled in correctly.";
 	$lang['admin_edituser_confdelete'] = "I understand that deleting the user is something that cannot be undone.";
 	$lang['admin_edituser_newuser'] = "New user";
+	$lang['admin_edituser_approve'] = "Approve new user";
+	$lang['admin_edituser_approve_wat'] = "This user created itself.";
 $lang['admin_searchusers'] = "Search users";
 $lang['admin_addusers'] = "Add users";
 $lang['admin_addusers_success'] = "User added!";

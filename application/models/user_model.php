@@ -254,16 +254,15 @@ class User_model extends CI_Model
 	 * @param  string	$password	The password in clear text
 	 * @return bool
 	 */
-	function add_user($fname = '', $lname = '', $lukasid ='', $password = '')
+	function add_user($fname = '', $lname = '', $lukasid ='')
 	{
 		// fixing and trimming
 		$fn = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $fname ));
 		$ln = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $lname ));
 		$lid = trim(preg_replace("/[^A-Za-z0-9]/", "", $lukasid ));
-		$pwd = 'password';
 
 		// check lengths
-		if(strlen($fn) > 0 && strlen($ln) > 0 && strlen($lid) == 8 && strlen($pwd) > 5)
+		if(strlen($fn) > 0 && strlen($ln) > 0 && strlen($lid) == 8)
 		{
 			// if lukas_id not exists insert user
 			if(!$this->lukasid_exists($lid))
@@ -271,8 +270,7 @@ class User_model extends CI_Model
 				$data = array(
 				   'first_name' => $fn ,
 				   'last_name' => $ln,
-				   'lukasid' => $lid,
-				   'password_hash' => encrypt_password($pwd)
+				   'lukasid' => $lid
 				);
 				$q = $this->db->insert('users', $data);
 				return $q;
@@ -409,6 +407,17 @@ class User_model extends CI_Model
 		$q = $this->db->update('users', $data, 'id ='.$id);
 
 		return $q;
+	}
+
+	/**
+	 * Confirms a new user
+	 *
+	 * @param  integer	$id			The user id
+	 * @return bool
+	 */
+	function enable($id)
+	{
+		return $this->db->update('users', array('new' => 0), 'id ='.$id);
 	}
 
 	/**
