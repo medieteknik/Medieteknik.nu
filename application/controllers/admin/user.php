@@ -31,12 +31,11 @@ class User extends MY_Controller
 
 	public function index()
 	{
-		$this->user_start();
+		$this->overview();
 	}
 
-	function user_start()
+	function overview()
 	{
-
 		// Data for overview view
 		$this->load->model('User_model');
 		$main_data['user_list'] = $this->User_model->get_all_users();
@@ -44,7 +43,7 @@ class User extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/user/start',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/user/overview',  $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
