@@ -32,7 +32,7 @@ echo '
 	{
 		echo $lang['misc_gotopage'].' ';
 		for($page = 0; $page < $totalpages; $page++)
-			echo anchor('admin_user/user_list/'.$currentview['option'].'/'.$page, $page+1).' ';
+			echo anchor('admin/user/user_list/'.$currentview['option'].'/'.$page, $page+1).' ';
 	}
 	echo '</p>';
 echo'</div><!-- close .main-box -->';

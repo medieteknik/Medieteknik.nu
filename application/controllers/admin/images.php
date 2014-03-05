@@ -1,18 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	
-class Admin_images extends MY_Controller 
+
+class Images extends MY_Controller
 {
-	
+
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
-		
-		if(!$this->login->is_admin()) 
+
+		if(!$this->login->is_admin())
 		{
-			redirect('/admin/access_denied', 'refresh');
+			redirect('/admin/admin/access_denied', 'refresh');
 		}
-		
+
 		$this->load->model('Images_model');
 		$this->load->helper('form');
     }
@@ -21,8 +21,8 @@ class Admin_images extends MY_Controller
 	{
 		$this->overview();
 	}
-	
-	function overview() 
+
+	function overview()
 	{
 
 		// Data for overview view
@@ -57,21 +57,21 @@ class Admin_images extends MY_Controller
 		$title = '';
 		$description = '';
 
-		if ($this->input->post('title')) 
+		if ($this->input->post('title'))
 		{
 			$title = $this->input->post('title');
 		}
-		if ($this->input->post('description')) 
+		if ($this->input->post('description'))
 		{
 			$description = $this->input->post('description');
 		}
 
-		if ($this->upload->do_upload('img_file')) 
+		if ($this->upload->do_upload('img_file'))
 		{
 			$this->Images_model->add_uploaded_image(
-														$this->upload->data(), 
-														$this->login->get_id(), 
-														$title, 
+														$this->upload->data(),
+														$this->login->get_id(),
+														$title,
 														$description
 													);
 		}

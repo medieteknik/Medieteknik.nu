@@ -10,14 +10,14 @@ $search = array(
 
 
 
-echo form_open('admin_groups/add_member/'.$groups_year_id.'/'.$group_id.'/search');
+echo form_open('admin/groups/add_member/'.$groups_year_id.'/'.$group_id.'/search');
 echo '<div class="main-box clearfix">';
 
 if(isset($status))
 {
 	if($status)
 	{
-		echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin_groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$user_added, $lang['admin_edituser']).'</p>';
+		echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin/groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$user_added, $lang['admin_edituser']).'</p>';
 	}
 	else{
 		echo $status;
@@ -26,7 +26,7 @@ if(isset($status))
 	}
 }
 
-echo '<h2>'.$lang['admin_searchusers'].' '.anchor('admin_groups/list_members/'.$groups_year_id.'/'.$group_id, '&larr; '.$lang['misc_back']).'</h2>',
+echo '<h2>'.$lang['admin_searchusers'].' '.anchor('admin/groups/list_members/'.$groups_year_id.'/'.$group_id, '&larr; '.$lang['misc_back']).'</h2>',
 	form_input($search),
 	form_submit('submit', $lang['misc_search']),
 '</div><!-- close .main-box -->',
@@ -47,7 +47,7 @@ if(isset($result) && is_array($result))
 			$user_name = get_full_name($user);
 
 		// add user row to table
-		$user = array($user_name, $user->lukasid, anchor('admin_groups/add_member/'.$groups_year_id.'/'.$group_id.'/add/'.$user->id, '<i class="-icon-adduser"></i>', ' title="'.$lang['admin_addasmember'].'"'));
+		$user = array($user_name, $user->lukasid, anchor('admin/groups/add_member/'.$groups_year_id.'/'.$group_id.'/add/'.$user->id, '<i class="-icon-adduser"></i>', ' title="'.$lang['admin_addasmember'].'"'));
 		$this->table->add_row($user);
 	}
 

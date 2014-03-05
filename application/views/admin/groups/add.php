@@ -20,18 +20,18 @@ if(isset($status))
 		echo $status;
 		echo '<p class="notice red"><strong>'.$lang['error_error'].'</strong> ';
 		echo '</p>';
-		
+
 		//echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin_user/edit_user/'.$entered['lid'], $lang['admin_edituser']).'</p>';
 	}
 	else{
 		//echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin_groups/edit/'.$group_id, $lang['admin_edituser']).'</p>';
-		redirect('admin_groups/edit/'.$group_id, 'refresh');
+		redirect('admin/groups/edit/'.$group_id, 'refresh');
 	}
 
 }
 
-echo 
-form_open_multipart('admin_groups/add_year/'.$group_id.'/create'),
+echo
+form_open_multipart('admin/groups/add_year/'.$group_id.'/create'),
 '<div class="main-box clearfix"><h2>', $lang['admin_groups_add_year'], '</h2>';
 
 

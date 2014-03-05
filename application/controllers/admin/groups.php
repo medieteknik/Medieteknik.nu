@@ -1,15 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	
-class Admin_groups extends MY_Controller 
-{	
+
+class Groups extends MY_Controller
+{
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
-		
-		if(!$this->login->is_admin()) 
+
+		if(!$this->login->is_admin())
 		{
-			redirect('/admin/access_denied', 'refresh');
+			redirect('/admin/admin/access_denied', 'refresh');
 		}
 		// access granted, loading modules and helpers
 		$this->load->model('Group_model');
@@ -30,8 +30,8 @@ class Admin_groups extends MY_Controller
 	{
 		$this->overview();
 	}
-	
-	function overview() 
+
+	function overview()
 	{
 		// Data for overview page
 		$main_data['groups_array'] = $this->Group_model->get_all_groups();
@@ -43,8 +43,8 @@ class Admin_groups extends MY_Controller
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
-	
-	function create() 
+
+	function create()
 	{
 		// Data for edit view
 		$main_data['lang'] = $this->lang_data;
@@ -52,7 +52,7 @@ class Admin_groups extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
@@ -73,7 +73,7 @@ class Admin_groups extends MY_Controller
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
-	
+
 	function edit($id = 0)
 	{
 		if($id == 0)
@@ -87,7 +87,7 @@ class Admin_groups extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);					
+		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
@@ -98,7 +98,7 @@ class Admin_groups extends MY_Controller
 		{
 			$position = $this->input->post('position');
 			$email = $this->input->post('email');
-	
+
 			$main_data['edit_member'] = $this->Group_model->update_member_info($groups_year_id, $user_id, $position, $email);
 		}
 		elseif($do == 'delete')
@@ -160,18 +160,18 @@ class Admin_groups extends MY_Controller
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
-	
+
 	function edit_group($id)
 	{
 		$this->db->trans_start();
-		
+
 		$translations = array();
 		// check if translations is added
-		foreach($this->languages as $lang) 
+		foreach($this->languages as $lang)
 		{
 			$theName = addslashes($this->input->post('name_'.$lang['language_abbr']));
 			$theDescription = addslashes($this->input->post('description_'.$lang['language_abbr']));
-			
+
 			// new
 			if($id == 0) {
 				array_push($translations, array("lang" => $lang['language_abbr'], "name" => $theName, "description" => $theDescription));
@@ -179,7 +179,7 @@ class Admin_groups extends MY_Controller
 				$this->Group_model->update_group_translation($id, $lang['language_abbr'], $theName, $theDescription);
 			}
 		}
-		
+
 		//Check if group is official
 		$official = 0;
 		if($this->input->post('official') == 1)
@@ -199,7 +199,7 @@ class Admin_groups extends MY_Controller
 			$this->db->where("id", $id);
 			$this->db->update("groups", $data);
 		}
-		
+
 
 		$this->db->trans_complete();
 		redirect('admin_groups', 'refresh');

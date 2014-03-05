@@ -25,7 +25,7 @@ $lastname = array(
               'size'        => '50',
             );
 
-echo 
+echo
 form_open_multipart('admin_user/user_add/create'),
 '<div class="main-box clearfix"><h2>', $lang['admin_addusers'], '</h2>';
 
@@ -33,7 +33,7 @@ if(isset($status))
 {
 	if($status)
 	{
-		echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin_user/edit_user/'.$entered['lid'], $lang['admin_edituser']).'</p>';
+		echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin/user/edit_user/'.$entered['lid'], $lang['admin_edituser']).'</p>';
 	}
 	else{
 		echo $status;

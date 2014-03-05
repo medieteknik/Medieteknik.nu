@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin_user extends MY_Controller
+class User extends MY_Controller
 {
 
 	public $languages = '';
@@ -12,7 +12,7 @@ class Admin_user extends MY_Controller
 
 		if(!$this->login->is_admin())
 		{
-			redirect('/admin/access_denied', 'refresh');
+			redirect('/admin/admin/access_denied', 'refresh');
 		}
 
 		// access granted, loading modules

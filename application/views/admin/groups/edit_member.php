@@ -44,10 +44,10 @@ if($whattodo !== '')
 }
 
 //begin with information form
-echo form_open('admin_groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/edit'),'
+echo form_open('admin/groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/edit'),'
 <div class="main-box clearfix profile">
 	<h2>'.$lang['admin_groups_editmember'].' <em>'.get_full_name($member).'</em>
-	'.anchor('admin_groups/list_members/'.$groups_year_id.'/'.$group_id, '&larr; '.$lang['misc_back']).'</h2>';
+	'.anchor('admin/groups/list_members/'.$groups_year_id.'/'.$group_id, '&larr; '.$lang['misc_back']).'</h2>';
 
 	echo '<div class="row">';
 		echo '<div class="col-2">',
@@ -69,11 +69,11 @@ form_close();
 ?>
 <div class="main-box clearfix">
 	<h3>
-		<?php echo $lang['admin_edituser_drama']; ?>	
+		<?php echo $lang['admin_edituser_drama']; ?>
 	</h3>
 	<p>
 		<?php
-			echo anchor('admin_groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/delete', $lang['admin_groups_deletemember'], 'class="button"');
+			echo anchor('admin/groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/delete', $lang['admin_groups_deletemember'], 'class="button"');
 		?>
 	</p>
 </div>

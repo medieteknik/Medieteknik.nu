@@ -8,9 +8,9 @@ class Admin extends MY_Controller
 		// Call the Model constructor
 		parent::__construct();
 
-		if(!$this->login->is_admin() && $this->uri->segment(2) != "access_denied")
+		if(!$this->login->is_admin() && $this->uri->segment(3) != "access_denied")
 		{
-			redirect('/admin/access_denied', 'refresh');
+			redirect('/admin/admin/access_denied', 'refresh');
 		}
 	}
 

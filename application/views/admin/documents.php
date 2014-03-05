@@ -32,7 +32,7 @@ echo '
 	      location.reload();
 	    });
 
-	    // You might want to show the submit button only when 
+	    // You might want to show the submit button only when
 	    // files are dropped here:
 	    this.on("addedfile", function() {
 	      // Show submit button here and/or inform user to click it.
@@ -44,13 +44,13 @@ echo '
 
 	$(document).ready(function() {
 	    var now = new Date();
-	 
+
 	    var day = ("0" + now.getDate()).slice(-2);
 	    var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
 	    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 
-	    $('#date').val(today);	    
+	    $('#date').val(today);
 	    $('#title').val("Styrelsemöte");
 	    $('#description').val("Protokoll från styrelsemötet " + $('#date').val());
 
@@ -94,7 +94,7 @@ echo '
 
 
 <h2>Ladda upp dokument</h2>
-<form id="my-dropzone" action="<?php echo site_url('admin_documents/upload'); ?>" class="dropzone">
+<form id="my-dropzone" action="<?php echo site_url('admin/documents/upload'); ?>" class="dropzone">
 		<div class="dropzone-normal-form">
 			<select id="type" name="document_type">
 				<option value="1"><?php echo $lang['document_protocol'].' - '.$lang['document_protocol_normal']?></option>
@@ -130,7 +130,7 @@ foreach($protocols as $protocols_docs)
 	$uri = explode('/', uri_string());
 
 	if(sizeof($uri) == 4)			//admin_documents/overview/xxxx
-		$dropdown_uri = '';				
+		$dropdown_uri = '';
 	else if(sizeof($uri) == 3) 		//admin_documents/overview
 		$dropdown_uri = 'overview/';
 	else if(sizeof($uri) == 2) 		//admin_documents
@@ -159,7 +159,7 @@ foreach($protocols as $protocols_docs)
 		{
 			echo
 			'<div class="row"><div class="col-3-4"><li class = "document clearfix"> <!-- TEMP LÖSNING MED col-3-4 etc -->
-			<a href="' . base_url() . '/user_content/documents/'. $doc->document_original_filename .'">	
+			<a href="' . base_url() . '/user_content/documents/'. $doc->document_original_filename .'">
 				<i class = "-icon-document"></i>
 				<h4>'. $doc->document_title . '</h4>
 				<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>
@@ -174,13 +174,13 @@ foreach($protocols as $protocols_docs)
 }
 
 foreach ($document_types as $type) {
-	
+
 	echo '<h3 style="clear: both">'.$lang['document_'.$type->document_type].'</h3>';
-	
+
 	foreach ($type->documents as $doc) {
 		echo
 		'<div class="row"><div class="col-3-4"><li class = "document clearfix"> <!-- TEMP LÖSNING MED col-3-4 etc -->
-		<a href="' . base_url() . '/user_content/documents/'. $doc->document_original_filename .'">	
+		<a href="' . base_url() . '/user_content/documents/'. $doc->document_original_filename .'">
 			<i class = "-icon-document"></i>
 			<h4>'. $doc->document_title . '</h4>
 			<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>

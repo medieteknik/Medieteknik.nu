@@ -11,7 +11,7 @@ $official = array(		'name'        => 'official',
 // hack so that the same view can be used for both create and edit
 //foreach($groups as $group)
 //{
-	$action = 'admin_groups/edit_group/0';
+	$action = 'admin/groups/edit_group/0';
 	if(isset($group) && $group != false) {
 		$official['checked'] = ($group->official == 1);
 		$action = 'admin_groups/edit_group/'.$id;
@@ -19,7 +19,7 @@ $official = array(		'name'        => 'official',
 
 
 // do all the printing
-echo 
+echo
 form_open($action),
 '<div class="main-box clearfix">
 	<h2>', $lang['admin_editgroup'], '</h2>',
@@ -30,7 +30,7 @@ form_open($action),
 // hack so that the same view can be used for both create and edit
 //do_dump($page);
 $arr = '';
-if(isset($group) && $group != false) { 
+if(isset($group) && $group != false) {
 	$arr = $group->translations;
 } else {
 	$arr = $languages;
@@ -45,7 +45,7 @@ foreach($arr as $t) {
 	$language_name = '';
 
 	// hack so that the same view can be used for both create and edit
-	if(isset($group) && $group != false) { 
+	if(isset($group) && $group != false) {
 		$t_name = $t->name;
 		$t_description = $t->description;
 		$language_abbr = $t->language_abbr;
@@ -70,14 +70,14 @@ foreach($arr as $t) {
             );
 
 	//do_dump($name);
-	
+
 	echo '
 	<div class="main-box clearfix">
-	<h2>',$language_name,'</h2>',
-	form_label($lang['misc_headline'], 'title_'.$language_abbr),
-	form_input($name),
-	form_label($lang['misc_text'], 'text_'.$language_abbr),
-	form_textarea($description,$t_description),
+		<h2>',$language_name,'</h2>',
+		form_label($lang['misc_headline'], 'title_'.$language_abbr),
+		form_input($name),
+		form_label($lang['misc_text'], 'text_'.$language_abbr),
+		form_textarea($description,$t_description),
 	'</div>';
 }
 echo form_close();
@@ -92,10 +92,10 @@ if(isset($id))
 	echo '<h2>'.$lang['admin_groups_editmembers'].'</h2>
 		<ul class="box-list">';
 			foreach($group_years as $group_year)
-				echo '<li>'.anchor("admin_groups/list_members/".$group_year->id.'/'.$id, $group_year->start_year.'/'.$group_year->stop_year).'</li>';
+				echo '<li>'.anchor("admin/groups/list_members/".$group_year->id.'/'.$id, $group_year->start_year.'/'.$group_year->stop_year).'</li>';
 
 		echo '</ul>
-	<p>',anchor('admin_groups/add_year/'.$id, $lang['admin_createnewgroupbyclicking']),'</p>';
+	<p>',anchor('admin/groups/add_year/'.$id, $lang['admin_createnewgroupbyclicking']),'</p>';
 }
 
 echo '</div><!-- close .main-box -->';
@@ -105,9 +105,9 @@ echo '
 <div class="main-box news clearfix red">
 <h2>',$lang['misc_delete'],'</h2>';
 if(isset($id))
-	echo form_open('admin_groups/delete/'.$id);
+	echo form_open('admin/groups/delete/'.$id);
 else
-	echo form_open('admin_groups/delete');
+	echo form_open('admin/groups/delete');
 
 echo form_submit('delete', 'Delete'),
 form_close(),

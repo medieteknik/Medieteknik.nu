@@ -11,15 +11,15 @@ $pagename = array(			'name'        => 'pagename',
 					);
 
 // hack so that the same view can be used for both create and edit
-$action = 'admin_page/edit_page/0';
+$action = 'admin/page/edit_page/0';
 if(isset($page) && $page != false) {
 	$draft['checked'] = ($page->published == 1);
-	$action = 'admin_page/edit_page/'.$id;
+	$action = 'admin/page/edit_page/'.$id;
 	$pagename['value'] = $page->name;
 }
 
 // do all the printing
-echo 
+echo
 form_open($action),
 '<div class="main-box clearfix">
 	<h2>', $lang['admin_editpage'], '</h2>',
@@ -32,7 +32,7 @@ form_open($action),
 
 //do_dump($page);
 $arr = '';
-if(isset($page) && $page != false) { 
+if(isset($page) && $page != false) {
 	$arr = $page->translations;
 } else {
 	$arr = $languages;
@@ -48,7 +48,7 @@ foreach($arr as $t) {
 	$language_name = '';
 
 	// hack so that the same view can be used for both create and edit
-	if(isset($page) && $page != false) { 
+	if(isset($page) && $page != false) {
 		$t_title = $t->header;
 		$t_text = $t->content;
 		$language_abbr = $t->language_abbr;
@@ -71,7 +71,7 @@ foreach($arr as $t) {
               'rows'		=>	10,
               'cols'		=>	85,
             );
-	
+
 	echo '
 	<div class="main-box clearfix">
 	<h2>',$language_name,'</h2>',
@@ -86,7 +86,7 @@ echo form_close();
 echo '
 <div class="main-box news clearfix red">
 <h2>Delete</h2>',
-form_open('admin_page/delete'),
+form_open('admin/page/delete'),
 form_submit('delete', 'Delete'),
 form_close(),
 '</div>
