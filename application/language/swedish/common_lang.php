@@ -72,6 +72,7 @@ $lang['user_disabled_exp'] = "Den här användaren är avstängd.";
 $lang['user_login_fail'] = "Kunde inte logga in. Var vänlig kontrollera användarnamnet och lösenordet.";
 $lang['user_gravatar'] = 'Vi använder oss av Gravatar för att tillhandahålla visningsbilder. Skaffa en egen profilbild på <a href="http://gravatar.com" target="_blank">gravatar.com</a>.';
 $lang['user_new'] = "Ny användare";
+$lang['user_info'] = "Användarinformation";
 $lang['profile_back'] = "Tillbaka till profil";
 
 //groups
@@ -114,6 +115,8 @@ $lang['admin_edituser'] = "Redigera användare";
 	$lang['admin_edituser_delete'] = "Ta bort användare";
 	$lang['admin_edituser_delete_error'] = "Kunde inte ta bort användare. Kontrollera fälten nedan.";
 	$lang['admin_edituser_confdelete'] = "Jag förstår att jag inte kan ångra borttagandet av användaren.";
+	$lang['admin_edituser_approve'] = "Godkänn ny användare";
+	$lang['admin_edituser_approve_wat'] = "Denna användare skapade sig själv.";
 $lang['admin_searchusers'] = "Sök användare";
 $lang['admin_addusers'] = "Lägg till användare";
 $lang['admin_addusers_success'] = "Användare tillagd!";

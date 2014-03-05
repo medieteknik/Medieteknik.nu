@@ -27,7 +27,7 @@
 		<div class="main-box clearfix profile">
 			<h4><?php echo $lang['admin_addusers']; ?></h4>
 			<p>
-				<?php echo anchor('admin/user/user_add', $lang['admin_addusers']); ?>
+				<?php echo anchor('admin/user/add', $lang['admin_addusers']); ?>
 			</p>
 		</div>
 	</div>
@@ -61,7 +61,7 @@
 						echo '<td>',
 							anchor('admin/user/edit/'.$user->id, $lang['admin_edituser']);
 							if($user->new)
-								echo ' <span class="label label-warning">'.$lang['user_newuser'].'</span>';
+								echo ' <span class="label label-warning">'.$lang['user_new'].'</span>';
 							if($user->disabled)
 								echo ' <span class="label label-danger">'.$lang['user_disabled'].'</span>';
 						echo '</td>';

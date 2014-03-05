@@ -60,33 +60,41 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function edit($id, $do = '')
+	function edit($id, $message = '')
 	{
 		$this->load->model('User_model');
 
-		if($do == 'edit')
+		if($this->input->post('save'))
 		{
 			$web = $this->input->post('web');
-			$li = $this->input->post('linkedin');
+			$linkedin = $this->input->post('linkedin');
 			$twitter = $this->input->post('twitter');
 			$presentation = $this->input->post('presentation');
 			$firstname = $this->input->post('firstname');
 			$lastname = $this->input->post('lastname');
 			$lukasid = $this->input->post('lukasid');
-			$password = $this->input->post('password');
+			$gravatar = $this->input->post('gravatar');
 
-			$main_data['edit_data'] = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, '');
-			$main_data['edit_user'] = $this->User_model->edit_user($id, $firstname, $lastname, $lukasid, $password);
+			$main_data['edit_data'] = $this->User_model->edit_user_data($id, $web, $linkedin, $twitter, $presentation, $gravatar);
+			$main_data['edit_user'] = $this->User_model->edit_user($id, $firstname, $lastname, $lukasid);
+
+			redirect('admin/user/edit/'.$id.'/edit_done');
 		}
-		elseif($do == 'chstatus')
+		elseif($this->input->post('disable'))
 		{
 			$main_data['chstatus'] = $this->User_model->disableswitch($id);
+			redirect('admin/user/edit/'.$id.'/disable');
+		}
+		elseif($this->input->post('activate'))
+		{
+			$main_data['chstatus'] = $this->User_model->enable($id);
+			redirect('admin/user/edit/'.$id.'/enabled');
 		}
 
 		// Data for overview view
 		$main_data['user'] = $this->User_model->get_user_profile($id);
 		$main_data['lang'] = $this->lang_data;
-		$main_data['whattodo'] = $do;
+		$main_data['message'] = $message;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -95,7 +103,7 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function user_add($do = '')
+	function add($do = '')
 	{
 		$main_data['lang'] = $this->lang_data;
 		$this->load->model('User_model');
