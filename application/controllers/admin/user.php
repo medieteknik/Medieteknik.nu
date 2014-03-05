@@ -34,11 +34,23 @@ class User extends MY_Controller
 		$this->overview();
 	}
 
-	function overview()
+	function overview($do = '')
 	{
-		// Data for overview view
 		$this->load->model('User_model');
-		$main_data['user_list'] = $this->User_model->get_all_users();
+
+		// search or no?
+		if($do == 'search' && $this->input->get('q'))
+		{
+			$main_data['user_list'] = $this->User_model->search_user($this->input->get('q'));
+			$main_data['query'] = $this->input->get('q');
+		}
+		else
+		{
+			$main_data['user_list'] = $this->User_model->get_all_users(); // user data
+		}
+
+		// Data for overview view
+		$main_data['notif'] = $this->User_model->admin_get_notifications(); // notif
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
@@ -48,33 +60,7 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function user_list($option = 'all', $page = 0)
-	{
-		// Pass along informatino about what is beeing looked at
-		$currentview = array(
-							'page' => $page,
-							'rowsperpage' => 30,
-							'option' => $option
-						);
-
-		// load model and table library
-		$this->load->model('User_model');
-		$this->load->library('table');
-
-		// Data for overview view
-		$main_data['user_list'] = $this->User_model->get_all_users($currentview['rowsperpage'], $page, $option);
-		$main_data['user_num'] = $this->User_model->count_all_users($option);
-		$main_data['lang'] = $this->lang_data;
-		$main_data['currentview'] = $currentview;
-
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/user/list',  $main_data, true);
-		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
-	}
-
-	function edit_user($id, $do = '')
+	function edit($id, $do = '')
 	{
 		$this->load->model('User_model');
 
@@ -154,29 +140,6 @@ class User extends MY_Controller
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('admin/user/add',  $main_data, true);
-		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
-	}
-
-	function user_search($do = '', $search = '')
-	{
-		$main_data['lang'] = $this->lang_data;
-		$this->load->model('User_model');
-		$this->load->library('table');
-
-		if($do == 'run') // if form is sent
-		{
-			redirect('/admin_user/user_search/find/'.$this->input->post('search'), 'refresh');
-		}
-		elseif($do == 'find')
-		{
-			$main_data['result'] = $this->User_model->search_user($search);
-			$main_data['query'] = $search;
-		}
-
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu', $this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/user/search',  $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}

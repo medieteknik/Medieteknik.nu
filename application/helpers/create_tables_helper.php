@@ -26,11 +26,11 @@ function get_user_table_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '10',
 			),
-		'password_hash' => array(
-			'type' => 'VARCHAR',
-			'constraint' => '130',
-			),
 		'disabled' => array(
+			'type' => 'BOOL',
+			'default' => '0',
+			),
+		'new' => array(
 			'type' => 'BOOL',
 			'default' => '0',
 			),

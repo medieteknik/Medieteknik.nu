@@ -65,12 +65,13 @@ $lang['profile_edit'] = "Redigera profil";
 $lang['user_firstname'] = "Förnamn";
 $lang['user_lastname'] = "Efternamn";
 $lang['user_name'] = "Namn";
-$lang['user_lukasid'] = "LukasID";
+$lang['user_lukasid'] = "LiU-ID";
 $lang['user_userid'] = "Användarid";
 $lang['user_disabled'] = "avstängd";
 $lang['user_disabled_exp'] = "Den här användaren är avstängd.";
 $lang['user_login_fail'] = "Kunde inte logga in. Var vänlig kontrollera användarnamnet och lösenordet.";
 $lang['user_gravatar'] = 'Vi använder oss av Gravatar för att tillhandahålla visningsbilder. Skaffa en egen profilbild på <a href="http://gravatar.com" target="_blank">gravatar.com</a>.';
+$lang['user_new'] = "Ny användare";
 $lang['profile_back'] = "Tillbaka till profil";
 
 //groups
@@ -102,6 +103,9 @@ $lang['admin_admindocuments'] = "Administrera dokument";
 $lang['admin_addimage'] = "Ladda upp bild";
 $lang['admin_addimagebyclickinghere'] = "Klicka här för att ladda upp en ny bild till biblioteket";
 $lang['admin_listusers'] = "Lista användare";
+	$lang['admin_listusers_disabled'] = "avstängda användare";
+	$lang['admin_listusers_unapproved'] = "användare behöver godkännas";
+	$lang['admin_listusers_total'] = "användare totalt";
 $lang['admin_editusers'] = "Administrera användare";
 $lang['admin_edituser'] = "Redigera användare";
 	$lang['admin_edituser_drama'] = "Dramatiska rutan";
@@ -191,6 +195,7 @@ $lang['misc_by'] = "Av";
 $lang['misc_edit'] = "Redigera";
 $lang['misc_createdby'] = "Skapad av";
 $lang['misc_created'] = "Skapad";
+$lang['misc_typeandenter'] = "Skriv och tryck enter för att söka";
 
 // error
 $lang['error_error'] = "Fel!";
