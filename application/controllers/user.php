@@ -33,32 +33,29 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	public function new_user($do = '')
+	public function new_user($attempt = '', $redir = '')
 	{
 		$user = $this->cas->user();
 		$this->load->helper('form');
 		$this->load->model('User_model');
 
-		if($do == 'create')
+		if($this->input->post('save'))
 		{
 			$firstname = $this->input->post('firstname');
 			$lastname = $this->input->post('lastname');
 
 			if($this->User_model->add_user($firstname, $lastname, $user->userlogin, ''))
 			{
-				$this->login();
+				$this->login($attempt, $redir);
 			}
 			else
 				$main_data['error'] = true;
-
-
-
-
 		}
 
 		// Data for user view
 		$main_data['user'] = $user->userlogin;
 		$main_data['lang'] = $this->lang_data;
+		$main_data['redir_arr'] = array($attempt, $redir);
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -121,7 +118,7 @@ class User extends MY_Controller
 		// force auth using cas
 		$this->cas->force_auth();
 		// check this login and pass along redir param
-		$this->checklogin(base64_decode(urldecode($redir)));
+		$this->checklogin($redir);
 
 		//old login form, before use of CAS:
 		/*
@@ -165,16 +162,11 @@ class User extends MY_Controller
 		$user = $this->cas->user();
 
 		if($this->login->login($user->userlogin))
-		{
-			//success
-			redirect($redir, 'refresh');
-		} else {
-			// fail, there is no such user in database
-			//echo $this->input->post('username') ." ". $this->input->post('password');
-			$this->new_user();
-			//$this->login->logout();
-			//redirect('user/login/'.$this->input->post('username'), 'refresh');
-		}
+			//success, continue login
+			redirect(base64_decode(urldecode($redir)), 'refresh');
+		else
+			// fail, there is no such user in database, ask user to add one
+			$this->new_user('redir', $redir);
 	}
 
 

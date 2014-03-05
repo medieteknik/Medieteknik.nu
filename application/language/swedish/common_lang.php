@@ -74,6 +74,8 @@ $lang['user_gravatar'] = 'Vi använder oss av Gravatar för att tillhandahålla 
 $lang['user_new'] = "Ny användare";
 $lang['user_info'] = "Användarinformation";
 $lang['profile_back'] = "Tillbaka till profil";
+$lang['user_create_save'] = "Spara inställningar";
+$lang['user_create_wat'] = "<p>Hej!</p><p>Eftersom detta är första gången du loggar in på ditt konto, måste vi be dig att ge oss ditt för- och efternamn. Fyll enkelt i fälten här, så är allt klart.</p><p>Observera att du inte kan ändra ditt namn när du väl gett oss det. Se till att det blir rätt!</p>";
 
 //groups
 $lang['groups_title'] = "Grupper";
