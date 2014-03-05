@@ -1,22 +1,21 @@
 <?php
 echo '
 <div class="main-box clearfix">
-	<h2>',$lang['admin_addpage'],'</h2>
+	<h3>',$lang['admin_addpage'],'</h3>
 	<p>',anchor('admin/page/create', $lang['admin_createnewpagebyclicking']),'</p>
-</div>
-<h2>',$lang['menu_archive'],'</h2>';
-
-
+</div>';
 
 foreach($page_array as $page) {
-
-	$classes = '';
-	if($page->published == 1) {
-		$classes = ' red';
-	}
-
-	$content = '<h2>'.$page->name.'</h2>';
-
-	echo anchor('admin/page/edit/'.$page->id, $content, array("class" => "main-box news clearfix" . $classes, "title" => $lang['page_editthepage'] ));
+	?>
+	<div class="main-box clearfix margin-top">
+		<h3>
+			<?php
+			echo anchor('admin/page/edit/'.$page->id, $page->name, array('title' => $lang['page_editthepage']));
+			echo !$page->published ? ' <span class="label label-default">'.$lang['misc_draft'].'</span>' : '';
+			?>
+		</h3>
+	</div>
+	<?php
 }
 
+// do_dump($page_array);
