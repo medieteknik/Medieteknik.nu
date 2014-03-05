@@ -128,6 +128,7 @@
 							</p>
 							<p>
 								<?php echo anchor('http://liu.se/medieteknik', $lang['footer_mtliu'], 'target="_blank"'); ?>
+								<?php echo anchor('http://medieteknikdagarna.se/', $lang['menu_mtd'], 'target="_blank"'); ?>
 							</p>
 						</div>
 						<div class="col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3" id="follow">

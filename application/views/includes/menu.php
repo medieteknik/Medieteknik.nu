@@ -32,7 +32,7 @@
 				<li><?php echo anchor("news/archive", $menu_news); ?></li>
 				<li><?php echo anchor("about", $menu_about); ?></li>
 				<li><?php echo anchor("association", $menu_association); ?></li>
-				<li><?php echo anchor("mtd", $menu_mtd); ?></li>
+				<li><?php echo anchor("about/mtd", $menu_mtd); ?></li>
 				<li><?php echo anchor("forum", $menu_forum); ?></li>
 
 				<?php

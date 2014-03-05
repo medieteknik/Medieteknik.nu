@@ -986,7 +986,7 @@ class Install_model extends CI_Model
 									array("lang" => "se", "header" => "Medieteknikdagarna", "content" => "Det borde man gå på. Läs mer på http://medieteknikdagarna.se/"),
 									array("lang" => "en", "header" => "Media Technology Days", "content" => "You should go to it. Read more http://medieteknikdagarna.se/"),
 								);
-			$this->Page_model->add_page("mtd", $translations, 1);
+			$this->Page_model->add_page("about/mtd", $translations, 1);
 
 			/*
 			$translations = array(

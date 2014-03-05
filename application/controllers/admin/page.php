@@ -19,14 +19,14 @@ class Page extends MY_Controller
 		$this->load->model('Page_model');
 		$this->load->helper('form');
 
-		$this->languages = array	(
-										array(	'language_abbr' => 'se',
-												'language_name' => 'Svenska',
-												'id' => 1),
-										array(	'language_abbr' => 'en',
-												'language_name' => 'English',
-												'id' => 2)
-									);
+		$this->languages = array(
+								array(	'language_abbr' => 'se',
+										'language_name' => 'Svenska',
+										'id' => 1),
+								array(	'language_abbr' => 'en',
+										'language_name' => 'English',
+										'id' => 2)
+							);
     }
 
 	public function index()
@@ -61,12 +61,13 @@ class Page extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function edit($id)
+	function edit($id, $message = '')
 	{
 		// Data for overview view
 		$main_data['page'] = $this->Page_model->admin_get_page($id);
 		$main_data['lang'] = $this->lang_data;
 		$main_data['id'] = $id;
+		$main_data['message'] = $message;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -95,17 +96,13 @@ class Page extends MY_Controller
 		}
 
 		// get draft and approved setting
-		$draft = 0;
-		if($this->input->post('draft') == 1)
-		{
-			$draft = 1;
-		}
+		$draft = !$this->input->post('draft');
 
 		// new
 		if($id == 0) {
 			if($this->input->post('pagename'))
 			{
-				$this->Page_model->add_page(addslashes($this->input->post('pagename')), $translations, $draft);
+				$id = $this->Page_model->add_page(addslashes($this->input->post('pagename')), $translations, $draft);
 			}
 		} else { // update existing
 			$data = array(
@@ -120,7 +117,7 @@ class Page extends MY_Controller
 
 
 		$this->db->trans_complete();
-		redirect('admin_page', 'refresh');
+		redirect('admin/page/edit/'.$id.'/success', 'location');
 	}
 
 
