@@ -96,6 +96,7 @@ $lang['admin_addnews'] = "Create news";
 	$lang['admin_news_published'] = "published news";
 	$lang['admin_news_create'] = "Create new news post";
 	$lang['admin_news_sticky'] = "Sticky post";
+	$lang['admin_news_delete'] = "Delete this entry! (Draft required.)";
 $lang['admin_editimages'] = "Edit images";
 $lang['admin_adminimages'] = "Admin images";
 $lang['admin_admingroups'] = "Admin groups";

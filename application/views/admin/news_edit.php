@@ -90,10 +90,21 @@ form_open_multipart($action),
 				form_label($lang['misc_postdate'], 'post_date'),
 				form_input($post_date),
 			'</p>',
-		'</div>',
-	'</div>',
-'</div>';
-echo '
+		'</div>';
+		if(isset($news) && $news != false)
+		{
+			echo '<div class="col-sm-4">',
+				'<p>',
+					form_label($lang['admin_news_delete'], 'delete'),
+					anchor('admin_news/delete/'.$id,
+						'<span class=\'glyphicon glyphicon-trash\'></span> '.$lang['misc_delete'],
+						array('class' => 'btn btn-danger form-control')
+						),
+				'</p>',
+			'</div>';
+		}
+	echo '</div>',
+'</div>
 <div class="main-box clearfix margin-top" id="image-edit">
 	<h2>'.$lang['misc_image'].'</h2>',
 	$image_div,
@@ -128,65 +139,60 @@ if (count($images_array) > 0) {
 
 
 // hack so that the same view can be used for both create and edit
-$arr = '';
-if(isset($news) && $news != false) {
+if(isset($news) && $news != false)
 	$arr = $news->translations;
-} else {
+else
 	$arr = $languages;
-}
 
-//do_dump($arr);
-foreach($arr as $t) {
+echo '<div class="row">';
+	foreach($arr as $t) {
+		// hack so that the same view can be used for both create and edit
+		if(isset($news) && $news != false) {
+			$t_title = $t->title;
+			$t_text = $t->text;
+			$language_abbr = $t->language_abbr;
+			$language_name = $t->language_name;
+			$lang_id = $t->lang_id;
+		}
+		else
+		{
+			$t_title = '';
+			$t_text = '';
+			$language_abbr = $t['language_abbr'];
+			$language_name = $t['language_name'];
+			$lang_id = $t['id'];
+		}
 
-	$t_title = '';
-	$t_text = '';
-	$language_abbr = '';
-	$language_name = '';
+		$title = array(
+	              'name'        => 'title_'.$language_abbr,
+	              'id'          => 'title_'.$language_abbr,
+	              'value'       => $t_title,
+	              'class' 		=> 'form-control'
+	            );
+		$text = array(
+	              'name'        => 'text_'.$language_abbr,
+	              'id'          => 'text_'.$language_abbr,
+	              'rows'		=>	15,
+	              'class' 		=> 'form-control'
+	            );
 
-	// hack so that the same view can be used for both create and edit
-	if(isset($news) && $news != false) {
-		$t_title = $t->title;
-		$t_text = $t->text;
-		$language_abbr = $t->language_abbr;
-		$language_name = $t->language_name;
-	} else {
-		$t_title = '';
-		$t_text = '';
-		$language_abbr = $t['language_abbr'];
-		$language_name = $t['language_name'];
+		echo '
+		<div class="col-sm-6">
+			<div class="main-box clearfix margin-top">
+				<h4>',$language_name,' <img src="'.lang_id_to_imgpath($lang_id).'" class="img-circle" /></h4>',
+				'<p>',
+					form_label($lang['misc_headline'], 'title_'.$language_abbr),
+					form_input($title),
+				'</p>',
+				'<p>',
+					form_label($lang['misc_text'], 'text_'.$language_abbr),
+					form_textarea($text,$t_text),
+				'</p>
+			</div>
+		</div>';
 	}
-
-	$title = array(
-              'name'        => 'title_'.$language_abbr,
-              'id'          => 'title_'.$language_abbr,
-              'value'       => $t_title,
-            );
-	$text = array(
-              'name'        => 'text_'.$language_abbr,
-              'id'          => 'text_'.$language_abbr,
-              'rows'		=>	10,
-              'cols'		=>	85,
-            );
-
-	echo '
-	<div class="main-box clearfix">
-	<h2>',$language_name,'</h2>',
-	form_label($lang['misc_headline'], 'title_'.$language_abbr),
-	form_input($title),
-	form_label($lang['misc_text'], 'text_'.$language_abbr),
-	form_textarea($text,$t_text),
-	'</div>';
-}
+echo '</div>';
 echo form_close();
-
-echo '
-<div class="main-box news clearfix red">
-<h2>Delete</h2>',
-form_open('admin_news/delete'),
-form_submit('delete', 'Delete'),
-form_close(),
-'</div>
-';
 
 echo "<script src='".base_url()."/web/js/libs/jquery.min.js'></script>
 <script src='".base_url()."/web/js/load_images.js'></script>";
