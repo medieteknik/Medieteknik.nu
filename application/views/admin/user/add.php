@@ -36,9 +36,7 @@ if(isset($status))
 		$password['value'] = $entered['pwd'];
 		$firstname['value'] = $entered['fname'];
 	}
-
 }
-
 ?>
 
 <?php echo form_open('admin/user/add/create'); ?>

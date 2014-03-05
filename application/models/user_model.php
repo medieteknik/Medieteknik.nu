@@ -346,7 +346,6 @@ class User_model extends CI_Model
 	 * @param  string	$fname		First name
 	 * @param  string	$lname 		Last name
 	 * @param  string	$liuid 		LiU-id of user
-	 * @param  string	$password 	Password, uncrypted
 	 * @return bool
 	 */
 	function edit_user($id, $fname = '', $lname = '', $liuid = '', $password = '')

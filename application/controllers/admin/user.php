@@ -114,16 +114,14 @@ class User extends MY_Controller
 			$fn = $this->input->post('firstname');
 			$ln = $this->input->post('lastname');
 			$lid = $this->input->post('lukasid');
-			$pwd = $this->input->post('password');
 
 			$main_data['entered'] = array(
 										'fname' => $fn,
 										'lname' => $ln,
-										'lid' => $lid,
-										'pwd' => $pwd,
+										'lid' => $lid
 									);
 
-			$createuser = $this->User_model->add_user($fn, $ln, $lid, $pwd);
+			$createuser = $this->User_model->add_user($fn, $ln, $lid);
 
 			// pass along error messages
 			if(!$createuser)
@@ -136,8 +134,6 @@ class User extends MY_Controller
 					$errormsg .= $this->lang_data['admin_addusers_error_lname'].' ';
 				if(strlen(trim($lid)) !== 8 || $this->user_model->lukasid_exists($lid))
 					$errormsg .= $this->lang_data['admin_addusers_error_lid'].' ';
-				if(strlen(trim($pwd)) <= 5)
-					$errormsg .= $this->lang_data['admin_addusers_error_pwd'].' ';
 
 				$main_data['errormsg'] = $errormsg;
 			}

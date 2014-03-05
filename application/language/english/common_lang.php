@@ -74,6 +74,8 @@ $lang['user_gravatar'] = 'Medieteknik.nu uses Gravatar to provide profile pictur
 $lang['user_new'] = "New user";
 $lang['user_info'] = "User information";
 $lang['profile_back'] = "Back to profile";
+$lang['user_create_save'] = "Save settings";
+$lang['user_create_wat'] = "<p>Hi,</p><p>Since this is the first time you log in to your account, you'll need to tell us your first and last name. Just fill in both fields here, and you'll be ready to go.</p><p>Please note, ones you set your name, it cannot be changed again.</p>";
 
 
 //groups
