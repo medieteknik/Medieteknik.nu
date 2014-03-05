@@ -40,7 +40,7 @@ $news_height = 100;
 
 // hack so that the same view can be used for both create and edit
 $image_div = "";
-$action = 'admin_news/edit_news/0';
+$action = 'admin/news/edit_news/0';
 if(isset($news) && $news != false) {
 	$post_date['value'] = date('Y-m-d\TH:i:s', strtotime($news->date)); // fix for datetime-local date format
 	$draft['checked'] = ($news->draft == 1);
@@ -49,7 +49,7 @@ if(isset($news) && $news != false) {
 	$news_size = $news->size;
 	$news_position = $news->position;
 	$news_height = ($news->height == '') ? $news_height : $news->height;
-	$action = 'admin_news/edit_news/'.$id;
+	$action = 'admin/news/edit_news/'.$id;
 
 	if($news->image_original_filename != "") {
 		$image = new imagemanip($news->image_original_filename, 'zoom', news_size_to_px($news->size), $news->height);
@@ -63,7 +63,7 @@ if(isset($news) && $news != false) {
 echo
 form_open_multipart($action),
 '<div class="main-box clearfix">
-	<h2>', $lang['admin_editnews'], '</h2>',
+	<h2>', $lang['admin_editnews'], ' <small>',anchor('admin/news', $lang['misc_back']),'</small></h2>',
 	'<div class="row">',
 		'<div class="col-sm-4">',
 			'<label class="checkbox-inline">

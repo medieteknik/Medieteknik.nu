@@ -1,18 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	
-class Admin_documents extends MY_Controller 
+
+class Documents extends MY_Controller
 {
-	
+
     function __construct()
     {
         // Call the Model constructor
         parent::__construct();
-		
-		if(!$this->login->is_admin()) 
+
+		if(!$this->login->is_admin())
 		{
-			redirect('/admin/access_denied', 'refresh');
+			redirect('/admin/admin/access_denied', 'refresh');
 		}
-		
+
 		$this->load->model('Documents_model');
 		$this->load->helper('form');
     }
@@ -21,8 +21,8 @@ class Admin_documents extends MY_Controller
 	{
 		$this->overview();
 	}
-	
-	function overview($protocol_year = 0) 
+
+	function overview($protocol_year = 0)
 	{
 		if($protocol_year == 0)
 		{

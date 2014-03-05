@@ -14,7 +14,7 @@ echo '
 	<div class="col-sm-6">
 		<div class="main-box clearfix">
 			<h4>',$lang['admin_addnews'],'</h4>
-			<p>',anchor('admin_news/create', $lang['admin_news_create']),'</p>
+			<p>',anchor('admin/news/create', $lang['admin_news_create']),'</p>
 		</div>
 	</div>
 </div>
@@ -29,7 +29,7 @@ foreach($news_array as $news) {
 			<div class="col-sm-4">
 				<h4>
 					<?php
-					echo anchor('admin_news/edit/'.$news->id, $lang['misc_edit']);
+					echo anchor('admin/news/edit/'.$news->id, $lang['misc_edit']);
 					if($news->sticky_order)
 						echo ' <span class="label label-danger">'.$lang['admin_news_sticky'].'</span>';
 					if(!$news->approved)

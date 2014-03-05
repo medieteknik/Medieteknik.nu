@@ -74,22 +74,22 @@ class Sidebar
 		$this->adminmenu['items'] = array(array('title' => $this->lang_data['menu_admin'], 'href' => "admin"));
 
 		if($this->CI->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminnews'], 'href' => "admin_news"));
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminnews'], 'href' => "admin/news"));
 
 		if($this->CI->login->has_privilege('admin'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin_user"));
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin/user"));
 
 		if($this->CI->login->has_privilege('admin'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminpage'], 'href' => "admin_page"));
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminpage'], 'href' => "admin/page"));
 
 		if($this->CI->login->has_privilege('admin'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminimages'], 'href' => "admin_images"));
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminimages'], 'href' => "admin/images"));
 
 		if($this->CI->login->has_privilege('admin'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admingroups'], 'href' => "admin_groups"));
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admingroups'], 'href' => "admin/groups"));
 
 		if($this->CI->login->has_privilege('admin'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admindocuments'], 'href' => "admin_documents"));
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admindocuments'], 'href' => "admin/documents"));
 
 		/*
 		if($this->CI->login->has_privilege('news_editor'))

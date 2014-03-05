@@ -1,7 +1,7 @@
 <?php
 
 if($user->id == 0)
-	redirect('error_page/user/?msg=notfound-adm', 'refresh');
+	show_404();
 
 $lukasid = array(
 			'id'		=> 'lukasid',
@@ -87,10 +87,10 @@ if($whattodo !== '')
 
 
 //begin with information form
-echo form_open('admin_user/edit_user/'.$user->id.'/edit'),'
+echo form_open('admin/user/edit_user/'.$user->id.'/edit'),'
 <div class="main-box clearfix profile">
 	<h2>'.$lang['admin_edituser'].' <em>'.get_full_name($user).'</em>
-	'.anchor('admin_user/user_list', '&larr; '.$lang['misc_back']).'</h2>';
+	'.anchor('admin/user/user_list', '&larr; '.$lang['misc_back']).'</h2>';
 
 	echo '<div class="row">';
 		echo '<div class="col-2">',
@@ -131,7 +131,7 @@ form_close();
 			<p>
 				<?php
 					$text = ($user->disabled ? $lang['admin_edituser_activate'] : $lang['admin_edituser_deactivate']);
-					echo anchor('admin_user/edit_user/'.$user->id.'/chstatus', $text, 'class="button"');
+					echo anchor('admin/user/edit_user/'.$user->id.'/chstatus', $text, 'class="button"');
 				?>
 			</p>
 		</div><!-- .col-2 -->

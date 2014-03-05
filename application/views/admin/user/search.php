@@ -31,7 +31,7 @@ if(isset($result) && is_array($result))
 			$user_name = get_full_name($user);
 
 		// add user row to table
-		$user = array($user->id, $user->lukasid, $user_name, anchor('admin_user/edit_user/'.$user->id, '<i class="-icon-pen"></i>', ' title="'.$lang['admin_edituser'].'"'));
+		$user = array($user->id, $user->lukasid, $user_name, anchor('admin/user/edit_user/'.$user->id, '<i class="-icon-pen"></i>', ' title="'.$lang['admin_edituser'].'"'));
 		$this->table->add_row($user);
 	}
 

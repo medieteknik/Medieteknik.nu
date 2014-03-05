@@ -1,8 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin_news extends MY_Controller
+class News extends MY_Controller
 {
-
 	public $languages = '';
 
     function __construct()
@@ -12,7 +11,7 @@ class Admin_news extends MY_Controller
 
 		if(!$this->login->is_admin())
 		{
-			redirect('/admin/access_denied', 'refresh');
+			redirect('/admin/admin/access_denied', 'refresh');
 		}
 
 		// access granted, loading modules
@@ -65,13 +64,14 @@ class Admin_news extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function edit($id)
+	function edit($id, $message = '')
 	{
 		// Data for overview view
 		$main_data['news'] = $this->News_model->admin_get_news($id);
 		$main_data['lang'] = $this->lang_data;
 		$main_data['is_editor'] = true;
 		$main_data['id'] = $id;
+		$main_data['message'] = $message;
 		$main_data['images_array'] = $this->Images_model->get_all_images();
 
 		// composing the views
@@ -136,7 +136,9 @@ class Admin_news extends MY_Controller
 
 			if($success)
 				$news_id = $this->News_model->add_news($this->login->get_id(), $translations, $theTime, $draft, $approved);
-		} else {
+		}
+		else
+		{
 			// check if translations is added
 			foreach($this->languages as $lang)
 			{
@@ -158,14 +160,14 @@ class Admin_news extends MY_Controller
 		$images_id = 0;
 		if ($this->upload->do_upload('img_file'))
 		{
-			if ($news_id != 0) {
+			if ($news_id != 0)
 				$id = $news_id;
-			}
+
 			$images_id = $this->Images_model->add_uploaded_image($this->upload->data(), $this->login->get_id(), 'News', 'News');
 		}
 
 		$this->Images_model->add_or_replace_news_image($id,$images_id,$size,$position,$imgheight);
 		$this->db->trans_complete();
-		redirect('admin_news', 'refresh');
+		redirect('admin/news/edit/'.($id ? $id : $news_id).'/done', 'location');
 	}
 }
