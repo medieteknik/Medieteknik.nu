@@ -114,16 +114,16 @@ class Install_model extends CI_Model
 
 			// inserting users
 			$this->load->model("User_model");
-			$this->User_model->add_user("Jonas", "Strandstedt", "jonst184", "password");
-			$this->User_model->add_user("Emil", "Axelsson", "emiax775", "password");
-			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286", "password");
-			$this->User_model->add_user("Anders", "Nord", "andno992", "password");
-			$this->User_model->add_user("Jonas", "Zeitler", "jonze168", "password");
-			$this->User_model->add_user("Klas", "Eskilson", "klaes950", "password");
-			$this->User_model->add_user("Simon", "Joelsson", "simjo407", "password");
-			$this->User_model->add_user("Martin", "Kierkegaard", "marki423", "password");
-			$this->User_model->add_user("Mikael", "Zackrisson", "mikza835", "password");
-			$this->User_model->add_user("Arg", "Mtare", "argmt123", "password");
+			$this->User_model->add_user("Jonas", "Strandstedt", "jonst184");
+			$this->User_model->add_user("Emil", "Axelsson", "emiax775");
+			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286");
+			$this->User_model->add_user("Anders", "Nord", "andno992");
+			$this->User_model->add_user("Jonas", "Zeitler", "jonze168");
+			$this->User_model->add_user("Klas", "Eskilson", "klaes950");
+			$this->User_model->add_user("Simon", "Joelsson", "simjo407");
+			$this->User_model->add_user("Martin", "Kierkegaard", "marki423");
+			$this->User_model->add_user("Mikael", "Zackrisson", "mikza835");
+			$this->User_model->add_user("Arg", "Mtare", "argmt123");
 		}
 	}
 
