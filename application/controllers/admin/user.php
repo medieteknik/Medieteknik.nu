@@ -19,14 +19,14 @@ class User extends MY_Controller
 		$this->load->model('user_model');
 		$this->load->helper('form');
 
-		$this->languages = array	(
-										array(	'language_abbr' => 'se',
-												'language_name' => 'Svenska',
-												'id' => 1),
-										array(	'language_abbr' => 'en',
-												'language_name' => 'English',
-												'id' => 2)
-									);
+		$this->languages = array(
+								array(	'language_abbr' => 'se',
+										'language_name' => 'Svenska',
+										'id' => 1),
+								array(	'language_abbr' => 'en',
+										'language_name' => 'English',
+										'id' => 2)
+							);
     }
 
 	public function index()
@@ -34,24 +34,31 @@ class User extends MY_Controller
 		$this->overview();
 	}
 
-	function overview($do = '')
+	function overview($method = 'page', $page = 1, $filter = 'all')
 	{
 		$this->load->model('User_model');
+		$limit = 30;
 
 		// search or no?
-		if($do == 'search' && $this->input->get('q'))
+		if($method == 'search' && $this->input->get('q'))
 		{
 			$main_data['user_list'] = $this->User_model->search_user($this->input->get('q'));
 			$main_data['query'] = $this->input->get('q');
 		}
 		else
 		{
-			$main_data['user_list'] = $this->User_model->get_all_users(); // user data
+			$main_data['user_list'] = $this->User_model->get_all_users($limit, $page); // user data
 		}
 
 		// Data for overview view
 		$main_data['notif'] = $this->User_model->admin_get_notifications(); // notif
 		$main_data['lang'] = $this->lang_data;
+
+		$main_data['user_limit'] = $limit;
+		$main_data['user_count'] = $this->User_model->count_all_users();
+		$main_data['user_page'] = $page;
+		$main_data['user_method'] = $method;
+		$main_data['user_filter'] = $filter;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);

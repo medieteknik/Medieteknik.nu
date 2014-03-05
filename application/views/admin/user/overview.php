@@ -71,4 +71,29 @@
 			</tbody>
 		</table>
 	</div>
+	<?php
+	$total_pages = floor($user_count / $user_limit)+1;
+	$prev_page = $user_page == 1 ? 1 : $user_page-1;
+	$next_page = $user_page == $total_pages ? $total_pages : $user_page+1;
+	?>
+	<p>
+		<ul class="pagination center-block">
+			<li<?php echo $user_page == 1 ? ' class="disabled"' : '';?>>
+				<?php echo anchor('admin/user/overview/'.$user_method.'/'.$prev_page.'/'.$user_filter, '&laquo;'); ?>
+			</li>
+			<?php
+			for($k = 1; $k <= $total_pages; $k++)
+			{
+				?>
+				<li<?php echo $k == $user_page ? ' class="active"' : '';?>>
+					<?php echo anchor('admin/user/overview/'.$user_method.'/'.$k.'/'.$user_filter, $k); ?>
+				</li>
+				<?php
+			}
+			?>
+			<li<?php echo $user_page == $total_pages ? ' class="disabled"' : '';?>>
+				<?php echo anchor('admin/user/overview/'.$user_method.'/'.$next_page.'/'.$user_filter, '&raquo;'); ?>
+			</li>
+		</ul>
+	</p>
 </div>

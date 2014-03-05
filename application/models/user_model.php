@@ -134,10 +134,10 @@ class User_model extends CI_Model
 	 * @param  string	$option	What to get. All users, disabled user, enabled users?
 	 * @return array
 	 */
-    function get_all_users($pagination = 0, $page = 0, $option = 'all')
+    function get_all_users($pagination = 0, $page = 1, $option = 'all')
     {
-    	if($pagination !== 0)
-    		$this->db->limit($pagination, ($page * $pagination));
+    	if($pagination)
+    		$this->db->limit($pagination, ($page-1) * $pagination);
 
     	// are only disabled users asked for?
     	if ($option == 'disabled')
