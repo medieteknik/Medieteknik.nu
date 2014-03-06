@@ -251,10 +251,10 @@ class User_model extends CI_Model
 	 * @param  string	$fname		The first name of the user
 	 * @param  string	$lname		The last name of the user
 	 * @param  string	$lukasid	The lukasid of the user, ex abcde123
-	 * @param  string	$password	The password in clear text
+	 * @param  string	$new		Wether or not the flag 'new' should be true
 	 * @return bool
 	 */
-	function add_user($fname = '', $lname = '', $lukasid ='')
+	function add_user($fname = '', $lname = '', $lukasid = '', $new = 0)
 	{
 		// fixing and trimming
 		$fn = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $fname ));
@@ -270,7 +270,8 @@ class User_model extends CI_Model
 				$data = array(
 				   'first_name' => $fn ,
 				   'last_name' => $ln,
-				   'lukasid' => $lid
+				   'lukasid' => $lid,
+				   'new' => ($new ? true : false)
 				);
 				$q = $this->db->insert('users', $data);
 				return $q;

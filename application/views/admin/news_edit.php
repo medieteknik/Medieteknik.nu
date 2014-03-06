@@ -57,7 +57,10 @@ if(isset($news) && $news != false) {
 	}
 }
 
-
+if($message == 'success')
+	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
+if($message == 'error')
+	echo '<div class="alert alert-danger">'.$lang['admin_error_remove'].'</div>';
 
 // do all the printing
 echo
@@ -96,7 +99,7 @@ form_open_multipart($action),
 			echo '<div class="col-sm-4">',
 				'<p>',
 					form_label($lang['admin_news_delete'], 'delete'),
-					anchor('admin_news/delete/'.$id,
+					anchor('admin/news/delete/'.$id,
 						'<span class=\'glyphicon glyphicon-trash\'></span> '.$lang['misc_delete'],
 						array('class' => 'btn btn-danger form-control')
 						),

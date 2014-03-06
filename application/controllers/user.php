@@ -44,7 +44,7 @@ class User extends MY_Controller
 			$firstname = $this->input->post('firstname');
 			$lastname = $this->input->post('lastname');
 
-			if($this->User_model->add_user($firstname, $lastname, $user->userlogin, ''))
+			if($this->User_model->add_user($firstname, $lastname, $user->userlogin, 1))
 			{
 				$this->login($attempt, $redir);
 			}

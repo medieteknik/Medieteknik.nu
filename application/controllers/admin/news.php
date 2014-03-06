@@ -34,7 +34,7 @@ class News extends MY_Controller
 		$this->overview();
 	}
 
-	function overview()
+	function overview($message = '')
 	{
 		// Data for overview view
 		$this->load->model('News_model');
@@ -62,6 +62,14 @@ class News extends MY_Controller
 		$template_data['main_content'] = $this->load->view('admin/news_edit',  $main_data, true);
 		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function delete($id)
+	{
+		if($this->News_model->is_draft($id) && $this->News_model->delete($id))
+			redirect('admin/news/overview/success', 'location');
+		else
+			redirect('admin/news/edit/'.$id.'/error', 'location');
 	}
 
 	function edit($id, $message = '')
@@ -129,7 +137,13 @@ class News extends MY_Controller
 			{
 				if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '')
 				{
-					array_push($translations, array("lang" => $lang['language_abbr'], "title" => $this->input->post('title_'.$lang['language_abbr']), "text" => $this->input->post('text_'.$lang['language_abbr'])));
+					array_push($translations,
+						array(
+							"lang" => $lang['language_abbr'],
+							"title" => $this->input->post('title_'.$lang['language_abbr']),
+							"text" => $this->input->post('text_'.$lang['language_abbr'])
+							)
+						);
 					$success = true;
 				}
 			}
@@ -168,6 +182,6 @@ class News extends MY_Controller
 
 		$this->Images_model->add_or_replace_news_image($id,$images_id,$size,$position,$imgheight);
 		$this->db->trans_complete();
-		redirect('admin/news/edit/'.($id ? $id : $news_id).'/done', 'location');
+		redirect('admin/news/edit/'.($id ? $id : $news_id).'/success', 'location');
 	}
 }
