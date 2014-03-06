@@ -24,6 +24,8 @@ if(isset($page) && $page != false) {
 
 if($message == 'success')
 	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
+elseif($message == 'error')
+	echo '<div class="alert alert-danger">'.$lang['admin_error_remove'].'</div>';
 
 // do all the printing
 echo form_open($action);

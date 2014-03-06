@@ -134,6 +134,7 @@ $lang['user_overview'] = "Användaröversikt";
 $lang['admin_adminpage'] = "Administrera sidor";
 $lang['admin_editpage'] = "Redigera sidor";
 $lang['admin_addpage'] = "Skapa sida";
+$lang['admin_error_remove'] = "Det gick inte att ta bort sidan. Kontrollera så att den är ett utkast.";
 $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här";
 	$lang['admin_addgroup'] = "Skapa grupp";
 	$lang['admin_editgroup'] = "Redigera grupp";

@@ -34,11 +34,12 @@ class Page extends MY_Controller
 		$this->overview();
 	}
 
-	function overview()
+	function overview($message = '')
 	{
 		// Data for overview view
 		$main_data['page_array'] = $this->Page_model->admin_get_all_pages_overview();
 		$main_data['lang'] = $this->lang_data;
+		$main_data['message'] = $message;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -78,49 +79,62 @@ class Page extends MY_Controller
 
 	function edit_page($id)
 	{
-		$this->db->trans_start();
-
-		$translations = array();
-		// check if translations is added
-		foreach($this->languages as $lang)
+		if($this->input->post('delete'))
 		{
-			$theTitle = addslashes($this->input->post('title_'.$lang['language_abbr']));
-			$theText = addslashes($this->input->post('text_'.$lang['language_abbr']));
+			if($this->Page_model->is_draft($id) && $this->Page_model->admin_remove_page($id))
+				redirect('admin/page/overview/success', 'location');
+			else
+				redirect('admin/page/edit/'.$id.'/error', 'location');
+		}
+		elseif($this->input->post('save'))
+		{
+			$this->db->trans_start();
+
+			$translations = array();
+			// check if translations is added
+			foreach($this->languages as $lang)
+			{
+				$theTitle = addslashes($this->input->post('title_'.$lang['language_abbr']));
+				$theText = addslashes($this->input->post('text_'.$lang['language_abbr']));
+
+				// new
+				if($id == 0)
+				{
+					array_push($translations, array("lang" => $lang['language_abbr'], "header" => $theTitle, "content" => $theText));
+				}
+				else
+				{
+					// update existing
+					$this->Page_model->update_page_translation($id, $lang['language_abbr'], $theTitle, $theText);
+				}
+			}
+
+			// get draft and approved setting
+			$draft = !$this->input->post('draft');
 
 			// new
 			if($id == 0) {
-				array_push($translations, array("lang" => $lang['language_abbr'], "header" => $theTitle, "content" => $theText));
+				if($this->input->post('pagename'))
+				{
+					$id = $this->Page_model->add_page(addslashes($this->input->post('pagename')), $translations, $draft);
+				}
 			} else { // update existing
-				$this->Page_model->update_page_translation($id, $lang['language_abbr'], $theTitle, $theText);
+				$data = array(
+		               'published' => $draft
+		        );
+				if($this->input->post('pagename')) {
+					$data['name'] = addslashes($this->input->post('pagename'));
+				}
+				$this->db->where("id", $id);
+				$this->db->update("page", $data);
 			}
+
+			$this->db->trans_complete();
+
+			redirect('admin/page/edit/'.$id.'/success', 'location');
 		}
 
-		// get draft and approved setting
-		$draft = !$this->input->post('draft');
-
-		// new
-		if($id == 0) {
-			if($this->input->post('pagename'))
-			{
-				$id = $this->Page_model->add_page(addslashes($this->input->post('pagename')), $translations, $draft);
-			}
-		} else { // update existing
-			$data = array(
-	               'published' => $draft
-	        );
-			if($this->input->post('pagename')) {
-				$data['name'] = addslashes($this->input->post('pagename'));
-			}
-			$this->db->where("id", $id);
-			$this->db->update("page", $data);
-		}
-
-
-		$this->db->trans_complete();
-		redirect('admin/page/edit/'.$id.'/success', 'location');
+		show_404();
 	}
-
-
-
 
 }
