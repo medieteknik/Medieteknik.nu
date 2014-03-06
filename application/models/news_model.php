@@ -340,6 +340,38 @@ class News_model extends CI_Model
 	}
 
 	/**
+	 * deleta a news entry and it's translations
+	 * @param  int $id the id
+	 * @return bool     success or not
+	 */
+	function delete($id)
+	{
+		if($this->is_draft($id))
+		{
+			$translations = $this->db->delete('news_translation', array('news_id' => $id));
+			$sticky = $this->db->delete('news_sticky', array('news_id' => $id));
+			$news = $this->db->delete('news', array('id' => $id, 'draft' => 1));
+
+			return ($translations && $sticky && $news);
+		}
+
+		return false;
+	}
+
+	/**
+	 * check wether post is draft
+	 * @param  int  $id post id
+	 * @return boolean
+	 */
+	function is_draft($id)
+	{
+		$this->db->where(array('id' => $id, 'draft' => 1));
+		$q = $this->db->get('news');
+
+		return $q->num_rows();
+	}
+
+	/**
 	 * Update a translation of a specific news item
 	 *
 	 * @param  integer	$news_id		The ID of the news item
