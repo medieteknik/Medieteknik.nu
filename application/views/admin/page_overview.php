@@ -1,4 +1,7 @@
 <?php
+if(!empty($message))
+	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
+
 echo '
 <div class="main-box clearfix">
 	<h3>',$lang['admin_addpage'],'</h3>

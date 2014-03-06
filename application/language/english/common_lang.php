@@ -137,6 +137,7 @@ $lang['user_overview'] = "User overview";
 $lang['admin_adminpage'] = "Admin pages";
 $lang['admin_editpage'] = "Edit page";
 $lang['admin_addpage'] = "Add page";
+$lang['admin_error_remove'] = "Could not remove page. Make sure that it is marked as a draft.";
 $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
 	$lang['admin_addgroup'] = "Add group";
 	$lang['admin_editgroup'] = "Edit group";
