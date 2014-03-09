@@ -24,7 +24,7 @@ class Install_model extends CI_Model
 		$this->create_groups_table();
 		$this->create_groups_descriptions_table();
 		$this->create_groups_year_table();
-		$this->create_users_groups_year_table();
+		$this->create_groups_year_members_table();
 		$this->create_groups_year_images_table();
 		$this->create_forum_categories_table();
 		$this->create_forum_categories_descriptions_table();
@@ -62,7 +62,7 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('groups_descriptions');
 		$this->dbforge->drop_table('groups_year');
 		$this->dbforge->drop_table('groups_year_images');
-		$this->dbforge->drop_table('users_groups_year');
+		$this->dbforge->drop_table('groups_year_members');
 		$this->dbforge->drop_table('forum_categories');
 		$this->dbforge->drop_table('forum_categories_descriptions');
 		$this->dbforge->drop_table('forum_topic');
@@ -286,19 +286,19 @@ class Install_model extends CI_Model
 		}
 	}
 
-	function create_users_groups_year_table()
+	function create_groups_year_members_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('users_groups_year') || isset($_GET['drop']))
+		if(!$this->db->table_exists('groups_year_members') || isset($_GET['drop']))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
-			$this->dbforge->add_field(get_users_groups_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_field(get_groups_year_members_fields()); 	// get_user_table_fields() returns an array with the fields
 			$this->dbforge->add_key('user_id',true);						// set the primary keys
 			$this->dbforge->add_key('groups_year_id',true);						// set the primary keys
-			$this->dbforge->create_table('users_groups_year');
+			$this->dbforge->create_table('groups_year_members');
 
-			log_message('info', "Created table: users_groups_year");
+			log_message('info', "Created table: groups_year_members");
 
 
 			$this->load->model("Group_model");

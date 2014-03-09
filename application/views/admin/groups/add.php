@@ -3,43 +3,47 @@
 $startyear = array(
               'id'          => 'startyear',
               'name'        => 'startyear',
-              'maxlength'   => '4',
-              'size'        => '50',
+              'class'       => 'form-control',
+              'placeholder' => 'YYYY',
+              'type'		=> 'number',
+              'min'			=> 1997,
+              'max'			=> date('Y')+3,
+              'value' 		=> (isset($entered['start']) ? $entered['start'] : '')
             );
 $stopyear = array(
               'id'          => 'stopyear',
               'name'        => 'stopyear',
-              'maxlength'   => '4',
-              'size'        => '50',
+              'class'       => 'form-control',
+              'placeholder' => 'YYYY',
+              'type'		=> 'number',
+              'min'			=> 1997,
+              'max'			=> date('Y')+3,
+              'value' 		=> (isset($entered['stop']) ? $entered['stop'] : '')
             );
 
-if(isset($status))
+if(isset($status) && !$status)
 {
-	if(!$status)
-	{
-		echo $status;
-		echo '<p class="notice red"><strong>'.$lang['error_error'].'</strong> ';
-		echo '</p>';
-
-		//echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin_user/edit_user/'.$entered['lid'], $lang['admin_edituser']).'</p>';
-	}
-	else{
-		//echo '<p class="notice">'.$lang['admin_addusers_success'].' '.anchor('admin_groups/edit/'.$group_id, $lang['admin_edituser']).'</p>';
-		redirect('admin/groups/edit/'.$group_id, 'refresh');
-	}
-
+	echo '<div class="alert alert-danger">'.$lang['admin_groups_year_error'].'</div>';
 }
 
-echo
-form_open_multipart('admin/groups/add_year/'.$group_id.'/create'),
-'<div class="main-box clearfix"><h2>', $lang['admin_groups_add_year'], '</h2>';
-
-
-echo form_label($lang['admin_groups_startyear'], 'startyear'),
-	form_input($startyear),
-	form_label($lang['admin_groups_stopyear'], 'stopyear'),
-	form_input($stopyear),
-	form_submit('save', $lang['misc_save']),
-form_close(),
-'</div><!-- close .main-box -->';
+echo form_open('admin/groups/add_year/'.$group_id.'/create');
 ?>
+<div class="main-box clearfix">
+	<h3>
+		<?php echo $lang['admin_groups_add_year']; ?>
+	</h3>
+	<div class="row">
+		<div class="col-sm-4">
+			<p>
+				<?php echo form_label($lang['admin_groups_startyear'], 'startyear'), form_input($startyear); ?>
+			</p>
+			<p>
+				<?php echo form_label($lang['admin_groups_stopyear'], 'stopyear'), form_input($stopyear); ?>
+			</p>
+			<p>
+				<input type="submit" value="<?php echo $lang['misc_save']; ?>" class="form-control btn btn-success" name="save" id="save">
+			</p>
+		</div>
+	</div>
+</div>
+<?php echo form_close(); ?>

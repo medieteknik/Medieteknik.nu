@@ -1,33 +1,30 @@
 <?php
-echo '
+if($message == 'success')
+	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
+
+if($message == 'error')
+	echo '<div class="alert alert-danger">'.$lang['error_error'].'</div>';
+?>
+
 <div class="main-box clearfix">
-	<h2>',$lang['admin_addgroup'],'</h2>
-	<p>',anchor('admin/groups/create', $lang['admin_createnewgroupbyclicking']),'</p>
+	<h2><?php echo $lang['admin_addgroup']; ?></h2>
+	<p><?php echo anchor('admin/groups/create', $lang['admin_createnewgroupbyclicking']); ?></p>
 </div>
 
-<h2>',$lang['admin_groups_official'],'</h2>';
+<div class="main-box clearfix margin-top">
+	<h4><?php echo $lang['admin_groups_official']; ?></h4>
 
-foreach($groups_array as $group) {
-	$classes = '';
-	if($group->official != 1) {
-		//$classes = ' red';
-	}
-
-	$content = '<h2>'.$group->name.'</h2>';
-
-	echo anchor('admin/groups/edit/'.$group->id, $content, array("class" => "main-box news clearfix" . $classes, "title" => $lang['admin_editgroup'] ));
-
-}
-
-/*
-echo '<h2>',$lang['admin_groups_unofficial'],'</h2>';
-foreach($groups_array as $group) {
-	$classes = '';
-	if($group->official != 1) {
-		$content = '<h2>'.$group->name.'</h2>';
-
-		echo anchor('admin_groups/edit/'.$group->id, $content, array("class" => "main-box news clearfix" . $classes, "title" => $lang['admin_editgroup'] ));
-	}
-}
-*/
-
+	<ul class="box-list list-unstyled">
+		<?php
+		foreach ($groups_array as $group) {
+			echo '<li>';
+			echo anchor(
+					'admin/groups/edit/'.$group->id,
+					$group->name.($group->official ? '' : '<span class="label label-info">'.$lang['misc_unofficial'].'</span>'),
+					array("title" => $lang['admin_editgroup'])
+				);
+			echo '</li>';
+		}
+		?>
+	</ul>
+</div>
