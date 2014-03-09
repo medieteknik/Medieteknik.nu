@@ -13,7 +13,8 @@ $linkedin = array(
 			'value'			=> $user->linkedin,
 			'maxlength'		=> '100',
 			'placeholder'	=> 'http://linkedin.com/in/...',
-			'class' 	=> 'form-control'
+			'type' 			=> 'url',
+			'class' 		=> 'form-control'
 		);
 $gravatar = array(
 			'id'			=> 'gravatar',
@@ -29,7 +30,8 @@ $web = array(
 			'value'			=> $user->web,
 			'maxlength'		=> '100',
 			'placeholder'	=> 'http://...',
-			'class' 	=> 'form-control'
+			'class' 		=> 'form-control',
+			'type' 			=> 'url'
 		);
 $presentation = array(
 			'id'		=> 'presentation',

@@ -11,63 +11,57 @@ $position = array(
 			'name'		=> 'position',
 			'value'		=> $member->position,
 			'maxlength'	=> '100',
-			'size'		=> '50'
+			'class'		=> 'form-control'
 		);
 $email = array(
 			'id'			=> 'email',
 			'name'			=> 'email',
 			'value'			=> $member->email,
 			'maxlength'		=> '100',
-			'size'			=> '50',
+			'class'			=> 'form-control',
 		);
 
-if($whattodo !== '')
+
+if($whattodo == 'edit')
 {
-	echo '<div class="main-box clearfix">';
-
-	if($whattodo == 'chstatus')
-	{
-		if($chstatus)
-			echo '<p class="notice">'.$lang['misc_done'].'</p>';
-		else
-			echo '<p class="notice red">'.$lang['error_common'].'</p>';
-	}
-	if($whattodo == 'edit')
-	{
-		if($edit_member)
-			echo '<p class="notice">'.$lang['misc_done'].'</p>';
-		else
-			echo '<p class="notice red">'.$lang['error_common'].'</p>';
-	}
-
-	echo '</div>';
+	if($edit_member)
+		echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
+	else
+		echo '<div class="alert alert-danger">'.$lang['error_common'].'</div>';
 }
 
-//begin with information form
-echo form_open('admin/groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/edit'),'
-<div class="main-box clearfix profile">
-	<h2>'.$lang['admin_groups_editmember'].' <em>'.get_full_name($member).'</em>
-	'.anchor('admin/groups/list_members/'.$groups_year_id.'/'.$group_id, '&larr; '.$lang['misc_back']).'</h2>';
 
-	echo '<div class="row">';
-		echo '<div class="col-2">',
-			form_label($lang['admin_groups_position'], 'position'),
-			form_input($position),
-		'</div><!-- .col-2 -->';
-		echo '<div class="col-2">',
-			form_label('Email', 'email'),
-			form_input($email),
-		'</div><!-- .col-2 -->';
-	echo '</div><!-- .row -->',
-	'<div class="clearfix"></div>',
-	form_submit('save', $lang['misc_save']);
-
-echo '</div><!-- close .main-box -->',
-form_close();
-
-//drama area
+echo form_open('admin/groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/edit');
 ?>
 <div class="main-box clearfix">
+	<h2>
+		<?php echo $lang['admin_groups_editmember']; ?>
+		<small>
+			<em><?php echo get_full_name($member); ?></em>
+			<?php echo anchor('admin/groups/list_members/'.$groups_year_id.'/'.$group_id, $lang['misc_back']); ?>
+		</small>
+	</h2>
+	<div class="row">
+		<div class="col-sm-4">
+			<p>
+				<?php echo form_label($lang['admin_groups_position'], 'position'), form_input($position); ?>
+			</p>
+		</div>
+		<div class="col-sm-4">
+			<p>
+				<?php echo form_label('Email', 'email'), form_input($email); ?>
+			</p>
+		</div>
+		<div class="col-sm-4">
+			<p>
+				<?php echo form_label('&nbsp;', 'save'); ?>
+				<input type="submit" class="btn btn-success form-control" name="save" id="save" value="<?php echo $lang['misc_save']; ?>">
+			</p>
+		</div>
+	</div>
+</div>
+<?php echo form_close(); ?>
+<div class="main-box clearfix margin-top">
 	<h3>
 		<?php echo $lang['admin_edituser_drama']; ?>
 	</h3>

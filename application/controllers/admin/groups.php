@@ -16,7 +16,7 @@ class Groups extends MY_Controller
 		$this->load->model('User_model');
 		$this->load->helper('form');
 
-		$this->languages = array	(
+		$this->languages = array(
 								array(	'language_abbr' => 'se',
 										'language_name' => 'Svenska',
 										'id' => 1),
@@ -31,11 +31,12 @@ class Groups extends MY_Controller
 		$this->overview();
 	}
 
-	function overview()
+	function overview($message = '')
 	{
 		// Data for overview page
 		$main_data['groups_array'] = $this->Group_model->get_all_groups();
 		$main_data['lang'] = $this->lang_data;
+		$main_data['message'] = $message;
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -44,26 +45,13 @@ class Groups extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function create()
+	function list_members($groups_year_id, $group_id, $message = '')
 	{
-		// Data for edit view
-		$main_data['lang'] = $this->lang_data;
-		$main_data['languages'] = $this->languages;
-
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);
-		$template_data['sidebar_content'] = $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
-	}
-
-	function list_members($groups_year_id, $group_id)
-	{
-		$this->load->library('table');
-
-		// Data for overview view
+		// Data for member list view
+		$main_data['group_year'] = $this->Group_model->get_group_year($groups_year_id);
 		$main_data['member_list'] = $this->Group_model->get_group_members_year($groups_year_id);
 		$main_data['group_id'] = $group_id;
+		$main_data['message'] = $message;
 		$main_data['groups_year_id'] = $groups_year_id;
 		$main_data['lang'] = $this->lang_data;
 
@@ -74,22 +62,14 @@ class Groups extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	function edit($id = 0)
+	function remove_year($groups_year_id = 0)
 	{
-		if($id == 0)
-		{
+		if($groups_year_id == 0)
 			show_404();
-		}
-		// Data for edit view
-		$main_data['group'] = $this->Group_model->admin_get_group($id);
-		$main_data['lang'] = $this->lang_data;
-		$main_data['id'] = $id;
 
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);
-		$template_data['sidebar_content'] = $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
+		$this->Group_model->remove_groups_year($groups_year_id);
+
+		redirect('admin/groups/edit/'.$groups_year_id.'/success', 'refresh');
 	}
 
 	function edit_member($groups_year_id, $group_id, $user_id = 0, $do = '')
@@ -104,7 +84,7 @@ class Groups extends MY_Controller
 		elseif($do == 'delete')
 		{
 			$this->Group_model->remove_member($groups_year_id, $user_id);
-			redirect('admin_groups/list_members/'.$groups_year_id.'/'.$group_id, 'refresh');
+			redirect('admin/groups/list_members/'.$groups_year_id.'/'.$group_id, 'refresh');
 		}
 
 		// Data for overview view
@@ -124,9 +104,7 @@ class Groups extends MY_Controller
 	function add_member($groups_year_id = 0, $group_id = 0, $do = '', $user_id = 0)
 	{
 		if($groups_year_id == 0)
-		{
-			//typ show_404
-		}
+			show_404();
 
 		$main_data['lang'] = $this->lang_data;
 		$this->load->library('table');
@@ -134,10 +112,10 @@ class Groups extends MY_Controller
 		$main_data['groups_year_id'] = $groups_year_id;
 		$main_data['group_id'] = $group_id;
 
-		if($do == 'search') // if form is sent
+		if($do == 'search' && $this->input->get('search')) // if form is sent
 		{
-			$main_data['result'] = $this->User_model->search_user($this->input->post('search'));
-			$main_data['query'] = $this->input->post('search');
+			$main_data['result'] = $this->User_model->search_user($this->input->get('search'));
+			$main_data['query'] = $this->input->get('search');
 		}
 		else if($do == 'add')
 		{
@@ -156,84 +134,124 @@ class Groups extends MY_Controller
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/groups/add_member',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/add_member', $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function create()
+	{
+		// Data for edit view
+		$main_data['lang'] = $this->lang_data;
+		$main_data['languages'] = $this->languages;
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);
+		$template_data['sidebar_content'] = $this->sidebar->get_standard();
+		$this->load->view('templates/main_template',$template_data);
+	}
+
+	function edit($id = 0)
+	{
+		if(!$this->Group_model->group_exists($id))
+			show_404();
+
+		// Data for edit view
+		$main_data['group'] = $this->Group_model->admin_get_group($id);
+		$main_data['group_years'] = $this->Group_model->get_group_years($id);
+		$main_data['lang'] = $this->lang_data;
+		$main_data['id'] = $id;
+
+		// composing the views
+		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+		$template_data['main_content'] = $this->load->view('admin/groups/edit',  $main_data, true);
+		$template_data['sidebar_content'] = $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}
 
 	function edit_group($id)
 	{
-		$this->db->trans_start();
-
-		$translations = array();
-		// check if translations is added
-		foreach($this->languages as $lang)
+		if($this->input->post('save'))
 		{
-			$theName = addslashes($this->input->post('name_'.$lang['language_abbr']));
-			$theDescription = addslashes($this->input->post('description_'.$lang['language_abbr']));
+			$this->db->trans_start();
+
+			$translations = array();
+			// check if translations is added
+			foreach($this->languages as $lang)
+			{
+				$theName = addslashes($this->input->post('name_'.$lang['language_abbr']));
+				$theDescription = addslashes($this->input->post('description_'.$lang['language_abbr']));
+
+				// new
+				if($id == 0){
+					array_push($translations, array("lang" => $lang['language_abbr'], "name" => $theName, "description" => $theDescription));
+				}
+				else
+				{
+					// update existing
+					$this->Group_model->update_group_translation($id, $lang['language_abbr'], $theName, $theDescription);
+				}
+			}
+
+			//Check if group is official
+			$official = $this->input->post('official');
 
 			// new
 			if($id == 0) {
-				array_push($translations, array("lang" => $lang['language_abbr'], "name" => $theName, "description" => $theDescription));
-			} else { // update existing
-				$this->Group_model->update_group_translation($id, $lang['language_abbr'], $theName, $theDescription);
+				$id = $this->Group_model->add_group($translations, $official);
 			}
-		}
+			else
+			{ // update existing
+				$data = array(
+		               'official' => $official
+		        );
+				$this->db->where("id", $id);
+				$this->db->update("groups", $data);
+			}
 
-		//Check if group is official
-		$official = 0;
-		if($this->input->post('official') == 1)
+			$this->db->trans_complete();
+
+			redirect('admin/groups/edit/'.$id , 'refresh');
+		}
+		if($this->input->post('delete'))
 		{
-			$official = 1;
+			if(!$this->Group_model->group_exists($id))
+				show_404();
+
+			if($this->Group_model->delete_group($id))
+				redirect('admin/groups/overview/success', 'location');
+			else
+				redirect('admin/groups/edit/'.$id, 'location');
 		}
-
-		// new
-		if($id == 0) {
-			//if($translations[0]["name"] != "") //Must at least have a name in swedish to create a group
-			$this->Group_model->add_group($translations, $official);
-
-		} else { // update existing
-			$data = array(
-	               'official' => $official
-	        );
-			$this->db->where("id", $id);
-			$this->db->update("groups", $data);
-		}
-
-
-		$this->db->trans_complete();
-		redirect('admin_groups', 'refresh');
-	}
-
-	function remove_year($groups_year_id = 0)
-	{
-		if($groups_year_id == 0)
-		{
-			show_404();
-		}
-
-		$this->Group_model->remove_groups_year($groups_year_id);
-
-		redirect('admin_groups', 'refresh');
 	}
 
 	function add_year($group_id = 0, $do = '')
 	{
 		$main_data['lang'] = $this->lang_data;
 
-		if($do == 'create') // if form is sent
+		if($this->input->post('save')) // if form is sent
 		{
 			$startyear = $this->input->post('startyear');
 			$stopyear = $this->input->post('stopyear');
 
 			$main_data['entered'] = array(
-										'start' => $stopyear,
+										'start' => $startyear,
 										'stop' => $stopyear,
 									);
 
-			$createuser = $this->Group_model->add_group_year($group_id, $startyear, $stopyear);
+			if($stopyear >= $startyear)
+			{
+				$createyear = $this->Group_model->add_group_year($group_id, $startyear, $stopyear);
+				if($createyear)
+					redirect('admin/groups/list_members/'.$createyear.'/'.$group_id, 'location');
+				else
+					$main_data['status'] = false;
+			}
+			else {
+				$main_data['status'] = false;
+			}
 
-			$main_data['status'] = $createuser;
 		}
 
 		$main_data['group_id'] = $group_id;

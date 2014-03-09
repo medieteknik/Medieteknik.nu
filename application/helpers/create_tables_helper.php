@@ -261,7 +261,7 @@ function get_groups_year_images_fields()
 	return $fields;
 }
 
-function get_users_groups_fields()
+function get_groups_year_members_fields()
 {
 	$fields = array(
 		'user_id' => array(

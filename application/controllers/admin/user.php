@@ -60,9 +60,12 @@ class User extends MY_Controller
 		$main_data['user_method'] = $method;
 		$main_data['user_filter'] = $filter;
 
+		// load user list as var
+		$main_data['list_users'] = $this->load->view('admin/user/list_users', $main_data, true);
+
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('admin/user/overview',  $main_data, true);
+		$template_data['main_content'] = $this->load->view('admin/user/overview', $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
 	}

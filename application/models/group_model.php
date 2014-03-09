@@ -15,7 +15,7 @@ class Group_model extends CI_Model
 		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.groups_id", "");
 		$this->db->join("groups_year", "groups.id = groups_year.groups_id", "left");
 		$this->db->group_by("groups.id");
-		
+
 		$query = $this->db->get();
 
         return $query->result();
@@ -42,8 +42,8 @@ class Group_model extends CI_Model
 	 * fetches a specific page, admin-style => more data included
 	 *
 	 * @param  integer	$id		The ID of the news item
-	 * @return array 	
-	 */ 
+	 * @return array
+	 */
 	function admin_get_group($id)
     {
 		$this->db->select("*");
@@ -53,7 +53,7 @@ class Group_model extends CI_Model
 		$this->db->where("groups.id",$id);
 		$query = $this->db->get();
 		$translations = $query->result();
-		
+
 		$this->db->select("groups.id, groups.official, groups_descriptions_language.name");
 		$this->db->from("groups");
 		$this->db->join("groups_descriptions_language", "groups.id = groups_descriptions_language.groups_id", "");
@@ -62,28 +62,28 @@ class Group_model extends CI_Model
 		$query = $this->db->get();
 		$group_array = $query->result();
 		$group = $group_array[0];
-		
+
 		$group->translations = array();
-		
-		foreach($translations as $t) 
+
+		foreach($translations as $t)
 		{
 			array_push($group->translations, $t);
 		}
-		
+
 		return $group;
-		
+
 	}
 
 	function get_group_members($id)
 	{
 		$this->db->select("groups_year.id, groups_year.start_year, groups_year.stop_year");
 		$this->db->select("users.first_name, users.last_name");
-		$this->db->select("users_groups_year.position, users_groups_year.email, users_groups_year.user_id");
+		$this->db->select("groups_year_members.position, groups_year_members.email, groups_year_members.user_id");
 		$this->db->select("users_data.gravatar");
 		$this->db->from("groups");
 		$this->db->join("groups_year", "groups_year.groups_id = groups.id", 'left');
-		$this->db->join("users_groups_year", "users_groups_year.groups_year_id = groups_year.id", 'left');
-		$this->db->join("users", "users.id = users_groups_year.user_id", 'left');
+		$this->db->join("groups_year_members", "groups_year_members.groups_year_id = groups_year.id", 'left');
+		$this->db->join("users", "users.id = groups_year_members.user_id", 'left');
 		$this->db->join("users_data", "users_data.users_id = users.id", 'left');
 		$this->db->where("groups.id", $id);
 		$query = $this->db->get();
@@ -95,32 +95,42 @@ class Group_model extends CI_Model
 	{
 		$this->db->select("groups_year.start_year, groups_year.stop_year");
 		$this->db->select("users.first_name, users.last_name");
-		$this->db->select("users_groups_year.position, users_groups_year.email, users_groups_year.user_id");
+		$this->db->select("groups_year_members.position, groups_year_members.email, groups_year_members.user_id");
 		$this->db->select("users_data.gravatar");
 		$this->db->from("groups");
 		$this->db->join("groups_year", "groups_year.groups_id = groups.id", 'left');
-		$this->db->join("users_groups_year", "users_groups_year.groups_year_id = groups_year.id", 'left');
-		$this->db->join("users", "users.id = users_groups_year.user_id", 'left');
+		$this->db->join("groups_year_members", "groups_year_members.groups_year_id = groups_year.id", 'left');
+		$this->db->join("users", "users.id = groups_year_members.user_id", 'left');
 		$this->db->join("users_data", "users_data.users_id = users.id", 'left');
-		$this->db->where("users_groups_year.groups_year_id", $groups_year_id);
+		$this->db->where("groups_year_members.groups_year_id", $groups_year_id);
 		$query = $this->db->get();
 		$result = $query->result();
 		return $result;
+	}
+
+	function get_group_year($groups_year_id)
+	{
+		$this->db->where('id', $groups_year_id);
+		$this->db->from('groups_year');
+		$query = $this->db->get();
+		$result = $query->result();
+
+		return $result[0];
 	}
 
 	function get_group_year_member($groups_year_id, $user_id)
 	{
 		$this->db->select("groups_year.start_year, groups_year.stop_year");
 		$this->db->select("users.first_name, users.last_name");
-		$this->db->select("users_groups_year.position, users_groups_year.email, users_groups_year.user_id");
+		$this->db->select("groups_year_members.position, groups_year_members.email, groups_year_members.user_id");
 		$this->db->select("users_data.gravatar");
 		$this->db->from("groups");
 		$this->db->join("groups_year", "groups_year.groups_id = groups.id", 'left');
-		$this->db->join("users_groups_year", "users_groups_year.groups_year_id = groups_year.id", 'left');
-		$this->db->join("users", "users.id = users_groups_year.user_id", 'left');
+		$this->db->join("groups_year_members", "groups_year_members.groups_year_id = groups_year.id", 'left');
+		$this->db->join("users", "users.id = groups_year_members.user_id", 'left');
 		$this->db->join("users_data", "users_data.users_id = users.id", 'left');
-		$this->db->where("users_groups_year.groups_year_id", $groups_year_id);
-		$this->db->where("users_groups_year.user_id", $user_id);
+		$this->db->where("groups_year_members.groups_year_id", $groups_year_id);
+		$this->db->where("groups_year_members.user_id", $user_id);
 		$query = $this->db->get();
 		$result = $query->result();
 		return $result;
@@ -134,7 +144,21 @@ class Group_model extends CI_Model
 		$this->db->order_by("groups_year.start_year", "asc");
 		$query = $this->db->get();
 		$result = $query->result();
+
+		foreach ($result as $key => $year) {
+			// stupid way of doing this! Lots of database calls.
+			$result[$key]->members = $this->Group_model->get_group_members_year($year->id);
+		}
+
 		return $result;
+	}
+
+	function group_exists($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('groups');
+
+		return $query->num_rows();
 	}
 
 	function get_group_name($name, $lang = 'se')
@@ -170,16 +194,18 @@ class Group_model extends CI_Model
 	function add_group($translations = array(), $official = 1)
 	{
 		if(!is_array($translations))
-		{
 			return false;
-		}
+
 		$arr_keys = array_keys($translations);
 		if(!is_numeric($arr_keys[0]))
 		{
 			$theTranslations = array($translations);
-		} else {
+		}
+		else
+		{
 			$theTranslations = $translations;
 		}
+
 		foreach($theTranslations as &$translation)
 		{
 			$arr_keys = array_keys($translation);
@@ -220,6 +246,7 @@ class Group_model extends CI_Model
 		} else {
 			$this->db->trans_commit();
 		}
+
 		return $group_id;
 	}
 
@@ -307,7 +334,7 @@ class Group_model extends CI_Model
 	{
 		if($start_year == 0 || $stop_year == 0)
 			return false;
-		
+
 		// check if group exists, return false if not
 		$query = $this->db->get_where('groups', array('id' => $groups_id), 1, 0);
 		if ($query->num_rows() == 0)
@@ -363,12 +390,12 @@ class Group_model extends CI_Model
 
 			$l['groups_year_id'] = $groups_year_id;
 
-			$query = $this->db->get_where('users_groups_year', array('groups_year_id' => $groups_year_id, 'user_id' => $l['user_id']), 1, 0);
+			$query = $this->db->get_where('groups_year_members', array('groups_year_id' => $groups_year_id, 'user_id' => $l['user_id']), 1, 0);
 			if ($query->num_rows() != 0)
 				return false;
 		}
 
-		return $this->db->insert_batch('users_groups_year', $list);
+		return $this->db->insert_batch('groups_year_members', $list);
 	}
 
 	function update_member_info($groups_year_id, $user_id, $position, $email)
@@ -379,7 +406,7 @@ class Group_model extends CI_Model
 		// check if the user exists in the group
 		$this->db->where('groups_year_id', $groups_year_id);
 		$this->db->where('user_id', $user_id);
-		$query = $this->db->get('users_groups_year');
+		$query = $this->db->get('groups_year_members');
 		if($query->num_rows != 1)
 		{
 			//Should be one user with that user_id in that group
@@ -392,7 +419,7 @@ class Group_model extends CI_Model
 						);
 			$this->db->where('groups_year_id', $groups_year_id);
 			$this->db->where('user_id', $user_id);
-			$this->db->update('users_groups_year', $data);
+			$this->db->update('groups_year_members', $data);
 			return true;
 		}
 
@@ -403,7 +430,7 @@ class Group_model extends CI_Model
 	{
 		$this->db->where('groups_year_id', $groups_year_id);
 		$this->db->where('user_id', $user_id);
-		$this->db->delete('users_groups_year');
+		$this->db->delete('groups_year_members');
 	}
 
 	function remove_groups_year($groups_year_id)
@@ -412,20 +439,16 @@ class Group_model extends CI_Model
 		$this->db->delete('groups_year');
 
 		$this->db->where('groups_year_id', $groups_year_id);
-		$this->db->delete('users_groups_year');
+		$this->db->delete('groups_year_members');
 	}
 
 	function delete_group($id)
 	{
-		$this->db->where('id', $id);
-		$this->db->delete('groups');
+		$groups = $this->db->delete('groups', array('id' => $id));
+		$groups_descriptions = $this->db->delete('groups_descriptions', array('groups_id' => $id));
+		$groups_year = $this->db->delete('groups_year', array('groups_id' => $id));
 
-		$this->db->where('groups_id', $id);
-		$this->db->delete('groups_descriptions');
-
-		$this->db->where('groups_id', $id);
-		$this->db->delete('groups_year');
-
+		return ($groups && $groups_descriptions && $groups_year);
 	}
 }
 
