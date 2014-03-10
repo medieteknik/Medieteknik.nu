@@ -10,9 +10,7 @@ echo '
 ?>
 <div class="main-box clearfix margin-top">
 	<h3>
-		<?php
-		echo $lang['admin_adminpage'];
-		?>
+		<?php echo $lang['admin_adminpage']; ?>
 	</h3>
 	<ul class="list-unstyled box-list">
 		<?php
