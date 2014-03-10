@@ -24,7 +24,6 @@ class Images extends MY_Controller
 
 	function overview()
 	{
-
 		// Data for overview view
 		$main_data['image_array'] = $this->Images_model->get_all_images();
 		$main_data['lang'] = $this->lang_data;
@@ -81,6 +80,6 @@ class Images extends MY_Controller
 	function delete($id)
 	{
 		$this->Images_model->delete_image($id);
-		redirect('admin_images', 'refresh');
+		redirect('admin/images/overview/success', 'refresh');
 	}
 }

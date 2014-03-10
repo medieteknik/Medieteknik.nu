@@ -22,9 +22,9 @@ if(isset($page) && $page != false) {
 	$pagename['value'] = $page->name;
 }
 
-if($message == 'success')
+if(isset($message) && $message == 'success')
 	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
-elseif($message == 'error')
+elseif(isset($message) && $message == 'error')
 	echo '<div class="alert alert-danger">'.$lang['admin_error_remove'].'</div>';
 
 // do all the printing
