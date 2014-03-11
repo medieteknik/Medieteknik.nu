@@ -89,6 +89,7 @@ $lang['document_protocol_normal'] = 'Board meeting';
 $lang['document_documents_meeting_autumn'] = 'Autumn meeting';
 $lang['document_documents_meeting_spring'] = 'Spring meeting';
 $lang['document_directional_document'] = 'Directional documents';
+$lang['document_type'] = 'Type';
 
 
 // admin
@@ -209,6 +210,7 @@ $lang['misc_created'] = "Created";
 $lang['misc_typeandenter'] = "Type and hit enter to search";
 $lang['misc_searchusers'] = "Search users";
 $lang['misc_translations'] = "Translations";
+$lang['misc_date'] = "Date";
 
 // error
 $lang['error_error'] = "Error!";

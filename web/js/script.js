@@ -6,4 +6,9 @@ $(document).ready(function(){
 	});
 	// toogle tooltips
 	$('[data-toggle="tooltip"]').tooltip();
+
+	// confirm delete
+	$('#delete').click(function(event) {
+		return confirm("Are you sure you want to delete?");
+	});
 })

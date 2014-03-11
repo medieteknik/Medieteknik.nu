@@ -536,8 +536,8 @@ body {
 	.radialgradient(lighten(@darkbg, 20%), @darkbg);
 	color: @bodybg;
 }
-p.bigmargin {
-	margin: 15px 0;
+.bigmargin {
+	margin: 15px 0 !important;
 }
 ul.box-list {
 	list-style: none;
@@ -596,4 +596,28 @@ ul.box-list {
 #main-content label.checkbox-inline {
 	margin-bottom: 3px;
 	margin-top: 2px;
+}
+#documents-dropzone.dropzone {
+	position: relative;
+	min-height: 200px;
+	border-radius: 0;
+	border: 0;
+	padding: 0;
+	background: inherit;
+
+	.dz-message {
+		border: 1px solid rgba(0,0,0,0.03);
+		min-height: 200px;
+		background: rgba(0,0,0,0.03);
+		padding: 15px;
+		margin: 15px -15px 0;
+	}
+	.dz-preview {
+		background: inherit;
+		margin: 15px 0;
+		border: 0;
+		border-bottom: 1px solid #ccc;
+		box-shadow: 0 0;
+		display: block;
+	}
 }
