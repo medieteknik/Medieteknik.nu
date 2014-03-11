@@ -88,6 +88,7 @@ $lang['document_protocol_normal'] = 'Styrelsemöte';
 $lang['document_documents_meeting_autumn'] = 'Höstmöte';
 $lang['document_documents_meeting_spring'] = 'Vårmöte';
 $lang['document_directional_document'] = 'Styrdokument';
+$lang['document_type'] = 'Typ';
 
 // admin
 $lang['admin_addnews'] = "Skapa nyhet";
@@ -205,6 +206,7 @@ $lang['misc_createdby'] = "Skapad av";
 $lang['misc_created'] = "Skapad";
 $lang['misc_typeandenter'] = "Skriv och tryck enter för att söka";
 $lang['misc_translations'] = "Översättningar";
+$lang['misc_date'] = "Datum";
 
 // error
 $lang['error_error'] = "Fel!";

@@ -31,7 +31,6 @@ class Documents extends MY_Controller
 
 			if($month < 6)
 				$protocol_year--;
-
 		}
 		$main_data['config'] = $this->Documents_model->get_config();
 		$main_data['document_years_array'] = $this->Documents_model->get_document_years(2005);
@@ -42,6 +41,8 @@ class Documents extends MY_Controller
 		$main_data['document_types'] = $this->Documents_model->get_all_documents_for_group(1);
 		$main_data['group'] = "medietekniksektionen";
 		$main_data['lang'] = $this->lang_data;
+
+		$main_data['extra_javascripts'] = array('libs/dropzone.min.js', 'admin_documents.js');
 
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
@@ -65,13 +66,11 @@ class Documents extends MY_Controller
 	        {
 		        if(move_uploaded_file($tempFile, $targetFile))
 		        {
-		          	$temp_type = $_POST['document_type'];
-		          	$temp_title = $_POST['title'];
-		          	$temp_date = $_POST['upload_date'];
+		          	$temp_type = $this->input->post('document_type');
+		          	$temp_title = $this->input->post('title');
+		          	$temp_date = $this->input->post('upload_date');
 
-		          	if($temp_type == "1_autumn")
-		          		$temp_type = 1;
-		          	elseif($temp_type == "1_spring")
+		          	if($temp_type == "1_autumn" || $temp_type == "1_spring")
 		          		$temp_type = 1;
 
 		          	//upload successful
@@ -81,9 +80,9 @@ class Documents extends MY_Controller
 	    }
 	}
 
-	function delete($id)
+	function delete($id, $document_year = 0)
 	{
 		$this->Documents_model->delete_document($id);
-		redirect('admin_documents', 'refresh');
+		redirect('admin/documents/', 'refresh');
 	}
 }

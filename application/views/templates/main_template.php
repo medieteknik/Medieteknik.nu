@@ -150,8 +150,15 @@
 
 		<!-- Load Bootstrap from it's CDN -->
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+		<!-- Load our javascripts -->
 		<script type="text/javascript" src="<?php echo base_url(); ?>web/js/script.js"></script>
+		<?php
+		if(isset($extra_javascripts) && is_array($extra_javascripts) && count($extra_javascripts) > 0)
+		{
+			foreach ($extra_javascripts as $script)
+				echo '<script type="text/javascript" src="'.base_url().'web/js/'.$script.'"></script>';
+		}
+		?>
 		<!-- end scripts-->
 	</body>
 </html>
