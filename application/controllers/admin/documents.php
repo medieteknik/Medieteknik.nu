@@ -56,11 +56,22 @@ class Documents extends MY_Controller
 	{
 		$config = $this->Documents_model->get_config();
 
+		// input data
+		$temp_type = $this->input->post('document_type');
+		$temp_title = $this->input->post('title');
+		$temp_date = $this->input->post('upload_date');
+
+		log_message('info', 'Uploading file "'.$_FILES['file']['name'].'". Title: "'.$temp_title.'" Date: "'.$temp_date.'"');
+
 		if (!empty($_FILES))
 	    {
 	        $tempFile = $_FILES['file']['tmp_name'];
-	        $targetPath = $config['uploadPath'];
-	        $targetFile = $targetPath . $_FILES['file']['name'];
+	        $targetPath = $config['uploadPath'].$temp_date.'/';
+	        $targetFile = $targetPath.$_FILES['file']['name'];
+
+	        if (!file_exists($targetPath) && !is_dir($targetPath)) {
+				mkdir($targetPath);
+			}
 
 	        if(!file_exists($targetFile))
 	        {
@@ -68,12 +79,11 @@ class Documents extends MY_Controller
 		        {
 		          	$temp_type = $this->input->post('document_type');
 		          	$temp_title = $this->input->post('title');
-		          	$temp_date = $this->input->post('upload_date');
 
 		          	if($temp_type == "1_autumn" || $temp_type == "1_spring")
 		          		$temp_type = 1;
 
-		          	//upload successful
+		          	//upload successful, add to database
 		          	$this->Documents_model->add_uploaded_document($_FILES['file']['name'], $temp_type, 1, $temp_title, $_POST['description'], 1, true, $temp_date);
 		        }
 		    }
