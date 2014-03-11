@@ -4,7 +4,7 @@
 */
 class Documents_model extends CI_Model
 {
-	
+
 	function __construct()
 	{
 		// Call the Model constructor
@@ -12,7 +12,7 @@ class Documents_model extends CI_Model
 
 	}
 
-	function get_config() 
+	function get_config()
 	{
 		$config['uploadPath'] = './user_content/documents/';
 		$config['acceptedFiles'] = "application/pdf,.doc,.rtf";
@@ -23,7 +23,7 @@ class Documents_model extends CI_Model
 	function get_document_years($year_from = 2005)
 	{
 		$years_array = array();
-		$year_to = date("Y",time()); 
+		$year_to = date("Y",time());
 
 		$month = date("m", time());
 		if($month < 6)
@@ -39,9 +39,8 @@ class Documents_model extends CI_Model
         return array_reverse($years_array);
 	}
 
-	function add_uploaded_document($orig_filename, $document_type, $userid, $title = '', $description = '', $group_id, $is_public = true, $upload_date) 
+	function add_uploaded_document($orig_filename, $document_type, $userid, $title = '', $description = '', $group_id, $is_public = true, $upload_date)
 	{
-
 		$data = array(
 			'user_id' => $userid,
 			'type' => $document_type,
@@ -54,7 +53,7 @@ class Documents_model extends CI_Model
 			);
 		$this->db->insert('documents', $data);
 		$document_id = $this->db->insert_id();
-		
+
 		return $document_id;
 
 	}
@@ -76,9 +75,9 @@ class Documents_model extends CI_Model
 
 		foreach($result as $result_type)
 			$result_type->documents = array();
-		
+
 		foreach($documents as $document)
-			array_push($result[$document->type-1]->documents, $document);	
+			array_push($result[$document->type-1]->documents, $document);
 
 		return $result;
 	}
@@ -86,12 +85,12 @@ class Documents_model extends CI_Model
 	function delete_document($id)
 	{
 		$query = $this->db->get_where('documents', array('id' => $id), 1, 0);
-		if ($query->num_rows() == 1) 
+		if ($query->num_rows() == 1)
 		{
 			$res = $query->result();
 			$res = $res[0];
-			unlink('user_content/documents/'.$res->document_original_filename);
+			unlink('user_content/documents/'.date("Y-m-d", strtotime($res->upload_date)).'/'.$res->document_original_filename);
 		}
-		$this->db->delete('documents', array('id' => $id)); 
+		$this->db->delete('documents', array('id' => $id));
 	}
 }

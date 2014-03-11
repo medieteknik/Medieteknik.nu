@@ -94,12 +94,12 @@
 
 		$uri = explode('/', uri_string());
 
-		if(sizeof($uri) == 5)			//admin_documents/overview/xxxx
+		if(sizeof($uri) == 5)			//admin/documents/overview/xxxx
 			$dropdown_uri = '';
-		else if(sizeof($uri) == 4) 		//admin_documents/overview
-			$dropdown_uri = 'overview/';
-		else if(sizeof($uri) == 3) 		//admin_documents
-			$dropdown_uri = 'admin/documents/overview/';
+		else if(sizeof($uri) == 4) 		//admin/documents/overview
+			$dropdown_uri = 'documents/overview/';
+		else if(sizeof($uri) == 3) 		//admin/documents
+			$dropdown_uri = 'documents/overview/';
 
 		foreach($document_years_array as $year)
 		{
@@ -145,7 +145,7 @@
 		foreach ($type->documents as $doc) {
 			echo
 			'<div class="row"><div class="col-3-4"><li class = "document clearfix"> <!-- TEMP LÖSNING MED col-3-4 etc -->
-			<a href="' . base_url() . '/user_content/documents/'. $doc->document_original_filename .'">
+			<a href="' . base_url() . '/user_content/documents/'.date("Y-m-d", strtotime($doc->upload_date)).'/'. $doc->document_original_filename .'">
 				<i class = "-icon-document"></i>
 				<h4>'. $doc->document_title . '</h4>
 				<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>

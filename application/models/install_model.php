@@ -851,7 +851,7 @@ class Install_model extends CI_Model
 			log_message('info', "Created table: documents");
 
 			//get and insert sample pdfs in db
-			$dir = 'user_content/documents';
+			$dir = 'user_content/documents/2000-01-01';
 			if ($handle = opendir($dir)) {
 				while (false !== ($file = readdir($handle))) {
 					if(preg_match('/(.pdf)$/i', $file)){
@@ -862,7 +862,8 @@ class Install_model extends CI_Model
 							'document_title' => str_replace('.pdf', "", $file),
 							'document_description' => 'Document description',
 							'group_id' => 1,
-							'is_public' => true
+							'is_public' => true,
+							'upload_date' => '2000-01-01'
 						);
 						$this->db->insert('documents', $data);
 					}
