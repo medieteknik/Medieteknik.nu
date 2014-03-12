@@ -91,4 +91,3 @@ $threshold = 3;
 		<?php echo anchor('news/archive/page/'.$next_page.'/'.$news_limit, '&raquo;'); ?>
 	</li>
 </ul>
-<?php

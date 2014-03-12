@@ -162,5 +162,3 @@
 		<!-- end scripts-->
 	</body>
 </html>
-
-
