@@ -128,6 +128,10 @@ $lang['admin_createnewpagebyclicking'] = "Create a new page by clicking here";
 	$lang['admin_createnewgroupbyclicking'] = "Create a new group by clicking here";
 	$lang['admin_addmemberbyclicking'] = "Add new member by clicking here";
 	$lang['admin_addasmember'] = "Add as member";
+$lang['admin_admincarousel'] = "Admin carousel";
+$lang['admin_addcarouselitem'] = "Add carousel item";
+$lang['admin_addcarouselimageslidebyclicking'] = "Add a new carousel slide with images by clicking here";
+$lang['admin_addcarouselembeddedslidebyclicking'] = "Add a new carousel slide with embedded content (e.g. video) by clicking here";
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -146,10 +150,14 @@ $lang['misc_right'] = "Right";
 $lang['misc_left'] = "Left";
 $lang['misc_approved'] = "Approved";
 $lang['misc_draft'] = "Draft";
+$lang['misc_disabled'] = "Disabled";
 $lang['misc_official'] = "Official";
 $lang['misc_published'] = "Published";
 $lang['misc_pending'] = "Pending";
 $lang['misc_image'] = "Image";
+$lang['misc_images'] = "Images";
+$lang['misc_link'] = "Link";
+$lang['misc_photo'] = "Photo";
 $lang['misc_size'] = "Size";
 $lang['misc_position'] = "Position";
 $lang['misc_width'] = "Width";
@@ -172,6 +180,7 @@ $lang['misc_gotopage'] = "Go to page";
 $lang['misc_title'] = "Title";
 $lang['misc_description'] = "Description";
 $lang['misc_delete'] = "Delete";
+$lang['misc_upload'] = "Upload";
 
 // error
 $lang['error_error'] = "Error!";
