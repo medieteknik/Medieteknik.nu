@@ -158,6 +158,10 @@ $lang['admin_createnewgroupbyclicking'] = "Create a new group by clicking here";
 $lang['admin_addmemberbyclicking'] = "Add new member by clicking here";
 $lang['admin_addasmember'] = "Add as member";
 $lang['admin_groups_year_error'] = "Could not add new year with the specified dates.";
+$lang['admin_admincarousel'] = "Admin carousel";
+$lang['admin_addcarouselitem'] = "Add carousel item";
+$lang['admin_addcarouselimageslidebyclicking'] = "Add a new carousel slide with images by clicking here";
+$lang['admin_addcarouselembeddedslidebyclicking'] = "Add a new carousel slide with embedded content (e.g. video) by clicking here";
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -211,6 +215,11 @@ $lang['misc_typeandenter'] = "Type and hit enter to search";
 $lang['misc_searchusers'] = "Search users";
 $lang['misc_translations'] = "Translations";
 $lang['misc_date'] = "Date";
+$lang['misc_disabled'] = "Disabled";
+$lang['misc_image'] = "Image";
+$lang['misc_images'] = "Images";
+$lang['misc_link'] = "Link";
+$lang['misc_upload'] = "Upload";
 
 // error
 $lang['error_error'] = "Error!";

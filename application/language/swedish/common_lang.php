@@ -156,6 +156,12 @@ $lang['admin_addmemberbyclicking'] = "Lägg till en ny medlem genom att klicka h
 $lang['admin_addasmember'] = "Lägg till som medlem";
 $lang['admin_groups_year_error'] = "Kunde inte lägga till nytt år med angivna gränser. Startåret måste vara mer än eller lika med slutåret.";
 
+$lang['admin_admincarousel'] = "Administrera karusell";
+$lang['admin_addcarouselitem'] = "Lägg till karusellobjekt";
+$lang['admin_addcarouselimageslidebyclicking'] = "Lägg till ett karusellobjekt med bilder genom att klicka här";
+$lang['admin_addcarouselembeddedslidebyclicking'] = "Lägg till ett karusellobjekt med inbäddat innehåll (ex. video) genom att klicka här";
+$lang['admin_removeimage'] = "Ta bort bild";
+
 // date
 $lang['date_yesterday'] = "Igår";
 $lang['date_today'] = "Idag";
@@ -207,6 +213,11 @@ $lang['misc_created'] = "Skapad";
 $lang['misc_typeandenter'] = "Skriv och tryck enter för att söka";
 $lang['misc_translations'] = "Översättningar";
 $lang['misc_date'] = "Datum";
+$lang['misc_disabled'] = "Inaktiverad";
+$lang['misc_image'] = "Bild";
+$lang['misc_images'] = "Bilder";
+$lang['misc_link'] = "Länk";
+$lang['misc_upload'] = "Ladda upp";
 
 // error
 $lang['error_error'] = "Fel!";

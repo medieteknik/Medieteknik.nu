@@ -77,7 +77,10 @@ class Sidebar
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminnews'], 'href' => "admin/news"));
 
 		if($this->CI->login->has_privilege('admin'))
+		{
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin/user"));
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admincarousel'], 'href' => "admin/carousel"));
+		}
 
 		if($this->CI->login->has_privilege('admin'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminpage'], 'href' => "admin/page"));
