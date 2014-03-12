@@ -2,3 +2,4 @@ application/logs/*
 web/css/.sass-cache/*
 user_content/images/*
 *.DS_store
+.htaccess
