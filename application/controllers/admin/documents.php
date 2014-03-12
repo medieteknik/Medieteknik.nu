@@ -10,7 +10,7 @@ class Documents extends MY_Controller
 
 		if(!$this->login->is_admin())
 		{
-			redirect('/admin/admin/access_denied', 'refresh');
+			redirect('/admin/admin/access_denied', 'location');
 		}
 
 		$this->load->model('Documents_model');

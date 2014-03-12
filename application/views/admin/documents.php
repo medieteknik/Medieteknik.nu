@@ -16,7 +16,7 @@
 			'<div class="dz-preview">'+
 				'<h4><span data-dz-name></span> <em data-dz-size></em></h4>'+
 				'<div class="row">'+
-					'<div class="col-sm-3">'+
+					'<div class="col-sm-4">'+
 						'<label><?php echo $lang['document_type']; ?></label>'+
 						'<select id="type" class="form-control" name="document_type">'+
 							'<option value="1"><?php echo $lang['document_protocol'].' - '.$lang['document_protocol_normal']?></option>'+
@@ -27,17 +27,17 @@
 							'<option value="2"><?php echo $lang['document_directional_document']?></option>'+
 						'</select>'+
 					'</div>'+
-					'<div class="col-sm-3">'+
+					'<div class="col-sm-4">'+
 						'<label><?php echo $lang['misc_title']; ?></label>'+
 						'<input id="title" type="text" class="form-control" name="title" value="Styrelsemöte" disabled/>'+
 					'</div>'+
-					'<div class="col-sm-3">'+
-						'<label><?php echo $lang['misc_description']; ?></label>'+
-						'<input id="description" class="form-control" type="text" name="description" value="Protokoll från styrelsemötet '+today+'" disabled/>'+
-					'</div>'+
-					'<div class="col-sm-3">'+
+					'<div class="col-sm-4">'+
 						'<label><?php echo $lang['misc_date']; ?></label>'+
 						'<input id="date" type="date" class="form-control" name="upload_date" value="'+today+'">'+
+					'</div>'+
+					'<div class="col-sm-12">'+
+						'<label><?php echo $lang['misc_description']; ?></label>'+
+						'<input id="description" class="form-control" type="text" name="description" value="Protokoll från styrelsemötet '+today+'" disabled/>'+
 					'</div>'+
 				'</div>'+
 				'<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>'+
@@ -82,7 +82,7 @@
 <div class="main-box clearfix margin-top">
 	<h2>Dokumentarkiv för <?php echo $group; ?></h2>
 
-	<ul class = "document-list clearfix">
+	<ul class="list-unstyled box-list">
 	<?php
 	$protocols = array_slice($document_types, 0, 1);
 	$document_types = array_slice($document_types, 1);
@@ -138,6 +138,7 @@
 		}
 	}
 
+
 	foreach ($document_types as $type) {
 
 		echo '<h3 style="clear: both">'.$lang['document_'.$type->document_type].'</h3>';
@@ -158,6 +159,9 @@
 
 		}
 	}
+
+	do_dump($protocols);
+	do_dump($document_types);
 	?>
 	</ul>
 </div>

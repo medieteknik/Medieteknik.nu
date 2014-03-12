@@ -58,8 +58,8 @@ class Documents_model extends CI_Model
 
 	}
 
-	function get_all_documents_for_group($group_id, $type=0){
-
+	function get_all_documents_for_group($group_id, $type=0)
+	{
 		$this->db->select('*');
 		$this->db->from('documents');
 		$this->db->order_by('upload_date', 'desc');
