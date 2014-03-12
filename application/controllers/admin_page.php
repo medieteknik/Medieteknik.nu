@@ -123,9 +123,7 @@ class Admin_page extends MY_Controller
 
 		$this->db->trans_complete();
 		redirect('admin_page', 'refresh');
-	}
-	
-	
+	}	
 	
 	
 }

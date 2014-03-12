@@ -21,6 +21,8 @@ class Install_model extends CI_Model
 		$this->create_news_table();
 		$this->create_news_translation_table();
 		$this->create_news_sticky_table();
+		$this->create_carousel_table();
+		$this->create_carousel_translation_table();
 		$this->create_groups_table();
 		$this->create_groups_descriptions_table();
 		$this->create_groups_year_table();
@@ -37,12 +39,14 @@ class Install_model extends CI_Model
 		$this->create_documents_table();
 		$this->create_document_types_table();
 		$this->create_news_images_table();
+		$this->create_carousel_images_table();
 		$this->create_page_table();
 		$this->create_page_content_table();
 
 		// check all views exist
 		$this->create_forum_categories_descriptions_language_view();
 		$this->create_news_translation_language_view();
+		$this->create_carousel_translation_language_view();
 		$this->create_groups_descriptions_language_view();
 		$this->create_page_content_language_view();
 
@@ -57,6 +61,8 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('language');
 		$this->dbforge->drop_table('news');
 		$this->dbforge->drop_table('news_translation');
+		$this->dbforge->drop_table('carousel');
+		$this->dbforge->drop_table('carousel_translation');
 		$this->dbforge->drop_table('news_sticky');
 		$this->dbforge->drop_table('groups');
 		$this->dbforge->drop_table('groups_descriptions');
@@ -74,6 +80,7 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('documents');
 		$this->dbforge->drop_table('document_types');
 		$this->dbforge->drop_table('news_images');
+		$this->dbforge->drop_table('carousel_images');
 		$this->dbforge->drop_table('page');
 		$this->dbforge->drop_table('page_content');
 	}
@@ -239,6 +246,67 @@ class Install_model extends CI_Model
 			   'sticky_order' => 1 ,
 			);
 			$this->db->insert('news_sticky', $data);
+		}
+	}
+
+	function create_carousel_table()
+	{
+		// if the users table does not exist, create it
+		if(!$this->db->table_exists('carousel') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_carousel_table_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('id',true);						// set the primary keys
+			$this->dbforge->create_table('carousel');
+
+			log_message('info', "Created table: carousel");
+		}
+	}
+
+	function create_carousel_translation_table()
+	{
+		// if the users table does not exist, create it
+		if(!$this->db->table_exists('carousel_translation') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_carousel_translation_table_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_key('carousel_id',true);						// set the primary keys
+			$this->dbforge->add_key('lang_id',true);						// set the primary keys
+			$this->dbforge->create_table('carousel_translation');
+
+			log_message('info', "Created table: carousel_translation");
+
+			$this->load->model("Carousel_model");
+
+			// carousel_type = 1  =>  content is url to embedded content, e.g. video
+			$carousel_type = 1;
+			$translations = array(
+									array("lang" => "se", "title" => "Civilingenjör i Medieteknik – en utbildning för dig?",
+									 "content" => "player.vimeo.com/video/73557097?title=0"),
+									array("lang" => "en", "title" => "Master of Science in Media Technology - an education for you?",
+									 "content" => "player.vimeo.com/video/73557097?title=0"),
+								);
+			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 1);
+
+			// carousel_type = 2  =>  content is text.
+			$carousel_type = 2;
+			$translations = array(
+									array("lang" => "se", "title" => "Linköpings universitet &ndash; Campus Norrköping",
+									 "content" => "Civilingenjör i Medieteknik på Linköpings universitet ges på Campus Norrköping &ndash; Sveriges bästa studentstad 2013."),
+									array("lang" => "en", "title" => "Linköping University &ndash; Campus Norrköping",
+									 "content" => "Master of Science in Media Technology at Linköping University is located in Norrköping - Sweden's best student city in 2013."),
+								);
+			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 2);
+
+			$translations = array(
+									array("lang" => "se", "title" => "Derka derka",
+									 "content" => "Schpoople"),
+									array("lang" => "en", "title" => "",
+									 "content" => ""),
+								);
+			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 3);
 		}
 	}
 
@@ -916,6 +984,19 @@ class Install_model extends CI_Model
 		}
 	}
 
+	function create_carousel_images_table()
+	{
+		if(!$this->db->table_exists('carousel_images') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			$this->dbforge->add_field(get_carousel_images_fields());
+			$this->dbforge->add_key('images_id',true);
+			$this->dbforge->create_table('carousel_images');
+
+			log_message('info', "Created table: carousel_images");
+		}
+	}
+
 	function create_page_table()
 	{
 		if(!$this->db->table_exists('page') || isset($_GET['drop']))
@@ -1075,6 +1156,18 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 			$q = "CREATE OR REPLACE VIEW news_translation_language AS (SELECT e.news_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.introduction,e.introduction) as introduction, COALESCE(o.text,e.text) as text, e.last_edit ";
 			$q .= " FROM news_translation               e";
 			$q .= " LEFT OUTER JOIN news_translation o ON e.news_id=o.news_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
+			$q .= " WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))";
+			$this->db->query($q);
+		}
+	}
+
+	function create_carousel_translation_language_view()
+	{
+		if(!$this->db->table_exists('carousel_translation_language') || isset($_GET['drop']))
+		{
+			$q = "CREATE OR REPLACE VIEW carousel_translation_language AS (SELECT e.carousel_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.content,e.content) as content";
+			$q .= " FROM carousel_translation               e";
+			$q .= " LEFT OUTER JOIN carousel_translation o ON e.carousel_id=o.carousel_id AND o.lang_id<>e.lang_id AND o.lang_id=get_primary_language_id()";
 			$q .= " WHERE (e.lang_id = get_primary_language_id() AND o.lang_id IS NULL) OR (e.lang_id = get_secondary_language_id() AND o.lang_id IS NULL))";
 			$this->db->query($q);
 		}

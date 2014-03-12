@@ -127,22 +127,25 @@ class Admin_news extends MY_Controller
 			// check if translations is added
 			foreach($this->languages as $lang) 
 			{
-				if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '') 
+				if($this->input->post('title_'.$lang['language_abbr']) != '' && $this->input->post('introduction_'.$lang['language_abbr']) != '' && $this->input->post('text_'.$lang['language_abbr']) != '') 
 				{
-					array_push($translations, array("lang" => $lang['language_abbr'], "title" => $this->input->post('title_'.$lang['language_abbr']), "text" => $this->input->post('text_'.$lang['language_abbr'])));
+					array_push($translations, array("lang" => $lang['language_abbr'], "title" => $this->input->post('title_'.$lang['language_abbr']), "introduction" => $this->input->post('introduction_'.$lang['language_abbr']), "text" => $this->input->post('text_'.$lang['language_abbr'])));
 					$success = true;
 				}
 			}
 
 			if($success)
+			{
 				$news_id = $this->News_model->add_news($this->login->get_id(), $translations, $theTime, $draft, $approved);
+			}
 		} else {
 			// check if translations is added
 			foreach($this->languages as $lang) 
 			{
 				$theTitle = addslashes($this->input->post('title_'.$lang['language_abbr']));
+				$theIntroduction = addslashes($this->input->post('introduction_'.$lang['language_abbr'])); 
 				$theText = addslashes($this->input->post('text_'.$lang['language_abbr']));
-				$this->News_model->update_translation($id, $lang['language_abbr'], $theTitle, $theText);
+				$this->News_model->update_translation($id, $lang['language_abbr'], $theTitle, $theIntroduction, $theText);
 			}
 
 			$data = array(
@@ -168,4 +171,10 @@ class Admin_news extends MY_Controller
 		$this->db->trans_complete();
 		redirect('admin_news', 'refresh');
 	}
+
+	function delete($id)
+	{
+		$this->News_model->delete_news($id);
+		redirect('admin_news', 'refresh');
+	}	
 }

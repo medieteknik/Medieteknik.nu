@@ -126,6 +126,11 @@ $lang['admin_createnewpagebyclicking'] = "Skapa en ny sida genom att klicka här
 	$lang['admin_createnewgroupbyclicking'] = "Skapa en ny grupp genom att klicka här";
 	$lang['admin_addmemberbyclicking'] = "Lägg till en ny medlem genom att klicka här";
 	$lang['admin_addasmember'] = "Lägg till som medlem";
+$lang['admin_admincarousel'] = "Administrera karusell";
+$lang['admin_addcarouselitem'] = "Lägg till karusellobjekt";
+$lang['admin_addcarouselimageslidebyclicking'] = "Lägg till ett karusellobjekt med bilder genom att klicka här";
+$lang['admin_addcarouselembeddedslidebyclicking'] = "Lägg till ett karusellobjekt med inbäddat innehåll (ex. video) genom att klicka här";
+$lang['admin_removeimage'] = "Ta bort bild";
 
 // date
 $lang['date_yesterday'] = "Igår";
@@ -144,10 +149,14 @@ $lang['misc_right'] = "Höger";
 $lang['misc_left'] = "Vänster";
 $lang['misc_approved'] = "Godkänd";
 $lang['misc_draft'] = "Utkast";
+$lang['misc_disabled'] = "Inaktiverad";
 $lang['misc_official'] = "Officiell";
 $lang['misc_published'] = "Publicerad";
 $lang['misc_pending'] = "Väntande";
 $lang['misc_image'] = "Bild";
+$lang['misc_images'] = "Bilder";
+$lang['misc_link'] = "Länk";
+$lang['misc_photo'] = "Foto";
 $lang['misc_size'] = "Storlek";
 $lang['misc_position'] = "Placering";
 $lang['misc_width'] = "Bredd";
@@ -170,6 +179,7 @@ $lang['misc_gotopage'] = "Gå till sida";
 $lang['misc_title'] = "Titel";
 $lang['misc_description'] = "Beskrivning";
 $lang['misc_delete'] = "Radera";
+$lang['misc_upload'] = "Ladda upp";
 
 // error
 $lang['error_error'] = "Fel!";

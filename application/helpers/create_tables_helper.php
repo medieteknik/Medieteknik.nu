@@ -177,6 +177,91 @@ function get_news_sticky_table_fields()
 	return $fields;
 }
 
+function get_carousel_table_fields()
+{
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+			),
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'carousel_type' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'carousel_order' => array(
+			'type' => 'TINYINT',
+			'unsigned' => TRUE,
+			),
+		'disabled' => array(
+			'type' => 'BOOL',
+			'default' => '0',
+			),
+		'date' => array(
+			'type' => 'DATETIME',
+			),
+		);
+	return $fields;
+}
+
+function get_carousel_translation_table_fields()
+{
+	$fields = array(
+		'carousel_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			),
+		'lang_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'title' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '100',
+		),
+		'content' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '200',
+		)
+	);
+	return $fields;
+}
+
+function get_carousel_images_fields()
+{
+	$fields = array(
+		'carousel_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'images_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'photo' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '50',
+		),
+		'link' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '100',
+		),
+
+	);
+	return $fields;
+}
+
 function get_groups_fields()
 {
 	$fields = array(

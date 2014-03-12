@@ -14,10 +14,10 @@ $img_height = array(	'name'        => 'img_height',
 $img_file = array(		'name'        => 'img_file',
 						'id'          => 'img_file',
 					);
-$options = 	array(		'1'  => '1/3',
-						'2'    => '1/2',
-						'3'   => '2/3',
-						'4'   => '1/1',
+$options = 	array(		'1'  => '1/3 (250px)',
+						'2'    => '1/2 (375px)',
+						'3'   => '2/3 (500px)',
+						'4'   => '1/1 (750px)',
 					);
 $pos = array(			'1'  => $lang['misc_left'],
 						'2'    => $lang['misc_right'],
@@ -78,7 +78,7 @@ echo '<div>', form_submit('save', $lang['misc_save']), '</div>',
 	<h2>'.$lang['misc_image'].'</h2>',
 	$image_div,
 	'<div>',
-		form_label($lang['misc_size'], 'img_size'),
+		form_label($lang['misc_width'], 'img_size'),
 		form_dropdown('img_size', $options, $news_size, 'id="img_size"'),
 	'</div>
 	<div>',
@@ -119,6 +119,7 @@ if(isset($news) && $news != false) {
 foreach($arr as $t) {
 	
 	$t_title = '';
+	$t_introduction = '';
 	$t_text = '';
 	$language_abbr = '';
 	$language_name = '';
@@ -126,11 +127,13 @@ foreach($arr as $t) {
 	// hack so that the same view can be used for both create and edit
 	if(isset($news) && $news != false) { 
 		$t_title = $t->title;
+		$t_introduction = $t->introduction;
 		$t_text = $t->text;
 		$language_abbr = $t->language_abbr;
 		$language_name = $t->language_name;
 	} else {
 		$t_title = '';
+		$t_introduction = '';
 		$t_text = '';
 		$language_abbr = $t['language_abbr'];
 		$language_name = $t['language_name'];
@@ -140,6 +143,12 @@ foreach($arr as $t) {
               'name'        => 'title_'.$language_abbr,
               'id'          => 'title_'.$language_abbr,
               'value'       => $t_title,
+            );
+	$introduction = array(
+              'name'        => 'introduction_'.$language_abbr,
+              'id'          => 'introduction_'.$language_abbr,
+              'rows'		=>	5,
+              'cols'		=>	85,
             );
 	$text = array(
               'name'        => 'text_'.$language_abbr,
@@ -153,20 +162,23 @@ foreach($arr as $t) {
 	<h2>',$language_name,'</h2>',
 	form_label($lang['misc_headline'], 'title_'.$language_abbr),
 	form_input($title),
+	form_label($lang['misc_introduction'], 'introduction_'.$language_abbr),
+	form_textarea($introduction,$t_introduction),
 	form_label($lang['misc_text'], 'text_'.$language_abbr),
 	form_textarea($text,$t_text),
 	'</div>';
 }
 echo form_close();
 
-echo '
-<div class="main-box news clearfix red">
-<h2>Delete</h2>',
-form_open('admin_news/delete'),
-form_submit('delete', 'Delete'),
-form_close(),
-'</div>
-';
-
+if(isset($news) && $news != false) {
+	echo '
+	<div class="main-box news clearfix red">
+	<h2>Delete</h2>',
+	form_open('admin_news/delete/'.$id),
+	form_submit('delete', 'Delete'),
+	form_close(),
+	'</div>
+	';
+}
 echo "<script src='".base_url()."/web/js/libs/jquery.min.js'></script>
 <script src='".base_url()."/web/js/load_images.js'></script>";
