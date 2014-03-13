@@ -187,4 +187,10 @@ class News extends MY_Controller
 		$this->db->trans_complete();
 		redirect('admin/news/edit/'.($id ? $id : $news_id).'/success', 'location');
 	}
+
+	function delete($id)
+	{
+		$this->News_model->delete_news($id);
+		redirect('admin_news', 'refresh');
+	}
 }
