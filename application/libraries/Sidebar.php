@@ -20,18 +20,18 @@ class Sidebar
 	}
 
 	public function get_about() {
-		$upcomingevents['title'] = $this->lang_data['menu_about'] ;
-		$upcomingevents['items'] = array(	array('title' => "Om utbildningen", 'href' => 'about/education'),
+		$sidebar_about['title'] = $this->lang_data['menu_about'] ;
+		$sidebar_about['items'] = array(	array('title' => "Om utbildningen", 'href' => 'about/education'),
 											array('title' => "Kurser", 'href' => 'about/courses'),
 											array('title' => "Sökande", 'href' => 'about/applicant'),
 											);
 
-		return $this->CI->load->view('includes/list', $upcomingevents, true);
+		return $this->CI->load->view('includes/list', $sidebar_about, true);
 	}
 
 	public function get_association() {
-		$upcomingevents['title'] = $this->lang_data['menu_association'] ;
-		$upcomingevents['items'] = array(
+		$sidebar_association['title'] = $this->lang_data['menu_association'] ;
+		$sidebar_association['items'] = array(
 			array('title' => "Styrelsen", 'href' => 'association/board'),
 			array('title' => "Utskott", 'href' => 'association/committee'),
 			array('title' => "Webbgruppen", 'href' => 'association/web'),
@@ -40,15 +40,9 @@ class Sidebar
 			array('title' => "Protokoll och stadgar", 'href' => 'association/documents')
 		);
 
-		return $this->CI->load->view('includes/list', $upcomingevents, true);
+		return $this->CI->load->view('includes/list', $sidebar_association, true);
 	}
 
-	public function get_latest_events() {
-		$upcomingevents['title'] = $this->lang_data['misc_upcomingevents'] ;
-		$upcomingevents['items'] = array(array('title' => "Första", 'data' => "datan", 'href' => 'linj'));
-
-		return $this->CI->load->view('includes/list', $upcomingevents, true);
-	}
 
 	public function get_latest_forum() {
 
@@ -94,16 +88,6 @@ class Sidebar
 		if($this->CI->login->has_privilege('admin'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admindocuments'], 'href' => "admin/documents"));
 
-		/*
-		if($this->CI->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin/edit_users"));
-
-		if($this->CI->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editimages'], 'href' => "admin/edit_images"));
-
-		if($this->CI->login->has_privilege('news_editor'))
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_addusers'], 'href' => "admin/add_users"));
-		*/
 		return $this->CI->load->view('includes/list', $this->adminmenu, true);
 	}
 
@@ -114,7 +98,6 @@ class Sidebar
 			$menus .= $this->get_admin_menu();
 		}
 
-		$menus .= $this->get_latest_events();
 		$menus .= $this->get_latest_forum();
 		return $menus;
 	}

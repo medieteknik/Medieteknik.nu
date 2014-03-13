@@ -12,6 +12,7 @@ $lang['head_author'] = "Media Technology Assosciation web group";
 // footer
 $lang['footer_contact'] = "Contact";
 $lang['footer_info'] = "Information";
+$lang['footer_links'] = "Links";
 $lang['footer_aboutsite'] = "About the website";
 $lang['footer_cookies'] = "About cookies";
 $lang['footer_follow'] = "Follow us";

@@ -12,6 +12,7 @@ $lang['head_author'] = "Medietekniks Webbutskott";
 // footer
 $lang['footer_contact'] = "Kontakt";
 $lang['footer_info'] = "Information";
+$lang['footer_links'] = "Länkar";
 $lang['footer_aboutsite'] = "Om hemsidan";
 $lang['footer_cookies'] = "Om kakor";
 $lang['footer_follow'] = "Följ oss";
