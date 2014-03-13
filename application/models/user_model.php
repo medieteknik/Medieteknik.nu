@@ -531,9 +531,19 @@ class User_model extends CI_Model
 	 * @param  int $id
 	 * @return array
 	 */
-	function get_user_forum_posts($id)
+	function get_user_forum_posts($id, $limit = 5)
 	{
-		return array();
+		$this->db->select("forum_reply.id as reply_id, forum_reply.reply_date, forum_reply.topic_id, forum_topic.topic, forum_categories_descriptions_language.title");
+		$this->db->from("forum_reply");
+		$this->db->join("forum_topic", "forum_reply.topic_id = forum_topic.id", "");
+		$this->db->join("forum_categories_descriptions_language", "forum_topic.cat_id = forum_categories_descriptions_language.cat_id", "");
+		$this->db->where("forum_reply.user_id", $id);
+		$this->db->order_by("reply_date", "desc");
+		$this->db->limit($limit);
+
+		$query = $this->db->get();
+
+		return $query->result();
 	}
 
 }

@@ -38,6 +38,17 @@ $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 		?>
 			<div class="col-sm-4">
 				<h3><?php echo $lang['user_profile_posts'].' '.$user->first_name; ?></h3>
+				<ul class="list-unstyled box-list">
+					<?php
+					foreach ($user->forum_posts as $post) {
+						?>
+						<li>
+							<?php echo anchor('forum/thread/'.$post->topic_id.'#replyid-'.$post->reply_id, $post->topic.'<span>'.readable_date($post->reply_date,$lang).'</span>'); ?>
+						</li>
+						<?php
+					}
+					?>
+				</ul>
 			</div>
 		<?php
 		}
