@@ -8,6 +8,18 @@ class Forum_model extends CI_Model
         parent::__construct();
     }
 
+    /**
+     * check existance of category id
+     * @param 	int $id the cat id
+     * @return 	bool
+     */
+    function category_exists($id)
+    {
+    	$this->db->where('id', $id);
+    	$query = $this->db->get('forum_categories');
+    	return $query->num_rows();
+    }
+
 	/**
 	 * Fetches all subcategories to a certain category
 	 *
@@ -110,6 +122,19 @@ class Forum_model extends CI_Model
 		$this->db->limit($max_threads);
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	/**
+	 * Check topic existance
+	 *
+	 * @param  integer	$id		The ID of the topic
+	 * @return bool
+	 */
+	function topic_exists($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('forum_topic');
+		return $query->num_rows();
 	}
 
 	/**
