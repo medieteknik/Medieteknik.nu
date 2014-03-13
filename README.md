@@ -1,10 +1,9 @@
-#README - medieteknik.nu
+# medieteknik.nu
 
 1. License
 2. Developing medieteknik.nu
-3. Technical notes
-4. Demo/Dev URL
-5. Contact information
+3. Demo/Dev URL
+4. Contact information
 
 ## 1. License
 The license for Codeigniter can be found in "license_CodeIgniter.txt"
@@ -33,13 +32,40 @@ THE SOFTWARE.
 This application in developed for the Students Association for Media Technology at Linköping University.
 To get started developing this application, please refer to [the Get started wiki page](https://github.com/medieteknik/Medieteknik.nu/wiki/Get-started-with-the-development-of-medieteknik.nu).
 
-## 3. Technical notes
+### Less
 The system uses Less, currently being rendered on the run.
 
-## 4. Demo/Dev URL
+### .htaccess
+To enable pretty urls, the following should be added into <code>.htaccess</code> file in the root of this repo:
+
+```
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # !IMPORTANT! Set your RewriteBase here and don't forget trailing and leading
+  #  slashes.
+  # If your page resides at
+  #  http://www.example.com/mypage/test1
+  # then use
+  # RewriteBase /mypage/test1/
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+  # If we don't have mod_rewrite installed, all 404's
+  # can be sent to index.php, and everything works as normal.
+  # Submitted by: ElliotHaughin
+
+  ErrorDocument 404 /index.php
+</IfModule>
+```
+
+## 3. Demo/Dev URL
 [http://dev.medieteknik.nu/](http://dev.medieteknik.nu/)
 
-## 5. Contact Information
+## 4. Contact Information
 Questions about the system:
 	webbchef@medieteknik.nu
 
