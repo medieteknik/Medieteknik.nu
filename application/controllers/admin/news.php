@@ -151,6 +151,7 @@ class News extends MY_Controller
 			if($success)
 			{
 				$news_id = $this->News_model->add_news($this->login->get_id(), $translations, $theTime, $draft, $approved);
+			}
 		}
 		else
 		{
@@ -185,6 +186,7 @@ class News extends MY_Controller
 		$this->Images_model->add_or_replace_news_image($id,$images_id,$size,$position,$imgheight);
 		$this->db->trans_complete();
 		redirect('admin/news/edit/'.($id ? $id : $news_id).'/success', 'location');
+
 	}
 
 	function delete($id)

@@ -65,7 +65,7 @@ To enable pretty urls, the following should be added into <code>.htaccess</code>
 ## 3. Demo/Dev URL
 [http://dev.medieteknik.nu/](http://dev.medieteknik.nu/)
 
-## 4. Contact Information
+## 5. Contact Information
 Questions about the system:
 	webbchef@medieteknik.nu
 

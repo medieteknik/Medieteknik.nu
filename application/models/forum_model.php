@@ -10,6 +10,7 @@ class Forum_model extends CI_Model
 
     /**
      * check existance of category id
+     *
      * @param 	int $id the cat id
      * @return 	bool
      */

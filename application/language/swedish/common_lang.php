@@ -12,6 +12,7 @@ $lang['head_author'] = "Medietekniks Webbutskott";
 // footer
 $lang['footer_contact'] = "Kontakt";
 $lang['footer_info'] = "Information";
+$lang['footer_links'] = "Länkar";
 $lang['footer_aboutsite'] = "Om hemsidan";
 $lang['footer_cookies'] = "Om kakor";
 $lang['footer_follow'] = "Följ oss";
@@ -183,6 +184,7 @@ $lang['misc_unofficial'] = "Inofficiell";
 $lang['misc_published'] = "Publicerad";
 $lang['misc_pending'] = "Väntande";
 $lang['misc_image'] = "Bild";
+$lang['misc_photo'] = "Foto";
 $lang['misc_size'] = "Storlek";
 $lang['misc_position'] = "Placering";
 $lang['misc_width'] = "Bredd";
