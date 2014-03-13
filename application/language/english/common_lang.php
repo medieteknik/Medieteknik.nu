@@ -184,6 +184,7 @@ $lang['misc_unofficial'] = "Unofficial";
 $lang['misc_published'] = "Published";
 $lang['misc_pending'] = "Pending";
 $lang['misc_image'] = "Image";
+$lang['misc_photo'] = "Photo";
 $lang['misc_size'] = "Size";
 $lang['misc_position'] = "Position";
 $lang['misc_width'] = "Width";

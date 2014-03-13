@@ -183,6 +183,7 @@ $lang['misc_unofficial'] = "Inofficiell";
 $lang['misc_published'] = "Publicerad";
 $lang['misc_pending'] = "Väntande";
 $lang['misc_image'] = "Bild";
+$lang['misc_photo'] = "Foto";
 $lang['misc_size'] = "Storlek";
 $lang['misc_position'] = "Placering";
 $lang['misc_width'] = "Bredd";
