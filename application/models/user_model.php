@@ -190,6 +190,11 @@ class User_model extends CI_Model
 			$res['user_id'] = 0;
 		else
 			$res = $res[0];
+
+		$res->groups = $this->get_user_groups($id);
+		$res->news = $this->get_user_news($id);
+		$res->forum_posts = $this->get_user_forum_posts($id);
+
 		return $res;
 	}
 
@@ -489,5 +494,47 @@ class User_model extends CI_Model
 
 		return $res[0];
 	}
+
+	/**
+	 * get group memberships for user
+	 * @param  int $id
+	 * @return array
+	 */
+	function get_user_groups($id)
+	{
+		$this->db->select("groups.id, groups_descriptions_language.name, groups_year.start_year, groups_year.stop_year, groups_year_members.*");
+		$this->db->from("groups_year_members");
+		$this->db->join("groups_year", "groups_year_members.groups_year_id = groups_year.id", "");
+		$this->db->join("groups_descriptions_language", "groups_year.groups_id = groups_descriptions_language.groups_id", "");
+		$this->db->join("groups", "groups_year.groups_id = groups.id", "");
+		$this->db->where("groups_year_members.user_id", $id);
+		$this->db->order_by("groups_year.stop_year", "asc");
+
+		$query = $this->db->get();
+		$result = $query->result();
+
+		return $result;
+	}
+
+	/**
+	 * get news posted by yser
+	 * @param  int $id
+	 * @return array
+	 */
+	function get_user_news($id)
+	{
+		return array();
+	}
+
+	/**
+	 * get forum posts by user
+	 * @param  int $id
+	 * @return array
+	 */
+	function get_user_forum_posts($id)
+	{
+		return array();
+	}
+
 }
 
