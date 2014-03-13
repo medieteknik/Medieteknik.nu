@@ -23,12 +23,15 @@ class Forum extends MY_Controller
 
 	}
 
-	function category($theid)
+	function category($theid = 0)
 	{
 		if(is_numeric($theid))
 			$id = $theid;
 		else
 			$id = $this->Forum_model->get_id_from_slug($theid);
+
+		if($theid !== 0 && !$this->Forum_model->category_exists($id))
+			show_404();
 
 		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($id);
 		// Data for forum view
@@ -96,8 +99,12 @@ class Forum extends MY_Controller
 		redirect('forum/thread/'.$this->input->post('topic_id'), 'refresh');
 	}
 
-	function thread($id)
+	function thread($id = 0)
 	{
+		// check topic existance
+		if(!$this->Forum_model->topic_exists($id))
+			show_404();
+
 		$main_data['replies'] = $this->Forum_model->get_replies($id);
 		$main_data['topic'] = $this->Forum_model->get_topic($id);
 		$main_data['lang'] = $this->lang_data;

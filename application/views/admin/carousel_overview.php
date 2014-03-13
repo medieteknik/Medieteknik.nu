@@ -24,8 +24,8 @@ foreach($carousel_array as $item)
 
 	}
 
-	echo '<div class="main-box clearfix">';
-		echo '<h2>'.$item->carousel_order.'. '.$type.'</h2>';
+	echo '<div class="main-box clearfix margin-top">';
+		echo '<h4>'.$item->carousel_order.'. '.$type.'</h4>';
 		echo '<p>';
 
 			foreach($item->translations as $translation)
