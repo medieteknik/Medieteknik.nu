@@ -423,6 +423,32 @@ class User_model extends CI_Model
 	}
 
 	/**
+	 * change user pricil
+	 * @param  int $id
+	 * @param  int $privil
+	 * @return bool
+	 */
+	function edit_user_privil($id, $privil)
+	{
+		$search = $this->db->get_where('users_privileges', array('user_id' => $id));
+
+		if($search->num_rows() > 0)
+			return $this->db->update('users_privileges', array('privilege_id' => $privil), array('user_id' => $id));
+		else
+			return $this->db->insert('users_privileges', array('privilege_id' => $privil, 'user_id' => $id));
+	}
+
+	/**
+	 * remove user pricil
+	 * @param  int $id
+	 * @return bool
+	 */
+	function remove_user_privil($id)
+	{
+		return $this->db->delete('users_privileges', array('user_id' => $id));
+	}
+
+	/**
 	 * Search through users
 	 *
 	 * @param  string	$search			The search string. Searches first name, last name, lukasid.
@@ -565,6 +591,12 @@ class User_model extends CI_Model
 		$this->db->from("users");
 
 		return $this->db->count_all_results();
+	}
+
+	function get_all_privileges()
+	{
+		$query = $this->db->get('privileges');
+		return $query->result();
 	}
 
 }

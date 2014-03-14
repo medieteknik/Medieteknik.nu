@@ -160,4 +160,25 @@ if(!empty($message))
 		</div>
 	</div>
 </div>
+
+<div class="main-box clearfix margin-top">
+	<h4>Admin privileges</h4>
+	<div class="row">
+		<div class="col-sm-6">
+			<p>
+				<label for="admin_privil">Privil level</label>
+				<select name="admin_privil" id="admin_privil" class="form-control">
+					<option value="0">None</option>
+					<?php
+					$user_level = count($user_privil) > 0 ? $user_privil[0]->privilege_id : '0';
+					foreach ($privil as $priv)
+					{
+						echo '<option value="'.$priv->id.'" '.($user_level == $priv->id ? 'selected' : '').'>'.$priv->privilege_name.' &ndash; '.$priv->privilege_description.'</option>';
+					}
+					?>
+				</select>
+			</p>
+		</div>
+	</div>
+</div>
 <?php echo form_close(); ?>
