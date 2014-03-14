@@ -518,9 +518,19 @@ class User_model extends CI_Model
 	 * @param  int $id
 	 * @return array
 	 */
-	function get_user_news($id)
+	function get_user_news($id, $limit = 10)
 	{
-		return array();
+		$this->db->select("news.*, news_translation_language.*");
+		$this->db->from("news");
+		$this->db->join("news_translation_language", "news.id = news_translation_language.news_id", "");
+		$this->db->where("user_id", $id);
+		$this->db->where("draft", 0);
+		$this->db->where("approved", 1);
+		$this->db->order_by("date", "desc");
+		$this->db->limit($limit);
+		$query = $this->db->get();
+
+		return $query->result();
 	}
 
 	/**

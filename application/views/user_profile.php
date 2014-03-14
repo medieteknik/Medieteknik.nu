@@ -30,14 +30,24 @@ $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 	</div>
 </div><!-- close .main-box -->
 
-<div class="main-box clearfix margin-top">
-	<div class="row">
+<?php
+$boxes = 0;
+if(count($user->forum_posts) > 0)
+	$boxes++;
+if(count($user->groups) > 0)
+	$boxes++;
+if(count($user->news) > 0)
+	$boxes++;
+?>
+
+<div class="row">
+	<div class="col-sm-6">
 		<?php
 		if(count($user->forum_posts) > 0)
 		{
-		?>
-			<div class="col-sm-6">
-				<h3><?php echo $lang['user_profile_posts'].' '.$user->first_name; ?></h3>
+			?>
+			<div class="main-box clearfix margin-top">
+				<h4><?php echo $lang['user_profile_posts'].' '.$user->first_name; ?></h4>
 				<ul class="list-unstyled box-list">
 					<?php
 					foreach ($user->forum_posts as $post) {
@@ -50,38 +60,62 @@ $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 					?>
 				</ul>
 			</div>
-		<?php
+			<?php
 		}
+		?>
+		<?php
 		if(count($user->groups) > 0)
 		{
-		?>
-			<div class="col-sm-6">
-				<h3><?php echo $lang['user_profile_groups']; ?></h3>
-				<ul class="list-unstyled box-list">
-					<?php
-					foreach ($user->groups as $group) {
-						?>
-						<li>
-							<?php echo '<strong>'.$group->name.'</strong> '.$group->start_year.'/'.$group->stop_year.', '.$group->position; ?>
-						</li>
+			echo $boxes == 2 ? '</div><div class="col-sm-6">' : '';
+			?>
+				<div class="main-box clearfix margin-top">
+					<h4><?php echo $lang['user_profile_groups']; ?></h4>
+					<ul class="list-unstyled box-list">
 						<?php
-					}
-					?>
-				</ul>
-			</div>
-		<?php
-		}
-		if(count($user->news) > 0)
-		{
-		?>
-			<div class="col-sm-4">
-				<h3><?php echo $lang['user_profile_news'].' '.$user->first_name; ?></h3>
-			</div>
-		<?php
+						foreach ($user->groups as $group) {
+							?>
+							<li>
+								<?php echo '<strong>'.$group->name.'</strong> '.$group->start_year.'/'.$group->stop_year.', '.$group->position; ?>
+							</li>
+							<?php
+						}
+						?>
+					</ul>
+				</div>
+			<?php
 		}
 		?>
 	</div>
+	<?php
+	if(count($user->news) > 0)
+	{
+	?>
+		<div class="col-sm-6">
+			<div class="main-box clearfix margin-top">
+				<h4><?php echo $lang['user_profile_news'].' '.$user->first_name; ?></h4>
+				<div class="profile-news">
+					<?php
+					foreach ($user->news as $news)
+					{
+						$news_story = news_excerpt(text_format($news->text, '<p>','</p>', FALSE), 100);
+						?>
+						<div class="entry">
+							<h4>
+								<?php echo anchor('news/view/'.$news->id, $news->title); ?>
+								<small><?php echo readable_date($news->date, $lang); ?></small>
+							</h4>
+							<p>
+								<?php echo $news_story; ?>...
+								<?php echo anchor('news/view/'.$news->id, $lang['misc_readmore'].'!', 'class="inline"');?>
+							</p>
+						</div>
+						<?php
+					}
+					?>
+				</div>
+			</div>
+		</div>
+	<?php
+	}
+	?>
 </div>
-<?php
-do_dump($user);
-?>

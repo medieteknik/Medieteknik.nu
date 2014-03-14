@@ -57,9 +57,9 @@ if(isset($news) && $news != false) {
 	}
 }
 
-if($message == 'success')
+if(isset($message) && $message == 'success')
 	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
-if($message == 'error')
+if(isset($message) && $message == 'error')
 	echo '<div class="alert alert-danger">'.$lang['admin_error_remove'].'</div>';
 
 // do all the printing
