@@ -354,16 +354,15 @@ class User_model extends CI_Model
 	 * @param  string	$liuid 		LiU-id of user
 	 * @return bool
 	 */
-	function edit_user($id, $fname = '', $lname = '', $liuid = '', $password = '')
+	function edit_user($id, $fname = '', $lname = '', $liuid = '')
 	{
 		// fixing and trimming
-		$fn = trim(preg_replace("/[^A-Za-z]/", "", $fname ));
-		$ln = trim(preg_replace("/[^A-Za-z]/", "", $lname ));
+		$fn = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $fname ));
+		$ln = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $lname ));
 		$lid = trim(preg_replace("/[^A-Za-z0-9]/", "", $liuid ));
-		$pwd = trim($password);
 
 		// check lengths
-		if((strlen($lid) == 8 || strlen($lid) == 0) && (strlen($pwd) > 5 || strlen($pwd) == 0))
+		if((strlen($lid) == 8 || strlen($lid) == 0))
 		{
 			// if userid exists, edit user
 			if($this->userid_exists($id))
@@ -376,8 +375,6 @@ class User_model extends CI_Model
 					$data['last_name'] = $ln;
 				if(!empty($lid))
 					$data['lukasid'] = $lid;
-				if(!empty($pwd))
-					$data['password_hash'] = encrypt_password($pwd);
 
 				// update user
 				$this->db->where('id', $id);

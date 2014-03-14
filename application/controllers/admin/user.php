@@ -85,10 +85,11 @@ class User extends MY_Controller
 			$lukasid = $this->input->post('lukasid');
 			$gravatar = $this->input->post('gravatar');
 
-			$main_data['edit_data'] = $this->User_model->edit_user_data($id, $web, $linkedin, $twitter, $presentation, $gravatar);
-			$main_data['edit_user'] = $this->User_model->edit_user($id, $firstname, $lastname, $lukasid);
-
-			redirect('admin/user/edit/'.$id.'/edit_done');
+			if($this->User_model->edit_user_data($id, $web, $linkedin, $twitter, $presentation, $gravatar)
+				&& $this->User_model->edit_user($id, $firstname, $lastname, $lukasid))
+				redirect('admin/user/edit/'.$id.'/edit_done', 'location');
+			else
+				redirect('admin/user/edit/'.$id.'/error', 'location');
 		}
 		elseif($this->input->post('disable'))
 		{

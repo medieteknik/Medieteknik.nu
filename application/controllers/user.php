@@ -131,21 +131,6 @@ class User extends MY_Controller
 		$this->cas->force_auth();
 		// check this login and pass along redir param
 		$this->checklogin($redir);
-
-		//old login form, before use of CAS:
-		/*
-		$this->load->helper('form');
-
-		// Data for login view
-		$main_data['lang'] = $this->lang_data;
-		$main_data['attempt'] = $attempt;
-
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('login_view',  $main_data, true);
-		$template_data['sidebar_content'] = $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
-		*/
 	}
 
 	public function logout()
