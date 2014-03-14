@@ -25,7 +25,14 @@ $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 					<i><?php echo $user->lukasid; ?>@student.liu.se</i>
 				</a></li>
 			</ul>
-			<p><?php echo text_format($user->presentation); ?></p>
+			<p>
+				<?php
+				if(!empty($user->presentation))
+					echo text_format($user->presentation);
+				else
+					echo $user->first_name.' '.$lang['user_profile_notext'];
+				?>
+			</p>
 		</div>
 	</div>
 </div><!-- close .main-box -->

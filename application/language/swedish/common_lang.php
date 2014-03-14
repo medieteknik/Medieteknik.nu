@@ -81,6 +81,7 @@ $lang['user_create_wat'] = "<p>Hej!</p><p>Eftersom detta är första gången du 
 $lang['user_profile_news'] = "Nyheter av";
 $lang['user_profile_groups'] = "Grupper";
 $lang['user_profile_posts'] = "Foruminlägg av";
+$lang['user_profile_notext'] = "har inte skrivit något om sig själv. Än så länge.";
 $lang['user_disabled_message'] = "En administratör har stängt av ditt konto. Kontakta oss på webb@medieteknik.nu för att höra efter varför.";
 
 
