@@ -40,7 +40,7 @@ class User_model extends CI_Model
 	 * @param  bool 	$login		Wether or not we require user to be active
 	 * @return bool
 	 */
-	function get_user($lukasid = '', $login = TRUE)
+	function get_user($lukasid = '', $login = FALSE)
 	{
 		$lid = preg_replace("/(@.*)/", "", $lukasid);
 
@@ -544,6 +544,20 @@ class User_model extends CI_Model
 		$query = $this->db->get();
 
 		return $query->result();
+	}
+
+	/**
+	 * check if user with id is disabled
+	 * @param  in  $id
+	 * @return boolean
+	 */
+	function is_disabled($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->where("disabled", 1);
+		$this->db->from("users");
+
+		return $this->db->count_all_results();
 	}
 
 }

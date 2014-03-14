@@ -81,6 +81,7 @@ $lang['user_create_wat'] = "<p>Hi,</p><p>Since this is the first time you log in
 $lang['user_profile_news'] = "News by";
 $lang['user_profile_groups'] = "Groups";
 $lang['user_profile_posts'] = "Forum posts by";
+$lang['user_disabled_message'] = "An administrator has suspended your account. Contact us at webb@medieteknik.nu to hear the reason why.";
 
 
 //groups

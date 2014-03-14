@@ -81,6 +81,9 @@ $lang['user_create_wat'] = "<p>Hej!</p><p>Eftersom detta är första gången du 
 $lang['user_profile_news'] = "Nyheter av";
 $lang['user_profile_groups'] = "Grupper";
 $lang['user_profile_posts'] = "Foruminlägg av";
+$lang['user_disabled_message'] = "En administratör har stängt av ditt konto. Kontakta oss på webb@medieteknik.nu för att höra efter varför.";
+
+
 //groups
 $lang['groups_title'] = "Grupper";
 $lang['groups_nomatch'] = "Ingen grupp matchade ditt sökkriterium";

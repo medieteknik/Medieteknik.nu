@@ -74,7 +74,7 @@ if(!empty($message))
 	<h3>
 		<?php
 		echo $lang['admin_edituser'].' <em>'.get_full_name($user).'</em> <small>',
-			anchor('#', '&larr; '.$lang['misc_back'], array('onclick' => 'window.history.back(); return false;')).'</small>'; ?>
+			anchor('#', $lang['misc_back'], array('onclick' => 'window.history.back(); return false;')).'</small>'; ?>
 	</h3>
 	<div class="row">
 		<div class="col-sm-4">

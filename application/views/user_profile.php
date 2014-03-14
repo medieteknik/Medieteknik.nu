@@ -36,14 +36,14 @@ $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 		if(count($user->forum_posts) > 0)
 		{
 		?>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<h3><?php echo $lang['user_profile_posts'].' '.$user->first_name; ?></h3>
 				<ul class="list-unstyled box-list">
 					<?php
 					foreach ($user->forum_posts as $post) {
 						?>
 						<li>
-							<?php echo anchor('forum/thread/'.$post->topic_id.'#replyid-'.$post->reply_id, $post->topic.'<span>'.readable_date($post->reply_date,$lang).'</span>'); ?>
+							<?php echo anchor('forum/thread/'.$post->topic_id.'#replyid-'.$post->reply_id, '<strong>'.$post->topic.'</strong><span>'.readable_date($post->reply_date,$lang).'</span>'); ?>
 						</li>
 						<?php
 					}
@@ -55,7 +55,7 @@ $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 		if(count($user->groups) > 0)
 		{
 		?>
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<h3><?php echo $lang['user_profile_groups']; ?></h3>
 				<ul class="list-unstyled box-list">
 					<?php

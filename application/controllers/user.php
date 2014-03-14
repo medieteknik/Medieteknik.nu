@@ -101,16 +101,28 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	public function not_logged_in()
+	public function not_logged_in($message = '')
 	{
 		// Data for forum view
 		$main_data['lang'] = $this->lang_data;
 
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('login_notloggedin',  $main_data, true);
-		$template_data['sidebar_content'] = $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
+		if($message == 'suspended')
+		{
+			$this->login->logout(false);
+
+			// composing the views
+			$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+			$template_data['main_content'] = $this->load->view('login_suspended',  $main_data, true);
+			$template_data['sidebar_content'] = $this->sidebar->get_standard();
+			$this->load->view('templates/main_template',$template_data);
+		}
+		else {
+			// composing the views
+			$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+			$template_data['main_content'] = $this->load->view('login_notloggedin',  $main_data, true);
+			$template_data['sidebar_content'] = $this->sidebar->get_standard();
+			$this->load->view('templates/main_template',$template_data);
+		}
 	}
 
 	public function login($attempt = '', $redir = '')
