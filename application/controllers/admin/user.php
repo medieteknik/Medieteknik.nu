@@ -10,7 +10,7 @@ class User extends MY_Controller
         // Call the Model constructor
         parent::__construct();
 
-		if(!$this->login->is_admin())
+		if(!$this->login->is_admin() )
 		{
 			redirect('/admin/admin/access_denied', 'refresh');
 		}
@@ -84,15 +84,19 @@ class User extends MY_Controller
 			$lastname = $this->input->post('lastname');
 			$lukasid = $this->input->post('lukasid');
 			$gravatar = $this->input->post('gravatar');
+			$github = $this->input->post('github');
 
 			$privil = $this->input->post('admin_privil');
 
-			if($privil !== 0)
-				$this->User_model->edit_user_privil($id, $privil);
-			else
-				$this->User_model->remove_user_privil($id);
+			if($this->login->has_privilege('superadmin'))
+			{
+				if($privil !== 0)
+					$this->User_model->edit_user_privil($id, $privil);
+				else
+					$this->User_model->remove_user_privil($id);
+			}
 
-			if($this->User_model->edit_user_data($id, $web, $linkedin, $twitter, $presentation, $gravatar)
+			if($this->User_model->edit_user_data($id, $web, $linkedin, $twitter, $presentation, $gravatar, $github)
 				&& $this->User_model->edit_user($id, $firstname, $lastname, $lukasid))
 				redirect('admin/user/edit/'.$id.'/edit_done', 'location');
 			else

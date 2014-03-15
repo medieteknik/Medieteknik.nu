@@ -81,8 +81,9 @@ class User extends MY_Controller
 			$twitter = $this->input->post('twitter');
 			$presentation = $this->input->post('presentation');
 			$gravatar = $this->input->post('gravatar');
+			$github = $this->input->post('github');
 
-			$status = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, $gravatar);
+			$status = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, $gravatar, $github);
 
 			// redirect to prevent accidental emptying of account info
 			redirect('user/edit_profile/'.($status ? 'success' : 'fail'), 'location');

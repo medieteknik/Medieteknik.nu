@@ -83,6 +83,7 @@ $lang['user_profile_groups'] = "Groups";
 $lang['user_profile_posts'] = "Forum posts by";
 $lang['user_profile_notext'] = "hasn't written anything about themself. Yet.";
 $lang['user_disabled_message'] = "An administrator has suspended your account. Contact us at webb@medieteknik.nu to hear the reason why.";
+$lang['user_twitter_placeholder'] = "Without the @";
 
 
 //groups

@@ -300,7 +300,7 @@ class User_model extends CI_Model
 	 * @param  string	$presentation 	The user presentation text
 	 * @return boole
 	 */
-	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $gravatar = '')
+	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $gravatar = '', $github = '')
 	{
 		// fixing and trimming
 		$twitter = preg_replace("/[^0-9A-Za-z_]/", "", $twitter );
@@ -308,10 +308,11 @@ class User_model extends CI_Model
 		$linkedin = prep_url($linkedin);
 		$presentation = trim($presentation);
 		$gravatar = strtolower(trim($gravatar));
+		$github = prep_url($github);
 
 		// validate
 		if(strlen($web) <= 300 && strlen($twitter) <= 300 && strlen($gravatar) <= 255 &&
-			strlen($linkedin) <= 300 && strlen($presentation) <= 1000)
+			strlen($linkedin) <= 300 && strlen($presentation) <= 1000 && strlen($github) <= 300)
 		{
 			//set data to be updated/inserted
 			$data = array(
@@ -319,7 +320,8 @@ class User_model extends CI_Model
 						'web' => $web,
 						'linkedin' => $linkedin,
 						'presentation' => $presentation,
-						'twitter' => $twitter
+						'twitter' => $twitter,
+						'github' => $github
 					);
 
 			// search for user data

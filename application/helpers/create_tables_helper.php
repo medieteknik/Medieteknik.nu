@@ -66,6 +66,10 @@ function get_users_data_table_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '300',
 			),
+		'github' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '300',
+			)
 		);
 	return $fields;
 }

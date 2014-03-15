@@ -21,6 +21,7 @@ $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 				<?php echo ($user->linkedin ? '<li><a href="'.$user->linkedin.'" target="_blank">Linkedin</a></li>': ''); ?>
 				<?php echo ($user->twitter ? '<li><a href="https://twitter.com/'.$user->twitter.'" target="_blank">Twitter <i>@'.$user->twitter.'</i></a></li>': ''); ?>
 				<?php echo ($user->web ? '<li><a href="'.$user->web.'" target="_blank">'.$readweb.'</a></li>': ''); ?>
+				<?php echo ($user->github ? '<li><a href="'.$user->github.'" target="_blank">GitHub</a></li>': ''); ?>
 				<li><a href="mailto:<?php echo $user->lukasid; ?>@student.liu.se" target="_blank">
 					<i><?php echo $user->lukasid; ?>@student.liu.se</i>
 				</a></li>
