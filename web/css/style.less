@@ -31,6 +31,7 @@ Table of contents
 @fontcolor: #111111;
 @headfont: 	#666666;
 @shadowcolor: #AAAAAA;
+@metacolor: #f0f0f0;
 
 /********* RESPONSIVE VARS *******/
 @screen-sm-min: 768px;
@@ -405,6 +406,18 @@ body {
 		margin: 0 -15px;
 	}
 }
+/************ META ***************/
+.metadata {
+	margin: 0 -15px;
+	padding: 5px 15px;
+	border-top: 1px solid darken(@metacolor, 5%);
+	background: @metacolor;
+
+	p {
+		padding: 0;
+		margin: 0 !important;
+	}
+}
 /************ ADMIN **************/
 .admin-news-entry {
 	// opacity: 0.8;
@@ -575,7 +588,7 @@ ul.box-list {
 			background-color: #eee;
 
 			&:hover {
-				background-color: #f0f0f0;
+				background-color: @metacolor;
 			}
 		}
 		&:nth-child(even):hover {

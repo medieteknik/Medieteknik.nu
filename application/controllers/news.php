@@ -39,7 +39,7 @@ class News extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	public function view($id)
+	public function view($id, $slug = '')
 	{
 		// Data for news view
 		$this->load->model('News_model');

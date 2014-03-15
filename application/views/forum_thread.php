@@ -12,16 +12,18 @@ $first = array_shift($replies);
 	<h2 id="replyid-<?php echo $first->id; ?>">
 		<?php echo text_strip($topic->topic); ?>
 	</h2>
-	<p><?php echo text_format($first->reply); ?></p>
-	<h3>
-		<?php
-		$user = gravatarimg($first->gravatar, 30, 'class="img-circle"').' '.get_full_name($first);
-		echo anchor('user/profile/'.$first->user_id, $user);
-		?>,
-		<a href="#replyid-<?php echo $first->id; ?>" title="<?php echo $first->reply_date; ?>">
-			<?php echo readable_date($first->reply_date, $lang); ?>
-		</a>
-	</h3>
+	<?php echo text_format($first->reply); ?>
+	<div class="metadata">
+		<p>
+			<?php
+			$user = gravatarimg($first->gravatar, 30, 'class="img-circle"').' '.get_full_name($first);
+			echo anchor('user/profile/'.$first->user_id, $user);
+			?>,
+			<a href="#replyid-<?php echo $first->id; ?>" title="<?php echo $first->reply_date; ?>">
+				<?php echo readable_date($first->reply_date, $lang); ?>
+			</a>
+		</p>
+	</div>
 </div>
 
 <?php
@@ -30,15 +32,17 @@ foreach($replies as $reply)
 	?>
 	<div class="main-box clearfix forum-view margin-top" id="replyid-<?php echo $reply->id; ?>">
 		<p><?php echo text_format($reply->reply); ?></p>
-		<h3>
-			<?php
-			$user = gravatarimg($reply->gravatar, 30, 'class="img-circle"').' '.get_full_name($reply);
-			echo anchor('user/profile/'.$reply->user_id, $user);
-			?>,
-			<a href="#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
-				<?php echo readable_date($reply->reply_date, $lang); ?>
-			</a>
-		</h3>
+		<div class="metadata">
+			<p>
+				<?php
+				$user = gravatarimg($reply->gravatar, 30, 'class="img-circle"').' '.get_full_name($reply);
+				echo anchor('user/profile/'.$reply->user_id, $user);
+				?>,
+				<a href="#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
+					<?php echo readable_date($reply->reply_date, $lang); ?>
+				</a>
+			</p>
+		</div>
 	</div>
 	<?php
 }

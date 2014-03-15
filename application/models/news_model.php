@@ -123,11 +123,12 @@ class News_model extends CI_Model
 		// check if approved to see not approved news
 		$admin = $this->login->has_privilege('news_editor');
 
-		$this->db->select("users.first_name, users.last_name, users.id as userid, news_images.*, images.*");
+		$this->db->select("users.first_name, users.last_name, users_data.gravatar as gravatar, users.id as userid, news_images.*, images.*");
 		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id, news_translation_language.last_edit");
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
 		$this->db->join("users", 'news.user_id = users.id', '');
+		$this->db->join("users_data", 'users_data.users_id = users.id', 'left');
 		$this->db->join("news_images", 'news.id = news_images.news_id', 'left');
 		$this->db->join("images", 'news_images.images_id = images.id', 'left');
 		$this->db->where("news.id",$id);

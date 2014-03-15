@@ -74,7 +74,7 @@ if(count($user->news) > 0)
 		<?php
 		if(count($user->groups) > 0)
 		{
-			echo $boxes == 2 ? '</div><div class="col-sm-6">' : '';
+			echo ($boxes == 2 && count($user->forum_posts) > 0) ? '</div><div class="col-sm-6">' : '';
 			?>
 				<div class="main-box clearfix margin-top">
 					<h4><?php echo $lang['user_profile_groups']; ?></h4>

@@ -31,7 +31,7 @@ foreach($news_array as $news_item)
 	?>
 	<div class="main-box news clearfix">
 		<h2>
-			<?php echo anchor('news/view/'.$news_item->id, $news_item->title, array("title" => $lang['news_tothenews'])); ?>
+			<?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', TRUE), $news_item->title, array("title" => $lang['news_tothenews'])); ?>
 			<?php
 			if($news_item->draft)
 				echo '<span class="label label-default">'.$lang['misc_draft'].'</span>';

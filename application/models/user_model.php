@@ -302,13 +302,15 @@ class User_model extends CI_Model
 	 */
 	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $gravatar = '', $github = '')
 	{
+		$this->load->helper('string');
+
 		// fixing and trimming
 		$twitter = preg_replace("/[^0-9A-Za-z_]/", "", $twitter );
-		$web = prep_url($web);
-		$linkedin = prep_url($linkedin);
+		$web = trim_slashes(prep_url($web));
+		$linkedin = trim_slashes(prep_url($linkedin));
 		$presentation = trim($presentation);
 		$gravatar = strtolower(trim($gravatar));
-		$github = prep_url($github);
+		$github = trim_slashes(prep_url($github));
 
 		// validate
 		if(strlen($web) <= 300 && strlen($twitter) <= 300 && strlen($gravatar) <= 255 &&

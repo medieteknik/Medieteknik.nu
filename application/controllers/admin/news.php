@@ -159,9 +159,8 @@ class News extends MY_Controller
 			foreach($this->languages as $lang)
 			{
 				$theTitle = addslashes($this->input->post('title_'.$lang['language_abbr']));
-				$theIntroduction = addslashes($this->input->post('introduction_'.$lang['language_abbr']));
 				$theText = addslashes($this->input->post('text_'.$lang['language_abbr']));
-				$this->News_model->update_translation($id, $lang['language_abbr'], $theTitle, $theIntroduction, $theText);
+				$this->News_model->update_translation($id, $lang['language_abbr'], $theTitle, $theText);
 			}
 
 			$data = array(
@@ -170,8 +169,7 @@ class News extends MY_Controller
 				'date' => $theTime,
 				);
 
-			$this->db->where('id', $id);
-			$this->db->update('news', $data);
+			$this->db->update('news', $data, array('id' => $id));
 		}
 
 		$images_id = 0;

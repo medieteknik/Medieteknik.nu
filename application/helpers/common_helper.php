@@ -183,7 +183,6 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
 	}
 
-
 	return auto_link($text);
 
 }

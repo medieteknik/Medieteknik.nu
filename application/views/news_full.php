@@ -34,13 +34,18 @@
 			<?php echo $news->title; ?>
 			<img src="<?php echo lang_id_to_imgpath($news->lang_id); ?>" class="img-circle pull-right" />
 		</h1>
-		<h3>
-			<?php echo $lang['misc_published']; ?>
-			<i class="date" title="<?php echo $news->date; ?>">
-				<?php echo readable_date($news->date, $lang); ?>
-			</i>
-			<?php echo $lang['misc_by'].' '.anchor('user/profile/'.$news->userid, $news->first_name.' '.$news->last_name); ?>
-		</h3>
 		<?php echo $news_story; ?>
+		<div class="metadata">
+			<p>
+				<?php echo $lang['misc_published']; ?>
+				<i class="date" title="<?php echo $news->date; ?>">
+					<?php echo readable_date($news->date, $lang); ?>
+				</i>
+				<?php
+				$user = gravatarimg($news->gravatar, 25, 'class="img-circle"').' '.get_full_name($news);
+				echo $lang['misc_by'].' '.anchor('user/profile/'.$news->user_id, $user);
+				?>
+			</p>
+		</div>
 	</div>
 	<?php

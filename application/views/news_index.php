@@ -37,7 +37,7 @@ foreach($news_array as $news_item)
 			<div class="col-sm-12">
 				<div class="main-box news clearfix">
 					<h2>
-						<?php echo anchor('news/view/'.$news_item->id, $news_item->title, array("title" => $lang['news_tothenews'])); ?>
+						<?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', true), $news_item->title, array("title" => $lang['news_tothenews'])); ?>
 						<?php
 						if($news_item->draft)
 							echo '<span class="label label-default">'.$lang['misc_draft'].'</span>';
@@ -52,7 +52,7 @@ foreach($news_array as $news_item)
 						<?php echo $lang['misc_by'].' '.anchor('user/profile/'.$news_item->userid, $news_item->first_name.' '.$news_item->last_name); ?>
 					</h3>
 					<p>
-						<?php echo $news_story; ?>... <?php echo anchor('news/view/'.$news_item->id, $lang['misc_readmore'].'!');?>
+						<?php echo $news_story; ?>... <?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', true), $lang['misc_readmore'].'!');?>
 					</p>
 				</div>
 			</div>
@@ -68,7 +68,7 @@ foreach($news_array as $news_item)
 			<div class="main-box news clearfix">
 				<h2>
 					<img src="<?php echo lang_id_to_imgpath($news_item->lang_id); ?>" class="img-circle pull-right" />
-					<?php echo anchor('news/view/'.$news_item->id, $news_item->title, array("title" => $lang['news_tothenews'])); ?>
+					<?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', true), $news_item->title, array("title" => $lang['news_tothenews'])); ?>
 					<?php
 					if($news_item->draft)
 						echo '<span class="label label-default">'.$lang['misc_draft'].'</span>';
@@ -82,7 +82,7 @@ foreach($news_array as $news_item)
 					<?php echo $lang['misc_by'].' '.anchor('user/profile/'.$news_item->userid, $news_item->first_name.' '.$news_item->last_name); ?>
 				</h3>
 				<p>
-					<?php echo $news_story; ?>... <?php echo anchor('news/view/'.$news_item->id, $lang['misc_readmore'].'!');?>
+					<?php echo $news_story; ?>... <?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', true), $lang['misc_readmore'].'!');?>
 				</p>
 			</div>
 		</div>
