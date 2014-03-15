@@ -27,7 +27,7 @@ foreach($news_array as $news_item)
 	}
 	// echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => $lang['news_tothenews'] ));
 
-	$news_story = text_format($news_item->text, '<p>','</p>', FALSE);
+	$news_story = text_format($news_item->text);
 	?>
 	<div class="main-box news clearfix">
 		<h2>

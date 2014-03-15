@@ -27,7 +27,7 @@
 // }
 // echo '</div>';
 
-	$news_story = text_format($news->text, '<p>','</p>', FALSE);
+	$news_story = text_format($news->text);
 	?>
 	<div class="main-box news clearfix">
 		<h1>

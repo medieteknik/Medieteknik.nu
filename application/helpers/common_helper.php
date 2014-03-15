@@ -77,7 +77,7 @@ function _local_linker($matches)
 {
 	$c = count($matches);
 	if($c > 2)
-		return anchor($matches[1],$matches[2]);
+		return anchor($matches[1], $matches[2], 'rel="nofollow"');
 	return "";
 }
 
@@ -167,10 +167,10 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 
 	if($xtravaganza === TRUE)
 	{
-		// URL
+		// url
 		$text = preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $text);
-
-		$text = preg_replace_callback("/\(([a-zA-Z\/]+)\|([a-zA-Z\s]+)\)/",'_local_linker',$text);
+		// URL, written as (url|text)
+		$text = preg_replace_callback("/\(([a-zA-Z\/\.\_]+)\|([a-zA-Z_åäöÅÄÖ0-9\"\s]+)\)/",'_local_linker',$text);
 
 		// headlines
 		$text = preg_replace("/(\n####)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h4>$2</h4>\n",$text);
@@ -183,7 +183,7 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
 	}
 
-	return auto_link($text);
+	return ($text);
 
 }
 
