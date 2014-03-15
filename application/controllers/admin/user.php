@@ -10,7 +10,7 @@ class User extends MY_Controller
         // Call the Model constructor
         parent::__construct();
 
-		if(!$this->login->is_admin())
+		if(!$this->login->is_admin() )
 		{
 			redirect('/admin/admin/access_denied', 'refresh');
 		}
@@ -84,11 +84,23 @@ class User extends MY_Controller
 			$lastname = $this->input->post('lastname');
 			$lukasid = $this->input->post('lukasid');
 			$gravatar = $this->input->post('gravatar');
+			$github = $this->input->post('github');
 
-			$main_data['edit_data'] = $this->User_model->edit_user_data($id, $web, $linkedin, $twitter, $presentation, $gravatar);
-			$main_data['edit_user'] = $this->User_model->edit_user($id, $firstname, $lastname, $lukasid);
+			$privil = $this->input->post('admin_privil');
 
-			redirect('admin/user/edit/'.$id.'/edit_done');
+			if($this->login->has_privilege('superadmin'))
+			{
+				if($privil !== 0)
+					$this->User_model->edit_user_privil($id, $privil);
+				else
+					$this->User_model->remove_user_privil($id);
+			}
+
+			if($this->User_model->edit_user_data($id, $web, $linkedin, $twitter, $presentation, $gravatar, $github)
+				&& $this->User_model->edit_user($id, $firstname, $lastname, $lukasid))
+				redirect('admin/user/edit/'.$id.'/edit_done', 'location');
+			else
+				redirect('admin/user/edit/'.$id.'/error', 'location');
 		}
 		elseif($this->input->post('disable'))
 		{
@@ -103,6 +115,8 @@ class User extends MY_Controller
 
 		// Data for overview view
 		$main_data['user'] = $this->User_model->get_user_profile($id);
+		$main_data['user_privil'] = $this->User_model->get_user_privileges($id);
+		$main_data['privil'] = $this->User_model->get_all_privileges($id);
 		$main_data['lang'] = $this->lang_data;
 		$main_data['message'] = $message;
 

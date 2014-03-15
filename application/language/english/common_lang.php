@@ -17,6 +17,7 @@ $lang['footer_aboutsite'] = "About the website";
 $lang['footer_cookies'] = "About cookies";
 $lang['footer_follow'] = "Follow us";
 $lang['footer_mtliu'] = "Media Technology at liu.se";
+$lang['footer_github'] = "The MT Organization at GitHub";
 
 
 // menu
@@ -77,6 +78,12 @@ $lang['user_info'] = "User information";
 $lang['profile_back'] = "Back to profile";
 $lang['user_create_save'] = "Save settings";
 $lang['user_create_wat'] = "<p>Hi,</p><p>Since this is the first time you log in to your account, you'll need to tell us your first and last name. Just fill in both fields here, and you'll be ready to go.</p><p>Please note, ones you set your name, it cannot be changed again.</p>";
+$lang['user_profile_news'] = "News by";
+$lang['user_profile_groups'] = "Groups";
+$lang['user_profile_posts'] = "Forum posts by";
+$lang['user_profile_notext'] = "hasn't written anything about themself. Yet.";
+$lang['user_disabled_message'] = "An administrator has suspended your account. Contact us at webb@medieteknik.nu to hear the reason why.";
+$lang['user_twitter_placeholder'] = "Without the @";
 
 
 //groups

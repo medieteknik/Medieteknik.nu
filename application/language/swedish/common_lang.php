@@ -17,6 +17,7 @@ $lang['footer_aboutsite'] = "Om hemsidan";
 $lang['footer_cookies'] = "Om kakor";
 $lang['footer_follow'] = "Följ oss";
 $lang['footer_mtliu'] = "Medieteknik på liu.se";
+$lang['footer_github'] = "MT på GitHub";
 
 
 // menu
@@ -77,6 +78,13 @@ $lang['user_info'] = "Användarinformation";
 $lang['profile_back'] = "Tillbaka till profil";
 $lang['user_create_save'] = "Spara inställningar";
 $lang['user_create_wat'] = "<p>Hej!</p><p>Eftersom detta är första gången du loggar in på ditt konto, måste vi be dig att ge oss ditt för- och efternamn. Fyll enkelt i fälten här, så är allt klart.</p><p>Observera att du inte kan ändra ditt namn när du väl gett oss det. Se till att det blir rätt!</p>";
+$lang['user_profile_news'] = "Nyheter av";
+$lang['user_profile_groups'] = "Grupper";
+$lang['user_profile_posts'] = "Foruminlägg av";
+$lang['user_profile_notext'] = "har inte skrivit något om sig själv. Än så länge.";
+$lang['user_disabled_message'] = "En administratör har stängt av ditt konto. Kontakta oss på webb@medieteknik.nu för att höra efter varför.";
+$lang['user_twitter_placeholder'] = "Utan @";
+
 
 //groups
 $lang['groups_title'] = "Grupper";

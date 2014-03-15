@@ -5,14 +5,18 @@ class News extends MY_Controller
 
 	public function index()
 	{
-		// Data for news view
 		$this->load->model('News_model');
+		$this->load->model('carousel_model');
+
+		// Data for news view
 		$main_data['news_array'] = $this->News_model->get_paged_news(1, 9);
 		$main_data['lang'] = $this->lang_data;
 
+		// carousel view
+		$template_data['carousel_content'] = $this->load->view('includes/carousel',$main_data, true);
+
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['carousel_content'] = $this->load->view('includes/carousel',$main_data, true);
 		$template_data['main_content'] = $this->load->view('news_index', $main_data, true);
 		$template_data['sidebar_content'] =  $this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);

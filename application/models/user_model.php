@@ -40,7 +40,7 @@ class User_model extends CI_Model
 	 * @param  bool 	$login		Wether or not we require user to be active
 	 * @return bool
 	 */
-	function get_user($lukasid = '', $login = TRUE)
+	function get_user($lukasid = '', $login = FALSE)
 	{
 		$lid = preg_replace("/(@.*)/", "", $lukasid);
 
@@ -190,6 +190,11 @@ class User_model extends CI_Model
 			$res['user_id'] = 0;
 		else
 			$res = $res[0];
+
+		$res->groups = $this->get_user_groups($id);
+		$res->news = $this->get_user_news($id);
+		$res->forum_posts = $this->get_user_forum_posts($id);
+
 		return $res;
 	}
 
@@ -295,7 +300,7 @@ class User_model extends CI_Model
 	 * @param  string	$presentation 	The user presentation text
 	 * @return boole
 	 */
-	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $gravatar = '')
+	function edit_user_data($id, $web = '', $linkedin = '', $twitter = '', $presentation = '', $gravatar = '', $github = '')
 	{
 		// fixing and trimming
 		$twitter = preg_replace("/[^0-9A-Za-z_]/", "", $twitter );
@@ -303,10 +308,11 @@ class User_model extends CI_Model
 		$linkedin = prep_url($linkedin);
 		$presentation = trim($presentation);
 		$gravatar = strtolower(trim($gravatar));
+		$github = prep_url($github);
 
 		// validate
 		if(strlen($web) <= 300 && strlen($twitter) <= 300 && strlen($gravatar) <= 255 &&
-			strlen($linkedin) <= 300 && strlen($presentation) <= 1000)
+			strlen($linkedin) <= 300 && strlen($presentation) <= 1000 && strlen($github) <= 300)
 		{
 			//set data to be updated/inserted
 			$data = array(
@@ -314,7 +320,8 @@ class User_model extends CI_Model
 						'web' => $web,
 						'linkedin' => $linkedin,
 						'presentation' => $presentation,
-						'twitter' => $twitter
+						'twitter' => $twitter,
+						'github' => $github
 					);
 
 			// search for user data
@@ -349,16 +356,15 @@ class User_model extends CI_Model
 	 * @param  string	$liuid 		LiU-id of user
 	 * @return bool
 	 */
-	function edit_user($id, $fname = '', $lname = '', $liuid = '', $password = '')
+	function edit_user($id, $fname = '', $lname = '', $liuid = '')
 	{
 		// fixing and trimming
-		$fn = trim(preg_replace("/[^A-Za-z]/", "", $fname ));
-		$ln = trim(preg_replace("/[^A-Za-z]/", "", $lname ));
+		$fn = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $fname ));
+		$ln = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $lname ));
 		$lid = trim(preg_replace("/[^A-Za-z0-9]/", "", $liuid ));
-		$pwd = trim($password);
 
 		// check lengths
-		if((strlen($lid) == 8 || strlen($lid) == 0) && (strlen($pwd) > 5 || strlen($pwd) == 0))
+		if((strlen($lid) == 8 || strlen($lid) == 0))
 		{
 			// if userid exists, edit user
 			if($this->userid_exists($id))
@@ -371,8 +377,6 @@ class User_model extends CI_Model
 					$data['last_name'] = $ln;
 				if(!empty($lid))
 					$data['lukasid'] = $lid;
-				if(!empty($pwd))
-					$data['password_hash'] = encrypt_password($pwd);
 
 				// update user
 				$this->db->where('id', $id);
@@ -418,6 +422,32 @@ class User_model extends CI_Model
 	function enable($id)
 	{
 		return $this->db->update('users', array('new' => 0), 'id ='.$id);
+	}
+
+	/**
+	 * change user pricil
+	 * @param  int $id
+	 * @param  int $privil
+	 * @return bool
+	 */
+	function edit_user_privil($id, $privil)
+	{
+		$search = $this->db->get_where('users_privileges', array('user_id' => $id));
+
+		if($search->num_rows() > 0)
+			return $this->db->update('users_privileges', array('privilege_id' => $privil), array('user_id' => $id));
+		else
+			return $this->db->insert('users_privileges', array('privilege_id' => $privil, 'user_id' => $id));
+	}
+
+	/**
+	 * remove user pricil
+	 * @param  int $id
+	 * @return bool
+	 */
+	function remove_user_privil($id)
+	{
+		return $this->db->delete('users_privileges', array('user_id' => $id));
 	}
 
 	/**
@@ -489,5 +519,87 @@ class User_model extends CI_Model
 
 		return $res[0];
 	}
+
+	/**
+	 * get group memberships for user
+	 * @param  int $id
+	 * @return array
+	 */
+	function get_user_groups($id)
+	{
+		$this->db->select("groups.id, groups_descriptions_language.name, groups_year.start_year, groups_year.stop_year, groups_year_members.*");
+		$this->db->from("groups_year_members");
+		$this->db->join("groups_year", "groups_year_members.groups_year_id = groups_year.id", "");
+		$this->db->join("groups_descriptions_language", "groups_year.groups_id = groups_descriptions_language.groups_id", "");
+		$this->db->join("groups", "groups_year.groups_id = groups.id", "");
+		$this->db->where("groups_year_members.user_id", $id);
+		$this->db->order_by("groups_year.stop_year", "asc");
+
+		$query = $this->db->get();
+		$result = $query->result();
+
+		return $result;
+	}
+
+	/**
+	 * get news posted by yser
+	 * @param  int $id
+	 * @return array
+	 */
+	function get_user_news($id, $limit = 10)
+	{
+		$this->db->select("news.*, news_translation_language.*");
+		$this->db->from("news");
+		$this->db->join("news_translation_language", "news.id = news_translation_language.news_id", "");
+		$this->db->where("user_id", $id);
+		$this->db->where("draft", 0);
+		$this->db->where("approved", 1);
+		$this->db->order_by("date", "desc");
+		$this->db->limit($limit);
+		$query = $this->db->get();
+
+		return $query->result();
+	}
+
+	/**
+	 * get forum posts by user
+	 * @param  int $id
+	 * @return array
+	 */
+	function get_user_forum_posts($id, $limit = 5)
+	{
+		$this->db->select("forum_reply.id as reply_id, forum_reply.reply_date, forum_reply.topic_id, forum_topic.topic, forum_categories_descriptions_language.title");
+		$this->db->from("forum_reply");
+		$this->db->join("forum_topic", "forum_reply.topic_id = forum_topic.id", "");
+		$this->db->join("forum_categories_descriptions_language", "forum_topic.cat_id = forum_categories_descriptions_language.cat_id", "");
+		$this->db->where("forum_reply.user_id", $id);
+		$this->db->order_by("reply_date", "desc");
+		$this->db->limit($limit);
+
+		$query = $this->db->get();
+
+		return $query->result();
+	}
+
+	/**
+	 * check if user with id is disabled
+	 * @param  in  $id
+	 * @return boolean
+	 */
+	function is_disabled($id)
+	{
+		$this->db->where("id", $id);
+		$this->db->where("disabled", 1);
+		$this->db->from("users");
+
+		return $this->db->count_all_results();
+	}
+
+	function get_all_privileges()
+	{
+		$query = $this->db->get('privileges');
+		return $query->result();
+	}
+
 }
 

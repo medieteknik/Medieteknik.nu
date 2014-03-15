@@ -14,8 +14,13 @@ class Login
 		{
 			return false;
 		}
+		elseif($this->is_disabled() && $this->CI->uri->segment(3) !== 'suspended')
+		{
+			redirect('/user/not_logged_in/suspended', 'location');
+		}
 		return true;
 	}
+
 	function is_admin() {
 		if($this->is_logged_in()) {
 			$is_admin = $this->CI->session->userdata('is_admin');
@@ -79,6 +84,13 @@ class Login
 		return $this->CI->session->userdata('lukasid');
 	}
 
+	public function is_disabled()
+	{
+		$id = $this->get_id();
+		$this->CI->load->model("User_model");
+		return $this->CI->User_model->is_disabled($id);
+	}
+
 	public function get_name()
 	{
 		// load model and collect uid
@@ -128,7 +140,7 @@ class Login
 		}
 	}
 
-	public function logout() {
+	public function logout($cas_logout = true) {
 		$data = array(
 			'id' => 0,
 			'lukasid' => "",
@@ -137,39 +149,8 @@ class Login
 		);
 		$this->CI->session->set_userdata($data);
 		$this->CI->session->sess_destroy();
-		$this->CI->cas->logout();
+		if($cas_logout)
+			$this->CI->cas->logout();
 	}
-
-	/*
-	 * // old validate
-	public function validate($name = '', $pwd = '', $admin = false) {
-		$this->CI->load->model('User_model');
-		$query = $this->CI->User_model->validate($name, $pwd);
-
-		if($query) // if the user's credentials validated...
-		{
-			$result = $query->result();
-			$result = $result[0];
-
-			if($admin === true && !$this->CI->User_model->has_privilege($result->id, "admin")) {
-				return false;
-			}
-
-			$data = array(
-				'id' => $result->id,
-				'lukasid' => $result->lukasid,
-				'is_logged_in' => true,
-				'is_admin' => ($admin === true) ? true : false,
-			);
-			$this->CI->session->set_userdata($data);
-			return true;
-		}
-		else // incorrect username or password
-		{
-			return false;
-		}
-	}
-
-	*/
 
 }

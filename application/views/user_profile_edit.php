@@ -5,7 +5,8 @@ $twitter = array(
 			'name'		=> 'twitter',
 			'value'		=> $user->twitter,
 			'maxlength'	=> '100',
-			'class' 	=> 'form-control'
+			'class' 	=> 'form-control',
+			'placeholder' => $lang['user_twitter_placeholder']
 		);
 $linkedin = array(
 			'id'			=> 'linkedin',
@@ -22,7 +23,8 @@ $gravatar = array(
 			'value'			=> $user->gravatar,
 			'maxlength'		=> '254',
 			'placeholder'	=> 'mt@example.com',
-			'class' 		=> 'form-control'
+			'class' 		=> 'form-control',
+			'type'			=> 'email'
 		);
 $web = array(
 			'id'			=> 'web',
@@ -30,6 +32,15 @@ $web = array(
 			'value'			=> $user->web,
 			'maxlength'		=> '100',
 			'placeholder'	=> 'http://...',
+			'class' 		=> 'form-control',
+			'type' 			=> 'url'
+		);
+$github = array(
+			'id'			=> 'github',
+			'name'			=> 'github',
+			'value'			=> $user->github,
+			'maxlength'		=> '100',
+			'placeholder'	=> 'https://...',
 			'class' 		=> 'form-control',
 			'type' 			=> 'url'
 		);
@@ -69,6 +80,9 @@ echo form_open('user/edit_profile/runedit'),
 			'</p><p>',
 				form_label('Web', 'web'),
 				form_input($web),
+			'</p><p>',
+				form_label('GitHub', 'github'),
+				form_input($github),
 			'</p>',
 		'</div>',
 		'<div class="col-sm-3 col-sm-push-4">',

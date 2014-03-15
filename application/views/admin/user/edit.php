@@ -3,12 +3,13 @@
 if($user->id == 0)
 	show_404();
 
-$lukasid = array(
+$liuid = array(
 			'id'		=> 'lukasid',
 			'name'		=> 'lukasid',
 			'value'		=> $user->lukasid,
 			'maxlength'	=> '100',
-			'class' 	=> 'form-control'
+			'class' 	=> 'form-control',
+			'disabled'  => ''
 		);
 $firstname = array(
 			'id'		=> 'firstname',
@@ -29,7 +30,8 @@ $twitter = array(
 			'name'		=> 'twitter',
 			'value'		=> $user->twitter,
 			'maxlength'	=> '15',
-			'class' 	=> 'form-control'
+			'class' 	=> 'form-control',
+			'placeholder' => $lang['user_twitter_placeholder']
 		);
 $linkedin = array(
 			'id'			=> 'linkedin',
@@ -37,7 +39,7 @@ $linkedin = array(
 			'value'			=> $user->linkedin,
 			'maxlength'		=> '100',
 			'class' 		=> 'form-control',
-			'placeholder'	=> 'http://linkedin.com/in/...'
+			'placeholder'	=> 'http://...'
 		);
 $web = array(
 			'id'			=> 'web',
@@ -45,7 +47,15 @@ $web = array(
 			'value'			=> $user->web,
 			'maxlength'		=> '100',
 			'class' 		=> 'form-control',
-			'placeholder'	=> 'http://'
+			'placeholder'	=> 'http://...'
+		);
+$github = array(
+			'id'			=> 'github',
+			'name'			=> 'github',
+			'value'			=> $user->github,
+			'maxlength'		=> '100',
+			'class' 		=> 'form-control',
+			'placeholder'	=> 'https://...'
 		);
 $gravatar = array(
 			'id'			=> 'gravatar',
@@ -74,7 +84,7 @@ if(!empty($message))
 	<h3>
 		<?php
 		echo $lang['admin_edituser'].' <em>'.get_full_name($user).'</em> <small>',
-			anchor('#', '&larr; '.$lang['misc_back'], array('onclick' => 'window.history.back(); return false;')).'</small>'; ?>
+			anchor('#', $lang['misc_back'], array('onclick' => 'window.history.back(); return false;')).'</small>'; ?>
 	</h3>
 	<div class="row">
 		<div class="col-sm-4">
@@ -123,7 +133,7 @@ if(!empty($message))
 			</p>
 			<p>
 				<?php
-				echo form_label($lang['user_lukasid'], 'lukasid'), form_input($lukasid);
+				echo form_label($lang['user_lukasid'], 'lukasid'), form_input($liuid);
 				?>
 			</p>
 			<p>
@@ -148,6 +158,11 @@ if(!empty($message))
 				echo form_label('Web', 'web'), form_input($web);
 				?>
 			</p>
+			<p>
+				<?php
+				echo form_label('GitHub', 'github'), form_input($github);
+				?>
+			</p>
 		</div>
 	</div>
 	<div class="row">
@@ -160,4 +175,33 @@ if(!empty($message))
 		</div>
 	</div>
 </div>
-<?php echo form_close(); ?>
+
+<?php
+if($this->login->has_privilege('superadmin'))
+{
+?>
+
+<div class="main-box clearfix margin-top">
+	<h4>Admin privileges</h4>
+	<div class="row">
+		<div class="col-sm-6">
+			<p>
+				<label for="admin_privil">Privil level</label>
+				<select name="admin_privil" id="admin_privil" class="form-control">
+					<option value="0">None</option>
+					<?php
+					$user_level = count($user_privil) > 0 ? $user_privil[0]->privilege_id : '0';
+					foreach ($privil as $priv)
+					{
+						echo '<option value="'.$priv->id.'" '.($user_level == $priv->id ? 'selected' : '').'>'.$priv->privilege_name.' &ndash; '.$priv->privilege_description.'</option>';
+					}
+					?>
+				</select>
+			</p>
+		</div>
+	</div>
+</div>
+<?php
+}
+echo form_close();
+?>

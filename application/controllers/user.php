@@ -81,8 +81,9 @@ class User extends MY_Controller
 			$twitter = $this->input->post('twitter');
 			$presentation = $this->input->post('presentation');
 			$gravatar = $this->input->post('gravatar');
+			$github = $this->input->post('github');
 
-			$status = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, $gravatar);
+			$status = $this->User_model->edit_user_data($id, $web, $li, $twitter, $presentation, $gravatar, $github);
 
 			// redirect to prevent accidental emptying of account info
 			redirect('user/edit_profile/'.($status ? 'success' : 'fail'), 'location');
@@ -101,16 +102,28 @@ class User extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
-	public function not_logged_in()
+	public function not_logged_in($message = '')
 	{
 		// Data for forum view
 		$main_data['lang'] = $this->lang_data;
 
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('login_notloggedin',  $main_data, true);
-		$template_data['sidebar_content'] = $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
+		if($message == 'suspended')
+		{
+			$this->login->logout(false);
+
+			// composing the views
+			$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+			$template_data['main_content'] = $this->load->view('login_suspended',  $main_data, true);
+			$template_data['sidebar_content'] = $this->sidebar->get_standard();
+			$this->load->view('templates/main_template',$template_data);
+		}
+		else {
+			// composing the views
+			$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
+			$template_data['main_content'] = $this->load->view('login_notloggedin',  $main_data, true);
+			$template_data['sidebar_content'] = $this->sidebar->get_standard();
+			$this->load->view('templates/main_template',$template_data);
+		}
 	}
 
 	public function login($attempt = '', $redir = '')
@@ -119,21 +132,6 @@ class User extends MY_Controller
 		$this->cas->force_auth();
 		// check this login and pass along redir param
 		$this->checklogin($redir);
-
-		//old login form, before use of CAS:
-		/*
-		$this->load->helper('form');
-
-		// Data for login view
-		$main_data['lang'] = $this->lang_data;
-		$main_data['attempt'] = $attempt;
-
-		// composing the views
-		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
-		$template_data['main_content'] = $this->load->view('login_view',  $main_data, true);
-		$template_data['sidebar_content'] = $this->sidebar->get_standard();
-		$this->load->view('templates/main_template',$template_data);
-		*/
 	}
 
 	public function logout()
