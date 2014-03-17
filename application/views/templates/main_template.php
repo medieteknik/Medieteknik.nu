@@ -48,10 +48,10 @@
 								<?php
 								if(substr(site_url(), -2, 2)=='en')
 									echo anchor(substr(site_url(), 0, -2).'se'.uri_string(),
-										"<img src=\"".base_url()."web/img/flags/se_big.png\" class=\"img-circle\" />".$misc_swedish_native);
+										$misc_swedish_native);
 								else
 									echo anchor(substr(site_url(), 0, -2).'en'.uri_string(),
-										"<img src=\"".base_url()."web/img/flags/gb_big.png\" class=\"img-circle\" />".$misc_english_native);
+										$misc_english_native);
 
 								?>
 							</div>

@@ -24,7 +24,7 @@
 						echo '<td>'.$user->id.'</td>';
 						echo '<td>'.$user->first_name.'</td>';
 						echo '<td>'.$user->last_name.'</td>';
-						echo '<td>'.anchor('user/profile/'.$user->id, $user->lukasid).'</td>';
+						echo '<td>'.anchor('user/profile/'.$user->id, '<span class="glyphicon glyphicon-user"></span> '.$user->lukasid).'</td>';
 						echo '<td>',
 							anchor('admin/user/edit/'.$user->id, $lang['admin_edituser']);
 							if($user->new)

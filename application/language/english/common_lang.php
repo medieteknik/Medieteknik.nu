@@ -59,6 +59,8 @@ $lang['forum_submit'] = "Submit reply!";
 $lang['forum_guidelines'] = "Please keep a good tone in the forum. Don't write something you don't stand for.";
 $lang['forum_posttopic'] = "Post topic";
 $lang['forum_createtopic'] = "Submit topic!";
+$lang['forum_report'] = "Flag post";
+$lang['forum_report_confirm'] = "This is inappropriate";
 
 // user
 $lang['user_username'] = "Username";
