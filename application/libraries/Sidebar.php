@@ -63,6 +63,9 @@ class Sidebar
 	}
 
 	public function get_admin_menu() {
+		$this->CI->load->model('Notification_model');
+
+		$notif = $this->CI->Notification_model->get_admin_notifications();
 
 		$this->adminmenu['title'] = "Admin";
 		$this->adminmenu['items'] = array(array('title' => $this->lang_data['menu_admin'], 'href' => "admin"));
@@ -72,9 +75,12 @@ class Sidebar
 
 		if($this->CI->login->has_privilege('admin'))
 		{
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'], 'href' => "admin/user"));
-			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admincarousel'], 'href' => "admin/carousel"));
+			$notif_users = $notif->new_users > 0 ? ' <span class="badge">'.$notif->new_users.'</span>' : '';
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_editusers'].$notif_users, 'href' => "admin/user"));
 		}
+
+		if($this->CI->login->has_privilege('admin'))
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_admincarousel'], 'href' => "admin/carousel"));
 
 		if($this->CI->login->has_privilege('admin'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminpage'], 'href' => "admin/page"));
