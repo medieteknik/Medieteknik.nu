@@ -1182,9 +1182,9 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 			$carousel_type = 1;
 			$translations = array(
 									array("lang" => "se", "title" => "Civilingenjör i Medieteknik – en utbildning för dig?",
-									 "content" => "http://player.vimeo.com/video/73557097?title=0"),
+									 "content" => "//player.vimeo.com/video/89094258?title=0&amp;byline=0&amp;portrait=0&amp;color=a6a6a6"),
 									array("lang" => "en", "title" => "Master of Science in Media Technology - an education for you?",
-									 "content" => "http://player.vimeo.com/video/73557097?title=0"),
+									 "content" => "//player.vimeo.com/video/89094258?title=0&amp;byline=0&amp;portrait=0&amp;color=a6a6a6"),
 								);
 			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 1, 0, 0);
 
