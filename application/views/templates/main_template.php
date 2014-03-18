@@ -147,6 +147,9 @@
 		</footer>
 		<!-- END footer -->
 		<!-- JavaScript at the bottom for fast page loading -->
+		<script>
+			var BASE_URL = '<?php echo base_url(); ?>';
+		</script>
 
 		<!-- Grab jQuery CDNs jQuery, with a protocol relative URL; fall back to local if offline -->
 		<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>

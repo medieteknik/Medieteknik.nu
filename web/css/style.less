@@ -153,7 +153,7 @@ body {
 		float: left;
 	}
 	.header-box {
-		padding: 10px;
+		padding: 5px 10px;
 		background: @bodybg;
 		line-height: 31px;
 
@@ -509,7 +509,7 @@ body {
  *********************************/
 
 /* Despite thie nice mobile first approach, here's some needed fixes */
-@media (max-width: @screen-sm-min) {
+@media (max-width: @screen-md-min) {
 	ul.box-list li span {
 		float: none !important;
 		margin-left: 6px;
@@ -540,6 +540,17 @@ body {
 		.navbar-collapse {
 			padding-left: 0;
 			padding-right: 0;
+		}
+	}
+	.forum-reply {
+		.report {
+			line-height: 30px;
+			float: right;
+			opacity: 0;
+		}
+
+		&:hover .report {
+			opacity: 1;
 		}
 	}
 }

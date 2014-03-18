@@ -61,6 +61,7 @@ $lang['forum_posttopic'] = "Post topic";
 $lang['forum_createtopic'] = "Submit topic!";
 $lang['forum_report'] = "Flag post";
 $lang['forum_report_confirm'] = "This is inappropriate";
+$lang['forum_report_thanks'] = "Thanks! We'll look into it.";
 
 // user
 $lang['user_username'] = "Username";

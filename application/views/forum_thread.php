@@ -4,7 +4,7 @@
 
 $first = array_shift($replies);
 ?>
-<div class="main-box clearfix forum-view">
+<div class="main-box clearfix forum-view forum-reply">
 	<?php
 		render_breadcrumbs($ancestors_array);
 		render_forum($categories_array);
@@ -20,8 +20,38 @@ $first = array_shift($replies);
 			echo anchor('user/profile/'.$first->user_id, $user);
 			?>,
 			<a href="#replyid-<?php echo $first->id; ?>" title="<?php echo $first->reply_date; ?>">
-				<?php echo readable_date($first->reply_date, $lang); ?>
+				<?php echo strtolower(readable_date($first->reply_date, $lang)); ?>
 			</a>
+
+			<?php
+			if($this->login->is_logged_in() && $this->login->get_id() !== $first->user_id)
+			{
+				if(count($first->reports) == 0)
+				{
+					?>
+					<span class="report">
+						<span class="glyphicon glyphicon-flag"></span>
+						<a href="#" class="toggle">
+							<?php echo $lang['forum_report']; ?>
+						</a>
+						<a href="#" class="hidden confirm" data-id="<?php echo $first->id; ?>">
+							<?php echo $lang['forum_report_confirm']; ?>!
+						</a>
+						<span class="thanks hidden"><?php echo $lang['forum_report_thanks']; ?></span>
+					</span>
+					<?php
+				}
+				else
+				{
+					?>
+					<span class="report">
+						<span class="glyphicon glyphicon-flag"></span>
+						<?php echo $lang['forum_report_thanks']; ?>
+					</span>
+					<?php
+				}
+			}
+			?>
 		</p>
 	</div>
 </div>
@@ -30,7 +60,7 @@ $first = array_shift($replies);
 foreach($replies as $reply)
 {
 	?>
-	<div class="main-box clearfix forum-view margin-top" id="replyid-<?php echo $reply->id; ?>">
+	<div class="main-box clearfix forum-view margin-top forum-reply" id="replyid-<?php echo $reply->id; ?>">
 		<p><?php echo text_format($reply->reply); ?></p>
 		<div class="metadata">
 			<p>
@@ -39,8 +69,37 @@ foreach($replies as $reply)
 				echo anchor('user/profile/'.$reply->user_id, $user);
 				?>,
 				<a href="#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
-					<?php echo readable_date($reply->reply_date, $lang); ?>
+					<?php echo strtolower(readable_date($reply->reply_date, $lang)); ?>
 				</a>
+				<?php
+				if($this->login->is_logged_in() && $this->login->get_id() !== $reply->user_id)
+				{
+					if(count($reply->reports) == 0)
+					{
+						?>
+						<span class="report">
+							<span class="glyphicon glyphicon-flag"></span>
+							<a href="#" class="toggle">
+								<?php echo $lang['forum_report']; ?>
+							</a>
+							<a href="#" class="hidden confirm" data-id="<?php echo $reply->id; ?>">
+								<?php echo $lang['forum_report_confirm']; ?>!
+							</a>
+							<span class="thanks hidden"><?php echo $lang['forum_report_thanks']; ?></span>
+						</span>
+						<?php
+					}
+					else
+					{
+						?>
+						<span class="report">
+							<span class="glyphicon glyphicon-flag"></span>
+							<?php echo $lang['forum_report_thanks']; ?>
+						</span>
+						<?php
+					}
+				}
+				?>
 			</p>
 		</div>
 	</div>

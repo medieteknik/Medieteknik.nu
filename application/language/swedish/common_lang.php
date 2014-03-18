@@ -60,8 +60,8 @@ $lang['forum_guidelines'] = "Tänk på att hålla en god ton. Skriv inget du int
 $lang['forum_posttopic'] = "Skapa ny tråd";
 $lang['forum_createtopic'] = "Skapa tråden!";
 $lang['forum_report'] = "Rapportera";
-$lang['forum_report_confirm'] = "Rapportera";
 $lang['forum_report_confirm'] = "Detta inlägg är olämpligt";
+$lang['forum_report_thanks'] = "Tack! Vi tittar på det.";
 
 // user
 $lang['user_username'] = "Användarnamn";
