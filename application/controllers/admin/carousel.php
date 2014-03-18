@@ -39,7 +39,7 @@ class Carousel extends MY_Controller
 	{
 		// Data for overview view
 		$this->load->model('Carousel_model');
-		$main_data['carousel_array'] = $this->Carousel_model->get_all_carousel_items();
+		$main_data['carousel_array'] = $this->Carousel_model->admin_get_all_carousel_items();
 		$main_data['lang'] = $this->lang_data;
 
 		// composing the views
@@ -117,6 +117,15 @@ class Carousel extends MY_Controller
 			$disabled = 0;
 		}
 
+		if($this->input->post('draft') == 1)
+		{
+			$draft = 1;
+		}
+		else
+		{
+			$draft = 0;
+		}
+
 		$item_type = $this->input->post('item_type');
 
 		$this->db->trans_start();
@@ -143,7 +152,7 @@ class Carousel extends MY_Controller
 			if($success)
 			{
 				$item_order = $this->Carousel_model->get_number_of_carousel_items() + 1;
-				$carousel_id = $this->Carousel_model->add_carousel_item($this->login->get_id(), $translations, $item_type, $item_order, $disabled);
+				$carousel_id = $this->Carousel_model->add_carousel_item($this->login->get_id(), $translations, $item_type, $item_order, $disabled, $draft);
 			}
 		}
 		else
@@ -152,11 +161,11 @@ class Carousel extends MY_Controller
 			foreach($this->languages as $lang)
 			{
 				$theTitle = addslashes($this->input->post('title_'.$lang['language_abbr']));
-				$theContent = addslashes($this->input->post('content_'.$lang['language_abbr']));
+				$theContent = addslashes($this->input->post('content_'));
 				$this->Carousel_model->update_carousel_translation($id, $lang['language_abbr'], $theTitle, $theContent);
 			}
 
-			$data = array('disabled' => $disabled);
+			$data = array('disabled' => $disabled, 'draft' => $draft);
 
 			$this->db->where('id', $id);
 			$this->db->update('carousel', $data);

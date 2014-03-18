@@ -52,6 +52,91 @@ class Carousel_model extends CI_Model
 		return $carousel;
 	}
 
+	function admin_get_all_carousel_items()
+	{
+		$this->db->select("carousel.id, language.language_name, language.language_abbr, carousel_translation.*");
+		$this->db->from("carousel");
+		$this->db->from("language");
+		$this->db->join("carousel_translation", 'carousel_translation.carousel_id = carousel.id AND carousel_translation.lang_id = language.id', 'left');
+		$query = $this->db->get();
+		$translations = $query->result();
+
+		$this->db->select("carousel.*");
+		$this->db->select("COALESCE(carousel_order, 0) as carousel_order",false);
+		$this->db->from("carousel");
+		$this->db->order_by("carousel_order ASC, carousel.date DESC");
+		$query = $this->db->get();
+		$carousel_items_array = $query->result();
+
+		$this->db->select("carousel_images.*, images.image_original_filename");
+		$this->db->from("carousel");
+		$this->db->join("carousel_images", 'carousel.id = carousel_images.carousel_id', 'left');
+		$this->db->join("images", 'carousel_images.images_id = images.id', 'left');
+
+		$query = $this->db->get();
+		$photos = $query->result();
+
+		foreach($carousel_items_array as $carousel_item) {
+			$carousel_item->translations = array();
+			$carousel_item->photos = array();
+			foreach($translations as $t) {
+				if($t->id == $carousel_item->id) {
+					array_push($carousel_item->translations, $t);
+				}
+			}
+			foreach($photos as $photo) {
+				if($photo->carousel_id == $carousel_item->id) {
+					array_push($carousel_item->photos, $photo);
+				}
+			}
+		}
+		return $carousel_items_array;
+	}
+
+	function get_carousel_items(){
+		// check if approved to see not approved news
+		$admin = $this->login->has_privilege('news_editor');
+
+		$this->db->select("carousel.*");
+		$this->db->select("carousel_translation_language.*");
+		$this->db->select("COALESCE(carousel_order, 0) as carousel_order",false);
+		$this->db->from("carousel");
+		$this->db->join("carousel_translation_language", 'carousel_translation_language.carousel_id = carousel.id', 'left');
+		if(!$admin)
+		{
+			// not admin, forces carousel to be not draft
+			$this->db->where("carousel.draft",0);
+		}
+		$this->db->order_by("carousel_order ASC, carousel.date DESC");
+
+		$query = $this->db->get();
+		$carousel_items_array = $query->result();
+
+		$this->db->select("carousel_images.*, images.image_original_filename");
+		$this->db->from("carousel");
+		$this->db->join("carousel_images", 'carousel.id = carousel_images.carousel_id', 'left');
+		$this->db->join("images", 'carousel_images.images_id = images.id', 'left');
+
+		$query = $this->db->get();
+		$photos = $query->result();
+
+		foreach($carousel_items_array as $carousel_item) {
+			//$carousel_item->translations = array();
+			$carousel_item->photos = array();
+			// foreach($translations as $t) {
+			// 	if($t->id == $carousel_item->id) {
+			// 		array_push($carousel_item->translations, $t);
+			// 	}
+			// }
+			foreach($photos as $photo) {
+				if($photo->carousel_id == $carousel_item->id) {
+					array_push($carousel_item->photos, $photo);
+				}
+			}
+		}
+		return $carousel_items_array;
+	}
+
 	function get_carousel_item_images($id){
 		$this->db->select("carousel_images.*, images.image_original_filename");
 		$this->db->from("carousel");
@@ -135,48 +220,7 @@ class Carousel_model extends CI_Model
 		return $rowcount;
     }
 
-	function get_all_carousel_items()
-	{
-		$this->db->select("carousel.id, language.language_name, language.language_abbr, carousel_translation.*");
-		$this->db->from("carousel");
-		$this->db->from("language");
-		$this->db->join("carousel_translation", 'carousel_translation.carousel_id = carousel.id AND carousel_translation.lang_id = language.id', 'left');
-		$query = $this->db->get();
-		$translations = $query->result();
-
-		$this->db->select("carousel.*");
-		$this->db->select("COALESCE(carousel_order, 0) as carousel_order",false);
-		$this->db->from("carousel");
-		$this->db->order_by("carousel_order ASC, carousel.date DESC");
-		$query = $this->db->get();
-		$carousel_items_array = $query->result();
-
-		$this->db->select("carousel_images.*, images.image_original_filename");
-		$this->db->from("carousel");
-		$this->db->join("carousel_images", 'carousel.id = carousel_images.carousel_id', 'left');
-		$this->db->join("images", 'carousel_images.images_id = images.id', 'left');
-
-		$query = $this->db->get();
-		$photos = $query->result();
-
-		foreach($carousel_items_array as $carousel_item) {
-			$carousel_item->translations = array();
-			$carousel_item->photos = array();
-			foreach($translations as $t) {
-				if($t->id == $carousel_item->id) {
-					array_push($carousel_item->translations, $t);
-				}
-			}
-			foreach($photos as $photo) {
-				if($photo->carousel_id == $carousel_item->id) {
-					array_push($carousel_item->photos, $photo);
-				}
-			}
-		}
-		return $carousel_items_array;
-	}
-
-	function add_carousel_item($user_id, $translations = array(), $carousel_type, $carousel_order, $disabled = 1)
+	function add_carousel_item($user_id, $translations = array(), $carousel_type, $carousel_order, $disabled = 1, $draft = 1)
 	{
 		if(!is_array($translations))
 		{
@@ -216,6 +260,7 @@ class Carousel_model extends CI_Model
 		   'carousel_type' => $carousel_type,
 		   'carousel_order' => $carousel_order,
 		   'disabled' => $disabled,
+		   'draft' => $draft,
 		   'date' => $theTime,
 		);
 		$this->db->insert('carousel', $data);

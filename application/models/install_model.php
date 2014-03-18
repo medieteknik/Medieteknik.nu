@@ -1165,11 +1165,11 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 			$carousel_type = 1;
 			$translations = array(
 									array("lang" => "se", "title" => "Civilingenjör i Medieteknik – en utbildning för dig?",
-									 "content" => "player.vimeo.com/video/73557097?title=0"),
+									 "content" => "http://player.vimeo.com/video/73557097?title=0"),
 									array("lang" => "en", "title" => "Master of Science in Media Technology - an education for you?",
-									 "content" => "player.vimeo.com/video/73557097?title=0"),
+									 "content" => "http://player.vimeo.com/video/73557097?title=0"),
 								);
-			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 1);
+			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 1, 0, 0);
 
 			// carousel_type = 2  =>  content is text.
 			$carousel_type = 2;
@@ -1179,15 +1179,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 									array("lang" => "en", "title" => "Linköping University &ndash; Campus Norrköping",
 									 "content" => "Master of Science in Media Technology at Linköping University is located in Norrköping - Sweden's best student city in 2013."),
 								);
-			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 2);
-
-			$translations = array(
-									array("lang" => "se", "title" => "Derka derka",
-									 "content" => "Schpoople"),
-									array("lang" => "en", "title" => "",
-									 "content" => ""),
-								);
-			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 3);
+			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 2, 0, 0);
 		}
 	}
 
