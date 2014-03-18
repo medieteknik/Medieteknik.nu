@@ -205,6 +205,10 @@ function get_carousel_table_fields()
 			'type' => 'BOOL',
 			'default' => '0',
 			),
+		'draft' => array(
+			'type' => 'BOOL',
+			'default' => '1',
+			),
 		'date' => array(
 			'type' => 'DATETIME',
 			),

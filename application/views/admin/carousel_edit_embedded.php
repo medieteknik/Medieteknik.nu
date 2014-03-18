@@ -9,15 +9,23 @@ $disabled = array(		'name'        => 'disabled',
 						'value'       => '1',
 						'checked'     => FALSE,
 					);
+$draft = array(			'name'        => 'draft',
+						'id'          => 'draft',
+						'value'       => '1',
+						'checked'     => FALSE,
+					);
 
 $carousel_disabled = 0;
+$carousel_draft = 0;
 $carousel_url = '';
 
 // hack so that the same view can be used for both create and edit
 $action = 'admin/carousel/edit_carousel/0';
 if(isset($carousel) && $carousel != false) {
 	$disabled['checked'] = ($carousel->disabled == 1);
+	$draft['checked'] = ($carousel->draft == 1);
 	$carousel_disabled = $carousel->disabled;
+	$carousel_draft = $carousel->draft;
 	$carousel_url = $carousel->translations[0]->content;
 	$action = 'admin/carousel/edit_carousel/'.$id;
 }
@@ -34,9 +42,10 @@ echo
 form_open($action, 'save'),
 '<div class="main-box clearfix">
 	<h2>', $lang['admin_admincarousel'], '</h2>',
-	'<div>', form_checkbox($disabled),form_label($lang['misc_disabled'], 'disabled'),'</div>',
+	form_checkbox($disabled), form_label($lang['misc_disabled'], 'disabled'),'<br />',
+	form_checkbox($draft), form_label($lang['misc_draft'], 'draft'),'<br />',
 	form_hidden('item_type', 1),
-	form_label('URL', 'content'),
+	form_label('URL', 'content_'),'<br />',
 	form_input($url),
 '<div>', form_submit('save', $lang['misc_save']), '</div>',
 '</div>';
@@ -67,14 +76,14 @@ foreach($arr as $t) {
 	$title = array(
               'name'        => 'title_'.$language_abbr,
               'id'          => 'title_'.$language_abbr,
-              'size'		=>	50,
+              'size'		=>	100,
               'value'       => $t_title,
             );
 
 	echo '
 	<div class="main-box clearfix">
 	<h2>',$language_name,'</h2>',
-	form_label($lang['misc_headline'], 'title_'.$language_abbr),
+	form_label($lang['misc_headline'], 'title_'.$language_abbr),'<br />',
 	form_input($title),
 	'</div>';
 }
