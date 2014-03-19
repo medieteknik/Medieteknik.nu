@@ -40,7 +40,7 @@ $url = array(
 // do all the printing
 echo
 form_open($action, 'save'),
-'<div class="main-box clearfix">
+'<div class="main-box box-body clearfix">
 	<h2>', $lang['admin_admincarousel'], '</h2>',
 	form_checkbox($disabled), form_label($lang['misc_disabled'], 'disabled'),'<br />',
 	form_checkbox($draft), form_label($lang['misc_draft'], 'draft'),'<br />',
@@ -81,7 +81,7 @@ foreach($arr as $t) {
             );
 
 	echo '
-	<div class="main-box clearfix">
+	<div class="main-box box-body clearfix">
 	<h2>',$language_name,'</h2>',
 	form_label($lang['misc_headline'], 'title_'.$language_abbr),'<br />',
 	form_input($title),
@@ -91,7 +91,7 @@ echo form_close();
 
 if(isset($carousel) && $carousel != false) {
 	echo '
-	<div class="main-box news clearfix red">
+	<div class="main-box box-body news clearfix red">
 	<h2>Delete</h2>',
 	form_open('admin/carousel/delete/'.$id),
 	form_submit('delete', 'Delete'),

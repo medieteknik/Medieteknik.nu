@@ -40,7 +40,7 @@ if(isset($status))
 ?>
 
 <?php echo form_open('admin/user/add/create'); ?>
-<div class="main-box clearfix profile">
+<div class="main-box box-body clearfix profile">
 	<h3>
 		<?php echo $lang['admin_addusers']; ?>
 	</h3>

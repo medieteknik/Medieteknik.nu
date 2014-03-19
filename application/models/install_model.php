@@ -835,8 +835,8 @@ class Install_model extends CI_Model
 										'image_original_filename' => $file,
 										'width' => $img_size[0],
 										'height' => $img_size[1],
-										'image_title' => 'news_image',
-										'image_description' => 'news_image');
+										'image_title' => 'Image',
+										'image_description' => 'Image');
 						$this->db->insert('images', $data);
 					}
 				}

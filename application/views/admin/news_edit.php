@@ -7,21 +7,8 @@ $post_date = array(		'name'        => 'post_date',
 						'class'		  => 'form-control',
 						'type' 		  => 'datetime-local'
 					);
-
-$img_height = array(	'name'        => 'img_height',
-						'id'          => 'img_height',
-						'value'       => '',
-					);
 $img_file = array(		'name'        => 'img_file',
 						'id'          => 'img_file',
-					);
-$options = 	array(		'1'  => '1/3 (250px)',
-						'2'    => '1/2 (375px)',
-						'3'   => '2/3 (500px)',
-						'4'   => '1/1 (750px)',
-					);
-$pos = array(			'1'  => $lang['misc_left'],
-						'2'    => $lang['misc_right'],
 					);
 $draft = array(			'name'        => 'draft',
 						'id'          => 'draft',
@@ -34,9 +21,6 @@ $approved = array(		'name'        => 'approved',
 						'checked'     => FALSE,
 					);
 $news_approved = 0;
-$news_size = 0;
-$news_position = 0;
-$news_height = 100;
 
 // hack so that the same view can be used for both create and edit
 $image_div = "";
@@ -46,13 +30,10 @@ if(isset($news) && $news != false) {
 	$draft['checked'] = ($news->draft == 1);
 	$approved['checked'] = ($news->approved == 1);
 	$news_approved = $news->approved;
-	$news_size = $news->size;
-	$news_position = $news->position;
-	$news_height = ($news->height == '') ? $news_height : $news->height;
 	$action = 'admin/news/edit_news/'.$id;
 
 	if($news->image_original_filename != "") {
-		$image = new imagemanip($news->image_original_filename, 'zoom', news_size_to_px($news->size), $news->height);
+		$image = new imagemanip($news->image_original_filename, 'zoom', 100, 100);
 		$image_div = '<div><img src="'.$image.'"/></div>';
 	}
 }
@@ -65,7 +46,7 @@ if(isset($message) && $message == 'error')
 // do all the printing
 echo
 form_open_multipart($action),
-'<div class="main-box clearfix">
+'<div class="main-box box-body clearfix">
 	<h2>', $lang['admin_editnews'], ' <small>',anchor('admin/news', $lang['misc_back']),'</small></h2>',
 	'<div class="row">',
 		'<div class="col-sm-4">',
@@ -108,36 +89,36 @@ form_open_multipart($action),
 		}
 	echo '</div>',
 '</div>
-<div class="main-box clearfix margin-top" id="image-edit">
+<div class="main-box box-body clearfix margin-top" id="image-edit">
 	<h2>'.$lang['misc_image'].'</h2>',
 	$image_div,
 	'<div>',
-		form_label($lang['misc_width'], 'img_size'),
-		form_dropdown('img_size', $options, $news_size, 'id="img_size"'),
-	'</div>
-	<div>',
-		form_label($lang['misc_position'], 'img_position'),
-		form_dropdown('img_position', $pos, $news_position, 'id="img_position"'),
-	'</div>
-	<div>',
-		form_label($lang['misc_height'], 'img_height'),
-		'<input type="number" min="75" max="400" name="img_height" id="img_height" value="'.$news_height .'" />',
-	'</div>
-	<div>',
+	'<h4>'.$lang['admin_news_uploadimage'].'</h4>',
+	'</div>',
+	'<div>',
 		form_upload($img_file),
-	'</div>
-</div>';
-//do_dump($image_array);
+	'</div>',
+	'<div>',
+	'<h4>'.$lang['admin_news_existingimage'].'</h4>',
+	'</div>';
+//do_dump($images_array);
 if (count($images_array) > 0) {
-	echo '<div class="main-box clearfix">';
+	
+	echo '<select name = "image_id" class="image-picker show-html">
+		 <option value=""></option>';
+	$image_count = 1;
 	foreach($images_array as $img) {
-		echo
-		'<div class="image_overview" style="display: inline-block; width: 110px; height: 150px; overflow:hidden; clear:both;">',
-			$img->image->get_img_tag(),
-			'<input type="text" value="[img id=',substr($img->image_original_filename, 0, -4),' w=150 h=100]" disabled="disabled" style="width: 100px;" />',
-		'</div>';
+		// echo
+		//  '<div class="image_overview" style="display: inline-block; width: 110px; height: 150px; overflow:hidden; clear:both;">',
+		//  	$img->image->get_img_tag(),
+		//  '</div>';
+
+		echo '<option data-img-src="'.$img->image->get_filepath(false).'" value="'.$img->id.'">Cute Kitten 1</option>';
+		$image_count++;
 	}
+	echo '</select>';
 	echo '</div>';
+
 }
 
 
@@ -181,7 +162,7 @@ echo '<div class="row">';
 
 		echo '
 		<div class="col-sm-6">
-			<div class="main-box clearfix margin-top">
+			<div class="main-box box-body clearfix margin-top">
 				<h4>',$language_name,' <img src="'.lang_id_to_imgpath($lang_id).'" class="img-circle" /></h4>',
 				'<p>',
 					form_label($lang['misc_headline'], 'title_'.$language_abbr),
@@ -197,5 +178,13 @@ echo '<div class="row">';
 echo '</div>';
 echo form_close();
 
+
 echo "<script src='".base_url()."/web/js/libs/jquery.min.js'></script>
-<script src='".base_url()."/web/js/load_images.js'></script>";
+<script src='".base_url()."/web/js/load_images.js'></script>
+<script src='".base_url()."/web/js/libs/image-picker.min.js'></script>";
+
+?>
+
+<script>
+	$("select").imagepicker();
+</script>

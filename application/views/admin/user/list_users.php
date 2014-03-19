@@ -1,5 +1,5 @@
 
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h3>
 		<?php
 		echo isset($query) ? $lang['misc_searchresult'].': <i>'.$query.'</i>' : $lang['admin_listusers'];

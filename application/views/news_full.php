@@ -29,9 +29,9 @@
 
 	$news_story = text_format($news->text);
 	?>
-	<div class="main-box news clearfix">
+	<div class="main-box box-body news clearfix">
 		<h1>
-			<?php echo $news->title; ?>
+			<?php echo $news->title;?>
 			<img src="<?php echo lang_id_to_imgpath($news->lang_id); ?>" class="img-circle pull-right" />
 		</h1>
 		<?php echo $news_story; ?>

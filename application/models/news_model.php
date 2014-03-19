@@ -162,7 +162,7 @@ class News_model extends CI_Model
 		$query = $this->db->get();
 		$translations = $query->result();
 
-		$this->db->select("news.*, news_images.height, news_images.position, news_images.size, news_images.images_id, images.image_original_filename");
+		$this->db->select("news.*, news_images.images_id, images.image_original_filename");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
 		$this->db->join("news_sticky", 'news.id = news_sticky.news_id', 'left');
@@ -200,7 +200,7 @@ class News_model extends CI_Model
 		$query = $this->db->get();
 		$translations = $query->result();
 
-		$this->db->select("news.*, news_images.height, news_images.position, news_images.size, news_images.images_id, images.image_original_filename");
+		$this->db->select("news.*, news_images.images_id, images.image_original_filename");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->select("users.first_name, users.last_name");
 		$this->db->from("news");

@@ -1,7 +1,7 @@
 <?php
 echo isset($_GET['confdel']) ? '<div class="alert alert-success">'.$lang['misc_done'].'</div>' : '';
 ?>
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2>
 		<?php
 		echo $lang['admin_groups_editmembers'];
@@ -47,7 +47,7 @@ echo isset($_GET['confdel']) ? '<div class="alert alert-success">'.$lang['misc_d
 if(isset($groups_year_id))
 {
 ?>
-	<div class="main-box clearfix margin-top">
+	<div class="main-box box-body clearfix margin-top">
 		<h2><?php echo $lang['misc_delete']; ?></h2>
 		<?php echo form_open('admin/groups/remove_year/'.$groups_year_id); ?>
 			<p>

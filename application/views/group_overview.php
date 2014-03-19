@@ -5,7 +5,7 @@ $most_recent_group = end($group_years);
 foreach($groups as $group)
 {
 	//do_dump($group);
-	echo 	'<div class="main-box clearfix">
+	echo 	'<div class="main-box box-body clearfix">
 				<h2>',$group->name,'</h2>',
 				text_format($group->description);
 	echo '<ul class = "clearfix">';

@@ -30,7 +30,7 @@ elseif(isset($message) && $message == 'error')
 // do all the printing
 echo form_open($action);
 ?>
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2><?php echo $lang['admin_editpage']; ?> <small><?php echo anchor('admin/page', $lang['misc_back']); ?></small></h2>
 	<div class="row">
 		<div class="col-sm-4">
@@ -100,7 +100,7 @@ echo '<div class="row">';
 
 		echo '
 		<div class="col-sm-6">
-			<div class="main-box clearfix margin-top">
+			<div class="main-box box-body clearfix margin-top">
 				<h4>',$language_name,' <img src="'.lang_id_to_imgpath($lang_id).'" class="img-circle" /></h4>',
 				'<p>',
 					form_label($lang['misc_headline'], 'title_'.$language_abbr),

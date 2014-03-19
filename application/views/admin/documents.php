@@ -1,5 +1,5 @@
 
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<!-- Dropzone setup -->
 	<script type="text/javascript">
 		// AcceptedFiles and maxFilesize are set in documents_model
@@ -79,7 +79,7 @@
 	</form>
 </div><!-- /.main-box -->
 
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h2>Dokumentarkiv för <?php echo $group; ?></h2>
 
 	<ul class="list-unstyled box-list">

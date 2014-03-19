@@ -3,12 +3,12 @@ if(!empty($message))
 	echo '<div class="alert alert-success">'.$lang['misc_done'].'</div>';
 
 echo '
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h3>',$lang['admin_addpage'],'</h3>
 	<p>',anchor('admin/page/create', $lang['admin_createnewpagebyclicking']),'</p>
 </div>';
 ?>
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h3>
 		<?php echo $lang['admin_adminpage']; ?>
 	</h3>

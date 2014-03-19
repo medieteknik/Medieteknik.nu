@@ -10,7 +10,7 @@ if($is_logged_in) {
 $readweb = str_replace(array('http://', 'https://'), '', $user->web);
 
 ?>
-<div class="main-box clearfix profile">
+<div class="main-box box-body clearfix profile">
 	<div class="row">
 		<div class="col-sm-3">
 			<p><?php echo gravatarimg($user, 300, ' class="img-responsive img-circle"'); ?></p>
@@ -54,7 +54,7 @@ if(count($user->news) > 0)
 		if(count($user->forum_posts) > 0)
 		{
 			?>
-			<div class="main-box clearfix margin-top">
+			<div class="main-box box-body clearfix margin-top">
 				<h4><?php echo $lang['user_profile_posts'].' '.$user->first_name; ?></h4>
 				<ul class="list-unstyled box-list">
 					<?php
@@ -76,7 +76,7 @@ if(count($user->news) > 0)
 		{
 			echo ($boxes == 2 && count($user->forum_posts) > 0) ? '</div><div class="col-sm-6">' : '';
 			?>
-				<div class="main-box clearfix margin-top">
+				<div class="main-box box-body clearfix margin-top">
 					<h4><?php echo $lang['user_profile_groups']; ?></h4>
 					<ul class="list-unstyled box-list">
 						<?php
@@ -99,7 +99,7 @@ if(count($user->news) > 0)
 	{
 	?>
 		<div class="col-sm-6">
-			<div class="main-box clearfix margin-top">
+			<div class="main-box box-body clearfix margin-top">
 				<h4><?php echo $lang['user_profile_news'].' '.$user->first_name; ?></h4>
 				<div class="profile-news">
 					<?php

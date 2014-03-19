@@ -1,4 +1,4 @@
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<?php
 	foreach($content as $page){
 		?>

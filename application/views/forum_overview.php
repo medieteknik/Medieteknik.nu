@@ -3,7 +3,7 @@
 // do_dump($categories_array);
 // do_dump($ancestors_array);
 
-echo '<div class="main-box clearfix forum-view">';
+echo '<div class="main-box box-body clearfix forum-view">';
 
 if($ancestors_array)
 	render_breadcrumbs($ancestors_array);
@@ -33,7 +33,7 @@ echo '</div>';
 
 if($posting_allowed === true)
 {
-	echo '<div class="main-box clearfix forum-view margin-top">';
+	echo '<div class="main-box box-body clearfix forum-view margin-top">';
 	if($is_logged_in)
 	{
 		echo '<h2>'.$lang['forum_posttopic'].'</h2>';

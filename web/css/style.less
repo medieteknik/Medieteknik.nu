@@ -223,7 +223,7 @@ body {
 	padding: 0;
 
 	.main-box {
-		padding: 0 15px;
+		//padding: 0;
 		background: @contentbg;
 		.boxshadow(0px 1px 3px, @shadowcolor);
 
@@ -244,6 +244,10 @@ body {
 			width: auto;
 			margin-top: -3px;
 		}
+	}
+
+	.box-body{
+		padding: 0 15px;
 	}
 }
 /* Styles specific for the large carousel on index */
@@ -288,6 +292,7 @@ body {
 .news {
 	margin-bottom: 20px;
 
+
 	h2 {
 		font-size: 170%;
 
@@ -312,7 +317,12 @@ body {
 	p {
 		padding: 5px 0 5px;
 	}
+
+	.news-image {
+		padding: 0;
+	}
 }
+
 /*********** PROFILE *************/
 .profile {
 	padding: 15px !important;

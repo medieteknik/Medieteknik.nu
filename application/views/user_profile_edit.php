@@ -64,7 +64,7 @@ if(isset($status) && strlen($status) > 0)
 
 
 echo form_open('user/edit_profile/runedit'),
-'<div class="main-box clearfix profile">
+'<div class="main-box box-body clearfix profile">
 	<h3>',
 		$lang['profile_edit'],
 		' <small>',get_full_name($user),' ',anchor('user', $lang['profile_back']),'</small>',

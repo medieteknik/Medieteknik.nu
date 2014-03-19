@@ -17,7 +17,7 @@ $password = array(
 
 
 echo form_open('user/checklogin');
-echo '<div class="main-box clearfix">';
+echo '<div class="main-box box-body clearfix">';
 echo '<h2>'.$lang['menu_login'].'</h2>';
 if($attempt !== '')
   echo '<p class="notice red">'.$lang['user_login_fail'].'</p>';

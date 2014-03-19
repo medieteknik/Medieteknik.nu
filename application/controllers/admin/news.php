@@ -103,7 +103,7 @@ class News extends MY_Controller
 		}
 
 		// get draft and approved setting
-		$draft = 0; $approved = 0; $imgheight = 150; $size = 1; $position = 1;
+		$draft = 0; $approved = 0;
 		if($this->input->post('draft') == 1)
 		{
 			$draft = 1;
@@ -111,18 +111,6 @@ class News extends MY_Controller
 		if($this->input->post('approved') == 1)
 		{
 			$approved = 1;
-		}
-		if(is_numeric($this->input->post('img_height')) && $this->input->post('img_height') >= 75 && $this->input->post('img_height') <= 400)
-		{
-			$imgheight = $this->input->post('img_height');
-		}
-		if(is_numeric($this->input->post('img_size')) && $this->input->post('img_size') >= 1 && $this->input->post('img_size') <= 4)
-		{
-			$size = $this->input->post('img_size');
-		}
-		if(is_numeric($this->input->post('img_position')) && $this->input->post('img_position') >= 1 && $this->input->post('img_position') <= 2)
-		{
-			$position = $this->input->post('img_position');
 		}
 
 
@@ -173,15 +161,23 @@ class News extends MY_Controller
 		}
 
 		$images_id = 0;
-		if ($this->upload->do_upload('img_file'))
+		if($this->input->post('image_id') != '')
 		{
-			if ($news_id != 0)
-				$id = $news_id;
+			$images_id = $this->input->post('image_id');
+		}
+		else
+		{
+			if ($this->upload->do_upload('img_file'))
+			{
+				if ($news_id != 0)
+					$id = $news_id;
 
-			$images_id = $this->Images_model->add_uploaded_image($this->upload->data(), $this->login->get_id(), 'News', 'News');
+				$images_id = $this->Images_model->add_uploaded_image($this->upload->data(), $this->login->get_id(), 'News', 'News');
+			}
 		}
 
-		$this->Images_model->add_or_replace_news_image($id,$images_id,$size,$position,$imgheight);
+		echo $images_id;
+		$this->Images_model->add_or_replace_news_image($id,$images_id);
 		$this->db->trans_complete();
 		redirect('admin/news/edit/'.($id ? $id : $news_id).'/success', 'location');
 	}

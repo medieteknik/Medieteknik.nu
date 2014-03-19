@@ -91,34 +91,25 @@ class Images_model extends CI_Model
 			unlink('user_content/images/original/'.$res->image_original_filename);
 		}
 		$this->db->delete('images', array('id' => $id)); 
-		$this->db->delete('news_images', array('images_id' => $id)); 
+		$this->db->delete('news_images', array('images_id' => $id));
+		$this->db->delete('carousel_images', array('images_id' => $id));
 	}
 
-	function add_or_replace_news_image($news_id, $images_id, $size, $position, $height)
+	function add_or_replace_news_image($news_id, $images_id)
 	{
 		$query = $this->db->get_where('news_images', array('news_id' => $news_id), 1, 0);
 		if ($query->num_rows() == 0) 
 		{
+
 			$data = array(
 				'news_id' => $news_id,
 				'images_id' => $images_id,
-				'size' => $size,
-				'position' => $position,
-				'height' => $height,
 				);
 			$this->db->insert('news_images', $data);
-		} else {
-			$data = array(
-				'size' => $size,
-				'position' => $position,
-				'height' => $height,
-				);
-			if ($images_id != 0) {
-				$data['images_id'] = $images_id;
-			}
-
+		}
+		elseif($images_id != 0){
 			$this->db->where('news_id', $news_id);
-			$this->db->update('news_images', $data); 
+			$this->db->update('news_images', array('images_id' => $images_id)); 
 		}
 	}
 
@@ -129,7 +120,7 @@ class Images_model extends CI_Model
 		$result = $query->result();
 
 		foreach($result as &$res){
-			$image = new imagemanip($res->image_original_filename, 'zoom', 100, 100);
+			$image = new imagemanip($res->image_original_filename, 'zoom', 140, 140);
 			$res->image = $image;
 		}
 
@@ -147,7 +138,7 @@ class Images_model extends CI_Model
 		$result = $query->result();
 		foreach($result as &$res){
 			$image = new imagemanip();
-			$image->create($res->image_original_filename, 'zoom', 100, 100);
+			$image->create($res->image_original_filename, 'zoom', 140, 140);
 			$res = $image->get_img_tag();
 		}
 		return $result;

@@ -110,6 +110,8 @@ $lang['admin_addnews'] = "Create news";
 	$lang['admin_news_create'] = "Create new news post";
 	$lang['admin_news_sticky'] = "Sticky post";
 	$lang['admin_news_delete'] = "Delete this entry! (Draft required.)";
+	$lang['admin_news_uploadimage'] = "Upload image..";
+	$lang['admin_news_existingimage'] = "..or use an existing image";
 $lang['admin_editimages'] = "Edit images";
 $lang['admin_adminimages'] = "Admin images";
 $lang['admin_admingroups'] = "Admin groups";
@@ -229,6 +231,7 @@ $lang['misc_image'] = "Image";
 $lang['misc_images'] = "Images";
 $lang['misc_link'] = "Link";
 $lang['misc_upload'] = "Upload";
+
 
 // error
 $lang['error_error'] = "Error!";

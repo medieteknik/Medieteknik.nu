@@ -24,7 +24,7 @@ if(isset($status))
 
 echo form_open('admin/groups/add_member/'.$groups_year_id.'/'.$group_id.'/search', array('method' => 'get'));
 ?>
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2>
 		<?php
 		echo $lang['admin_searchusers'];
@@ -41,7 +41,7 @@ echo form_close();
 if(isset($result) && is_array($result))
 {
 	?>
-	<div class="main-box clearfix margin-top">
+	<div class="main-box box-body clearfix margin-top">
 		<h2><?php echo $lang['misc_searchresult'].' <em>'.$query.'</em> ('.sizeof($result).' '.$lang['misc_searchhits'].')'; ?></h2>
 
 		<div class="table-responsive">
