@@ -176,7 +176,6 @@ class News extends MY_Controller
 			}
 		}
 
-		echo $images_id;
 		$this->Images_model->add_or_replace_news_image($id,$images_id);
 		$this->db->trans_complete();
 		redirect('admin/news/edit/'.($id ? $id : $news_id).'/success', 'location');
