@@ -118,7 +118,6 @@ class Forum extends MY_Controller
 
 			if($c->posting_allowed == 1)
 			{
-
 				if($this->login->is_logged_in())
 				{
 					$main_data['postform'] = TRUE;
@@ -138,5 +137,27 @@ class Forum extends MY_Controller
 		$this->load->view('templates/main_template',$template_data);
 	}
 
+	function report()
+	{
+		if($this->input->post('postid'))
+		{
+			$post_id = $this->input->post('postid');
+			$user_id = $this->login->get_id();
 
+			$result = array(
+						'post_id' => $post_id,
+						'user_id' => $user_id,
+						'report'  => $this->Forum_model->report_post($post_id, $user_id)
+					);
+
+			$main_data['result'] = $result;
+			$main_data['message'] = 'Reporting post id '.$post_id;
+		}
+		else
+		{
+			$main_data['result'] = false;
+			$main_data['message'] = 'No post data sent';
+		}
+		$this->load->view('templates/json', $main_data);
+	}
 }

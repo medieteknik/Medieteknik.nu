@@ -542,6 +542,29 @@ function get_forum_reply_guest_fields()
 	return $fields;
 }
 
+function get_forum_report_fields()
+{
+	$fields = array(
+		'id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+			'auto_increment' => TRUE
+		),
+		'reply_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
+		'user_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		)
+		);
+	return $fields;
+}
+
 function get_privileges_fields()
 {
 	$fields = array(

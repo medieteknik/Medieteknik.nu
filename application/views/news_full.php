@@ -39,11 +39,11 @@
 			<p>
 				<?php echo $lang['misc_published']; ?>
 				<i class="date" title="<?php echo $news->date; ?>">
-					<?php echo readable_date($news->date, $lang); ?>
+					<?php echo strtolower(readable_date($news->date, $lang)); ?>
 				</i>
 				<?php
 				$user = gravatarimg($news->gravatar, 25, 'class="img-circle"').' '.get_full_name($news);
-				echo $lang['misc_by'].' '.anchor('user/profile/'.$news->user_id, $user);
+				echo $lang['misc_by'].' '.anchor('user/profile/'.$news->userid, $user);
 				?>
 			</p>
 		</div>

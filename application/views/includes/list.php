@@ -7,10 +7,10 @@
 			$data = '';
 
 			if(isset($item['data']) && $item['data'] != '') {
-				$data = '<span>'.text_strip($item['data']).'</span>';
+				$data = '<span>'.($item['data']).'</span>';
 			}
 
-			$text = text_strip($item['title']).$data;
+			$text = ($item['title']).$data;
 
 			if(isset($item['href']) && $item['href'] != '') {
 				echo '<li>',anchor($item['href'], $text),'</li>';

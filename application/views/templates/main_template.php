@@ -51,10 +51,10 @@
 								<?php
 								if(substr(site_url(), -2, 2)=='en')
 									echo anchor(substr(site_url(), 0, -2).'se'.uri_string(),
-										"<img src=\"".base_url()."web/img/flags/se_big.png\" class=\"img-circle\" />".$misc_swedish_native);
+										$misc_swedish_native);
 								else
 									echo anchor(substr(site_url(), 0, -2).'en'.uri_string(),
-										"<img src=\"".base_url()."web/img/flags/gb_big.png\" class=\"img-circle\" />".$misc_english_native);
+										$misc_english_native);
 
 								?>
 							</div>
@@ -150,6 +150,9 @@
 		</footer>
 		<!-- END footer -->
 		<!-- JavaScript at the bottom for fast page loading -->
+		<script>
+			var BASE_URL = '<?php echo base_url(); ?>';
+		</script>
 
 		<!-- Grab jQuery CDNs jQuery, with a protocol relative URL; fall back to local if offline -->
 		<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>

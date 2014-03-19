@@ -225,7 +225,17 @@ class Forum_model extends CI_Model
 		$this->db->where("forum_reply.topic_id", $id);
 		$this->db->order_by("forum_reply.reply_date ASC");
 		$query = $this->db->get();
-		return $query->result();
+		$result = $query->result();
+
+		if($this->login->is_logged_in())
+		{
+			$user_id = $this->login->get_id();
+			foreach ($result as $post) {
+				$post->reports = $this->get_reports($post->id, $user_id);
+			}
+		}
+
+		return $result;
 	}
 
 	/**
@@ -299,6 +309,35 @@ class Forum_model extends CI_Model
 
 		$this->db->where('id', $topic_id);
 		$this->db->update('forum_topic', $data);
+	}
+
+	function report_post($post_id, $user_id)
+	{
+		if($this->report_exists($post_id, $user_id))
+			return true;
+
+		$data = array('reply_id' => $post_id, 'user_id' => $user_id);
+		$insert = $this->db->insert('forum_report', $data);
+		return ($insert ? $this->db->insert_id() : false);
+	}
+
+	function report_exists($post_id, $user_id)
+	{
+		$this->db->where('reply_id', $post_id);
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get('forum_report');
+		return $query->num_rows();
+	}
+
+	function get_reports($post_id, $user_id = 0)
+	{
+		if($user_id !== 0)
+			$this->db->where('user_id', $user_id);
+
+		$this->db->where('reply_id', $post_id);
+		$query = $this->db->get('forum_report');
+
+		return $query->result();
 	}
 }
 

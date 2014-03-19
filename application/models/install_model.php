@@ -31,6 +31,7 @@ class Install_model extends CI_Model
 		$this->create_forum_topic_table();
 		$this->create_forum_reply_table();
 		$this->create_forum_reply_guest_table();
+		$this->create_forum_report_table();
 		$this->create_privileges_table();
 		$this->create_users_privileges_table();
 		$this->create_images_table();
@@ -73,6 +74,7 @@ class Install_model extends CI_Model
 		$this->dbforge->drop_table('forum_topic');
 		$this->dbforge->drop_table('forum_reply');
 		$this->dbforge->drop_table('forum_reply_guest');
+		$this->dbforge->drop_table('forum_report');
 		$this->dbforge->drop_table('privileges');
 		$this->dbforge->drop_table('users_privileges');
 		$this->dbforge->drop_table('images');
@@ -736,6 +738,21 @@ class Install_model extends CI_Model
 		}
 	}
 
+	function create_forum_report_table()
+	{
+		if(!$this->db->table_exists('forum_report') || isset($_GET['drop']))
+		{
+			$this->load->dbforge();
+			// the table configurations from /application/helpers/create_tables_helper.php
+			$this->dbforge->add_field(get_forum_report_fields()); 	// get_user_table_fields() returns an array with the fields
+			$this->dbforge->add_field("`report_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"); // manual adding date
+			$this->dbforge->add_key('id', true);
+			$this->dbforge->create_table('forum_report');
+
+			log_message('info', "Created table: forum_report");
+		}
+	}
+
 	function create_privileges_table()
 	{
 		if(!$this->db->table_exists('privileges') || isset($_GET['drop']))
@@ -1165,9 +1182,9 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 			$carousel_type = 1;
 			$translations = array(
 									array("lang" => "se", "title" => "Civilingenjör i Medieteknik – en utbildning för dig?",
-									 "content" => "http://player.vimeo.com/video/73557097?title=0"),
+									 "content" => "//player.vimeo.com/video/89094258?title=0&amp;byline=0&amp;portrait=0&amp;color=a6a6a6"),
 									array("lang" => "en", "title" => "Master of Science in Media Technology - an education for you?",
-									 "content" => "http://player.vimeo.com/video/73557097?title=0"),
+									 "content" => "//player.vimeo.com/video/89094258?title=0&amp;byline=0&amp;portrait=0&amp;color=a6a6a6"),
 								);
 			$this->Carousel_model->add_carousel_item(9, $translations, $carousel_type, 1, 0, 0);
 
