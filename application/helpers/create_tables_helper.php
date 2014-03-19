@@ -719,22 +719,6 @@ function get_news_images_fields()
 			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
-		'size' => array(
-			'type' => 'INT',
-			'constraint' => 5,
-			'unsigned' => TRUE,
-		),
-		'position' => array(
-			'type' => 'INT',
-			'constraint' => 5,
-			'unsigned' => TRUE,
-		),
-		'height' => array(
-			'type' => 'INT',
-			'constraint' => 5,
-			'unsigned' => TRUE,
-		),
-
 		);
 	return $fields;
 }

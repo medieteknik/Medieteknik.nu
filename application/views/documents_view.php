@@ -1,6 +1,6 @@
 <?php
 echo '
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 <h2>Dokumentarkiv för ' . $group . '</h2>
 <ul class = "document-list clearfix">';
 

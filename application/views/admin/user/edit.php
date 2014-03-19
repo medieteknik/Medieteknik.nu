@@ -80,7 +80,7 @@ if(!empty($message))
 ?>
 
 <?php echo form_open('admin/user/edit/'.$user->id.'/edit'); ?>
-<div class="main-box clearfix profile">
+<div class="main-box box-body clearfix profile">
 	<h3>
 		<?php
 		echo $lang['admin_edituser'].' <em>'.get_full_name($user).'</em> <small>',
@@ -117,7 +117,7 @@ if(!empty($message))
 		</div>
 	</div>
 </div>
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h4><?php echo $lang['user_info']; ?></h4>
 	<div class="row">
 		<div class="col-sm-6">
@@ -181,7 +181,7 @@ if($this->login->has_privilege('superadmin'))
 {
 ?>
 
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h4>Admin privileges</h4>
 	<div class="row">
 		<div class="col-sm-6">

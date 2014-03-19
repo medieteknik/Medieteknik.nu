@@ -1,4 +1,4 @@
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
     <h2><?php echo $title; ?></h2>
     <ul class="box-list list-unstyled">
 		<?php

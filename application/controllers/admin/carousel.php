@@ -184,7 +184,7 @@ class Carousel extends MY_Controller
 		$images_id = 0;
 		if ($this->upload->do_upload('img_file'))
 		{
-			$images_id = $this->Images_model->add_uploaded_image($this->upload->data(), $this->login->get_id(), 'News', 'News');
+			$images_id = $this->Images_model->add_uploaded_image($this->upload->data(), $this->login->get_id(), 'Carousel', 'Carousel');
 		}
 
 		$photo = $this->input->post('photo');

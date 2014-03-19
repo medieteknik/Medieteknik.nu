@@ -74,7 +74,7 @@ class Images extends MY_Controller
 														$description
 													);
 		}
-		redirect('admin_images', 'refresh');
+		redirect('admin/images', 'refresh');
 	}
 
 	function delete($id)

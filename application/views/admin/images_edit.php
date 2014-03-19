@@ -22,7 +22,7 @@ $img_file = array(
 $action = 'admin/images/upload';
 echo
 form_open_multipart($action),
-'<div class="main-box clearfix">
+'<div class="main-box box-body clearfix">
 	<h2>', $lang['admin_addimage'], '</h2>',
 	form_label($lang['misc_title'], 'title'),
 	form_input($title),

@@ -3,39 +3,32 @@ $i = 0;
 echo '<div class="row">';
 foreach($news_array as $news_item)
 {
-	// do_dump($news_item);
-	$img_div = "";
-	$news_class = "main-box";
-	$style = "";
-	if($news_item->image_original_filename != "")
-	{
-		$image = new imagemanip();
-		$image->create($news_item->image_original_filename, 'zoom', news_size_to_px($news_item->size), $news_item->height);
+	$news_story = news_excerpt(text_format($news_item->text, '<p>','</p>', FALSE), 400);
+	?>
+		<div class="col-sm-12">
+			<div class="main-box news clearfix">
+				<?php
+				$image_col = 'col-sm-5';
+				$text_col = 'col-sm-7';
 
-		$img_div = '<img class="'.news_size_to_class($news_item->size).'" src="'.$image->get_filepath().'" alt="'.$news_item->title.'" />';
-		$news_class = news_size_to_class_invert($news_item->size);
-		$style = 'max-height:'.$news_item->height.'px; overflow: hidden;';
-	}
-
-	$lang_img = '<img src="'.lang_id_to_imgpath($news_item->lang_id).'" alt="flag" class="news_flag" />';
-	$news_div = '<div style="'.$style.'" class="'.$news_class.'">'.$lang_img.'<h2>'.$news_item->title.'</h2><p>'.text_format($news_item->text, '<p>','</p>', FALSE).'</p></div>';
-
-	$story = "";
-	if($news_item->position == 1 || $news_item->size == 4)
-	{
-		$story = $img_div.$news_div;
-	} else {
-		$story = $news_div.$img_div;
-	}
-	// echo anchor('news/view/'.$news_item->id, $story, array("class" => "main-box news clearfix", "title" => $lang['news_tothenews'] ));
-
-	// every third news is displayed large
-	if($i%3 == 0)
-	{
-		$news_story = news_excerpt(text_format($news_item->text, '<p>','</p>', FALSE), 500);
-		?>
-			<div class="col-sm-12">
-				<div class="main-box news clearfix">
+				// Image is on the right on every other news
+				if($i%2 == 0)
+				{
+					$image_col .= ' col-sm-push-7';
+					$text_col .= ' col-sm-pull-5';
+				}
+				if($news_item->image_original_filename != "")
+				{
+					echo '<div class="'.$image_col.' news-image">';
+					echo '<img src="'.base_url().'user_content/images/original/'.$news_item->image_original_filename.'" class="img-responsive" alt="Responsive image">';
+					echo '</div>';
+					echo '<div class="'.$text_col.' box-body">';
+				}
+				else
+				{
+					echo '<div class="col-sm-12 box-body">';
+				}
+				?>
 					<h2>
 						<?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', true), $news_item->title, array("title" => $lang['news_tothenews'])); ?>
 						<?php
@@ -56,45 +49,17 @@ foreach($news_array as $news_item)
 					</p>
 				</div>
 			</div>
-		</div> <!-- /.row -->
-		<div class="row">
-		<?php
-	}
-	else
-	{
-		$news_story = news_excerpt(text_format($news_item->text, '<p>','</p>', FALSE), 200);
-		?>
-		<div class="col-sm-6">
-			<div class="main-box news clearfix">
-				<h2>
-					<img src="<?php echo lang_id_to_imgpath($news_item->lang_id); ?>" class="img-circle pull-right" />
-					<?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', true), $news_item->title, array("title" => $lang['news_tothenews'])); ?>
-					<?php
-					if($news_item->draft)
-						echo '<span class="label label-default">'.$lang['misc_draft'].'</span>';
-					?>
-				</h2>
-				<h3>
-					<?php echo $lang['misc_published']; ?>
-					<i class="date" title="<?php echo $news_item->date; ?>">
-						<?php echo strtolower(readable_date($news_item->date, $lang)); ?>
-					</i>
-					<?php echo $lang['misc_by'].' '.anchor('user/profile/'.$news_item->userid, $news_item->first_name.' '.$news_item->last_name); ?>
-				</h3>
-				<p>
-					<?php echo $news_story; ?>... <?php echo anchor('news/view/'.$news_item->id.'/'.url_title($news_item->title, '-', true), $lang['misc_readmore'].'!');?>
-				</p>
-			</div>
 		</div>
-		<?php
+	</div> <!-- /.row -->
+	<div class="row">
+	<?php
 
-	}
 	// increment counter
 	$i++;
 }
-//do_dump($news_array);
+echo 	'</div>'; // row
+
 ?>
-</div><!-- /.row -->
 <div class="row">
 	<div class="col-sm-12">
 		<p>

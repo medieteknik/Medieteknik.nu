@@ -1,4 +1,4 @@
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2>Assosciation</h2>
 	<p>
 		Lorizzle ipsizzle crunk shiznit bling bling, fo adipiscing funky fresh. Nullam sapien velizzle, gangsta volutpizzle, suscipizzle shut the shizzle up, boofron vizzle, shit. Pellentesque shit tortor. Sizzle rizzle. Fo shizzle shizzlin dizzle dolizzle dapibizzle black tempizzle fo shizzle my nizzle. Mauris dizzle nibh mofo turpizzle. Vestibulum in tortizzle. Check it out sheezy rhoncizzle . In hac habitasse my shizz dictumst. Donec dapibizzle. Hizzle tellus urna, pretium eu, mattizzle break it down, funky fresh vitae, nunc. That's the shizzle suscipizzle. Integer sempizzle my shizz nizzle purus.

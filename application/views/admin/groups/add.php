@@ -28,7 +28,7 @@ if(isset($status) && !$status)
 
 echo form_open('admin/groups/add_year/'.$group_id.'/create');
 ?>
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h3>
 		<?php echo $lang['admin_groups_add_year']; ?>
 	</h3>

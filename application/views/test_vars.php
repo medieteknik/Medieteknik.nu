@@ -1,5 +1,5 @@
 
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2>variabeltest</h2>
 	<p>
 

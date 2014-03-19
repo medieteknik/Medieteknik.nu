@@ -20,13 +20,13 @@ $lastname = array(
 
 if(isset($error))
 {
-	echo '<div class="main-box clearfix"><p class="notice red">'.$lang['error_common'].'</p></div>';
+	echo '<div class="main-box box-body clearfix"><p class="notice red">'.$lang['error_common'].'</p></div>';
 }
 
 echo form_open('user/new_user/'.$redir_arr[0].'/'.$redir_arr[1]);
 ?>
 
-<div class="main-box clearfix profile">
+<div class="main-box box-body clearfix profile">
 	<h2>Nytt konto: <i><?php echo $user; ?></i></h2>
 	<div class="row">
 		<div class="col-sm-8">

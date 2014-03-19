@@ -4,7 +4,7 @@
 
 $first = array_shift($replies);
 ?>
-<div class="main-box clearfix forum-view forum-reply">
+<div class="main-box box-body clearfix forum-view forum-reply">
 	<?php
 		render_breadcrumbs($ancestors_array);
 		render_forum($categories_array);
@@ -60,7 +60,7 @@ $first = array_shift($replies);
 foreach($replies as $reply)
 {
 	?>
-	<div class="main-box clearfix forum-view margin-top forum-reply" id="replyid-<?php echo $reply->id; ?>">
+	<div class="main-box box-body clearfix forum-view margin-top forum-reply" id="replyid-<?php echo $reply->id; ?>">
 		<p><?php echo text_format($reply->reply); ?></p>
 		<div class="metadata">
 			<p>
@@ -108,7 +108,7 @@ foreach($replies as $reply)
 
 if(isset($postform))
 {
-	echo '<div class="main-box clearfix forum-view margin-top">';
+	echo '<div class="main-box box-body clearfix forum-view margin-top">';
 	if(isset($guest))
 	{
 		echo 'Gästformulär';

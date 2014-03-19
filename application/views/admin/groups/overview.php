@@ -6,12 +6,12 @@ if($message == 'error')
 	echo '<div class="alert alert-danger">'.$lang['error_error'].'</div>';
 ?>
 
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2><?php echo $lang['admin_addgroup']; ?></h2>
 	<p><?php echo anchor('admin/groups/create', $lang['admin_createnewgroupbyclicking']); ?></p>
 </div>
 
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h4><?php echo $lang['admin_groups_official']; ?></h4>
 
 	<ul class="box-list list-unstyled">

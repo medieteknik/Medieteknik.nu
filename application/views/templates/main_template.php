@@ -24,6 +24,9 @@
 	    <!-- Load DropZone -->
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>web/css/dropzone.css" type="text/css" />
 
+	    <!-- Load Image Picker -->
+	    <link rel="stylesheet" href="<?php echo base_url(); ?>web/css/image-picker.css" type="text/css" />
+
 		<link rel="shortcut icon" href="<?php echo base_url(); ?>/web/img/favicon.ico" />
 		<link rel="apple-touch-icon" href="<?php echo base_url(); ?>web/img/apple-touch-icon/apple-touch-icon-precomposed.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url(); ?>web/img/apple-touch-icon/apple-touch-icon-72x72-precomposed.png" />

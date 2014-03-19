@@ -18,7 +18,7 @@ if(isset($group) && $group != false) {
 // do all the printing
 echo form_open($action);
 ?>
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h3><?php echo isset($id) ? $lang['admin_editgroup'] : $lang['admin_addgroup']; ?> <small><?php echo anchor('admin/groups', $lang['misc_back']); ?></small></h3>
 	<div class="row">
 		<div class="col-sm-4">
@@ -46,7 +46,7 @@ echo form_open($action);
 	</div>
 </div>
 
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h3><?php echo $lang['misc_translations']; ?></h3>
 	<div class="row">
 		<?php
@@ -116,7 +116,7 @@ echo form_open($action);
 </div>
 <?php echo form_close(); ?>
 
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<?php
 	if (isset($id) && $id)
 	{

@@ -1,6 +1,6 @@
 <?php
 echo '
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2>',$lang['admin_addcarouselitem'],'</h2>
 	<p>',anchor('admin/carousel/create/images', $lang['admin_addcarouselimageslidebyclicking']),'</p>
 	<p>',anchor('admin/carousel/create/embedded', $lang['admin_addcarouselembeddedslidebyclicking']),'</p>
@@ -24,7 +24,7 @@ foreach($carousel_array as $item)
 
 	}
 
-	echo '<div class="main-box clearfix margin-top">';
+	echo '<div class="main-box box-body clearfix margin-top">';
 		echo '<h4>'.$item->carousel_order.'. '.$type.'</h4>';
 		echo '<p>';
 

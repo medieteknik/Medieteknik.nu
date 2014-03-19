@@ -33,7 +33,7 @@ if($whattodo == 'edit')
 
 echo form_open('admin/groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$member->user_id.'/edit');
 ?>
-<div class="main-box clearfix">
+<div class="main-box box-body clearfix">
 	<h2>
 		<?php echo $lang['admin_groups_editmember']; ?>
 		<small>
@@ -61,7 +61,7 @@ echo form_open('admin/groups/edit_member/'.$groups_year_id.'/'.$group_id.'/'.$me
 	</div>
 </div>
 <?php echo form_close(); ?>
-<div class="main-box clearfix margin-top">
+<div class="main-box box-body clearfix margin-top">
 	<h3>
 		<?php echo $lang['admin_edituser_drama']; ?>
 	</h3>
