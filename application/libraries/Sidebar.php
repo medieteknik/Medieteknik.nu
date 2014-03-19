@@ -66,12 +66,21 @@ class Sidebar
 		$this->CI->load->model('Notification_model');
 
 		$notif = $this->CI->Notification_model->get_admin_notifications();
+		// do_dump($notif);
 
 		$this->adminmenu['title'] = "Admin";
 		$this->adminmenu['items'] = array(array('title' => $this->lang_data['menu_admin'], 'href' => "admin"));
 
 		if($this->CI->login->has_privilege('news_editor'))
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_adminnews'], 'href' => "admin/news"));
+
+		if($this->CI->login->has_privilege('forum_moderator'))
+		{
+			// this /10 fix is the ugliest thing ever. I'm so sorry for it, I just dont want to spend
+			// another hour searching for the cause of this wierd issue.
+			$forum_reports = $notif->forum_reports > 0 ? ' <span class="badge">'.(($notif->forum_reports)/10).'</span>' : '';
+			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_forum'].$forum_reports, 'href' => "admin/forum"));
+		}
 
 		if($this->CI->login->has_privilege('admin'))
 		{

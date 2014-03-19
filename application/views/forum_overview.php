@@ -18,7 +18,7 @@ if(count($topics_array) > 0)
 		$topic_text = text_strip($topic->topic).
 			' <span class="pull-right">'.
 				get_full_name($topic).', '.
-				readable_date($topic->reply_date, $lang).
+				strtolower(readable_date($topic->reply_date, $lang)).
 			'</span>';
 		echo '<li>',anchor('forum/thread/'.$topic->topic_id, $topic_text),'</li>';
 	}
