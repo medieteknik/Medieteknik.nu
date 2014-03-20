@@ -123,14 +123,14 @@
 								Sweden
 							</p>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-3 col-xs-6">
 							<h1><?php echo $lang['footer_info']; ?></h1>
 							<ul class="list-unstyled">
 								<li><?php echo anchor("/about/website", $lang['footer_aboutsite']); ?></li>
 								<li><?php echo anchor("/about/cookies", $lang['footer_cookies']); ?></li>
 							</ul>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-3 col-xs-6">
 							<h1><?php echo $lang['footer_links']; ?></h1>
 							<ul class="list-unstyled">
 								<li><?php echo anchor('http://liu.se/medieteknik', $lang['footer_mtliu'], 'target="_blank"'); ?></li>

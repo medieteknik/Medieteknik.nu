@@ -175,6 +175,11 @@ $lang['admin_addcarouselitem'] = "Lägg till karusellobjekt";
 $lang['admin_addcarouselimageslidebyclicking'] = "Med bilder";
 $lang['admin_addcarouselembeddedslidebyclicking'] = "Med inbäddat innehåll (ex. video)";
 $lang['admin_removeimage'] = "Ta bort bild";
+	$lang['admin_forum'] = "Moderera forum";
+	$lang['admin_forum_reported'] = "Rapporterade inlägg";
+	$lang['admin_forum_reported_by'] = "raporterade";
+	$lang['admin_forum_show_post'] = "Visa inlägg";
+	$lang['admin_forum_remove'] = "Ta bort rapport";
 
 // date
 $lang['date_yesterday'] = "Igår";
@@ -233,6 +238,7 @@ $lang['misc_image'] = "Bild";
 $lang['misc_images'] = "Bilder";
 $lang['misc_link'] = "Länk";
 $lang['misc_upload'] = "Ladda upp";
+$lang['misc_post'] = "inlägg";
 
 // error
 $lang['error_error'] = "Fel!";

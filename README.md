@@ -63,7 +63,9 @@ To enable pretty urls, the following should be added into <code>.htaccess</code>
 ```
 
 ## 3. Demo/Dev URL
-[http://dev.medieteknik.nu/](http://dev.medieteknik.nu/)
+[Dev branch &mdash; dev.medieteknik.nu](http://dev.medieteknik.nu/)
+
+[Master branch &mdash; new.medieteknik.nu](http://new.medieteknik.nu/)
 
 ## 5. Contact Information
 Questions about the system:

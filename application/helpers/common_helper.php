@@ -264,7 +264,7 @@ function news_excerpt($cont, $length = 200)
 			$cont_notags = $sub_excerpt;
 	}
 
-	return $cont_notags;
+	return trim($cont_notags);
 }
 
 /**

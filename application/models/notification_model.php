@@ -19,8 +19,9 @@ class Notification_model extends CI_Model
 		if(!$this->login->is_admin())
 			return false;
 
-		$this->db->select('SUM(users.new = 1) as new_users');
-		$query = $this->db->get('users');
+		$this->db->select('SUM(users.new = 1) as new_users, COUNT(*) as forum_reports');
+		$this->db->from('users, forum_report');
+		$query = $this->db->get();
 		$res = $query->result();
 
 		return $res[0];

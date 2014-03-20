@@ -175,6 +175,12 @@ $lang['admin_admincarousel'] = "Carousel";
 $lang['admin_addcarouselitem'] = "Add carousel item";
 $lang['admin_addcarouselimageslidebyclicking'] = "With images";
 $lang['admin_addcarouselembeddedslidebyclicking'] = "With embedded content (e.g. video)";
+	$lang['admin_forum'] = "Moderate forums";
+	$lang['admin_forum_reported'] = "Reported posts";
+	$lang['admin_forum_reported_by'] = "reported";
+	$lang['admin_forum_show_post'] = "Show post";
+	$lang['admin_forum_remove'] = "Remove report";
+
 
 // date
 $lang['date_yesterday'] = "Yesterday";
@@ -234,6 +240,7 @@ $lang['misc_image'] = "Image";
 $lang['misc_images'] = "Images";
 $lang['misc_link'] = "Link";
 $lang['misc_upload'] = "Upload";
+$lang['misc_post'] = "post";
 
 
 // error
