@@ -113,8 +113,8 @@ $lang['admin_addnews'] = "Create news";
 	$lang['admin_news_create'] = "Create new news post";
 	$lang['admin_news_sticky'] = "Sticky post";
 	$lang['admin_news_delete'] = "Delete this entry! (Draft required.)";
-	$lang['admin_news_uploadimage'] = "Upload image..";
-	$lang['admin_news_existingimage'] = "..or use an existing image";
+	$lang['admin_news_uploadimage'] = "Upload image";
+	$lang['admin_news_existingimage'] = "or use an existing image";
 $lang['admin_editimages'] = "Edit images";
 $lang['admin_adminimages'] = "Images";
 $lang['admin_admingroups'] = "Groups";
@@ -175,6 +175,7 @@ $lang['admin_admincarousel'] = "Carousel";
 $lang['admin_addcarouselitem'] = "Add carousel item";
 $lang['admin_addcarouselimageslidebyclicking'] = "With images";
 $lang['admin_addcarouselembeddedslidebyclicking'] = "With embedded content (e.g. video)";
+$lang['admin_carousel_changeorder'] = "Change order";
 	$lang['admin_forum'] = "Moderate forums";
 	$lang['admin_forum_reported'] = "Reported posts";
 	$lang['admin_forum_reported_by'] = "reported";
@@ -203,6 +204,8 @@ $lang['misc_unofficial'] = "Unofficial";
 $lang['misc_published'] = "Published";
 $lang['misc_pending'] = "Pending";
 $lang['misc_image'] = "Image";
+$lang['misc_image_blurred'] = "Blurred";
+$lang['misc_image_grayscale'] = "Grayscale";
 $lang['misc_photo'] = "Photo";
 $lang['misc_size'] = "Size";
 $lang['misc_position'] = "Position";
@@ -241,6 +244,8 @@ $lang['misc_images'] = "Images";
 $lang['misc_link'] = "Link";
 $lang['misc_upload'] = "Upload";
 $lang['misc_post'] = "post";
+$lang['misc_embeddedcontent'] = "Embedded content";
+$lang['misc_copyright'] = "Copyright";
 
 
 // error

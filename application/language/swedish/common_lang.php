@@ -112,8 +112,8 @@ $lang['admin_addnews'] = "Skapa nyhet";
 	$lang['admin_news_create'] = "Skapa ny nyhet";
 	$lang['admin_news_sticky'] = "Fastnålad nyhet";
 	$lang['admin_news_delete'] = "Ta bort detta inlägg! (Endast utkast.)";
-	$lang['admin_news_uploadimage'] = "Ladda upp bild..";
-	$lang['admin_news_existingimage'] = "..eller använd en existerande bild." ;
+	$lang['admin_news_uploadimage'] = "Ladda upp bild";
+	$lang['admin_news_existingimage'] = "eller använd en existerande bild." ;
 $lang['admin_editimages'] = "Redigera bilder";
 $lang['admin_adminimages'] = "Bilder";
 $lang['admin_admingroups'] = "Grupper";
@@ -169,11 +169,12 @@ $lang['admin_createnewgroupbyclicking'] = "Skapa en ny grupp genom att klicka h�
 $lang['admin_addmemberbyclicking'] = "Lägg till en ny medlem genom att klicka här";
 $lang['admin_addasmember'] = "Lägg till som medlem";
 $lang['admin_groups_year_error'] = "Kunde inte lägga till nytt år med angivna gränser. Startåret måste vara mer än eller lika med slutåret.";
-
 $lang['admin_admincarousel'] = "Karusell";
 $lang['admin_addcarouselitem'] = "Lägg till karusellobjekt";
 $lang['admin_addcarouselimageslidebyclicking'] = "Med bilder";
 $lang['admin_addcarouselembeddedslidebyclicking'] = "Med inbäddat innehåll (ex. video)";
+$lang['admin_carousel_changeorder'] = "Ändra ordning";
+
 $lang['admin_removeimage'] = "Ta bort bild";
 	$lang['admin_forum'] = "Moderera forum";
 	$lang['admin_forum_reported'] = "Rapporterade inlägg";
@@ -202,6 +203,8 @@ $lang['misc_unofficial'] = "Inofficiell";
 $lang['misc_published'] = "Publicerad";
 $lang['misc_pending'] = "Väntande";
 $lang['misc_image'] = "Bild";
+$lang['misc_image_blurred'] = "Suddig";
+$lang['misc_image_grayscale'] = "Gråskala";
 $lang['misc_photo'] = "Foto";
 $lang['misc_size'] = "Storlek";
 $lang['misc_position'] = "Placering";
@@ -239,6 +242,8 @@ $lang['misc_images'] = "Bilder";
 $lang['misc_link'] = "Länk";
 $lang['misc_upload'] = "Ladda upp";
 $lang['misc_post'] = "inlägg";
+$lang['misc_embeddedcontent'] = "Inbäddat innehåll";
+$lang['misc_copyright'] = "Upphovsrätt";
 
 // error
 $lang['error_error'] = "Fel!";

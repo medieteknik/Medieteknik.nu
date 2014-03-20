@@ -93,13 +93,13 @@ form_open_multipart($action),
 	<h2>'.$lang['misc_image'].'</h2>',
 	$image_div,
 	'<div>',
-	'<h4>'.$lang['admin_news_uploadimage'].'</h4>',
+	'<h4>'.$lang['admin_news_uploadimage'].'..</h4>',
 	'</div>',
 	'<div>',
 		form_upload($img_file),
 	'</div>',
 	'<div>',
-	'<h4>'.$lang['admin_news_existingimage'].'</h4>',
+	'<h4>..'.$lang['admin_news_existingimage'].'</h4>',
 	'</div>';
 //do_dump($images_array);
 if (count($images_array) > 0) {
@@ -113,7 +113,7 @@ if (count($images_array) > 0) {
 		//  	$img->image->get_img_tag(),
 		//  '</div>';
 
-		echo '<option data-img-src="'.$img->image->get_filepath(false).'" value="'.$img->id.'">Cute Kitten 1</option>';
+		echo '<option data-img-src="'.$img->image->get_filepath(false).'" value="'.$img->id.'"></option>';
 		$image_count++;
 	}
 	echo '</select>';

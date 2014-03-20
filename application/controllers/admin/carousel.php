@@ -189,8 +189,10 @@ class Carousel extends MY_Controller
 
 		$photo = $this->input->post('photo');
 		$link = $this->input->post('link');
+		$filter_blurred = $this->input->post('blurred');
+		$filter_grayscale = $this->input->post('grayscale');
 
-		$this->Carousel_model->add_carousel_image($id,$images_id,$photo,$link);
+		$this->Carousel_model->add_carousel_image($id,$images_id,$photo,$link, $filter_blurred, $filter_grayscale);
 
 		redirect('admin/carousel/edit/'.$id, 'refresh');
 	}

@@ -58,32 +58,10 @@
 			}
 			elseif($slide->carousel_type == 2 && !$slide->disabled)
 			{
-				// $photos = array(
-				// 			array(
-				// 				'file' => 'campus-1-peter-modin-liu.jpg',
-				// 				'photo' => 'Peter Modin, LiU',
-				// 				'link' => 'http://liu.se'
-				// 				 ),
-				// 			array(
-				// 				'file' => 'campus-2-peter-modin-liu.jpg',
-				// 				'photo' => 'Peter Modin, LiU',
-				// 				'link' => 'http://liu.se'
-				// 				 ),
-				// 			array(
-				// 				'file' => 'campus-3-peter-modin-liu.jpg',
-				// 				'photo' => 'Peter Modin, LiU',
-				// 				'link' => 'http://liu.se'
-				// 				 ),
-				// 			array(
-				// 				'file' => 'campus-bibl.jpg',
-				// 				'photo' => 'Norrköpings stadsbibliotek',
-				// 				'link' => 'http://www.flickr.com/photos/gamle_swartzen/486774017/'
-				// 				 )
-				// 		  );
 				$photos = array();
 				foreach($slide->photos as $photo)
 				{
-					array_push($photos, array('file' => $photo->image_original_filename, 'photo' => $photo->photo, 'link' => $photo->link));
+					array_push($photos, array('file' => $photo->image_original_filename, 'photo' => $photo->photo, 'link' => $photo->link, 'filter_blurred' => $photo->filter_blurred, 'filter_grayscale' => $photo->filter_grayscale));
 				}
 
 				$img = rand(0, count($photos)-1);
@@ -93,9 +71,19 @@
 				$photo_photo = '';
 				$photo_link = '';
 
+				$photo_blur = '';
+
+
 				if(count($photos) > 0)
 				{
-					$photo_image = '<div class="image" style="background-image: url('.base_url().'user_content/images/original/'.$photos[$img]['file'].');"></div>';
+					if($photos[$img]['filter_blurred'] == 1 && $photos[$img]['filter_grayscale'] == 1)
+						$photo_blur = 'grayscale-blur';
+					elseif($photos[$img]['filter_grayscale'] == 1)
+						$photo_blur = 'grayscale';
+					elseif($photos[$img]['filter_blurred'] == 1)
+						
+					$photo_blur = 'blur';
+					$photo_image = '<div class="image '.$photo_blur.'" style="background-image: url('.base_url().'user_content/images/original/'.$photos[$img]['file'].');"></div>';
 					$photo_photo = $photos[$img]['link'];
 					$photo_link = $lang['misc_photo'].': '.$photos[$img]['photo'];
 				}
