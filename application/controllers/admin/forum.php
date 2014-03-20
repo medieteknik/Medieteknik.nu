@@ -33,7 +33,7 @@ class Forum extends MY_Controller
     function reports($message = '')
     {
 		// Data for overview page
-		$main_data['reports'] = $this->Forum_model->get_all_reports();
+		$main_data['reports'] = $this->Forum_model->get_all_active_reports();
 		$main_data['lang'] = $this->lang_data;
 		$main_data['message'] = $message;
 
@@ -49,7 +49,7 @@ class Forum extends MY_Controller
     	if(!is_numeric($report_id))
     		show_404();
 
-    	if($this->Forum_model->remove_report($report_id))
+    	if($this->Forum_model->handle_report($report_id))
     		redirect('admin/forum/reports/success', 'location');
     	else
     		redirect('admin/forum/reports/fail', 'location');

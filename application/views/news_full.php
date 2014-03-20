@@ -35,7 +35,7 @@
 			<img src="<?php echo lang_id_to_imgpath($news->lang_id); ?>" class="img-circle pull-right" />
 		</h1>
 		<?php echo $news_story; ?>
-		<div class="metadata">
+		<div class="metadata clearfix">
 			<p>
 				<?php echo $lang['misc_published']; ?>
 				<i class="date" title="<?php echo $news->date; ?>">

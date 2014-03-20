@@ -713,7 +713,9 @@ class Install_model extends CI_Model
 
 			// inserting users
 			$this->load->model("Forum_model");
-			$this->Forum_model->create_topic(4, 10, 'Vart fan är nya hemsidan?', 'Vad håller webbchefen på med egentligen?', '2013-11-12 19:00:00');
+			$this->Forum_model->create_topic(4, 10, 'Vad tycker du om nya hemsidan?', 'Förut kändes det hopplöst, men nu börjar det ju faktiskt hända saker här!
+
+				Vad tycker du om sidan? Jag tycker det är ganska fett faktiskt.', date('Y-m-d H:i:s'));
 
 			$this->Forum_model->create_topic(4, 1, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?
 			Det viktiga är inte exakt dag utan på ett ungefär?

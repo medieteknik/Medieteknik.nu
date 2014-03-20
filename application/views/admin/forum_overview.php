@@ -5,14 +5,14 @@ if($message == 'fail')
 	echo '<div class="alert alert-danger">'.$lang['error_error'].'</div>';
 ?>
 
-<div class="main-box clearfix">
+<div class="main-box clearfix box-body">
 	<h2><?php echo $lang['admin_forum']; ?></h2>
 </div>
 <?php
 if(count($reports) > 0)
 {
 	?>
-	<div class="main-box clearfix margin-top">
+	<div class="main-box clearfix margin-top box-body">
 		<h3>
 			<?php echo $lang['admin_forum_reported']; ?>
 		</h3>

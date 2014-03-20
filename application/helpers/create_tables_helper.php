@@ -560,6 +560,10 @@ function get_forum_report_fields()
 			'type' => 'INT',
 			'constraint' => 5,
 			'unsigned' => TRUE,
+		),
+		'handled' => array(
+			'type' => 'bool',
+			'default' => 0
 		)
 		);
 	return $fields;

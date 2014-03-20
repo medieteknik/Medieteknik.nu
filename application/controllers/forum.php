@@ -63,7 +63,6 @@ class Forum extends MY_Controller
 
 	function post_topic()
 	{
-
 		$c = $this->Forum_model->get_all_categories_sub_to($this->input->post('cat_id'), 1);
 		$c = $c[0];
 
@@ -72,7 +71,6 @@ class Forum extends MY_Controller
 		{
 			if($this->input->post('topic') != '' && $this->input->post('reply') != '')
 			{
-
 				// $cat_id, $user_id, $topic, $post, $date = ''
 				$tid = $this->Forum_model->create_topic($this->input->post('cat_id'), $this->login->get_id(),$this->input->post('topic'), $this->input->post('reply'));
 			}

@@ -350,9 +350,26 @@ class Forum_model extends CI_Model
 		return $query->result();
 	}
 
+	function get_all_active_reports()
+	{
+		$this->db->select('forum_report.*, forum_reply.*, users.lukasid, poster.lukasid as p_lukasid');
+		$this->db->join('forum_reply', 'forum_reply.id = forum_report.reply_id', '');
+		$this->db->join('users', 'users.id = forum_report.user_id', '');
+		$this->db->join('users AS poster', 'poster.id = forum_reply.user_id', 'left');
+		$this->db->where('forum_report.handled', 0);
+		$query = $this->db->get('forum_report');
+		return $query->result();
+	}
+
 	function remove_report($report_id)
 	{
 		return $this->db->delete('forum_report', array('id' => $report_id));
+	}
+
+	function handle_report($report_id)
+	{
+		$this->db->where('id', $report_id);
+		return $this->db->update('forum_report', array('handled' => 1));
 	}
 }
 
