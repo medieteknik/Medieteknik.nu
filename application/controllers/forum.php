@@ -18,28 +18,30 @@ class Forum extends MY_Controller
 
 	function overview()
 	{
-
 		$this->category(0);
-
 	}
 
-	function category($theid = 0)
+	function category($theid = 0, $data = '')
 	{
+		// slug to id
 		if(is_numeric($theid))
 			$id = $theid;
 		else
 			$id = $this->Forum_model->get_id_from_slug($theid);
 
+		// check existance of category
 		if($theid !== 0 && !$this->Forum_model->category_exists($id))
 			show_404();
 
+		// load the cats and topics
 		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($id);
-		// Data for forum view
 		$main_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to($id, 2);
-		$main_data['lang'] = $this->lang_data;
-
 		$main_data['topics_array'] = $this->Forum_model->get_topics($id);
 
+		// pass alpng the data sent from param
+		$main_data['post_data'] = $data;
+
+		// check if posting should be enabled
 		if(count($main_data['categories_array']) == 1)
 		{
 			$c = $main_data['categories_array'][0];
@@ -54,6 +56,9 @@ class Forum extends MY_Controller
 			$main_data['guest_allowed'] =false;
 		}
 
+		// load lang data
+		$main_data['lang'] = $this->lang_data;
+
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('forum_overview', $main_data, true);
@@ -63,20 +68,58 @@ class Forum extends MY_Controller
 
 	function post_topic()
 	{
+		$this->load->helper('Email_helper');
+
 		$c = $this->Forum_model->get_all_categories_sub_to($this->input->post('cat_id'), 1);
 		$c = $c[0];
 
 		$tid = 0;
 		if($c->posting_allowed == 1)
 		{
-			if($this->input->post('topic') != '' && $this->input->post('reply') != '')
+			$data = array(
+					'cat_id' => $this->input->post('cat_id'),
+					'topic'  => $this->input->post('topic'),
+					'reply'  => $this->input->post('reply')
+				);
+
+			// user logged in?
+			if($this->login->is_logged_in())
 			{
-				// $cat_id, $user_id, $topic, $post, $date = ''
-				$tid = $this->Forum_model->create_topic($this->input->post('cat_id'), $this->login->get_id(),$this->input->post('topic'), $this->input->post('reply'));
+				$tid = $this->Forum_model->create_topic($data['cat_id'], $this->login->get_id(), $data['topic'], $data['reply']);
+			}
+			// guest post!
+			else
+			{
+				$data['name'] = $this->input->post('name');
+				$data['email'] = $this->input->post('email');
+
+				$tid = $this->Forum_model->create_guest_topic($data['cat_id'], $data['topic'], $data['reply'], $data['name'], $data['email']);
+			}
+
+			// check if the post was successful
+			if($tid)
+			{
+				// $this->category($this->input->post('cat_id'), $data);
+				redirect('/forum/thread/'.$tid, 'location');
+			}
+			else
+			{
+				// if fail, load cat view with the post data along with it
+				$data['message'] = 'fail';
+				$this->category($this->input->post('cat_id'), $data);
 			}
 		}
+		else
+		{
+			redirect('/forum/category/'.$this->input->post('cat_id'), 'location');
+		}
 
-		redirect('forum/thread/'.$tid, 'refresh');
+		// do_dump($_POST);
+	}
+
+	function post_topic_guest()
+	{
+		do_dump($_POST);
 	}
 
 	function post_reply()

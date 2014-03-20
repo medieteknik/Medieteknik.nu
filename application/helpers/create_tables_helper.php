@@ -524,15 +524,15 @@ function get_forum_reply_guest_fields()
 			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
-		'post' => array(
+		'reply' => array(
 			'type' => 'TEXT',
 		),
 		'reply_date' => array(
 			'type' => 'DATETIME',
 		),
-		'first_name' => array(
+		'name' => array(
 			'type' => 'VARCHAR',
-			'constraint' => '50',
+			'constraint' => '100',
 		),
 		'email' => array(
 			'type' => 'VARCHAR',

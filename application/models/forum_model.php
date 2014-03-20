@@ -250,15 +250,16 @@ class Forum_model extends CI_Model
  	 */
 	function create_topic($cat_id, $user_id, $topic, $post, $date = '')
 	{
+		if(empty($topic) || empty($post))
+			return false;
+
 		$theTime = strtotime($date);
 
 		// if unable to parse the date, use the current datetime
 		if($theTime === false)
-		{
 			$theTime = date("Y-m-d H:i:s", time());
-		} else {
+		else
 			$theTime = date("Y-m-d H:i:s", $theTime);
-		}
 
 		// start transaction
 		$this->db->trans_start();
@@ -271,6 +272,31 @@ class Forum_model extends CI_Model
 		$query = $this->db->insert('forum_topic', $data);
 		$topic_id = $this->db->insert_id();
 		$this->add_reply($topic_id, $user_id, $post, $theTime);
+
+		// completes the transaction, if anything has gone wrong, it rollbacks the changes
+		$this->db->trans_complete();
+
+		return $topic_id;
+	}
+
+	function create_guest_topic($cat_id, $topic, $post, $name, $email)
+	{
+		if(empty($topic) || empty($post) || empty($name) || !valid_email($email))
+			return false;
+
+		$theTime = date("Y-m-d H:i:s", time());
+
+		// start transaction
+		$this->db->trans_start();
+
+		$data = array(	'cat_id' 		=> $cat_id,
+						'user_id' 		=> 0,
+						'topic'			=> $topic,
+						'last_reply_id'	=> 0,
+						);
+		$query = $this->db->insert('forum_topic', $data);
+		$topic_id = $this->db->insert_id();
+		$this->add_guest_reply($topic_id, $post, $name, $email);
 
 		// completes the transaction, if anything has gone wrong, it rollbacks the changes
 		$this->db->trans_complete();
@@ -302,6 +328,29 @@ class Forum_model extends CI_Model
 						'reply_date'	=> $theTime,
 						);
 		$query = $this->db->insert('forum_reply', $data);
+		$reply_id = $this->db->insert_id();
+
+		$data = array(	'last_reply_id' => $reply_id,
+            			);
+
+		$this->db->where('id', $topic_id);
+		$this->db->update('forum_topic', $data);
+	}
+
+
+
+	function add_guest_reply($topic_id, $reply, $name, $email)
+	{
+		if(empty($reply) || empty($name) || !valid_email($email))
+			return false;
+
+		$data = array(	'topic_id' 		=> $topic_id,
+						'reply'			=> $reply,
+						'reply_date'	=> date("Y-m-d H:i:s"),
+						'name'			=> $name,
+						'email' 		=> $email
+						);
+		$query = $this->db->insert('forum_reply_guest', $data);
 		$reply_id = $this->db->insert_id();
 
 		$data = array(	'last_reply_id' => $reply_id,

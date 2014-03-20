@@ -62,6 +62,10 @@ $lang['forum_createtopic'] = "Submit topic!";
 $lang['forum_report'] = "Flag post";
 $lang['forum_report_confirm'] = "This is inappropriate";
 $lang['forum_report_thanks'] = "Thanks! We'll look into it.";
+$lang['forum_guest_form'] = "Add topic as guest";
+$lang['forum_guest_name'] = "Your name";
+$lang['forum_guest_email'] = "Your email";
+$lang['forum_guest_topic_error'] = "Could not create topic. Please make sure you entered everything correctly.";
 
 // user
 $lang['user_username'] = "Username";
