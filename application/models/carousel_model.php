@@ -352,7 +352,7 @@ class Carousel_model extends CI_Model
 		return FALSE;
 	}
 
-	function add_carousel_image($carousel_id, $images_id, $photo, $link){
+	function add_carousel_image($carousel_id, $images_id, $photo, $link, $filter_blurred = 0, $filter_grayscale = 0){
 		$query = $this->db->get_where('carousel_images', array('carousel_id' => $carousel_id, 'images_id' => $images_id));
 		if($query->num_rows() != 0)
 			return false;
@@ -362,6 +362,8 @@ class Carousel_model extends CI_Model
 				'images_id' => $images_id,
 				'photo' => $photo,
 				'link' => $link,
+				'filter_blurred' => $filter_blurred,
+				'filter_grayscale' => $filter_grayscale,
 				);
 			$this->db->insert('carousel_images', $data);
 		}

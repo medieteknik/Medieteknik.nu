@@ -120,7 +120,7 @@ class Images_model extends CI_Model
 		$result = $query->result();
 
 		foreach($result as &$res){
-			$image = new imagemanip($res->image_original_filename, 'zoom', 140, 140);
+			$image = new imagemanip($res->image_original_filename, 'zoom', 100, 100);
 			$res->image = $image;
 		}
 
@@ -138,7 +138,7 @@ class Images_model extends CI_Model
 		$result = $query->result();
 		foreach($result as &$res){
 			$image = new imagemanip();
-			$image->create($res->image_original_filename, 'zoom', 140, 140);
+			$image->create($res->image_original_filename, 'zoom', 100, 100);
 			$res = $image->get_img_tag();
 		}
 		return $result;

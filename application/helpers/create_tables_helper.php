@@ -262,6 +262,14 @@ function get_carousel_images_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '100',
 		),
+		'filter_blurred' => array(
+			'type' => 'BOOL',
+			'default' => '0',
+		),
+		'filter_grayscale' => array(
+			'type' => 'BOOL',
+			'default' => '0',
+		),
 
 	);
 	return $fields;
