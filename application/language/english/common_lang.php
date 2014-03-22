@@ -63,9 +63,11 @@ $lang['forum_report'] = "Flag post";
 $lang['forum_report_confirm'] = "This is inappropriate";
 $lang['forum_report_thanks'] = "Thanks! We'll look into it.";
 $lang['forum_guest_form'] = "Add topic as guest";
+$lang['forum_guest_reply_form'] = "Reply as guest";
 $lang['forum_guest_name'] = "Your name";
 $lang['forum_guest_email'] = "Your email";
 $lang['forum_guest_topic_error'] = "Could not create topic. Please make sure you entered everything correctly.";
+$lang['forum_guest_reply_error'] = "Could not post reply. Please make sure you entered everything correctly.";
 
 // user
 $lang['user_username'] = "Username";
@@ -244,6 +246,7 @@ $lang['misc_images'] = "Images";
 $lang['misc_link'] = "Link";
 $lang['misc_upload'] = "Upload";
 $lang['misc_post'] = "post";
+$lang['misc_guest'] = "Guest";
 
 
 // error

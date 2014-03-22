@@ -68,6 +68,7 @@ class Forum extends MY_Controller
 
 	function post_topic()
 	{
+		// load helper for nice validity check functions
 		$this->load->helper('Email_helper');
 
 		$c = $this->Forum_model->get_all_categories_sub_to($this->input->post('cat_id'), 1);
@@ -88,7 +89,7 @@ class Forum extends MY_Controller
 				$tid = $this->Forum_model->create_topic($data['cat_id'], $this->login->get_id(), $data['topic'], $data['reply']);
 			}
 			// guest post!
-			else
+			elseif($c->guest_allowed == 1)
 			{
 				$data['name'] = $this->input->post('name');
 				$data['email'] = $this->input->post('email');
@@ -99,7 +100,6 @@ class Forum extends MY_Controller
 			// check if the post was successful
 			if($tid)
 			{
-				// $this->category($this->input->post('cat_id'), $data);
 				redirect('/forum/thread/'.$tid, 'location');
 			}
 			else
@@ -117,30 +117,47 @@ class Forum extends MY_Controller
 		// do_dump($_POST);
 	}
 
-	function post_topic_guest()
-	{
-		do_dump($_POST);
-	}
-
 	function post_reply()
 	{
+		$this->load->helper('Email_helper');
+
 		$c = $this->Forum_model->get_all_categories_sub_to($this->input->post('cat_id'), 1);
 		$c = $c[0];
 
-		$tid = 0;
 		if($c->posting_allowed == 1)
 		{
-			if($this->input->post('reply') != '')
+			if($this->login->is_logged_in())
 			{
-				// $cat_id, $user_id, $topic, $post, $date = ''
-				$this->Forum_model->add_reply($this->input->post('topic_id'), $this->login->get_id(),$this->input->post('reply'));
+				if($this->input->post('reply') != '')
+				{
+					// $cat_id, $user_id, $topic, $post, $date = ''
+					$this->Forum_model->add_reply($this->input->post('topic_id'), $this->login->get_id(),$this->input->post('reply'));
+				}
+
+				redirect('forum/thread/'.$this->input->post('topic_id'), 'refresh');
+			}
+			elseif($c->guest_allowed == 1)
+			{
+				$data = array(
+						'topic_id'	=> $this->input->post('topic_id'),
+						'name' 		=> $this->input->post('name'),
+						'email' 	=> $this->input->post('email'),
+						'reply' 	=> $this->input->post('reply'),
+						'message' 	=> 'fail'
+					);
+				$reply = $this->Forum_model->add_guest_reply($data['topic_id'], $data['reply'], $data['name'], $data['email']);
+
+				if($reply)
+					redirect('forum/thread/'.$this->input->post('topic_id'), 'refresh');
+				else
+					$this->thread($data['topic_id'], $data);
 			}
 		}
 
-		redirect('forum/thread/'.$this->input->post('topic_id'), 'refresh');
+		// redirect('forum/thread/'.$this->input->post('topic_id'), 'refresh');
 	}
 
-	function thread($id = 0)
+	function thread($id = 0, $post_data = '')
 	{
 		// check topic existance
 		if(!$this->Forum_model->topic_exists($id))
@@ -148,10 +165,10 @@ class Forum extends MY_Controller
 
 		$main_data['replies'] = $this->Forum_model->get_replies($id);
 		$main_data['topic'] = $this->Forum_model->get_topic($id);
-		$main_data['lang'] = $this->lang_data;
-
 		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($main_data['topic']->cat_id);
 		$main_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to($main_data['topic']->cat_id, 1);
+
+		$main_data['post_data'] = $post_data;
 
 		if(count($main_data['categories_array']) == 1)
 		{
@@ -171,6 +188,7 @@ class Forum extends MY_Controller
 			}
 		}
 
+		$main_data['lang'] = $this->lang_data;
 		// composing the views
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		$template_data['main_content'] = $this->load->view('forum_thread', $main_data, true);

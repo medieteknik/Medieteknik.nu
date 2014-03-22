@@ -63,9 +63,11 @@ $lang['forum_report'] = "Rapportera";
 $lang['forum_report_confirm'] = "Detta inlägg är olämpligt";
 $lang['forum_report_thanks'] = "Tack! Vi tittar på det.";
 $lang['forum_guest_form'] = "Skapa tråd som gäst";
+$lang['forum_guest_reply_form'] = "Svara som gäst";
 $lang['forum_guest_name'] = "Ditt namn";
 $lang['forum_guest_email'] = "Din epost";
 $lang['forum_guest_topic_error'] = "Kunde inte skapa inlägg! Se till att alla fält är ifyllda, och att din epostadress stämmer.";
+$lang['forum_guest_reply_error'] = "Kunde inte skapa svar! Se till att alla fält är korrekt ifyllda, och att din epostadress stämmer.";
 
 // user
 $lang['user_username'] = "Användarnamn";
@@ -242,6 +244,7 @@ $lang['misc_images'] = "Bilder";
 $lang['misc_link'] = "Länk";
 $lang['misc_upload'] = "Ladda upp";
 $lang['misc_post'] = "inlägg";
+$lang['misc_guest'] = "Gäst";
 
 // error
 $lang['error_error'] = "Fel!";

@@ -513,30 +513,18 @@ function get_forum_reply_fields()
 function get_forum_reply_guest_fields()
 {
 	$fields = array(
-		'id' => array(
+		'reply_id' => array(
 			'type' => 'INT',
 			'constraint' => 5,
 			'unsigned' => TRUE,
-			'auto_increment' => TRUE
-		),
-		'topic_id' => array(
-			'type' => 'INT',
-			'constraint' => 5,
-			'unsigned' => TRUE,
-		),
-		'reply' => array(
-			'type' => 'TEXT',
-		),
-		'reply_date' => array(
-			'type' => 'DATETIME',
 		),
 		'name' => array(
 			'type' => 'VARCHAR',
-			'constraint' => '100',
+			'constraint' => '320',
 		),
 		'email' => array(
 			'type' => 'VARCHAR',
-			'constraint' => '320',
+			'constraint' => '255',
 		),
 		);
 	return $fields;

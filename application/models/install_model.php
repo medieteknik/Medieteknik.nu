@@ -732,8 +732,7 @@ class Install_model extends CI_Model
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
-			$this->dbforge->add_field(get_forum_reply_guest_fields()); 	// get_user_table_fields() returns an array with the fields
-			$this->dbforge->add_key('id',true);
+			$this->dbforge->add_field(get_forum_reply_guest_fields());
 			$this->dbforge->create_table('forum_reply_guest');
 
 			log_message('info', "Created table: forum_reply_guest");

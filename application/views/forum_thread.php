@@ -16,8 +16,15 @@ $first = array_shift($replies);
 	<div class="metadata">
 		<p>
 			<?php
-			$user = gravatarimg($first->gravatar, 30, 'class="img-circle"').' '.get_full_name($first);
-			echo anchor('user/profile/'.$first->user_id, $user);
+			if($first->user_id == 0)
+			{
+				echo gravatarimg($first->email, 30, 'class="img-circle"').' '.$lang['misc_guest'].': '.$first->name;
+			}
+			else
+			{
+				$user = gravatarimg($first->gravatar, 30, 'class="img-circle"').' '.get_full_name($first);
+				echo anchor('user/profile/'.$first->user_id, $user);
+			}
 			?>,
 			<a href="#replyid-<?php echo $first->id; ?>" title="<?php echo $first->reply_date; ?>">
 				<?php echo strtolower(readable_date($first->reply_date, $lang)); ?>
@@ -65,8 +72,15 @@ foreach($replies as $reply)
 		<div class="metadata">
 			<p>
 				<?php
-				$user = gravatarimg($reply->gravatar, 30, 'class="img-circle"').' '.get_full_name($reply);
-				echo anchor('user/profile/'.$reply->user_id, $user);
+				if($reply->user_id == 0)
+				{
+					echo gravatarimg($reply->email, 30, 'class="img-circle"').' '.$lang['misc_guest'].': '.$reply->name;
+				}
+				else
+				{
+					$user = gravatarimg($reply->gravatar, 30, 'class="img-circle"').' '.get_full_name($reply);
+					echo anchor('user/profile/'.$reply->user_id, $user);
+				}
 				?>,
 				<a href="#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
 					<?php echo strtolower(readable_date($reply->reply_date, $lang)); ?>
@@ -111,7 +125,67 @@ if(isset($postform))
 	echo '<div class="main-box box-body clearfix forum-view margin-top">';
 	if(isset($guest))
 	{
-		echo 'Gästformulär';
+		?>
+		<h2><?php echo $lang['forum_guest_reply_form']; ?></h2>
+		<?php
+		if(is_array($post_data) && isset($post_data['message']) && $post_data['message'] == 'fail')
+			echo '<div class="alert alert-danger">'.$lang['forum_guest_reply_error'].'</div>';
+		?>
+		<?php echo form_open('forum/post_reply'); ?>
+			<?php
+			echo form_hidden(array('cat_id' => $categories_array[0]->id)),
+				form_hidden(array('topic_id' => $topic->id)),
+				form_hidden(array('guest' => 1));
+			?>
+			<div class="row">
+				<div class="col-sm-8">
+					<p>
+						<?php
+						echo form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
+							form_textarea(array('name' 		=> 'reply',
+												'id' 		=> 'reply',
+												'rows'		=>	8,
+												'class'		=> 'form-control',
+												'placeholder' => $lang['misc_text'].'...',
+												'required' 	=> '',
+										   		'value' => (is_array($post_data) && isset($post_data['reply']) ? $post_data['reply'] : '')));
+						?>
+					</p>
+				</div>
+				<div class="col-sm-4">
+					<p>
+						<?php
+						echo  form_label($lang['forum_guest_name'], 'name', array('class' => 'sr-only')),
+							form_input(array('name' => 'name',
+											   'id' => 'name',
+											   'class'=> 'form-control',
+											   'placeholder' => $lang['forum_guest_name'],
+											   'required' => '',
+										   	   'value' => (is_array($post_data) && isset($post_data['name']) ? $post_data['name'] : '')));
+						?>
+					</p>
+					<p>
+						<?php
+						echo  form_label($lang['forum_guest_email'], 'email', array('class' => 'sr-only')),
+							form_input(array('name' => 'email',
+											   'id' => 'email',
+											   'class'=> 'form-control',
+											   'placeholder' => $lang['forum_guest_email'],
+											   'type' => 'email',
+											   'required' => '',
+										   	   'value' => (is_array($post_data) && isset($post_data['email']) ? $post_data['email'] : '')));
+						?>
+					</p>
+					<p>
+						<input type="submit" name="post" value="<?php echo $lang['forum_submit']; ?>" class="btn btn-success form-control" />
+					</p>
+					<p>
+						<?php echo $lang['forum_guidelines']; ?>
+					</p>
+				</div>
+			</div>
+		<?php echo form_close(); ?>
+		<?php
 	}
 	else
 	{

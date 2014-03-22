@@ -35,7 +35,7 @@ if(count($reports) > 0)
 				<div class="col-sm-3">
 					<p>
 						<?php
-						echo anchor('admin/forum/remove_report/'.$report->id, '<span class="glyphicon glyphicon-trash"></span> '.$lang['admin_forum_remove'], array('class' => 'btn btn-danger btn-sm btn-block'));
+						echo anchor('admin/forum/remove_report/'.$report->report_id, '<span class="glyphicon glyphicon-trash"></span> '.$lang['admin_forum_remove'], array('class' => 'btn btn-danger btn-sm btn-block'));
 						?>
 					</p>
 				</div>

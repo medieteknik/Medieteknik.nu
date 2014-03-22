@@ -150,6 +150,3 @@ if($posting_allowed === true)
 	}
 	echo '</div>';
 }
-
-
-do_dump($post_data);

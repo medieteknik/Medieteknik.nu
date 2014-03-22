@@ -216,17 +216,21 @@ class Forum_model extends CI_Model
 	 * @param  integer	$id		The ID of topic to fetch replies from
 	 * @return array
 	 */
-	function get_replies($id)
+	function get_replies($topic_id)
 	{
-		$this->db->select("forum_reply.*, users.first_name, users.last_name, users_data.gravatar");
+		$this->db->select("forum_reply.*, forum_reply_guest.*, users.first_name, users.last_name, users_data.gravatar");
 		$this->db->from("forum_reply");
-		$this->db->join("users", "forum_reply.user_id = users.id", "");
+		$this->db->join("users", "forum_reply.user_id = users.id", "left");
 		$this->db->join("users_data", "users.id = users_data.users_id", "left");
-		$this->db->where("forum_reply.topic_id", $id);
+		$this->db->join("forum_reply_guest", "forum_reply_guest.reply_id = forum_reply.id", "left");
+		$this->db->where("forum_reply.topic_id", $topic_id);
 		$this->db->order_by("forum_reply.reply_date ASC");
 		$query = $this->db->get();
 		$result = $query->result();
 
+		// This is inefficient, should be included in the first mysql query, but
+		// i could not get it working properly. Should be looked on some day, but it works
+		// for now! /klaes950
 		if($this->login->is_logged_in())
 		{
 			$user_id = $this->login->get_id();
@@ -330,14 +334,11 @@ class Forum_model extends CI_Model
 		$query = $this->db->insert('forum_reply', $data);
 		$reply_id = $this->db->insert_id();
 
-		$data = array(	'last_reply_id' => $reply_id,
-            			);
+		$data = array('last_reply_id' => $reply_id);
 
 		$this->db->where('id', $topic_id);
 		$this->db->update('forum_topic', $data);
 	}
-
-
 
 	function add_guest_reply($topic_id, $reply, $name, $email)
 	{
@@ -347,17 +348,33 @@ class Forum_model extends CI_Model
 		$data = array(	'topic_id' 		=> $topic_id,
 						'reply'			=> $reply,
 						'reply_date'	=> date("Y-m-d H:i:s"),
-						'name'			=> $name,
-						'email' 		=> $email
+						'user_id'		=> 0
 						);
-		$query = $this->db->insert('forum_reply_guest', $data);
+		$query = $this->db->insert('forum_reply', $data);
 		$reply_id = $this->db->insert_id();
 
-		$data = array(	'last_reply_id' => $reply_id,
-            			);
+		log_message('info', 'Guest reply #'.$reply_id.' from '.$name.' ('.$email.'), IP:'.get_client_ip_addr());
+
+		// add guest user data
+		$this->add_guest_data($reply_id, $name, $email);
+
+		$data = array('last_reply_id' => $reply_id);
 
 		$this->db->where('id', $topic_id);
 		$this->db->update('forum_topic', $data);
+
+		return true;
+	}
+
+	function add_guest_data($reply_id, $name, $email)
+	{
+		$data = array(
+				'reply_id' 	=> $reply_id,
+				'name' 		=> $name,
+				'email' 	=> $email
+			);
+
+		$this->db->insert('forum_reply_guest', $data);
 	}
 
 	function report_post($post_id, $user_id)
@@ -401,7 +418,7 @@ class Forum_model extends CI_Model
 
 	function get_all_active_reports()
 	{
-		$this->db->select('forum_report.*, forum_reply.*, users.lukasid, poster.lukasid as p_lukasid');
+		$this->db->select('forum_report.id as report_id, forum_report.*, forum_reply.*, users.lukasid, poster.lukasid as p_lukasid');
 		$this->db->join('forum_reply', 'forum_reply.id = forum_report.reply_id', '');
 		$this->db->join('users', 'users.id = forum_report.user_id', '');
 		$this->db->join('users AS poster', 'poster.id = forum_reply.user_id', 'left');
