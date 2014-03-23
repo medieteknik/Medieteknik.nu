@@ -146,10 +146,11 @@ class Forum_model extends CI_Model
 	 */
 	function get_topics($id)
 	{
-		$this->db->select("forum_topic.*, forum_reply.*, users.first_name, users.last_name");
+		$this->db->select("forum_topic.*, forum_reply.*, users.first_name, users.last_name, forum_reply_guest.name, forum_reply_guest.email");
 		$this->db->from("forum_topic");
 		$this->db->join("forum_reply", "forum_reply.id = forum_topic.last_reply_id", "");
-		$this->db->join("users", "forum_topic.user_id = users.id", "");
+		$this->db->join("users", "forum_topic.user_id = users.id", "left");
+		$this->db->join("forum_reply_guest", "forum_reply_guest.reply_id = forum_topic.last_reply_id", "left");
 		$this->db->where("forum_topic.cat_id", $id);
 		$this->db->order_by("forum_reply.reply_date DESC");
 		$query = $this->db->get();
