@@ -388,3 +388,21 @@ function get_client_ip_addr()
 
     return $ip;
 }
+
+function str_gen($bottom = 10, $top = 15, $upper = true, $lower = true, $numeric = true)
+{
+	$pick_from = '';
+	if($upper)
+		$pick_from .= 'ABCDEFGHIJKLMNOPQRSTUVXYZ';
+	if($lower)
+		$pick_from .= 'abcdefghijklmnopqrstuvxyz';
+	if($numeric)
+		$pick_from .= '0123456789';
+
+	$string = '';
+
+	for ($i = 0; $i < mt_rand($bottom, $top); $i++)
+		$string .= $pick_from[mt_rand(0, strlen($pick_from)-1)];
+
+	return $string;
+}

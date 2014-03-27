@@ -219,4 +219,19 @@ class Forum extends MY_Controller
 		}
 		$this->load->view('templates/json', $main_data);
 	}
+
+	function verify($email = '', $hash = '')
+	{
+		// do_dump($email);
+		$email = urldecode($email);
+
+		$redir = $this->Forum_model->get_topic_id_from_hash($hash, $email);
+
+		$this->Forum_model->verify($hash, $email);
+
+		if($redir->topic_id !== '')
+			redirect('forum/thread/'.$redir->topic_id.'/#replyid-'.$redir->reply_id, 'location');
+		else
+			show_404();
+	}
 }

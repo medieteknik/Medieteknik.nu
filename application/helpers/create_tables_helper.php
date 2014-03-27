@@ -534,6 +534,14 @@ function get_forum_reply_guest_fields()
 			'type' => 'VARCHAR',
 			'constraint' => '255',
 		),
+		'hash' => array(
+			'type' => 'VARCHAR',
+			'constraint' => '25',
+		),
+		'verified' => array(
+			'type' => 'BOOL',
+			'default' => 0
+		),
 		);
 	return $fields;
 }

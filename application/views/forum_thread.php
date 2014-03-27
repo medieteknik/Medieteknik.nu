@@ -1,5 +1,5 @@
 <?php
-// do_dump($replies);
+do_dump($replies);
 // do_dump($topic);
 
 $first = array_shift($replies);

@@ -32,7 +32,8 @@ class Forum_model extends CI_Model
     function get_all_categories_sub_to($id = 0, $levels = 1, $recursive = FALSE)
     {
 		//$this->db->distinct();
-		$this->db->select("forum_categories.*, forum_categories_descriptions_language.title, forum_categories_descriptions_language.slug, forum_categories_descriptions_language.description");
+		$this->db->select("forum_categories.*, forum_categories_descriptions_language.title");
+		$this->db->select("forum_categories_descriptions_language.slug, forum_categories_descriptions_language.description");
 		$this->db->from("forum_categories");
 		$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
 		$this->db->join("forum_topic", "forum_topic.cat_id = forum_categories.id", "left");
@@ -58,7 +59,8 @@ class Forum_model extends CI_Model
 		// if not a recursive call and not the root node, fetch also the title of the current category
 		if(!$recursive && $id != 0)
 		{
-			$this->db->select("forum_categories.*, forum_categories_descriptions_language.title, forum_categories_descriptions_language.description, forum_categories_descriptions_language.slug");
+			$this->db->select("forum_categories.*, forum_categories_descriptions_language.title");
+			$this->db->select("forum_categories_descriptions_language.description, forum_categories_descriptions_language.slug");
 			$this->db->from("forum_categories");
 			$this->db->join("forum_categories_descriptions_language", "forum_categories.id = forum_categories_descriptions_language.cat_id", "");
 			$this->db->where("forum_categories.id", $id);
@@ -225,6 +227,8 @@ class Forum_model extends CI_Model
 		$this->db->join("users_data", "users.id = users_data.users_id", "left");
 		$this->db->join("forum_reply_guest", "forum_reply_guest.reply_id = forum_reply.id", "left");
 		$this->db->where("forum_reply.topic_id", $topic_id);
+		// only verified/approved replies!
+		$this->db->where("(forum_reply_guest.email IS NULL OR forum_reply_guest.verified = 1)");
 		$this->db->order_by("forum_reply.reply_date ASC");
 		$query = $this->db->get();
 		$result = $query->result();
@@ -372,10 +376,43 @@ class Forum_model extends CI_Model
 		$data = array(
 				'reply_id' 	=> $reply_id,
 				'name' 		=> $name,
-				'email' 	=> $email
+				'email' 	=> $email,
+				'hash' 		=> str_gen(15, 25),
+				'verified' 	=> $this->is_verified($email)
 			);
 
 		$this->db->insert('forum_reply_guest', $data);
+	}
+
+	function is_verified($email)
+	{
+		$this->db->where('email', $email);
+		$this->db->where('verified', 1);
+		$q = $this->db->get('forum_reply_guest');
+
+		return $q->num_rows();
+	}
+
+	function verify($hash, $email)
+	{
+		$where = array(
+				'hash' 	=> $hash,
+				'email' => $email
+			);
+		return $this->db->update('forum_reply_guest', array('verified' => 1), $where);
+	}
+
+	function get_topic_id_from_hash($hash, $email)
+	{
+		$this->db->select("forum_reply.topic_id, forum_reply.id as reply_id");
+		$this->db->from("forum_reply_guest");
+		$this->db->where("hash", $hash);
+		$this->db->where("email", $email);
+		$this->db->join("forum_reply", "forum_reply_guest.reply_id = forum_reply.id", "");
+		$query = $this->db->get();
+		$res = $query->result();
+
+		return $res[0];
 	}
 
 	function report_post($post_id, $user_id)
