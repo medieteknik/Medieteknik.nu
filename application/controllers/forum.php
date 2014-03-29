@@ -78,9 +78,10 @@ class Forum extends MY_Controller
 		if($c->posting_allowed == 1)
 		{
 			$data = array(
-					'cat_id' => $this->input->post('cat_id'),
-					'topic'  => $this->input->post('topic'),
-					'reply'  => $this->input->post('reply')
+					'cat_id' 	=> $this->input->post('cat_id'),
+					'topic'		=> $this->input->post('topic'),
+					'reply'		=> $this->input->post('reply'),
+					'guest'		=> false
 				);
 
 			// user logged in?
@@ -93,6 +94,7 @@ class Forum extends MY_Controller
 			{
 				$data['name'] = $this->input->post('name');
 				$data['email'] = $this->input->post('email');
+				$data['guest'] = true;
 
 				$tid = $this->Forum_model->create_guest_topic($data['cat_id'], $data['topic'], $data['reply'], $data['name'], $data['email']);
 			}
@@ -100,7 +102,10 @@ class Forum extends MY_Controller
 			// check if the post was successful
 			if($tid)
 			{
-				redirect('/forum/thread/'.$tid, 'location');
+				if($data['guest'] && !$this->Forum_model->is_verified($data['email']))
+					redirect('/forum/category/'.$data['cat_id'].'/verify', 'location');
+				else
+					redirect('/forum/thread/'.$tid, 'location');
 			}
 			else
 			{
@@ -147,8 +152,15 @@ class Forum extends MY_Controller
 					);
 				$reply = $this->Forum_model->add_guest_reply($data['topic_id'], $data['reply'], $data['name'], $data['email']);
 
+				$is_verified = '';
+				if(!$this->Forum_model->is_verified($data['email']))
+				{
+					// this is a good place to send an email to the user
+					$is_verified = '/verify';
+				}
+
 				if($reply)
-					redirect('forum/thread/'.$this->input->post('topic_id'), 'refresh');
+					redirect('forum/thread/'.$this->input->post('topic_id').$is_verified, 'refresh');
 				else
 					$this->thread($data['topic_id'], $data);
 			}

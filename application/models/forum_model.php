@@ -148,12 +148,17 @@ class Forum_model extends CI_Model
 	 */
 	function get_topics($id)
 	{
-		$this->db->select("forum_topic.*, forum_reply.*, users.first_name, users.last_name, forum_reply_guest.name, forum_reply_guest.email");
+		$this->db->select("forum_topic.*, forum_reply.*, users.first_name, users.last_name");
+		$this->db->select("forum_reply_guest.name, forum_reply_guest.email, verify.verified");
 		$this->db->from("forum_topic");
 		$this->db->join("forum_reply", "forum_reply.id = forum_topic.last_reply_id", "");
 		$this->db->join("users", "forum_topic.user_id = users.id", "left");
+		// only verified threads!
+		$this->db->join("forum_reply_guest AS verify", "verify.reply_id = forum_topic.first_reply_id", "left");
 		$this->db->join("forum_reply_guest", "forum_reply_guest.reply_id = forum_topic.last_reply_id", "left");
 		$this->db->where("forum_topic.cat_id", $id);
+		// only verified threads!
+		$this->db->where("(forum_reply_guest.email IS NULL OR verify.verified = 1)");
 		$this->db->order_by("forum_reply.reply_date DESC");
 		$query = $this->db->get();
 		return $query->result();
@@ -187,10 +192,13 @@ class Forum_model extends CI_Model
 	function get_all_latest_threads($max_threads = 5)
 	{
 		$this->db->select("forum_topic.id, forum_topic.topic, MAX(forum_reply.reply_date) as date");
+		// $this->db->select("forum_reply_guest.email");
 		$this->db->from("forum_reply");
 		$this->db->join("forum_topic", "forum_reply.topic_id = forum_topic.id", "");
+		$this->db->join("forum_reply_guest", "forum_reply_guest.reply_id = forum_reply.id", "left");
 		$this->db->order_by("date DESC");
 		$this->db->group_by("forum_topic.id");
+		$this->db->where("(forum_reply_guest.email IS NULL OR forum_reply_guest.verified = 1)");
 		$this->db->limit($max_threads);
 		$query = $this->db->get();
 		return $query->result();
@@ -280,7 +288,10 @@ class Forum_model extends CI_Model
 						);
 		$query = $this->db->insert('forum_topic', $data);
 		$topic_id = $this->db->insert_id();
-		$this->add_reply($topic_id, $user_id, $post, $theTime);
+
+		$first_reply = $this->add_reply($topic_id, $user_id, $post, $theTime);
+
+		$this->db->update('forum_topic', array('first_reply_id' => $first_reply), array('id' => $topic_id));
 
 		// completes the transaction, if anything has gone wrong, it rollbacks the changes
 		$this->db->trans_complete();
@@ -302,10 +313,13 @@ class Forum_model extends CI_Model
 						'user_id' 		=> 0,
 						'topic'			=> $topic,
 						'last_reply_id'	=> 0,
+						'first_reply_id' => 0
 						);
 		$query = $this->db->insert('forum_topic', $data);
 		$topic_id = $this->db->insert_id();
-		$this->add_guest_reply($topic_id, $post, $name, $email);
+		$first_reply = $this->add_guest_reply($topic_id, $post, $name, $email);
+
+		$this->db->update('forum_topic', array('first_reply_id' => $first_reply), array('id' => $topic_id));
 
 		// completes the transaction, if anything has gone wrong, it rollbacks the changes
 		$this->db->trans_complete();
@@ -343,6 +357,8 @@ class Forum_model extends CI_Model
 
 		$this->db->where('id', $topic_id);
 		$this->db->update('forum_topic', $data);
+
+		return $reply_id;
 	}
 
 	function add_guest_reply($topic_id, $reply, $name, $email)
@@ -368,7 +384,7 @@ class Forum_model extends CI_Model
 		$this->db->where('id', $topic_id);
 		$this->db->update('forum_topic', $data);
 
-		return true;
+		return $reply_id;
 	}
 
 	function add_guest_data($reply_id, $name, $email)

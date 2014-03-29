@@ -485,6 +485,11 @@ function get_forum_topic_fields()
 			'constraint' => 5,
 			'unsigned' => TRUE,
 		),
+		'first_reply_id' => array(
+			'type' => 'INT',
+			'constraint' => 5,
+			'unsigned' => TRUE,
+		),
 		);
 	return $fields;
 }

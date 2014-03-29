@@ -1,6 +1,11 @@
 <?php
-do_dump($replies);
+// do_dump($replies);
 // do_dump($topic);
+
+if(isset($post_data) && $post_data == 'verify')
+{
+	echo '<div class="alert alert-success"><strong>'.$lang['forum_guest_verify'].'</strong> '.$lang['forum_guest_verify_info'].'</div>';
+}
 
 $first = array_shift($replies);
 ?>
@@ -37,7 +42,7 @@ $first = array_shift($replies);
 				{
 					?>
 					<span class="report">
-						<span class="glyphicon glyphicon-flag"></span>
+						<span class="glyphicon glyphicon-exclamation-sign"></span>
 						<a href="#" class="toggle">
 							<?php echo $lang['forum_report']; ?>
 						</a>
@@ -52,7 +57,7 @@ $first = array_shift($replies);
 				{
 					?>
 					<span class="report">
-						<span class="glyphicon glyphicon-flag"></span>
+						<span class="glyphicon glyphicon-exclamation-sign"></span>
 						<?php echo $lang['forum_report_thanks']; ?>
 					</span>
 					<?php
@@ -92,7 +97,7 @@ foreach($replies as $reply)
 					{
 						?>
 						<span class="report">
-							<span class="glyphicon glyphicon-flag"></span>
+							<span class="glyphicon glyphicon-exclamation-sign"></span>
 							<a href="#" class="toggle">
 								<?php echo $lang['forum_report']; ?>
 							</a>

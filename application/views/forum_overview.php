@@ -4,6 +4,11 @@
 // do_dump($ancestors_array);
 // do_dump($topics_array);
 
+if(isset($post_data) && $post_data == 'verify')
+{
+	echo '<div class="alert alert-success"><strong>'.$lang['forum_guest_verify'].'</strong> '.$lang['forum_guest_verify_info'].'</div>';
+}
+
 echo '<div class="main-box box-body clearfix forum-view">';
 
 if($ancestors_array)
