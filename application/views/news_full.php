@@ -29,23 +29,29 @@
 
 	$news_story = text_format($news->text);
 	?>
-	<div class="main-box box-body news clearfix">
-		<h1>
-			<?php echo $news->title;?>
-			<img src="<?php echo lang_id_to_imgpath($news->lang_id); ?>" class="img-circle pull-right" />
-		</h1>
-		<?php echo $news_story; ?>
-		<div class="metadata clearfix">
-			<p>
-				<?php echo $lang['misc_published']; ?>
-				<i class="date" title="<?php echo $news->date; ?>">
-					<?php echo strtolower(readable_date($news->date, $lang)); ?>
-				</i>
-				<?php
-				$user = gravatarimg($news->gravatar, 25, 'class="img-circle"').' '.get_full_name($news);
-				echo $lang['misc_by'].' '.anchor('user/profile/'.$news->userid, $user);
-				?>
-			</p>
+	<div class="main-box news clearfix">
+		<?php
+			if($news->image_original_filename != '')
+				echo '<img src="'.base_url().'user_content/images/original/'.$news->image_original_filename.'" class="img-responsive" alt="Responsive image">';
+		?>
+		<div class="box-body">
+			<h1>
+				<?php echo $news->title;?>
+				<img src="<?php echo lang_id_to_imgpath($news->lang_id); ?>" class="img-circle pull-right" />
+			</h1>
+			<?php echo $news_story; ?>
+			<div class="metadata clearfix">
+				<p>
+					<?php echo $lang['misc_published']; ?>
+					<i class="date" title="<?php echo $news->date; ?>">
+						<?php echo strtolower(readable_date($news->date, $lang)); ?>
+					</i>
+					<?php
+					$user = gravatarimg($news->gravatar, 25, 'class="img-circle"').' '.get_full_name($news);
+					echo $lang['misc_by'].' '.anchor('user/profile/'.$news->userid, $user);
+					?>
+				</p>
+			</div>
 		</div>
 	</div>
 	<?php
