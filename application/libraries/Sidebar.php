@@ -35,8 +35,8 @@ class Sidebar
 			array('title' => "Styrelsen", 'href' => 'association/board'),
 			array('title' => "Utskott", 'href' => 'association/committee'),
 			array('title' => "Webbgruppen", 'href' => 'association/web'),
-			array('title' => "Wiki", 'href' => 'http://wiki.medieteknik.nu/'),
-			array('title' => "LiU Alumn-inloggning", 'href' => 'https://alumni.liu.se/public/start/start.asp'),
+			array('title' => "Mette", 'href' => 'association/mette'),
+			array('title' => "LiU Alumn-inloggning", 'href' => 'https://alumni.liu.se/Portal/Public/Default.aspx'),
 			array('title' => "Protokoll och stadgar", 'href' => 'association/documents')
 		);
 
@@ -54,7 +54,12 @@ class Sidebar
 		$latestforum['items'] = array();
 
 		foreach($data as $item) {
-			array_push($latestforum['items'], array('title' => $item->topic, 'data' => readable_date($item->date,$this->lang_data, TRUE), 'href' => 'forum/thread/'.$item->id));
+			$topic = $item->topic;
+
+			if(strlen($topic) > 25)
+				$topic = substr($topic, 0, 25).'...';
+
+			array_push($latestforum['items'], array('title' => $topic, 'data' => readable_date($item->date,$this->lang_data, TRUE), 'href' => 'forum/thread/'.$item->id));
 		}
 
 		$latestforum['title'] = $this->lang_data['misc_latestforum'];
