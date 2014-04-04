@@ -84,13 +84,13 @@
 
 			<!-- START main -->
 			<div class="wrapper">
+				<div class="container">
+					<?php echo $menu; ?>
+				</div>
 				<?php
 				// if we have carousel, display it here
 				echo isset($carousel_content) ? $carousel_content : '';
 				?>
-				<div class="container">
-					<?php echo $menu; ?>
-				</div>
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-8 col-md-9" id="main-content">
