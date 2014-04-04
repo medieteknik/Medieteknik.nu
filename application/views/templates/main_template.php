@@ -8,11 +8,10 @@
 		<meta name="author" content="<?php echo $head_author; ?>">
 
 		<!-- responsive -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 		<title><?php echo $head_title; ?></title>
 
-		<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>web/css/reset.min.css" type="text/css" media="screen" /> -->
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 	    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>web/css/style.css" type="text/css" /> -->

@@ -189,6 +189,8 @@ $lang['admin_removeimage'] = "Ta bort bild";
 	$lang['admin_forum_reported_by'] = "raporterade";
 	$lang['admin_forum_show_post'] = "Visa inlägg";
 	$lang['admin_forum_remove'] = "Ta bort rapport";
+	$lang['admin_forum_pending'] = "Icke-verifierade inlägg";
+	$lang['admin_forum_approve'] = "Godkänn inlägg";
 
 // date
 $lang['date_yesterday'] = "Igår";

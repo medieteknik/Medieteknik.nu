@@ -19,8 +19,10 @@ class Notification_model extends CI_Model
 		if(!$this->login->is_admin())
 			return false;
 
-		$this->db->select('SUM(users.new = 1) as new_users, SUM(forum_report.handled = 0) as forum_reports');
-		$this->db->from('users, forum_report');
+		$this->db->select('SUM(users.new = 1) as new_users');
+		$this->db->select('SUM(forum_report.handled = 0) as forum_reports');
+		$this->db->select('SUM(forum_reply_guest.verified = 0) as forum_pending');
+		$this->db->from('users, forum_report, forum_reply_guest');
 		$query = $this->db->get();
 		$res = $query->result();
 

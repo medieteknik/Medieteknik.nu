@@ -189,6 +189,8 @@ $lang['admin_carousel_changeorder'] = "Change order";
 	$lang['admin_forum_reported_by'] = "reported";
 	$lang['admin_forum_show_post'] = "Show post";
 	$lang['admin_forum_remove'] = "Remove report";
+	$lang['admin_forum_pending'] = "Pending posts";
+	$lang['admin_forum_approve'] = "Verify reply";
 
 
 // date

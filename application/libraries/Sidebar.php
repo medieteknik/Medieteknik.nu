@@ -78,7 +78,8 @@ class Sidebar
 		{
 			// this /10 fix is the ugliest thing ever. I'm so sorry for it, I just dont want to spend
 			// another hour searching for the cause of this wierd issue.
-			$forum_reports = $notif->forum_reports > 0 ? ' <span class="badge">'.(($notif->forum_reports)/10).'</span>' : '';
+			$forum_count = $notif->forum_reports + $notif->forum_pending;
+			$forum_reports = $forum_count > 0 ? ' <span class="badge">'.(($forum_count)/10).'</span>' : '';
 			array_push($this->adminmenu['items'], array('title' => $this->lang_data['admin_forum'].$forum_reports, 'href' => "admin/forum"));
 		}
 

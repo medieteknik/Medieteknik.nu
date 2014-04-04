@@ -153,7 +153,7 @@ class Forum extends MY_Controller
 				$reply = $this->Forum_model->add_guest_reply($data['topic_id'], $data['reply'], $data['name'], $data['email']);
 
 				$is_verified = '';
-				if(!$this->Forum_model->is_verified($data['email']))
+				if(!$this->login->is_verified($this->input->post('email')))
 				{
 					// this is a good place to send an email to the user
 					$is_verified = '/verify';
@@ -239,10 +239,11 @@ class Forum extends MY_Controller
 
 		$redir = $this->Forum_model->get_topic_id_from_hash($hash, $email);
 
-		$this->Forum_model->verify($hash, $email);
-
-		if($redir->topic_id !== '')
+		if($redir)
+		{
+			$this->login->verify($hash, $email);
 			redirect('forum/thread/'.$redir->topic_id.'/#replyid-'.$redir->reply_id, 'location');
+		}
 		else
 			show_404();
 	}

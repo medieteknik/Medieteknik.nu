@@ -317,8 +317,8 @@ class Forum_model extends CI_Model
 						);
 		$query = $this->db->insert('forum_topic', $data);
 		$topic_id = $this->db->insert_id();
-		$first_reply = $this->add_guest_reply($topic_id, $post, $name, $email);
 
+		$first_reply = $this->add_guest_reply($topic_id, $post, $name, $email);
 		$this->db->update('forum_topic', array('first_reply_id' => $first_reply), array('id' => $topic_id));
 
 		// completes the transaction, if anything has gone wrong, it rollbacks the changes
@@ -394,12 +394,17 @@ class Forum_model extends CI_Model
 				'name' 		=> $name,
 				'email' 	=> $email,
 				'hash' 		=> str_gen(15, 25),
-				'verified' 	=> $this->is_verified($email)
+				'verified' 	=> $this->login->is_verified($email)
 			);
 
 		$this->db->insert('forum_reply_guest', $data);
 	}
 
+	/**
+	 * checks if a user is verified
+	 * @param  string  $email the user email
+	 * @return boolean
+	 */
 	function is_verified($email)
 	{
 		$this->db->where('email', $email);
@@ -409,6 +414,12 @@ class Forum_model extends CI_Model
 		return $q->num_rows();
 	}
 
+	/**
+	 * verifies a user using email AND hash
+	 * @param  string $hash  the hash
+	 * @param  string $email the email
+	 * @return bool
+	 */
 	function verify($hash, $email)
 	{
 		$where = array(
@@ -418,6 +429,37 @@ class Forum_model extends CI_Model
 		return $this->db->update('forum_reply_guest', array('verified' => 1), $where);
 	}
 
+	/**
+	 * mark a guest forum reply as ok
+	 * @param  int $reply_id the reply id
+	 * @return bool
+	 */
+	function verify_id($reply_id)
+	{
+		return $this->db->update('forum_reply_guest', array('verified' => 1), array('reply_id' => $reply_id));
+	}
+
+	/**
+	 * check if a hash/email combination is valid
+	 * @param  string $hash  the hash
+	 * @param  string $email the email
+	 * @return bool/int
+	 */
+	function hash_check($hash, $email)
+	{
+		$this->db->where('hash', $hash);
+		$this->db->where('email', $email);
+		$query = $this->db->get('forum_reply_guest');
+
+		return $query->num_rows();
+	}
+
+	/**
+	 * find out what topic the guest forum reply was posted to
+	 * @param  string $hash  the hash to search for
+	 * @param  string $email the email who posted the reply
+	 * @return array        the topic id and the reply id
+	 */
 	function get_topic_id_from_hash($hash, $email)
 	{
 		$this->db->select("forum_reply.topic_id, forum_reply.id as reply_id");
@@ -428,9 +470,18 @@ class Forum_model extends CI_Model
 		$query = $this->db->get();
 		$res = $query->result();
 
-		return $res[0];
+		if($query->num_rows() > 0)
+			return $res[0];
+
+		return false;
 	}
 
+	/**
+	 * report a forum reply
+	 * @param  int $post_id the forum post to report
+	 * @param  int $user_id the user who reports the post
+	 * @return int/false          the report id
+	 */
 	function report_post($post_id, $user_id)
 	{
 		if($this->report_exists($post_id, $user_id))
@@ -441,6 +492,12 @@ class Forum_model extends CI_Model
 		return ($insert ? $this->db->insert_id() : false);
 	}
 
+	/**
+	 * check if a user has reported a post
+	 * @param  int $post_id the reply id
+	 * @param  int $user_id the user id
+	 * @return int/bool
+	 */
 	function report_exists($post_id, $user_id)
 	{
 		$this->db->where('reply_id', $post_id);
@@ -449,6 +506,12 @@ class Forum_model extends CI_Model
 		return $query->num_rows();
 	}
 
+	/**
+	 * get reports for a forum post. either per user or all.
+	 * @param  int  $post_id the forum post id
+	 * @param  int $user_id  optional. the user id.
+	 * @return array           array with all the replies
+	 */
 	function get_reports($post_id, $user_id = 0)
 	{
 		if($user_id !== 0)
@@ -460,6 +523,10 @@ class Forum_model extends CI_Model
 		return $query->result();
 	}
 
+	/**
+	 * get all reports
+	 * @return array array of objects
+	 */
 	function get_all_reports()
 	{
 		$this->db->select('forum_report.*, forum_reply.*, users.lukasid, poster.lukasid as p_lukasid');
@@ -470,6 +537,10 @@ class Forum_model extends CI_Model
 		return $query->result();
 	}
 
+	/**
+	 * get all active reports
+	 * @return array array of objects
+	 */
 	function get_all_active_reports()
 	{
 		$this->db->select('forum_report.id as report_id, forum_report.*, forum_reply.*, users.lukasid, poster.lukasid as p_lukasid');
@@ -481,15 +552,40 @@ class Forum_model extends CI_Model
 		return $query->result();
 	}
 
+	/**
+	 * deletes a report
+	 * @param  int $report_id the report id
+	 * @return bool
+	 */
 	function remove_report($report_id)
 	{
 		return $this->db->delete('forum_report', array('id' => $report_id));
 	}
 
+	/**
+	 * mark a report as handled
+	 * @param  int $report_id the report id
+	 * @return bool
+	 */
 	function handle_report($report_id)
 	{
 		$this->db->where('id', $report_id);
 		return $this->db->update('forum_report', array('handled' => 1));
+	}
+
+	/**
+	 * get all unverified replies
+	 * @return array array of objects
+	 */
+	function get_all_pending_posts()
+	{
+		$this->db->select('forum_reply_guest.*, forum_reply.*, forum_topic.topic, forum_topic.cat_id');
+		$this->db->join("forum_reply", "forum_reply.id = forum_reply_guest.reply_id", "");
+		$this->db->join("forum_topic", "forum_topic.id = forum_reply.topic_id", "");
+		$this->db->where('verified', 0);
+		$query = $this->db->get('forum_reply_guest');
+
+		return $query->result();
 	}
 }
 

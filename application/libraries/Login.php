@@ -33,6 +33,30 @@ class Login
 		return false;
 	}
 
+	function is_verified($email)
+	{
+		return get_cookie('forum_email') == md5($email);
+	}
+
+	function verify($hash, $email)
+	{
+		$this->CI->load->model('Forum_model');
+
+		if($this->CI->Forum_model->hash_check($hash, $email))
+		{
+			$email_cookie = array(
+					'name' 		=> 'forum_email',
+					'value' 	=> md5($email),
+					'expire' 	=> 3600*24*30 // 30 days
+				);
+			set_cookie($email_cookie);
+
+			return $this->CI->Forum_model->verify($hash, $email);
+		}
+
+		return false;
+	}
+
 	public function has_privilege($privileges) {
 		if(!isset($privileges)) {
 			return false;
