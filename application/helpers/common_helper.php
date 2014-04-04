@@ -178,6 +178,7 @@ function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 		$text = preg_replace("/(\n##)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h2>$2</h2>\n",$text);
 		$text = preg_replace("/(\n#)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h1>$2</h1>\n",$text);
 
+		// images
 		$text = preg_replace_callback('/\[img((?:\s+[a-zA-Z]+=[a-zA-Z0-9\_]+)*)\s*\]/','_img_format', $text);
 	} else {
 		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
