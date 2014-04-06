@@ -159,8 +159,8 @@ class Install_model extends CI_Model
 			$this->db->insert('users_data', $data);
 			$data = array('users_id' => 9, 'gravatar' => 'micke.zackrisson@gmail.com');
 			$this->db->insert('users_data', $data);
-
 			$data = array('users_id' => 10, 'web' => "http://www.hackerman.se", 'presentation' => "Jag heter Erik, Jag är chef på internet.", 'twitter' => 'tistatos_', 'gravatar' => 'tistatos@gmail.com');
+			$this->db->insert('users_data', $data);
 			
 		}
 	}
