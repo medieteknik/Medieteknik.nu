@@ -260,3 +260,14 @@ $lang['misc_copyright'] = "Upphovsrätt";
 $lang['error_error'] = "Fel!";
 $lang['error_common'] = "Ett fel uppstod. Vänligen försök igen senare.";
 $lang['error_user_notfound'] = "Kunde inte hitta användaren. Säker på att du skrev rätt?";
+
+
+// email
+$lang['email_hello'] = "Hej";
+$lang['email_byebye'] = "Vänligen";
+$lang['email_assoc'] = "Medietekniksektionen";
+$lang['email_footer'] = "";
+$lang['email_forum_verify_title'] = "Bekräfta epostadress";
+$lang['email_forum_verify_explanation'] = "Du skrev precis ett inlägg på Medietekniksektionens forum. För att bekräfta din epostadress och se till att ditt inlägg publiceras, klicka på knappen nedan.";
+$lang['email_forum_verify_confirm'] = "Bekräfta epostadress!";
+$lang['email_forum_verify_ifitdoesntwork'] = "Om du inte ser någon knapp, kopiera följande adress och klistra in i din webläsares adressfält: ";

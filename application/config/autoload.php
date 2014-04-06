@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'common', 'create_tables', 'cookie');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('mt_config');
 
 
 /*

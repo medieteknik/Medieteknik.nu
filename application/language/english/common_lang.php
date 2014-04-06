@@ -263,3 +263,15 @@ $lang['misc_copyright'] = "Copyright";
 $lang['error_error'] = "Error!";
 $lang['error_common'] = "An error occured, please try again later.";
 $lang['error_user_notfound'] = "User could not be found. Are you sure you typed everything in correctly?";
+
+
+// email
+$lang['email_hello'] = "Hello";
+$lang['email_byebye'] = "Cheers";
+$lang['email_assoc'] = "The Media Technology association";
+$lang['email_footer'] = "";
+$lang['email_forum_verify_title'] = "Verify email address";
+$lang['email_forum_verify_explanation'] = "Du skrev precis ett inlägg på Medietekniksektionens forum. För att bekräfta din epostadress och se till att ditt inlägg publiceras, klicka på knappen nedan.";
+$lang['email_forum_verify_explanation'] = "In order to publish your post on the media technology association forum, please click the link below and confirm your email address.";
+$lang['email_forum_verify_confirm'] = "Confirm email address!";
+$lang['email_forum_verify_ifitdoesntwork'] = "If there is no button, copy the following URL and paste it into your browser's address field: ";

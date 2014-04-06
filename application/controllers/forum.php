@@ -94,16 +94,38 @@ class Forum extends MY_Controller
 			{
 				$data['name'] = $this->input->post('name');
 				$data['email'] = $this->input->post('email');
+				$data['hash'] = str_gen(15, 25);
 				$data['guest'] = true;
 
-				$tid = $this->Forum_model->create_guest_topic($data['cat_id'], $data['topic'], $data['reply'], $data['name'], $data['email']);
+				$tid = $this->Forum_model->create_guest_topic($data['cat_id'], $data['topic'], $data['reply'], $data['name'], $data['email'], $data['hash']);
 			}
 
 			// check if the post was successful
 			if($tid)
 			{
-				if($data['guest'] && !$this->Forum_model->is_verified($data['email']))
+				if($data['guest'] && !$this->login->is_verified($data['email']))
+				{
+					// load email lib and view data
+					$this->load->library('email');
+					$email_data['lang'] = $this->lang_data;
+					$email_data['data'] = $data;
+					// email properties
+					$this->email->from($this->config->item('noreply_mail'), $this->config->item('noreply_name'));
+					$this->email->to($data['email']);
+					$this->email->subject($this->config->item('mail_title').$email_data['lang']['email_forum_verify_title']);
+					// load email from view and compile message
+					$email_data['message'] = $this->load->view('emails/forum_verify', $email_data, true);
+					$message = $this->load->view('templates/email', $email_data, true);
+					$this->email->message($message);
+					// send message
+					$this->email->send();
+
+					// do_dump($data);
+					// echo $this->email->print_debugger();
+
+					// redirect user!
 					redirect('/forum/category/'.$data['cat_id'].'/verify', 'location');
+				}
 				else
 					redirect('/forum/thread/'.$tid, 'location');
 			}
@@ -148,14 +170,33 @@ class Forum extends MY_Controller
 						'name' 		=> $this->input->post('name'),
 						'email' 	=> $this->input->post('email'),
 						'reply' 	=> $this->input->post('reply'),
+						'hash'		=> str_gen(15, 25),
 						'message' 	=> 'fail'
 					);
-				$reply = $this->Forum_model->add_guest_reply($data['topic_id'], $data['reply'], $data['name'], $data['email']);
+				$reply = $this->Forum_model->add_guest_reply($data['topic_id'], $data['reply'], $data['name'], $data['email'], $data['hash']);
 
 				$is_verified = '';
 				if(!$this->login->is_verified($this->input->post('email')))
 				{
-					// this is a good place to send an email to the user
+					// load email lib and view data
+					$this->load->library('email');
+					$email_data['lang'] = $this->lang_data;
+					$email_data['data'] = $data;
+					// email properties
+					$this->email->from($this->config->item('noreply_mail'), $this->config->item('noreply_name'));
+					$this->email->to($data['email']);
+					$this->email->subject($this->config->item('mail_title').$email_data['lang']['email_forum_verify_title']);
+					// load email from view and compile message
+					$email_data['message'] = $this->load->view('emails/forum_verify', $email_data, true);
+					$message = $this->load->view('templates/email', $email_data, true);
+					$this->email->message($message);
+					// send message
+					$this->email->send();
+
+					// do_dump($data);
+					// echo $this->email->print_debugger();
+
+					// append verify to url so that the user gets a nice message
 					$is_verified = '/verify';
 				}
 
@@ -166,7 +207,7 @@ class Forum extends MY_Controller
 			}
 		}
 
-		// redirect('forum/thread/'.$this->input->post('topic_id'), 'refresh');
+		redirect('forum/thread/'.$this->input->post('topic_id').'/error', 'refresh');
 	}
 
 	function thread($id = 0, $post_data = '')

@@ -299,7 +299,7 @@ class Forum_model extends CI_Model
 		return $topic_id;
 	}
 
-	function create_guest_topic($cat_id, $topic, $post, $name, $email)
+	function create_guest_topic($cat_id, $topic, $post, $name, $email, $hash)
 	{
 		if(empty($topic) || empty($post) || empty($name) || !valid_email($email))
 			return false;
@@ -318,7 +318,7 @@ class Forum_model extends CI_Model
 		$query = $this->db->insert('forum_topic', $data);
 		$topic_id = $this->db->insert_id();
 
-		$first_reply = $this->add_guest_reply($topic_id, $post, $name, $email);
+		$first_reply = $this->add_guest_reply($topic_id, $post, $name, $email, $hash);
 		$this->db->update('forum_topic', array('first_reply_id' => $first_reply), array('id' => $topic_id));
 
 		// completes the transaction, if anything has gone wrong, it rollbacks the changes
@@ -361,7 +361,7 @@ class Forum_model extends CI_Model
 		return $reply_id;
 	}
 
-	function add_guest_reply($topic_id, $reply, $name, $email)
+	function add_guest_reply($topic_id, $reply, $name, $email, $hash)
 	{
 		if(empty($reply) || empty($name) || !valid_email($email))
 			return false;
@@ -376,8 +376,8 @@ class Forum_model extends CI_Model
 
 		log_message('info', 'Guest reply #'.$reply_id.' from '.$name.' ('.$email.'), IP:'.get_client_ip_addr());
 
-		// add guest user data
-		$this->add_guest_data($reply_id, $name, $email);
+		// add guest user data and save hash as variable
+		$hash = $this->add_guest_data($reply_id, $name, $email, $hash);
 
 		$data = array('last_reply_id' => $reply_id);
 
@@ -387,17 +387,20 @@ class Forum_model extends CI_Model
 		return $reply_id;
 	}
 
-	function add_guest_data($reply_id, $name, $email)
+	function add_guest_data($reply_id, $name, $email, $hash)
 	{
 		$data = array(
 				'reply_id' 	=> $reply_id,
 				'name' 		=> $name,
 				'email' 	=> $email,
-				'hash' 		=> str_gen(15, 25),
+				'hash' 		=> $hash,
 				'verified' 	=> $this->login->is_verified($email)
 			);
 
-		$this->db->insert('forum_reply_guest', $data);
+		if($this->db->insert('forum_reply_guest', $data))
+			return $data['hash'];
+
+		return false;
 	}
 
 	/**
