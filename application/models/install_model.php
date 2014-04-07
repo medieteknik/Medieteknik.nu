@@ -715,12 +715,12 @@ Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur
 			$this->load->model("Forum_model");
 			$this->Forum_model->create_topic(4, 10, 'Vad tycker du om nya hemsidan?', 'Förut kändes det hopplöst, men nu börjar det ju faktiskt hända saker här!
 
-				Vad tycker du om sidan? Jag tycker det är ganska fett faktiskt.', date('Y-m-d H:i:s'));
+Vad tycker du om sidan? Jag tycker det är ganska fett faktiskt.', date('Y-m-d H:i:s'));
 
 			$this->Forum_model->create_topic(4, 1, 'När börjar det?', 'Hej, jag undrar när Medieteknikdagarna 2012 går av stapeln?
-			Det viktiga är inte exakt dag utan på ett ungefär?
+Det viktiga är inte exakt dag utan på ett ungefär?
 
-			puss', '2011-12-12 11:00:00');
+puss', '2011-12-12 11:00:00');
 			$this->Forum_model->create_topic(4, 2, 'LiU is the best.', 'its only a game.', '2011-12-12 12:00:00');
 			$this->Forum_model->add_reply(2, 2, 'Det har redan varit.', '2011-12-12 13:00:00');
 		}
@@ -1094,6 +1094,24 @@ Se mer på http://www.medieteknikdagarna.se/
 Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram förslag på nästa års styrelse."),
 								);
 			$this->Page_model->add_page("association/committee", $translations, 1);
+
+			$translations = array(
+									array("lang" => "se", "header" => "Om hemsidan", "content" => "Den här sidan använder kakor. Det är nice."),
+									array("lang" => "en", "header" => "About the website", "content" => "This site uses cookies. It's nice."),
+								);
+			$this->Page_model->add_page("about/website", $translations, 1);
+
+			$translations = array(
+									array("lang" => "se", "header" => "Cookies", "content" => "Den här sidan använder kakor."),
+									array("lang" => "en", "header" => "Cookies", "content" => "This site uses cookies."),
+								);
+			$this->Page_model->add_page("about/website/cookies", $translations, 1);
+
+			$translations = array(
+									array("lang" => "se", "header" => "Licenser", "content" => "Den här sidan använder verktyg byggda i öppen källkod. CodeIgniter, Parsedown, osv."),
+									array("lang" => "en", "header" => "Licenses", "content" => "This site uses some open source tools, such as CodeIgniter, Parsedown, etc."),
+								);
+			$this->Page_model->add_page("about/website/licenses", $translations, 1);
 
 		}
 	}

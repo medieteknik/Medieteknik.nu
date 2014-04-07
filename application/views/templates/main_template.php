@@ -111,7 +111,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-3">
-							<h1><?php echo $lang['footer_contact']; ?></h1>
+							<h1><?php echo $lang['footer_copyright']; ?></h1>
 							<p>
 								<a href="mailto:info@medieteknik.nu" target="_blank">info@medieteknik.nu</a>
 							</p>
@@ -126,7 +126,8 @@
 							<h1><?php echo $lang['footer_info']; ?></h1>
 							<ul class="list-unstyled">
 								<li><?php echo anchor("/about/website", $lang['footer_aboutsite']); ?></li>
-								<li><?php echo anchor("/about/cookies", $lang['footer_cookies']); ?></li>
+								<li><?php echo anchor("/about/website/cookies", $lang['footer_cookies']); ?></li>
+								<li><?php echo anchor("/about/website/licenses", $lang['footer_licenses']); ?></li>
 							</ul>
 						</div>
 						<div class="col-sm-3 col-xs-6">
