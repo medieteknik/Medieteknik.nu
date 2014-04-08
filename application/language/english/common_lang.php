@@ -11,10 +11,12 @@ $lang['head_author'] = "Media Technology Assosciation web group";
 
 // footer
 $lang['footer_contact'] = "Contact";
+$lang['footer_copyright'] = "&copy; The media technology association";
 $lang['footer_info'] = "Information";
 $lang['footer_links'] = "Links";
 $lang['footer_aboutsite'] = "About the website";
 $lang['footer_cookies'] = "About cookies";
+$lang['footer_licenses'] = "Licenses";
 $lang['footer_follow'] = "Follow us";
 $lang['footer_mtliu'] = "Media Technology at liu.se";
 $lang['footer_github'] = "The MT Organization at GitHub";

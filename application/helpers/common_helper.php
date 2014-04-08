@@ -152,37 +152,42 @@ function text_strip($input, $line_break = FALSE)
 
 function text_format($input, $pre = '<p>', $post = '</p>', $xtravaganza = TRUE)
 {
-	$text = text_strip($input, TRUE);
+	// $text = text_strip($input, TRUE);
 
-	//wrap with paragraph
-	//$text = $pre.$text.$post;
-	//$text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9]+.*)\n/","\n".$pre."$2".$post."\n", $text);
+	// //wrap with paragraph
+	// //$text = $pre.$text.$post;
+	// //$text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9]+.*)\n/","\n".$pre."$2".$post."\n", $text);
 
-	$text = preg_replace("/(\[br\]\n?)/","<br/>", $text);
-	$text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9].*)(\n|$)/","\n".$pre."$2".$post."\n", $text);
+	// $text = preg_replace("/(\[br\]\n?)/","<br/>", $text);
+	// $text = preg_replace("/(^|\n)((?!#+).*[a-zA-Z_åäöÅÄÖ0-9].*)(\n|$)/","\n".$pre."$2".$post."\n", $text);
 
-	// bold and italics
-	$text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);
-	$text = preg_replace('/\[i\](.*)\[\/i\]/','<i>${1}</i>', $text);
+	// // bold and italics
+	// $text = preg_replace('/\[b\](.*)\[\/b\]/','<b>${1}</b>', $text);
+	// $text = preg_replace('/\[i\](.*)\[\/i\]/','<i>${1}</i>', $text);
 
-	if($xtravaganza === TRUE)
-	{
-		// url
-		$text = preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $text);
-		// URL, written as (url|text)
-		$text = preg_replace_callback("/\(([a-zA-Z\/\.\_]+)\|([a-zA-Z_åäöÅÄÖ0-9\"\s]+)\)/",'_local_linker',$text);
+	// if($xtravaganza === TRUE)
+	// {
+	// 	// url
+	// 	$text = preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $text);
+	// 	// URL, written as (url|text)
+	// 	$text = preg_replace_callback("/\(([a-zA-Z\/\.\_]+)\|([a-zA-Z_åäöÅÄÖ0-9\"\s]+)\)/",'_local_linker',$text);
 
-		// headlines
-		$text = preg_replace("/(\n####)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h4>$2</h4>\n",$text);
-		$text = preg_replace("/(\n###)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h3>$2</h3>\n",$text);
-		$text = preg_replace("/(\n##)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h2>$2</h2>\n",$text);
-		$text = preg_replace("/(\n#)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h1>$2</h1>\n",$text);
+	// 	// headlines
+	// 	$text = preg_replace("/(\n####)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h4>$2</h4>\n",$text);
+	// 	$text = preg_replace("/(\n###)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h3>$2</h3>\n",$text);
+	// 	$text = preg_replace("/(\n##)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h2>$2</h2>\n",$text);
+	// 	$text = preg_replace("/(\n#)([a-zA-Z_åäöÅÄÖ0-9\s\_\-&]+)(\n)/","\n<h1>$2</h1>\n",$text);
 
-		// images
-		$text = preg_replace_callback('/\[img((?:\s+[a-zA-Z]+=[a-zA-Z0-9\_]+)*)\s*\]/','_img_format', $text);
-	} else {
-		$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
-	}
+	// 	// images
+	// 	$text = preg_replace_callback('/\[img((?:\s+[a-zA-Z]+=[a-zA-Z0-9\_]+)*)\s*\]/','_img_format', $text);
+	// } else {
+	// 	$text = preg_replace('/\[img[a-zA-Z0-9\_=\s]*\]/','', $text);
+	// }
+
+	$pd = Parsedown::instance('text_format');
+
+	$pd->setBreaksEnabled(true);
+	$text = $pd->parse($input);
 
 	return ($text);
 
