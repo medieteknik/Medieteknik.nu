@@ -33,7 +33,7 @@ Table of contents
 @shadowcolor: #AAAAAA;
 @metacolor: #f0f0f0;
 
-/********* RESPONSIVE VARS *******/
+//********* RESPONSIVE VARS *******
 @screen-sm-min: 768px;
 @screen-md-min: 992px;
 @screen-lg-min: 1200px;
@@ -199,7 +199,7 @@ body {
 			}
 		}
 
-		&#lang-control {
+		&#lang-control, &#header-user {
 			margin-left: 3px;
 		}
 	}
@@ -268,6 +268,23 @@ body {
 
 	.box-body{
 		padding: 0 15px;
+	}
+}
+.markdown {
+	h1, h2, h3, h4, h5, h6 {
+		clear: left;
+	}
+
+	img {
+		max-width: 100%;
+		margin: 15px 15px 15px 0;
+		float: left;
+
+		/* This is so ugly I can't believe it. Im so sorry. /klaes950 */
+		&[alt*=float_right] {
+			float: right !important;
+			margin: 15px 0 15px 15px !important;
+		}
 	}
 }
 /* Styles specific for the large carousel on index */
@@ -566,6 +583,11 @@ body {
 			float: none !important;
 		}
 	}
+	.markdown img {
+		width: 100%;
+		height: auto;
+		float: none;
+	}
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -622,6 +644,9 @@ body {
 }
 .bigmargin {
 	margin: 15px 0 !important;
+}
+code {
+	border: 1px solid rgba(0, 0, 0, 0.1);
 }
 ul.box-list {
 	list-style: none;

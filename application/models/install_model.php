@@ -126,15 +126,13 @@ class Install_model extends CI_Model
 			$this->load->model("User_model");
 			$this->User_model->add_user("Jonas", "Strandstedt", "jonst184");
 			$this->User_model->add_user("Emil", "Axelsson", "emiax775");
-			$this->User_model->add_user("Kristofer", "Janukiewicz", "krija286");
-			$this->User_model->add_user("Anders", "Nord", "andno992");
 			$this->User_model->add_user("Jonas", "Zeitler", "jonze168");
-			$this->User_model->add_user("Klas", "Eskilson", "klaes950");
-			$this->User_model->add_user("Simon", "Joelsson", "simjo407");
-			$this->User_model->add_user("Martin", "Kierkegaard", "marki423");
 			$this->User_model->add_user("Mikael", "Zackrisson", "mikza835");
+			$this->User_model->add_user("Klas", "Eskilson", "klaes950");
+			$this->User_model->add_user("Martin", "Kierkegaard", "marki423");
 			$this->User_model->add_user("Erik", "Larsson", "erila135");
-			$this->User_model->add_user("Arg", "Mtare", "argmt123");
+			$this->User_model->add_user("Daniel", "Rönnkvist", "danro716");
+			$this->User_model->add_user("Carl", "Englund", "caren083");
 		}
 	}
 
@@ -153,13 +151,13 @@ class Install_model extends CI_Model
 			// inserting data
 			$data = array('users_id' => 1, 'web' => "http://www.jonasstrandstedt.se", 'presentation' => "Jag heter jonas");
 			$this->db->insert('users_data', $data);
-			$data = array('users_id' => 5, 'gravatar' => 'jonasemanuelzeitler@gmail.com');
+			$data = array('users_id' => 3, 'gravatar' => 'jonasemanuelzeitler@gmail.com');
 			$this->db->insert('users_data', $data);
-			$data = array('users_id' => 6, 'web' => "http://www.klaseskilson.se", 'presentation' => "Jag heter Klas och pillar med den här sidan lite.", 'twitter' => 'Eskilicious', 'gravatar' => 'klas.eskilson@gmail.com');
+			$data = array('users_id' => 5, 'web' => "http://www.klaseskilson.se", 'presentation' => "Jag heter Klas och pillar med den här sidan lite.", 'twitter' => 'Eskilicious', 'gravatar' => 'klas.eskilson@gmail.com', 'github' => 'https://github.com/klaseskilson', 'linkedin' => 'http://linkedin.com/in/klaseskilson');
 			$this->db->insert('users_data', $data);
-			$data = array('users_id' => 9, 'gravatar' => 'micke.zackrisson@gmail.com');
+			$data = array('users_id' => 4, 'gravatar' => 'micke.zackrisson@gmail.com');
 			$this->db->insert('users_data', $data);
-			$data = array('users_id' => 10, 'web' => "http://www.hackerman.se", 'presentation' => "Jag heter Erik, Jag är chef på internet.", 'twitter' => 'tistatos_', 'gravatar' => 'tistatos@gmail.com');
+			$data = array('users_id' => 7, 'web' => "http://www.hackerman.se", 'presentation' => "Jag heter Erik, Jag är chef på internet.", 'twitter' => 'tistatos_', 'gravatar' => 'tistatos@gmail.com');
 			$this->db->insert('users_data', $data);
 
 		}
@@ -322,14 +320,16 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 								);
 			$id = $this->Group_model->add_group($translations);
 			$user_list = array(
-								array("user_id" => 9, "position" => "Webbchef"),
-								array("user_id" => 6, "position" => "PR-ansvarig", "email" => "pr@medieteknik.nu"),
+								array("user_id" => 4, "position" => "Webbchef", "email" => "webbchef@medieteknik.nu"),
+								array("user_id" => 5, "position" => "PR-ansvarig", "email" => "pr@medieteknik.nu"),
+								array("user_id" => 9, "position" => "Näringslinvsansvarig", "email" => "naringsliv@medieteknik.nu"),
+								array("user_id" => 8, "position" => "Festerichef", "email" => "3cant@medieteknik.nu"),
 			);
 			$this->Group_model->add_group_year($id, 2013, 2014, $user_list);
 
 			$translations = array(
-									array("lang" => "se", "name" => "Webbgruppen", "description" => "Om några är grymma så är det webbgruppen"),
-									array("lang" => "en", "name" => "Web development group", "description" => "If someone os cruel, then its the spider-web group."),
+									array("lang" => "se", "name" => "Webbgruppen", "description" => "Om några är grymma så är det webbgruppen. De ligger bakom den här hemsidan."),
+									array("lang" => "en", "name" => "Web development group", "description" => "If someone is cruel, then its the spider-web group."),
 								);
 			$id =$this->Group_model->add_group($translations);
 
@@ -343,6 +343,11 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 								array("user_id" => 1, "position" => "Coder", "email" => "jonst184@student.liu.se"),
 			);
 			$this->Group_model->add_group_year($id, 2011, 2012, $user_list);
+			$user_list = array(
+								array("user_id" => 4, "position" => "Nörd"),
+								array("user_id" => 5, "position" => "Webbchef"),
+			);
+			$this->Group_model->add_group_year($id, 2013, 2014, $user_list);
 
 			$translations = array(
 									array("lang" => "se", "name" => "Mette", "description" => "Mette är en förening för alla tjejer som studerar Medieteknik på Campus Norrköping. Vårt mål är att främja gemenskapen mellan alla tjejer på MT-programmet. Under skolåret anordnar vi olika roliga aktiviteter, vissa är enbart för MT-tjejer medan andra aktiviteter är till för alla som pluggar MT, kille som tjej. Mette är även med och anordnar sittningen Ladies Night i mars där alla flickor som vill kan träffas och äta god mat och kolla på gycklande pojkar."),
@@ -718,7 +723,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 
 			// inserting users
 			$this->load->model("Forum_model");
-			$this->Forum_model->create_topic(4, 10, 'Vad tycker du om nya hemsidan?', 'Förut kändes det hopplöst, men nu börjar det ju faktiskt hända saker här!
+			$this->Forum_model->create_topic(4, 7, 'Vad tycker du om nya hemsidan?', 'Förut kändes det hopplöst, men nu börjar det ju faktiskt hända saker här!
 
 Vad tycker du om sidan? Jag tycker det är ganska fett faktiskt.', date('Y-m-d H:i:s'));
 
@@ -1100,7 +1105,9 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 			$this->Page_model->add_page("association/committee", $translations, 1);
 
 			$translations = array(
-									array("lang" => "se", "header" => "Om hemsidan", "content" => "Den här sidan använder kakor. Det är nice."),
+									array("lang" => "se", "header" => "Om hemsidan", "content" => "Den här sidan använder kakor, eller _cookies_. Det är en liten textfil som placeras på din dators hårddisk. Vi använder kakor för att tillhandahålla vissa funktioner på denna sida.
+
+Du kan läsa mer om kakor på [PTS hemsida](http://www.pts.se/cookies)."),
 									array("lang" => "en", "header" => "About the website", "content" => "This site uses cookies. It's nice."),
 								);
 			$this->Page_model->add_page("about/website", $translations, 1);
@@ -1116,6 +1123,16 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 									array("lang" => "en", "header" => "Licenses", "content" => "This site uses some open source tools, such as CodeIgniter, Parsedown, etc."),
 								);
 			$this->Page_model->add_page("about/website/licenses", $translations, 1);
+
+			$translations = array(
+									array("lang" => "se", "header" => "Markdown", "content" => "På den här sidan använder vi ett verktyg som heter [Parsedown](http://parsedown.org). Det bygger på [Markdown](daringfireball.net/projects/markdown/syntax), och har vissa funktioner som liknar [GitHub flavored markdown](https://help.github.com/articles/github-flavored-markdown). Några saker är dock lite annorlunda. Du kan läsa om det här nedan.
+
+#### Bilder
+Det går utmärkt att justera bilder. I dagsläget, skriv med <code>float_right</code> i <code>alt</code>-texten till bilden.
+
+På mobila enheter kommer samtliga bilder få en bredd på 100%.")
+								);
+			$this->Page_model->add_page("about/website/markdown", $translations, 1);
 
 		}
 	}
