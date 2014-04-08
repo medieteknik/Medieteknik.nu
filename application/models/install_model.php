@@ -161,7 +161,7 @@ class Install_model extends CI_Model
 			$this->db->insert('users_data', $data);
 			$data = array('users_id' => 10, 'web' => "http://www.hackerman.se", 'presentation' => "Jag heter Erik, Jag är chef på internet.", 'twitter' => 'tistatos_', 'gravatar' => 'tistatos@gmail.com');
 			$this->db->insert('users_data', $data);
-			
+
 		}
 	}
 
@@ -217,13 +217,13 @@ class Install_model extends CI_Model
 
 			$this->load->model("News_model");
 			$translations = array(
-									array("lang" => "se", "title" => "Klistrad nyhet!", "text" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
+									array("lang" => "se", "title" => "Klistrad nyhet!", "text" => "Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
 									array("lang" => "en", "title" => "Sticky News!", "text" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->News_model->add_news(1, $translations, "2012-01-06");
-			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Bilder", "text" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit.
+			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Bilder", "text" => "Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit.
 
-Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo http://www.google.se/ . Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."), "2012-01-06");
+Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo http://www.google.se/ . Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."), "2012-01-06");
 			$this->News_model->add_news(1, array("lang_abbr" => "se", "title" => "Utkast!", "text" => "Ett utkast mtf!"), "2012-10-06", 1);
 
 
@@ -317,14 +317,15 @@ Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur
 
 			$this->load->model("Group_model");
 			$translations = array(
-									array("lang" => "se", "name" => "Styrelsen", "description" => "Medietekniksektionen skall bevaka MT-studentens intressen när det gäller såväl studierna som profilering mot näringslivet. Här kommer sektionsstyrelsen in i bilden som sektionens verkställande organ. Kontakta oss på info@medieteknik.nu. Läs mer om våra (association/committee|utskott)"),
+									array("lang" => "se", "name" => "Styrelsen", "description" => "Medietekniksektionen skall bevaka MT-studentens intressen när det gäller såväl studierna som profilering mot näringslivet. Här kommer sektionsstyrelsen in i bilden som sektionens verkställande organ. Kontakta oss på info@medieteknik.nu. Läs mer om våra [utskott](/association/committee)"),
 									array("lang" => "en", "name" => "The Board", "description" => "The Board is hard."),
 								);
 			$id = $this->Group_model->add_group($translations);
 			$user_list = array(
 								array("user_id" => 9, "position" => "Webbchef"),
+								array("user_id" => 6, "position" => "PR-ansvarig", "email" => "pr@medieteknik.nu"),
 			);
-			$this->Group_model->add_group_year($id, 2011, 2012, $user_list);
+			$this->Group_model->add_group_year($id, 2013, 2014, $user_list);
 
 			$translations = array(
 									array("lang" => "se", "name" => "Webbgruppen", "description" => "Om några är grymma så är det webbgruppen"),
@@ -1004,11 +1005,10 @@ puss', '2011-12-12 11:00:00');
 									array("lang" => "se", "header" => "Utbildningen", "content" => "Civilingenjör i medieteknik är en mångsidig utbildning med tyngdpunkten på teknik för en bransch i ständig förändring. Liksom alla traditionella civilingenjörsutbildningar, består medieteknik av en gedigen grund i matematik och teknik. Styrkan ligger i vår unika förmåga att vara allsidiga, samtidigt som vi själva har möjligheten att välja vår egen profil och utveckla spetskompetens inom visualisering, grafisk teknik, ljud och video.
 
 ###Hård och mjuk
-									[img align=right id=5124141247590 w=150 h=100] Om ni tittar närmare på vår logotyp, ser ni att den är indelad i en mörkare grå kub, som står för de tunga tekniska ämnena samt en mjukare orange, som präglas av de mer humanistiskt lagda bitarna av utbildningen, såsom design, projektledning, interaktion mellan människa och teknik, osv. Denna kombination av teknik och humaniora är en av grundstenarna till Medieteknikutbildningen, såväl som orsak till dess popularitet hos såväl företag som gymnasiestudenter.
+[img align=right id=5124141247590 w=150 h=100] Om ni tittar närmare på vår logotyp, ser ni att den är indelad i en mörkare grå kub, som står för de tunga tekniska ämnena samt en mjukare orange, som präglas av de mer humanistiskt lagda bitarna av utbildningen, såsom design, projektledning, interaktion mellan människa och teknik, osv. Denna kombination av teknik och humaniora är en av grundstenarna till Medieteknikutbildningen, såväl som orsak till dess popularitet hos såväl företag som gymnasiestudenter.
 
 ###Efter plugget
-									En utexaminerad medietekniker har en bred och varierad arbetsmarknad och har visat sig vara oumbärlig både innanför rikets gränser och utanför. Allt ifrån filmeffekter i Hollywood, 3D-visualiseringar av röntgenbilder och galaxer, fysiksimuleringar inom spelbranschen, virtuella möbler i Ikea-katalogen, IT-konsult och garanterad färgkvalitet i trycksaker. Listan kan göras lång och blir bara längre och längre. Allsidighet är ett nyckelord som ständigt kommer tillbaka.
-									"),
+En utexaminerad medietekniker har en bred och varierad arbetsmarknad och har visat sig vara oumbärlig både innanför rikets gränser och utanför. Allt ifrån filmeffekter i Hollywood, 3D-visualiseringar av röntgenbilder och galaxer, fysiksimuleringar inom spelbranschen, virtuella möbler i Ikea-katalogen, IT-konsult och garanterad färgkvalitet i trycksaker. Listan kan göras lång och blir bara längre och längre. Allsidighet är ett nyckelord som ständigt kommer tillbaka."),
 									array("lang" => "en", "header" => "Education", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->Page_model->add_page("about/education", $translations, 1);
@@ -1021,24 +1021,24 @@ puss', '2011-12-12 11:00:00');
 
 			/*
 			$translations = array(
-									array("lang" => "se", "header" => "Utbildningen", "content" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
+									array("lang" => "se", "header" => "Utbildningen", "content" => "Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
 									array("lang" => "en", "header" => "Education", "content" => "Lorizzle bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->Page_model->add_page("about/education", $translations, 1);
 			*/
 
 			$translations = array(
-									array("lang" => "se", "header" => "Kurser", "content" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
+									array("lang" => "se", "header" => "Kurser", "content" => "Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
 								);
 			$this->Page_model->add_page("about/courses", $translations, 1);
 
 			$translations = array(
-									array("lang" => "se", "header" => "Sökande", "content" => "Lorem [b]ipsum[/b] [i]dolor[/i] sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
+									array("lang" => "se", "header" => "Sökande", "content" => "Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget eros eu nulla porta fringilla. Morbi facilisis quam at mi dictum vel vestibulum tellus ultrices. Duis et orci neque, sit amet commodo libero. Pellentesque accumsan pharetra justo. Proin eu metus eget leo dapibus volutpat et in dui. Ut risus sapien, commodo id tempor vitae, dignissim at eros. Mauris sit amet sem non justo rutrum feugiat. Mauris semper tincidunt hendrerit."),
 								);
 			$this->Page_model->add_page("about/applicant", $translations, 1);
 
 			$translations = array(
-									array("lang" => "en", "header" => "Association", "content" => "Lorizzle (association/board|Styret) bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
+									array("lang" => "en", "header" => "Association", "content" => "Lorizzle [Styret](/association/board) bizzle dolor bow wow wow amizzle, consectetuer adipiscing boom shackalack. Nullizzle sapien velizzle, shiz volutpizzle, pizzle quizzle, gravida vizzle, arcu. Pellentesque eget tortor. Sed eros. Fusce sizzle dolor dapibizzle shiz tempus sheezy. Maurizzle pellentesque funky fresh izzle turpizzle. You son of a bizzle shut the shizzle up doggy. Bow wow wow my shizz rhoncizzle crazy. In you son of a bizzle ma nizzle platea dictumst. Shut the shizzle up tellivizzle. Curabitur tellizzle tellivizzle, dawg pimpin', mattizzle ac, eleifend bizzle, nunc. Break it down suscipit. Integizzle sempizzle away sizzle my shizz."),
 								);
 			$this->Page_model->add_page("association/overview", $translations, 1);
 
