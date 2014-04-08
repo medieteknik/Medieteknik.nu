@@ -54,7 +54,7 @@ class Association extends MY_Controller
 						$protocol_year--;
 				}
 				$main_data['protocol_year'] = $protocol_year;
-				$main_data['document_years_array'] = $this->Documents_model->get_document_years(2005);
+				$main_data['document_years_array'] = $this->Documents_model->get_document_years();
 				$main_data['document_types'] = $this->Documents_model->get_all_documents_for_group(1);
 				$main_data['group'] = "Medietekniksektionen";
 				$template_data['main_content'] = $this->load->view('documents_view',  $main_data, true);

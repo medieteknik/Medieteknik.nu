@@ -33,7 +33,7 @@ class Documents extends MY_Controller
 				$protocol_year--;
 		}
 		$main_data['config'] = $this->Documents_model->get_config();
-		$main_data['document_years_array'] = $this->Documents_model->get_document_years(2005);
+		$main_data['document_years_array'] = $this->Documents_model->get_document_years();
 
 		// Data for overview view
 		// currently only medietekniksektionen
