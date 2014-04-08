@@ -128,7 +128,7 @@ echo form_open($action);
 		foreach ($group_years as $group_year)
 		{
 			echo '<li>';
-			$link = ($group_year->start_year == $group_year->start_year ? $group_year->start_year : $group_year->start_year.'/'.$group_year->stop_year).' ';
+			$link = ($group_year->start_year == $group_year->stop_year ? $group_year->start_year : $group_year->start_year.'/'.$group_year->stop_year).' ';
 
 			foreach ($group_year->members as $member)
 			{

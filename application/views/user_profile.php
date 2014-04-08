@@ -83,7 +83,7 @@ if(count($user->news) > 0)
 						foreach ($user->groups as $group) {
 							?>
 							<li>
-								<?php echo '<strong>'.$group->name.'</strong> '.($group->start_year == $group->start_year ? $group->start_year : $group->start_year.'/'.$group->stop_year).', '.$group->position; ?>
+								<?php echo '<strong>'.$group->name.'</strong> '.($group->start_year == $group->stop_year ? $group->start_year : $group->start_year.'/'.$group->stop_year).', '.$group->position; ?>
 							</li>
 							<?php
 						}
