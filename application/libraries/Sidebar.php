@@ -21,9 +21,9 @@ class Sidebar
 
 	public function get_about() {
 		$sidebar_about['title'] = $this->lang_data['menu_about'] ;
-		$sidebar_about['items'] = array(	array('title' => "Om utbildningen", 'href' => 'about/education'),
-											array('title' => "Kurser", 'href' => 'about/courses'),
-											array('title' => "Sökande", 'href' => 'about/applicant'),
+		$sidebar_about['items'] = array(	array('title' => $this->lang_data['menu_education'], 'href' => 'about/education'),
+											array('title' => $this->lang_data['menu_applicants'], 'href' => 'about/applicant'),
+											array('title' => $this->lang_data['menu_businesses'], 'href' => 'about/business '),
 											);
 
 		return $this->CI->load->view('includes/list', $sidebar_about, true);
@@ -32,12 +32,12 @@ class Sidebar
 	public function get_association() {
 		$sidebar_association['title'] = $this->lang_data['menu_association'] ;
 		$sidebar_association['items'] = array(
-			array('title' => "Styrelsen", 'href' => 'association/board'),
-			array('title' => "Utskott", 'href' => 'association/committee'),
-			array('title' => "Webbgruppen", 'href' => 'association/web'),
+			array('title' => $this->lang_data['menu_board'], 'href' => 'association/board'),
+			array('title' => $this->lang_data['menu_committees'], 'href' => 'association/committee'),
+			array('title' => $this->lang_data['menu_webgroup'], 'href' => 'association/web'),
 			array('title' => "Mette", 'href' => 'association/mette'),
-			array('title' => "LiU Alumn-inloggning", 'href' => 'https://alumni.liu.se/Portal/Public/Default.aspx'),
-			array('title' => "Protokoll och stadgar", 'href' => 'association/documents')
+			array('title' => $this->lang_data['menu_alumnus'], 'href' => 'https://alumni.liu.se/Portal/Public/Default.aspx'),
+			array('title' => $this->lang_data['menu_documents'], 'href' => 'association/documents')
 		);
 
 		return $this->CI->load->view('includes/list', $sidebar_association, true);
