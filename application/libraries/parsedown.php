@@ -78,6 +78,9 @@ class Parsedown
         # trim line breaks
         $markup = trim($markup, "\n");
 
+        # add .markdown div
+        $markup = '<div class="markdown">'.$markup.'</div>';
+
         return $markup;
     }
 
