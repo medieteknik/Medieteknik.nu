@@ -37,6 +37,14 @@ $lang['menu_login'] = "Logga in";
 $lang['menu_logout'] = "Logga ut";
 $lang['menu_admin'] = "Admin";
 $lang['menu_home'] = "Hem";
+$lang['menu_board'] = "Styrelsen";
+$lang['menu_committees'] = "Utskott";
+$lang['menu_webgroup'] = "Webbgruppen";
+$lang['menu_alumnus'] = "LiU Alumn-inloggning";
+$lang['menu_documents'] = "Protokoll och stadgar";
+$lang['menu_education'] = "Om utbildningen";
+$lang['menu_applicants'] = "Sökande";
+$lang['menu_businesses'] = "Företag";
 
 // news
 $lang['news_news'] = "Nyheter";

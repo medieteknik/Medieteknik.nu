@@ -37,6 +37,14 @@ $lang['menu_login'] = "Log in";
 $lang['menu_logout'] = "Log out";
 $lang['menu_admin'] = "Admin";
 $lang['menu_home'] = "Home";
+$lang['menu_board'] = "Board";
+$lang['menu_committees'] = "Committees";
+$lang['menu_webgroup'] = "Web group";
+$lang['menu_alumnus'] = "LiU Alumnus-login";
+$lang['menu_documents'] = "Protocols and documents";
+$lang['menu_education'] = "About the education";
+$lang['menu_applicants'] = "Applicants";
+$lang['menu_businesses'] = "Businesses";
 
 // news
 $lang['news_news'] = "News";
