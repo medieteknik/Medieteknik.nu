@@ -14,9 +14,9 @@ foreach($groups as $group)
 		if($member->start_year == $most_recent_group->start_year)
 		{
 			echo '<div class = "col-sm-3 clearfix">',
-					'<p>',
+					'<p>', '<center>',
 					gravatarimg($member, 300, ' class="img-responsive img-circle"'),
-					'</p>',
+					'</center>','</p>',
 					'<p class="text-center">',
 					'<strong>',	$member->position,'</strong> - ',
 					anchor('user/profile/'.$member->user_id, get_full_name($member)),
