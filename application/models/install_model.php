@@ -133,6 +133,7 @@ class Install_model extends CI_Model
 			$this->User_model->add_user("Simon", "Joelsson", "simjo407");
 			$this->User_model->add_user("Martin", "Kierkegaard", "marki423");
 			$this->User_model->add_user("Mikael", "Zackrisson", "mikza835");
+			$this->User_model->add_user("Erik", "Larsson", "erila135");
 			$this->User_model->add_user("Arg", "Mtare", "argmt123");
 		}
 	}
@@ -158,6 +159,9 @@ class Install_model extends CI_Model
 			$this->db->insert('users_data', $data);
 			$data = array('users_id' => 9, 'gravatar' => 'micke.zackrisson@gmail.com');
 			$this->db->insert('users_data', $data);
+			$data = array('users_id' => 10, 'web' => "http://www.hackerman.se", 'presentation' => "Jag heter Erik, Jag är chef på internet.", 'twitter' => 'tistatos_', 'gravatar' => 'tistatos@gmail.com');
+			$this->db->insert('users_data', $data);
+			
 		}
 	}
 
