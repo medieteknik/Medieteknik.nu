@@ -21,7 +21,6 @@ Table of contents
 /**********************************
  * 1. VARIABLES
  *********************************/
-/********* RESPONSIVE VARS *******/
 /**********************************
  * 2. MIXINS
  *********************************/
@@ -120,7 +119,8 @@ body {
 #main-header .header-box a:hover img {
   opacity: 0.7;
 }
-#main-header .header-box#lang-control {
+#main-header .header-box#lang-control,
+#main-header .header-box#header-user {
   margin-left: 3px;
 }
 /************ MENU ***************/
@@ -188,6 +188,24 @@ body {
 }
 #main-content .box-body {
   padding: 0 15px;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  clear: left;
+}
+.markdown img {
+  max-width: 100%;
+  margin: 15px 15px 15px 0;
+  float: left;
+  /* This is so ugly I can't believe it. Im so sorry. /klaes950 */
+}
+.markdown img[alt*=float_right] {
+  float: right !important;
+  margin: 15px 0 15px 15px !important;
 }
 /* Styles specific for the large carousel on index */
 #big-carousel {
@@ -461,6 +479,11 @@ body {
     font-weight: normal;
     float: none !important;
   }
+  .markdown img {
+    width: 100%;
+    height: auto;
+    float: none;
+  }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -515,6 +538,9 @@ body {
 }
 .bigmargin {
   margin: 15px 0 !important;
+}
+code {
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 ul.box-list {
   list-style: none;
