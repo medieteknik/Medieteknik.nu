@@ -2,7 +2,7 @@
 echo '
 <div class="main-box box-body clearfix">
 <h2>Dokumentarkiv för ' . $group . '</h2>
-<ul class = "document-list clearfix">';
+<ul class = "list-unstyled document-list clearfix">';
 
 $protocols = array_slice($document_types, 0, 1);
 $document_types = array_slice($document_types, 1);
@@ -21,15 +21,19 @@ foreach($protocols as $protocols_docs)
 	else if(sizeof($uri) == 2)
 		$dropdown_uri = 'association/documents/';
 
-	foreach($document_years_array as $year)
-	{
-		$dropdown_value = $dropdown_uri.$year;
-		$form_options[$dropdown_value] = "Protokoll ".$year."/".($year + 1);
-	}
-
-	// drop down will work as link
-	$js = "class='document' onchange='location = this.options[this.selectedIndex].value;'";
-	echo '<h3>'.form_dropdown('protocol_year', $form_options, $protocol_year, $js).'</h3>';
+	echo
+	'<h3 class="dropdown">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle">'.$lang['document_protocol'].' <b class="caret"></b></a>
+        <ul class="dropdown-menu">';
+			foreach($document_years_array as $year)
+			{
+				$dropdown_link = $dropdown_uri.$year;
+				$dropdown_name = $year."/".($year + 1);
+				echo '<li class="list-unstyled"><a href="'.$dropdown_link.'">'.$dropdown_name.'</a></li>';
+			}
+    echo
+    	'</ul>
+    </h3>';
 
 	// Show documents of selected year
 	foreach ($protocols_docs->documents as $doc) {
@@ -44,7 +48,7 @@ foreach($protocols as $protocols_docs)
 		{
 			echo
 			'<li class = "document clearfix">
-			<a href="' . base_url() . '/user_content/documents/'. $doc->document_original_filename .'">	
+			<a href="' . base_url() . '/user_content/documents/'.$doc->upload_date.'/'.$doc->document_original_filename .'">	
 				<i class = "-icon-document"></i>
 				<h4>'. $doc->document_title . '</h4>
 				<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>
@@ -58,9 +62,10 @@ foreach($protocols as $protocols_docs)
 foreach ($document_types as $type) {
 	echo '<h3>'.$lang['document_'.$type->document_type].'</h3>';
 	foreach ($type->documents as $doc) {
+		$upload_date = substr($doc->upload_date, 0, 10);
 		echo
 		'<li class = "document clearfix">
-		<a href="' . base_url() . '/user_content/documents/'. $doc->document_original_filename .'">	
+		<a href="' . base_url() . '/user_content/documents/'.$upload_date.'/'. $doc->document_original_filename .'">	
 			<i class = "-icon-document"></i>
 			<h4>'. $doc->document_title . '</h4>
 			<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>

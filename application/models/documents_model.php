@@ -20,23 +20,37 @@ class Documents_model extends CI_Model
 		return $config;
 	}
 
-	function get_document_years($year_from = 2005)
+	function get_document_years()
 	{
-		$years_array = array();
-		$year_to = date("Y",time());
+		$this->db->select('upload_date');
+		$this->db->from('documents');
+		$this->db->order_by('upload_date', 'desc');
+		$query = $this->db->get();
+		$documents = $query->result();
 
-		$month = date("m", time());
-		if($month < 6)
+		$years_array = array();
+
+		// Add this year
+		$this_year = date("Y", time());
+		$this_month = date("m", time());
+
+		if($this_month < 6)
+			$this_year--;	// Example: $year_to is 2013 if current board is 2013/2014
+
+		array_push($years_array,$this_year);
+
+		foreach($documents as $doc)
+		{
+			$year_to = date("Y", strtotime($doc->upload_date));
+			$month = date("m", strtotime($doc->upload_date));
+
+			if($month < 6)
 			$year_to--;	// Example: $year_to is 2013 if current board is 2013/2014
 
-		array_push($years_array, $year_from); // first entry
-        while ($year_from<$year_to)
-        {
-            $year_from+=1; // add 1 year
-            array_push($years_array,$year_from);
-        }
+			array_push($years_array,$year_to);
+		}
 
-        return array_reverse($years_array);
+        return array_unique($years_array);
 	}
 
 	function add_uploaded_document($orig_filename, $document_type, $userid, $title = '', $description = '', $group_id, $is_public = true, $upload_date)
