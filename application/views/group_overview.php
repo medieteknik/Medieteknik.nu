@@ -13,7 +13,7 @@ foreach($groups as $group)
 		// Show only member of this year (most recent year)
 		if($member->start_year == $most_recent_group->start_year)
 		{
-			echo '<div class = "col-sm-3 clearfix">',
+			echo '<div class = "col-sm-3 col-xs-6 clearfix">',
 					'<p>', '<center>',
 					gravatarimg($member, 300, ' class="img-responsive img-circle"'),
 					'</center>','</p>',
