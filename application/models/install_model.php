@@ -10,7 +10,7 @@ class Install_model extends CI_Model
 		$this->create_sql_functions();
 
 		// drop all tables if ?drop is set in the address bar
-		if(isset($_GET['drop'])) {
+		if((isset($_GET['drop']) && ENVIRONMENT == 'development')) {
 			$this->drop_tables();
 		}
 
@@ -112,7 +112,7 @@ class Install_model extends CI_Model
 	function create_users_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('users') || isset($_GET['drop']))
+		if(!$this->db->table_exists('users') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -141,7 +141,7 @@ class Install_model extends CI_Model
 	function create_users_data_table()
 	{
 		// if the users_data table does not exist, create it
-		if(!$this->db->table_exists('users_data') || isset($_GET['drop']))
+		if(!$this->db->table_exists('users_data') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -168,7 +168,7 @@ class Install_model extends CI_Model
 	function create_language_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('language') || isset($_GET['drop']))
+		if(!$this->db->table_exists('language') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -189,7 +189,7 @@ class Install_model extends CI_Model
 	function create_news_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('news') || isset($_GET['drop']))
+		if(!$this->db->table_exists('news') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -204,7 +204,7 @@ class Install_model extends CI_Model
 	function create_news_translation_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('news_translation') || isset($_GET['drop']))
+		if(!$this->db->table_exists('news_translation') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -233,7 +233,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 	function create_news_sticky_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('news_sticky') || isset($_GET['drop']))
+		if(!$this->db->table_exists('news_sticky') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -255,7 +255,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 	function create_groups_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('groups') || isset($_GET['drop']))
+		if(!$this->db->table_exists('groups') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -271,7 +271,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 	function create_groups_descriptions_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('groups_descriptions') || isset($_GET['drop']))
+		if(!$this->db->table_exists('groups_descriptions') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -287,7 +287,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 	function create_groups_year_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('groups_year') || isset($_GET['drop']))
+		if(!$this->db->table_exists('groups_year') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -303,7 +303,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 	function create_groups_year_members_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('groups_year_members') || isset($_GET['drop']))
+		if(!$this->db->table_exists('groups_year_members') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -367,7 +367,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 	function create_groups_year_images_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('groups_year_images') || isset($_GET['drop']))
+		if(!$this->db->table_exists('groups_year_images') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -382,7 +382,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 
 	function create_forum_categories_table()
 	{
-		if(!$this->db->table_exists('forum_categories') || isset($_GET['drop']))
+		if(!$this->db->table_exists('forum_categories') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -495,7 +495,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 
 	function create_forum_categories_descriptions_table()
 	{
-		if(!$this->db->table_exists('forum_categories_descriptions') || isset($_GET['drop']))
+		if(!$this->db->table_exists('forum_categories_descriptions') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -691,7 +691,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 
 	function create_forum_topic_table()
 	{
-		if(!$this->db->table_exists('forum_topic') || isset($_GET['drop']))
+		if(!$this->db->table_exists('forum_topic') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -706,7 +706,7 @@ Lorem **ipsum** _dolor_ sit amet, consectetur adipiscing elit. Curabitur eget er
 
 	function create_forum_reply_table()
 	{
-		if(!$this->db->table_exists('forum_reply') || isset($_GET['drop']))
+		if(!$this->db->table_exists('forum_reply') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -733,7 +733,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_forum_reply_guest_table()
 	{
-		if(!$this->db->table_exists('forum_reply_guest') || isset($_GET['drop']))
+		if(!$this->db->table_exists('forum_reply_guest') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -746,7 +746,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_forum_report_table()
 	{
-		if(!$this->db->table_exists('forum_report') || isset($_GET['drop']))
+		if(!$this->db->table_exists('forum_report') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -761,7 +761,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_privileges_table()
 	{
-		if(!$this->db->table_exists('privileges') || isset($_GET['drop']))
+		if(!$this->db->table_exists('privileges') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -805,7 +805,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_users_privileges_table()
 	{
-		if(!$this->db->table_exists('users_privileges') || isset($_GET['drop']))
+		if(!$this->db->table_exists('users_privileges') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -838,7 +838,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_images_table()
 	{
-		if(!$this->db->table_exists('images') || isset($_GET['drop']))
+		if(!$this->db->table_exists('images') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -871,7 +871,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_documents_table() {
 		// if the documents table does not exist, create it
-		if(!$this->db->table_exists('documents') || isset($_GET['drop']))
+		if(!$this->db->table_exists('documents') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -906,7 +906,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_document_types_table()
 	{
-		if(!$this->db->table_exists('document_types') || isset($_GET['drop']))
+		if(!$this->db->table_exists('document_types') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -951,7 +951,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_news_images_table()
 	{
-		if(!$this->db->table_exists('news_images') || isset($_GET['drop']))
+		if(!$this->db->table_exists('news_images') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -967,7 +967,7 @@ puss', '2011-12-12 11:00:00');
 
 	function create_page_table()
 	{
-		if(!$this->db->table_exists('page') || isset($_GET['drop']))
+		if(!$this->db->table_exists('page') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -981,7 +981,7 @@ puss', '2011-12-12 11:00:00');
 	}
 	function create_page_content_table()
 	{
-		if(!$this->db->table_exists('page_content') || isset($_GET['drop']))
+		if(!$this->db->table_exists('page_content') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -1124,7 +1124,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 
 	function create_forum_categories_descriptions_language_view()
 	{
-		if(!$this->db->table_exists('forum_categories_descriptions_language') || isset($_GET['drop']))
+		if(!$this->db->table_exists('forum_categories_descriptions_language') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$q = "CREATE OR REPLACE VIEW forum_categories_descriptions_language AS (SELECT e.cat_id,e.lang_id,COALESCE(o.title,e.title) as title,COALESCE(o.slug,e.slug) as slug, COALESCE(o.description,e.description) as description ";
 			$q .= " FROM forum_categories_descriptions               e";
@@ -1136,7 +1136,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 
 	function create_news_translation_language_view()
 	{
-		if(!$this->db->table_exists('news_translation_language') || isset($_GET['drop']))
+		if(!$this->db->table_exists('news_translation_language') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$q = "CREATE OR REPLACE VIEW news_translation_language AS (SELECT e.news_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.text,e.text) as text, e.last_edit ";
 			$q .= " FROM news_translation               e";
@@ -1148,7 +1148,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 
 	function create_groups_descriptions_language_view()
 	{
-		if(!$this->db->table_exists('groups_descriptions_language') || isset($_GET['drop']))
+		if(!$this->db->table_exists('groups_descriptions_language') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$q = "CREATE OR REPLACE VIEW groups_descriptions_language AS (SELECT e.groups_id,e.lang_id,COALESCE(o.description,e.description) as description,COALESCE(o.name,e.name) as name ";
 			$q .= " FROM groups_descriptions               e";
@@ -1173,7 +1173,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 	function create_carousel_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('carousel') || isset($_GET['drop']))
+		if(!$this->db->table_exists('carousel') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -1188,7 +1188,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 	function create_carousel_translation_table()
 	{
 		// if the users table does not exist, create it
-		if(!$this->db->table_exists('carousel_translation') || isset($_GET['drop']))
+		if(!$this->db->table_exists('carousel_translation') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			// the table configurations from /application/helpers/create_tables_helper.php
@@ -1225,7 +1225,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 
 	function create_carousel_images_table()
 	{
-		if(!$this->db->table_exists('carousel_images') || isset($_GET['drop']))
+		if(!$this->db->table_exists('carousel_images') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$this->load->dbforge();
 			$this->dbforge->add_field(get_carousel_images_fields());
@@ -1238,7 +1238,7 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 
 	function create_carousel_translation_language_view()
 	{
-		if(!$this->db->table_exists('carousel_translation_language') || isset($_GET['drop']))
+		if(!$this->db->table_exists('carousel_translation_language') || (isset($_GET['drop']) && ENVIRONMENT == 'development'))
 		{
 			$q = "CREATE OR REPLACE VIEW carousel_translation_language AS (SELECT e.carousel_id,e.lang_id,COALESCE(o.title,e.title) as title, COALESCE(o.content,e.content) as content";
 			$q .= " FROM carousel_translation               e";

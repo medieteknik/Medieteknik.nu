@@ -14,11 +14,22 @@
 
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-	    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>web/css/style.css" type="text/css" /> -->
-
-		<!-- load less -->
-		<link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>web/css/style.less" />
-		<script src="<?php echo base_url(); ?>web/js/libs/less.js" type="text/javascript"></script>
+		<?php
+		if(defined('ENVIRONMENT') && ENVIRONMENT == 'development')
+		{
+			?>
+			<!-- load less -->
+			<link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>web/css/style.less" />
+			<script src="<?php echo base_url(); ?>web/js/libs/less.js" type="text/javascript"></script>
+			<?php
+		}
+		else
+		{
+			?>
+			<link rel="stylesheet" href="<?php echo base_url('web/css/style.css'); ?>" type="text/css" />
+			<?php
+		}
+		?>
 
 	    <!-- Load DropZone -->
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>web/css/dropzone.css" type="text/css" />
