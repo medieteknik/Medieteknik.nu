@@ -1105,15 +1105,15 @@ Väljs under höstmötet och har som uppdrag att till vårmötet lägga fram fö
 			$this->Page_model->add_page("association/committee", $translations, 1);
 
 			$translations = array(
-									array("lang" => "se", "header" => "Om hemsidan", "content" => "Den här sidan använder kakor, eller _cookies_. Det är en liten textfil som placeras på din dators hårddisk. Vi använder kakor för att tillhandahålla vissa funktioner på denna sida.
-
-Du kan läsa mer om kakor på [PTS hemsida](http://www.pts.se/cookies)."),
+									array("lang" => "se", "header" => "Om hemsidan", "content" => "Den här websidan är skriven i öppen källkod. Sidan är resultatet av flera studenters arbete."),
 									array("lang" => "en", "header" => "About the website", "content" => "This site uses cookies. It's nice."),
 								);
 			$this->Page_model->add_page("about/website", $translations, 1);
 
 			$translations = array(
-									array("lang" => "se", "header" => "Cookies", "content" => "Den här sidan använder kakor."),
+									array("lang" => "se", "header" => "Om hemsidan", "content" => "Den här sidan använder kakor, eller _cookies_. Det är en liten textfil som placeras på din dators hårddisk. Vi använder kakor för att tillhandahålla vissa funktioner på denna sida.
+
+Du kan läsa mer om kakor på [PTS hemsida](http://www.pts.se/cookies)."),
 									array("lang" => "en", "header" => "Cookies", "content" => "This site uses cookies."),
 								);
 			$this->Page_model->add_page("about/website/cookies", $translations, 1);
