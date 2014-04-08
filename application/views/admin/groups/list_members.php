@@ -6,7 +6,7 @@ echo isset($_GET['confdel']) ? '<div class="alert alert-success">'.$lang['misc_d
 		<?php
 		echo $lang['admin_groups_editmembers'];
 		echo ' <small>',
-			$group_year->start_year,' / ', $group_year->stop_year,' ',
+			($group_year->start_year == $group_year->stop_year ? $group_year->start_year : $group_year->start_year.'/'.$group_year->stop_year),' ',
 			anchor('admin/groups/edit/'.$group_id, $lang['misc_back']),
 		'</small>';
 		?>
