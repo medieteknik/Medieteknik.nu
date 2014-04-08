@@ -8,21 +8,25 @@ foreach($groups as $group)
 	echo 	'<div class="main-box box-body clearfix">
 				<h2>',$group->name,'</h2>',
 				text_format($group->description);
-	echo '<ul class = "row">';
+	echo '<div class = "row">';
 	foreach($group->members as $member) {
 		// Show only member of this year (most recent year)
 		if($member->start_year == $most_recent_group->start_year)
 		{
-			echo '<li class = "list-unstyled clearfix">',
-					'<div class="col-sm-2">',
+			echo '<div class = "col-sm-3 clearfix">',
+					'<p>',
 					gravatarimg($member, 300, ' class="img-responsive img-circle"'),
-					'</div>',
-					'<div class="col-sm-10">',
-					'<strong>',	$member->position,'</strong> - ', get_full_name($member),
-					'</div>';
-			echo '</li><br />';
+					'</p>',
+					'<p class="text-center">',
+					'<strong>',	$member->position,'</strong> - ',
+					anchor('user/profile/'.$member->user_id, get_full_name($member)),
+					'</p>',
+					'<p class="text-center">',
+					($member->email ? mailto($member->email) : ""),
+					'</p>';
+			echo '</div>';
 		}
 	}
-	echo '</ul>';
+	echo '</div>';
 	echo '</div>';
 }
