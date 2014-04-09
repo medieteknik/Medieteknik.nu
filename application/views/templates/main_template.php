@@ -88,7 +88,7 @@
 								?>
 							</div>
 							<?php
-							if(date('n') == 3 || date('n') == 4)
+							if(date('n') <= 4)
 							{
 								?>
 								<div class="pull-right hidden-xs header-box" id="mtd-header">
