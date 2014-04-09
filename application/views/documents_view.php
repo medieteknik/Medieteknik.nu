@@ -46,9 +46,10 @@ foreach($protocols as $protocols_docs)
 
 		if($doc_year == $protocol_year)
 		{
+			$upload_date = substr($doc->upload_date, 0, 10);
 			echo
 			'<li class = "document clearfix">
-			<a href="' . base_url() . '/user_content/documents/'.$doc->upload_date.'/'.$doc->document_original_filename .'">	
+			<a href="' . base_url() . '/user_content/documents/'.$upload_date.'/'.$doc->document_original_filename .'">	
 				<i class = "-icon-document"></i>
 				<h4>'. $doc->document_title . '</h4>
 				<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>
