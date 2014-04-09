@@ -87,6 +87,16 @@
 								}
 								?>
 							</div>
+							<?php
+							if(date('n') <= 4)
+							{
+								?>
+								<div class="pull-right hidden-xs header-box" id="mtd-header">
+									<?php echo anchor('http://medieteknikdagarna.se', 'medieteknikdagarna.se', 'target="_blank"'); ?>
+								</div>
+								<?php
+							}
+							?>
 						</div>
 					</div>
 				</div><!-- end .container -->

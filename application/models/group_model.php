@@ -86,6 +86,7 @@ class Group_model extends CI_Model
 		$this->db->join("users", "users.id = groups_year_members.user_id", 'left');
 		$this->db->join("users_data", "users_data.users_id = users.id", 'left');
 		$this->db->where("groups.id", $id);
+		$this->db->order_by('users.last_name', 'asc');
 		$query = $this->db->get();
 		$result = $query->result();
 		return $result;
