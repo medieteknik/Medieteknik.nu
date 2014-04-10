@@ -361,8 +361,8 @@ class User_model extends CI_Model
 	function edit_user($id, $fname = '', $lname = '', $liuid = '')
 	{
 		// fixing and trimming
-		$fn = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $fname ));
-		$ln = trim(preg_replace("/[^A-Za-zåäöÅÄÖ]/", "", $lname ));
+		$fn = trim(preg_replace("/[^[:alpha:]\s-]/u", "", $fname ));
+		$ln = trim(preg_replace("/[^[:alpha:]\s-]/u", "", $lname ));
 		$lid = trim(preg_replace("/[^A-Za-z0-9]/", "", $liuid ));
 
 		// check lengths
