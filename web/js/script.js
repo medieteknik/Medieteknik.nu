@@ -42,4 +42,16 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+	$('a.forum-load').click(function(event){
+		event.preventDefault();
+		console.log('Loading more forum posts from thread ' + $(this).attr('data-thread'));
+
+		// do nice load here.
+
+		$(this).append('...');
+		window.history.pushState("string", "Title", $(this).attr('href'));
+		$('#forum-load').delay(800).slideUp('fast');
+		$('.forum-reply.hidden').hide().removeClass('hidden').delay(1000).slideDown('slow');
+	})
 })

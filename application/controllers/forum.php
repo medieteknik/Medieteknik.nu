@@ -220,6 +220,7 @@ class Forum extends MY_Controller
 		$main_data['topic'] = $this->Forum_model->get_topic($id);
 		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($main_data['topic']->cat_id);
 		$main_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to($main_data['topic']->cat_id, 1);
+		$main_data['count_replies'] = count($main_data['replies']);
 
 		$main_data['post_data'] = $post_data;
 
