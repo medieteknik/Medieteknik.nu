@@ -1,6 +1,7 @@
 <?php
 // do_dump($replies);
-// do_dump($topic);
+do_dump($topic);
+// do_dump($count_replies);
 
 if(isset($post_data) && $post_data == 'verify')
 {
@@ -69,10 +70,26 @@ $first = array_shift($replies);
 </div>
 
 <?php
+$count = 0;
+$break = 7;
 foreach($replies as $reply)
 {
+	if($count == $break && !(isset($post_data) && $post_data == 'all'))
+	{
+		?>
+		<p class="text-center" id="forum-load">
+			<?php
+			echo anchor('/forum/thread/'.$topic->id.'/all',
+				'<span class="glyphicon glyphicon-comment"></span> '.$lang['forum_loadmore'],
+				array('data-thread' => $topic->id, 'class' => 'btn btn-default forum-load'));
+			?>
+		</p>
+		<?php
+	}
 	?>
-	<div class="main-box box-body clearfix forum-view margin-top forum-reply" id="replyid-<?php echo $reply->id; ?>">
+
+	<div class="main-box box-body clearfix forum-view
+		margin-top forum-reply<?php echo ($count > $count_replies-$break || (isset($post_data) && $post_data == 'all')) ? '' : ' hidden'; ?>" id="replyid-<?php echo $reply->id; ?>">
 		<p><?php echo text_format($reply->reply); ?></p>
 		<div class="metadata">
 			<p>
@@ -87,7 +104,7 @@ foreach($replies as $reply)
 					echo anchor('user/profile/'.$reply->user_id, $user);
 				}
 				?>,
-				<a href="#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
+				<a href="<?php echo base_url('/forum/thread/'.$topic->id.'/all'); ?>#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
 					<?php echo strtolower(readable_date($reply->reply_date, $lang)); ?>
 				</a>
 				<?php
@@ -123,6 +140,7 @@ foreach($replies as $reply)
 		</div>
 	</div>
 	<?php
+	$count++;
 }
 
 if(isset($postform))
