@@ -61,7 +61,7 @@ if(count($user->news) > 0)
 					foreach ($user->forum_posts as $post) {
 						?>
 						<li>
-							<?php echo anchor('forum/thread/'.$post->topic_id.'#replyid-'.$post->reply_id, '<strong>'.$post->topic.'</strong><span>'.readable_date($post->reply_date,$lang).'</span>'); ?>
+							<?php echo anchor('forum/thread/'.$post->topic_id.'/all#replyid-'.$post->reply_id, '<strong>'.$post->topic.'</strong><span>'.readable_date($post->reply_date,$lang).'</span>'); ?>
 						</li>
 						<?php
 					}
