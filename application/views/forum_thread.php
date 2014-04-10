@@ -1,6 +1,6 @@
 <?php
 // do_dump($replies);
-do_dump($topic);
+// do_dump($topic);
 // do_dump($count_replies);
 
 if(isset($post_data) && $post_data == 'verify')
