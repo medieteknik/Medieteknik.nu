@@ -371,6 +371,15 @@ body {
 .forum-view ul.topics {
   margin: 0 -15px;
 }
+#forum-load {
+  margin-top: 15px;
+}
+#forum-load a {
+  color: #ff7d00;
+}
+#forum-load a:hover {
+  color: #666666;
+}
 /************ META ***************/
 .metadata {
   margin: 0 -15px;
@@ -618,6 +627,7 @@ i.-icon-document {
   float: left;
   width: 32px;
   height: 32px;
+  margin-right: 6px;
   background: url("../img/icons/linedpaper32.png");
   background-size: cover;
   display: block;
@@ -652,6 +662,7 @@ i.-icon-document {
 .main-box ul.document-list li.document h4 {
   font-weight: normal;
   font-size: 11pt;
+  margin-bottom: 0;
 }
 .main-box ul.document-list li.document small {
   font-size: 10pt;
