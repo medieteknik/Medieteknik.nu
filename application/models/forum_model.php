@@ -590,5 +590,73 @@ class Forum_model extends CI_Model
 
 		return $query->result();
 	}
+
+	function remove_reply($reply_id)
+	{
+		$data = array('reply' => $this->config->item('forum_deleted_string'));
+		return $this->db->update('forum_reply', $data, array('id' => $reply_id));
+	}
+
+	function admin_remove_reply($reply_id)
+	{
+		if($this->is_first_reply($reply_id))
+		{
+			// get topic id
+			$topic_id = $this->get_topic_id_from_reply($reply_id);
+			// remove the whole thread
+			$this->remove_topic($topic_id);
+		}
+		else
+		{
+			$replies 	= $this->db->delete('forum_reply', array('id' => $reply_id));
+			$guest 		= $this->db->delete('forum_reply_guest', array('reply_id' => $reply_id));
+			$reports 	= $this->db->delete('forum_reply_reports', array('reply_id' => $reply_id));
+
+			return $replies && $guest && $reports;
+		}
+	}
+
+	function remove_topic($topic_id)
+	{
+		$topic = $this->db->delete('forum_topic', array('id' => $topic_id));
+		$reply = $this->db->delete('forum_reply', array('id' => $topic_id));
+
+		return $topic && $reply;
+	}
+
+	function is_first_reply($id)
+	{
+		$this->db->where('first_reply', $id);
+		$q = $this->db->get('forum_topic');
+
+		return $q->num_rows();
+	}
+
+	function get_topic_id_from_reply($reply_id)
+	{
+		$this->db->select('topic_id');
+		$this->db->where('id', $reply_id);
+		$q = $this->db->get('forum_reply');
+		$result = $q->result_array();
+
+		if($q && $q->num_rows() > 0)
+			return $result[0]['topic_id'];
+
+		// if we got to this point, something went wrong
+		return false;
+	}
+
+	function get_reply_info($reply_id, $what = '*')
+	{
+		$this->db->select($what);
+		$this->db->where('id', $reply_id);
+		$q = $this->db->get('forum_reply');
+		$result = $q->result();
+
+		if($q->num_rows() > 0)
+			return $result[0];
+
+		return false;
+	}
 }
 

@@ -221,6 +221,7 @@ class Forum extends MY_Controller
 		$main_data['ancestors_array']=$this->Forum_model->get_all_categories_ancestors_to($main_data['topic']->cat_id);
 		$main_data['categories_array'] = $this->Forum_model->get_all_categories_sub_to($main_data['topic']->cat_id, 1);
 		$main_data['count_replies'] = count($main_data['replies']);
+		$main_data['forum_deleted_string'] = $this->config->item('forum_deleted_string');
 
 		$main_data['post_data'] = $post_data;
 
@@ -288,5 +289,21 @@ class Forum extends MY_Controller
 		}
 		else
 			show_404();
+	}
+
+	function delete($reply_id = '')
+	{
+		if(($reply_id == '' || !is_numeric($reply_id)))
+			show_404();
+
+		$info = $this->Forum_model->get_reply_info($reply_id);
+
+		if($info->user_id == $this->login->get_id() || $this->login->has_privilege('forum_moderator'))
+		{
+			if($this->Forum_model->remove_reply($reply_id))
+				redirect('forum/thread/'.$info->topic_id.'/all#replyid-'.$reply_id, 'location');
+		}
+
+		redirect('forum/thread/'.$info->topic_id, 'location');
 	}
 }

@@ -6,10 +6,12 @@ $(document).ready(function(){
 	});
 	// toogle tooltips
 	$('[data-toggle="tooltip"]').tooltip();
+	// add dropdowns
+	$('.dropdown-toggle').dropdown();
 
 	// confirm delete
-	$('#delete').click(function(event) {
-		return confirm("Are you sure you want to delete?");
+	$('#delete, [data-toggle="delete"]').click(function(event) {
+		return confirm("Are you sure you want to delete? This can not be undone.");
 	});
 
 	// forum report reply
