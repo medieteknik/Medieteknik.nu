@@ -72,22 +72,23 @@ $first = array_shift($replies);
 <?php
 $count = 0;
 $break = 7;
+
+if($count_replies > $break && !(isset($post_data) && $post_data == 'all'))
+{
+	?>
+	<p class="text-center" id="forum-load">
+		<?php
+		echo anchor('/forum/thread/'.$topic->id.'/all',
+			'<span class="glyphicon glyphicon-comment"></span> '.$lang['forum_loadmore'],
+			array('data-thread' => $topic->id, 'class' => 'btn btn-default forum-load'));
+		?>
+	</p>
+	<?php
+}
+
 foreach($replies as $reply)
 {
-	if($count == $break && !(isset($post_data) && $post_data == 'all'))
-	{
-		?>
-		<p class="text-center" id="forum-load">
-			<?php
-			echo anchor('/forum/thread/'.$topic->id.'/all',
-				'<span class="glyphicon glyphicon-comment"></span> '.$lang['forum_loadmore'],
-				array('data-thread' => $topic->id, 'class' => 'btn btn-default forum-load'));
-			?>
-		</p>
-		<?php
-	}
 	?>
-
 	<div class="main-box box-body clearfix forum-view
 		margin-top forum-reply<?php echo ($count > $count_replies-$break || (isset($post_data) && $post_data == 'all')) ? '' : ' hidden'; ?>" id="replyid-<?php echo $reply->id; ?>">
 		<p><?php echo text_format($reply->reply); ?></p>
