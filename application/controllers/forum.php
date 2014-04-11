@@ -300,6 +300,7 @@ class Forum extends MY_Controller
 
 		if($info->user_id == $this->login->get_id() || $this->login->has_privilege('forum_moderator'))
 		{
+			log_message('Removing forum content "'.$info->reply.'", written by id #'.$info->user_id.' in topic #'.$info->topic_id.'. User #'.$this->login->get_id().' is removing it.');
 			if($this->Forum_model->remove_reply($reply_id))
 				redirect('forum/thread/'.$info->topic_id.'/all#replyid-'.$reply_id, 'location');
 		}
