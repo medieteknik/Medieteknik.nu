@@ -82,6 +82,7 @@ $lang['forum_guest_verify'] = "Almost there!";
 $lang['forum_guest_verify_info'] = "Before we can post your topic, we need you to verify your email. We just sent you an email with instructions on how to do so. If you havn't received it in an hour, please contact us.";
 $lang['forum_loadmore'] = "Load more posts";
 $lang['forum_deleted_string'] = "<p><em>This post has been deleted.</em></p>";
+$lang['forum_latest_reply'] = "Latest reply";
 
 // user
 $lang['user_username'] = "Username";

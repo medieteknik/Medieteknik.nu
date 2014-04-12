@@ -148,11 +148,12 @@ class Forum_model extends CI_Model
 	 */
 	function get_topics($id)
 	{
-		$this->db->select("forum_topic.*, forum_reply.*, users.first_name, users.last_name");
+		$this->db->select("forum_topic.*, forum_reply.*, users.first_name, users.last_name, first_reply.*");
 		$this->db->select("forum_reply_guest.name, forum_reply_guest.email, verify.verified");
 		$this->db->from("forum_topic");
 		$this->db->join("forum_reply", "forum_reply.id = forum_topic.last_reply_id", "");
-		$this->db->join("users", "forum_topic.user_id = users.id", "left");
+		$this->db->join("forum_reply as first_reply", "first_reply.id = forum_topic.last_reply_id", "");
+		$this->db->join("users", "first_reply.user_id = users.id", "left");
 		// only verified threads!
 		$this->db->join("forum_reply_guest AS verify", "verify.reply_id = forum_topic.first_reply_id", "left");
 		$this->db->join("forum_reply_guest", "forum_reply_guest.reply_id = forum_topic.last_reply_id", "left");

@@ -2,7 +2,7 @@
 
 // do_dump($categories_array);
 // do_dump($ancestors_array);
-// do_dump($topics_array);
+do_dump($topics_array);
 
 if(isset($post_data) && $post_data == 'verify')
 {
@@ -22,7 +22,7 @@ if(count($topics_array) > 0)
 	foreach($topics_array as $topic)
 	{
 		$topic_text = text_strip($topic->topic).
-			' <span class="pull-right">'.
+			' <span class="pull-right" data-toggle="tooltip" title="'.$lang['forum_latest_reply'].'">'.
 				($topic->user_id == "0" ? $topic->name : get_full_name($topic)).', '.
 				strtolower(readable_date($topic->reply_date, $lang)).
 			'</span>';
