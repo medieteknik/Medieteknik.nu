@@ -2,7 +2,7 @@
 
 // do_dump($categories_array);
 // do_dump($ancestors_array);
-do_dump($topics_array);
+// do_dump($topics_array);
 
 if(isset($post_data) && $post_data == 'verify')
 {
