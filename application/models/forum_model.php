@@ -619,8 +619,8 @@ class Forum_model extends CI_Model
 
 	function remove_topic($topic_id)
 	{
+		$reply = $this->db->delete('forum_reply', array('topic_id' => $topic_id));
 		$topic = $this->db->delete('forum_topic', array('id' => $topic_id));
-		$reply = $this->db->delete('forum_reply', array('id' => $topic_id));
 
 		return $topic && $reply;
 	}
@@ -656,6 +656,19 @@ class Forum_model extends CI_Model
 
 		if($q->num_rows() > 0)
 			return $result[0];
+
+		return false;
+	}
+
+	function get_cat_id_from_topic($topic_id)
+	{
+		$this->db->select('cat_id');
+		$this->db->where('id', $topic_id);
+		$q = $this->db->get('forum_topic');
+		$result = $q->result_array();
+
+		if($q->num_rows() > 0)
+			return $result[0]['cat_id'];
 
 		return false;
 	}

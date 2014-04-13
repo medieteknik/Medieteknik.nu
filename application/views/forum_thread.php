@@ -41,6 +41,9 @@ $first = array_shift($replies);
 			{
 				echo '<span class="report">';
 
+				if($this->login->has_privilege('forum_moderator'))
+					echo '<span class="glyphicon glyphicon-remove-sign"></span> '.anchor('forum/delete_thread/'.$first->id, $lang['forum_delete_thread'], 'data-toggle="delete"').' ';
+
 				if($this->login->get_id() == $first->user_id || $this->login->has_privilege('forum_moderator'))
 					echo '<span class="glyphicon glyphicon-trash"></span> '.anchor('forum/delete/'.$first->id, $lang['misc_delete'], 'data-toggle="delete"').' ';
 

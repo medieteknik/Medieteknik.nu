@@ -5,9 +5,9 @@
 // do_dump($topics_array);
 
 if(isset($post_data) && $post_data == 'verify')
-{
 	echo '<div class="alert alert-success"><strong>'.$lang['forum_guest_verify'].'</strong> '.$lang['forum_guest_verify_info'].'</div>';
-}
+if(isset($post_data) && $post_data == 'success')
+	echo '<div class="alert alert-success"><strong>'.$lang['misc_done'].'</strong></div>';
 
 echo '<div class="main-box box-body clearfix forum-view">';
 

@@ -300,9 +300,30 @@ class Forum extends MY_Controller
 
 		if($info->user_id == $this->login->get_id() || $this->login->has_privilege('forum_moderator'))
 		{
-			log_message('Removing forum content "'.$info->reply.'", written by id #'.$info->user_id.' in topic #'.$info->topic_id.'. User #'.$this->login->get_id().' is removing it.');
+			log_message('info', 'Removing forum content "'.$info->reply.'", written by id #'.$info->user_id.' in topic #'.$info->topic_id.'. User #'.$this->login->get_id().' is removing it.');
 			if($this->Forum_model->remove_reply($reply_id))
 				redirect('forum/thread/'.$info->topic_id.'/all#replyid-'.$reply_id, 'location');
+		}
+
+		redirect('forum/thread/'.$info->topic_id, 'location');
+	}
+
+	function delete_thread($reply_id = '')
+	{
+		if(($reply_id == '' || !is_numeric($reply_id)))
+			show_404();
+
+		if(!$this->login->has_privilege('forum_moderator'))
+			redirect('/admin/admin/access_denied', 'location');
+
+		$info = $this->Forum_model->get_reply_info($reply_id);
+		$info->cat_id = $this->Forum_model->get_cat_id_from_topic($info->topic_id);
+
+		if($info->user_id == $this->login->get_id() || $this->login->has_privilege('forum_moderator'))
+		{
+			log_message('info', 'Removing forum topic #'.$info->topic_id.' "'.$info->reply.'", written by id #'.$info->user_id.'. User #'.$this->login->get_id().' is removing it.');
+			if($this->Forum_model->remove_topic($info->topic_id))
+				redirect('forum/category/'.$info->cat_id.'/success', 'location');
 		}
 
 		redirect('forum/thread/'.$info->topic_id, 'location');
