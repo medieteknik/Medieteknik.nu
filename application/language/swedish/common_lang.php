@@ -268,6 +268,7 @@ $lang['misc_post'] = "inlägg";
 $lang['misc_guest'] = "Gäst";
 $lang['misc_embeddedcontent'] = "Inbäddat innehåll";
 $lang['misc_copyright'] = "Upphovsrätt";
+$lang['misc_now'] = "nu";
 
 // error
 $lang['error_error'] = "Fel!";

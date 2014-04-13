@@ -55,5 +55,12 @@ $(document).ready(function(){
 		window.history.pushState("string", "Title", $(this).attr('href'));
 		$('#forum-load').delay(800).slideUp('fast');
 		$('.forum-reply.hidden').hide().removeClass('hidden').delay(1000).slideDown('slow');
-	})
+	});
+
+	$('#post_date_now').click(function(event){
+		event.preventDefault();
+		var d = new Date(),
+			now = d.getFullYear()+"-"+(d.getMonth() < 10 ? "0":"")+d.getMonth()+"-"+d.getDate()+"T"+d.getHours()+":"+d.getMinutes();
+		$('input[type=datetime-local]').val(now);
+	});
 })
