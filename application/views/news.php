@@ -35,7 +35,7 @@ foreach($news_array as $news_item)
 						if($news_item->draft)
 							echo '<span class="label label-default">'.$lang['misc_draft'].'</span>';
 						if($news_item->scheduled)
-							echo '<span class="label label-default">'.$lang['misc_scheduled'].'</span>';
+							echo '<span class="label label-primary">'.$lang['misc_scheduled'].'</span>';
 						?>
 						<img src="<?php echo lang_id_to_imgpath($news_item->lang_id); ?>" class="img-circle pull-right" />
 					</h2>
