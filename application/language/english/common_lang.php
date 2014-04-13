@@ -271,6 +271,7 @@ $lang['misc_guest'] = "Guest";
 $lang['misc_embeddedcontent'] = "Embedded content";
 $lang['misc_copyright'] = "Copyright";
 $lang['misc_now'] = "now";
+$lang['misc_scheduled'] = "Scheduled";
 
 
 // error

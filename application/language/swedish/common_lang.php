@@ -269,6 +269,7 @@ $lang['misc_guest'] = "Gäst";
 $lang['misc_embeddedcontent'] = "Inbäddat innehåll";
 $lang['misc_copyright'] = "Upphovsrätt";
 $lang['misc_now'] = "nu";
+$lang['misc_scheduled'] = "Schemalagd";
 
 // error
 $lang['error_error'] = "Fel!";
