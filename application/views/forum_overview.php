@@ -5,9 +5,9 @@
 // do_dump($topics_array);
 
 if(isset($post_data) && $post_data == 'verify')
-{
 	echo '<div class="alert alert-success"><strong>'.$lang['forum_guest_verify'].'</strong> '.$lang['forum_guest_verify_info'].'</div>';
-}
+if(isset($post_data) && $post_data == 'success')
+	echo '<div class="alert alert-success"><strong>'.$lang['misc_done'].'</strong></div>';
 
 echo '<div class="main-box box-body clearfix forum-view">';
 
@@ -22,7 +22,7 @@ if(count($topics_array) > 0)
 	foreach($topics_array as $topic)
 	{
 		$topic_text = text_strip($topic->topic).
-			' <span class="pull-right">'.
+			' <span class="pull-right" data-toggle="tooltip" title="'.$lang['forum_latest_reply'].'">'.
 				($topic->user_id == "0" ? $topic->name : get_full_name($topic)).', '.
 				strtolower(readable_date($topic->reply_date, $lang)).
 			'</span>';

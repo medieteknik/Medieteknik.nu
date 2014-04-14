@@ -211,6 +211,10 @@ body {
 
 	img {
 		margin-right: 5px;
+
+		&.flag {
+			height: 20px;
+		}
 	}
 	a:hover {
 		color: @orange;
@@ -599,6 +603,13 @@ body {
 		height: auto;
 		float: none;
 	}
+	.forum-reply .report {
+		display: block;
+		margin-top: 3px;
+	}
+	.group-member:nth-child(odd) {
+		clear: left;
+	}
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -626,6 +637,25 @@ body {
 			padding-left: 0;
 			padding-right: 0;
 		}
+		.open {
+			& > a {
+				background: transparent;
+				color: #000;
+			}
+			& > .dropdown-menu {
+				padding: 0;
+
+				a {
+					border-bottom: 0;
+					border-left: 2px solid @bodybg;
+					padding: 7px 13px;
+
+					&:hover {
+						border-left: 2px solid @orange;
+					}
+				}
+			}
+		}
 	}
 	.forum-reply {
 		.report {
@@ -637,6 +667,9 @@ body {
 		&:hover .report {
 			opacity: 1;
 		}
+	}
+	.group-member {
+		text-align: center;
 	}
 }
 /* Medium devices (desktops, 992px and up) */

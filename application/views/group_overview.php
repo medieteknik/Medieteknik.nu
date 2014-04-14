@@ -20,17 +20,25 @@ $most_recent_group = end($group_years);
 						echo '</div><!-- new row! --><div class="row">';
 
 					?>
-					<div class="col-sm-3 col-xs-6">
-						<p>
-							<?php echo gravatarimg($member, 400, ' class="img-responsive img-circle"'); ?>
-						</p>
-						<p class="text-center">
-							<strong><?php echo $member->position; ?></strong> &ndash;
-							<?php echo anchor('user/profile/'.$member->user_id, get_full_name($member)); ?>
-						</p>
-						<p class="text-center">
-							<?php echo ($member->email ? mailto($member->email) : ''); ?>
-						</p>
+					<div class="col-md-3 col-sm-6 col-xs-12 group-member">
+						<div class="row">
+							<div class="col-sm-12 col-xs-4">
+								<p>
+									<?php
+									echo anchor('user/profile/'.$member->user_id,gravatarimg($member, 400, ' class="img-responsive img-circle"'));
+									?>
+								</p>
+							</div>
+							<div class="col-sm-12 col-xs-8">
+								<p>
+									<strong><?php echo $member->position; ?></strong> &ndash;
+									<?php echo anchor('user/profile/'.$member->user_id, get_full_name($member)); ?>
+								</p>
+								<p>
+									<?php echo ($member->email ? mailto($member->email) : ''); ?>
+								</p>
+							</div>
+						</div>
 					</div>
 					<?php
 					$i++;

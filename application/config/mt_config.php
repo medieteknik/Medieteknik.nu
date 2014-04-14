@@ -13,3 +13,10 @@
 	$config['noreply_name'] = 'Medieteknik.nu';
 
 	$config['mail_title'] = 'Medieteknik.nu – ';
+
+
+
+/****************
+ * FORUM SETTINGS
+ ***************/
+	$config['forum_deleted_string'] = 'deleted_by_user_IPQFjqp0vB3qTsYLGHSBH0bdhQRWZfQJVRSDl2YN45PH1pZi8xDQ5J9RguGqIhDUhFLQ1mnNNEYeGmQr';

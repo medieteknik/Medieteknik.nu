@@ -71,7 +71,7 @@ form_open_multipart($action),
 		'</div>',
 		'<div class="col-sm-4">',
 			'<p>',
-				form_label($lang['misc_postdate'], 'post_date'),
+				form_label($lang['misc_postdate'].' &ndash; '.anchor('./#', $lang['misc_now'], 'id="post_date_now"'), 'post_date'),
 				form_input($post_date),
 			'</p>',
 		'</div>';
@@ -103,7 +103,7 @@ form_open_multipart($action),
 	'</div>';
 //do_dump($images_array);
 if (count($images_array) > 0) {
-	
+
 	echo '<select name = "image_id" class="image-picker show-html">
 		 <option value=""></option>';
 	$image_count = 1;

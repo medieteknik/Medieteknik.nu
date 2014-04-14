@@ -556,6 +556,7 @@ class User_model extends CI_Model
 		$this->db->where("user_id", $id);
 		$this->db->where("draft", 0);
 		$this->db->where("approved", 1);
+		$this->db->where("news.date <= NOW()");
 		$this->db->order_by("date", "desc");
 		$this->db->limit($limit);
 		$query = $this->db->get();

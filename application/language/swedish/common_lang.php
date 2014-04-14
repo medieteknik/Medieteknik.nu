@@ -25,7 +25,7 @@ $lang['footer_github'] = "MT på GitHub";
 // menu
 $lang['menu_menu'] = "Meny";
 $lang['menu_news'] = "Nyheter";
-$lang['menu_about'] = "Medieteknik";
+$lang['menu_about'] = "Om medieteknik";
 $lang['menu_mtd'] = "Medieteknikdagarna";
 $lang['menu_archive'] = "Arkiv";
 $lang['menu_wiki'] = "Wiki";
@@ -81,6 +81,9 @@ $lang['forum_guest_reply_error'] = "Kunde inte skapa svar! Se till att alla fäl
 $lang['forum_guest_verify'] = "Nästan klara!";
 $lang['forum_guest_verify_info'] = "Alldeles strax är ditt inlägg publicerat. Det enda du måste göra först är att bekräfta din epostadress. Vi har skickat ett mail med instruktioner om hur du gör det till epostadressen du angav. Om du inte fått ett mail inom en timme, kontakta oss.";
 $lang['forum_loadmore'] = "Ladda fler inlägg";
+$lang['forum_deleted_string'] = "<p><em>Detta inlägg har tagits bort.</em></p>";
+$lang['forum_delete_thread'] = "Ta bort tråd";
+$lang['forum_latest_reply'] = "Senaste svar";
 
 // user
 $lang['user_username'] = "Användarnamn";
@@ -266,6 +269,8 @@ $lang['misc_post'] = "inlägg";
 $lang['misc_guest'] = "Gäst";
 $lang['misc_embeddedcontent'] = "Inbäddat innehåll";
 $lang['misc_copyright'] = "Upphovsrätt";
+$lang['misc_now'] = "nu";
+$lang['misc_scheduled'] = "Schemalagd";
 
 // error
 $lang['error_error'] = "Fel!";
