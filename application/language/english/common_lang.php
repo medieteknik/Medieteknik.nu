@@ -273,6 +273,9 @@ $lang['misc_embeddedcontent'] = "Embedded content";
 $lang['misc_copyright'] = "Copyright";
 $lang['misc_now'] = "now";
 $lang['misc_scheduled'] = "Scheduled";
+$lang['misc_preview'] = "Preview";
+$lang['misc_preview_exp'] = "This is what your post will look";
+$lang['misc_loading'] = "Loading";
 
 
 // error

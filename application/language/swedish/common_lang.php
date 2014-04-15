@@ -271,6 +271,9 @@ $lang['misc_embeddedcontent'] = "Inbäddat innehåll";
 $lang['misc_copyright'] = "Upphovsrätt";
 $lang['misc_now'] = "nu";
 $lang['misc_scheduled'] = "Schemalagd";
+$lang['misc_preview'] = "Förhandsgranska";
+$lang['misc_preview_exp'] = "Så här kommer ditt inlägg se ut";
+$lang['misc_loading'] = "Laddar";
 
 // error
 $lang['error_error'] = "Fel!";

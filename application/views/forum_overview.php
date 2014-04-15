@@ -36,7 +36,14 @@ else if($posting_allowed === true)
 }
 
 echo '</div>';
+?>
 
+<div class="main-box box-body clearfix forum-view margin-top forum-reply hidden" id="markdown_preview">
+	<h2 class="dark"><?php echo $lang['misc_preview'].' <small>'.$lang['misc_preview_exp'].'</small>'; ?></h2>
+	<div class="content"></div>
+</div>
+
+<?php
 if($posting_allowed === true)
 {
 	echo '<div class="main-box box-body clearfix forum-view margin-top">';
@@ -71,6 +78,11 @@ if($posting_allowed === true)
 				'</p></div>',
 				'<div class="col-sm-4">',
 					'<p><input type="submit" name="post" value="',$lang['forum_createtopic'],'" class="btn btn-success form-control" /></p>',
+					'<p>',
+						'<button class="btn btn-default form-control" data-toggle="preview" data-target="#markdown_preview" data-text="#reply" data-loading-text="',$lang['misc_loading'],'...">',
+							$lang['misc_preview'],
+						'</button>',
+					'</p>',
 					'<p>',$lang['forum_guidelines'],'</p>',
 				'</div>',
 			form_close(),
@@ -107,7 +119,7 @@ if($posting_allowed === true)
 						echo form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
 							form_textarea(array('name' 		=> 'reply',
 												'id' 		=> 'reply',
-												'rows'		=>	6,
+												'rows'		=>	10,
 												'class'		=> 'form-control',
 												'placeholder' => $lang['misc_text'].'...',
 												'required' 	=> '',
@@ -141,6 +153,11 @@ if($posting_allowed === true)
 					</p>
 					<p>
 						<input type="submit" name="post" value="<?php echo $lang['forum_createtopic']; ?>" class="btn btn-success form-control" />
+					</p>
+					<p>
+						<button class="btn btn-default form-control" data-toggle="preview" data-target="#markdown_preview" data-text="#reply" data-loading-text="<?php echo $lang['misc_loading']; ?>...">
+							<?php echo $lang['misc_preview']; ?>
+						</button>
 					</p>
 					<p>
 						<?php echo $lang['forum_guidelines']; ?>
