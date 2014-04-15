@@ -6,6 +6,7 @@
 				<li><strong><?php echo $notifications->news_published; ?></strong> <?php echo $lang['admin_news_published']; ?></li>
 				<li><strong><?php echo $notifications->news_draft; ?></strong> <?php echo $lang['admin_news_drafts']; ?></li>
 				<li><strong><?php echo $notifications->news_unapproved; ?></strong> <?php echo $lang['admin_news_needsapproval']; ?></li>
+				<li><strong><?php echo $notifications->news_scheduled; ?></strong> <?php echo $lang['misc_scheduled']; ?></li>
 			</ul>
 		</div>
 	</div>
