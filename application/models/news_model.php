@@ -207,7 +207,7 @@ class News_model extends CI_Model
 		$query = $this->db->get();
 		$translations = $query->result();
 
-		$this->db->select("news.*, news_images.images_id, images.image_original_filename");
+		$this->db->select("news.*, (news.date > NOW()) as scheduled, news_images.images_id, images.image_original_filename");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->select("users.first_name, users.last_name");
 		$this->db->from("news");

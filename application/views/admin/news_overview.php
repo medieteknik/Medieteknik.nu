@@ -1,27 +1,24 @@
-<?php
-echo '
 <div class="row">
 	<div class="col-sm-6">
 		<div class="main-box box-body clearfix">
 			<h4>Status</h4>
 			<ul class="list-unstyled">
-				<li><strong>',$notifications->news_published,'</strong> ',$lang['admin_news_published'],'</li>
-				<li><strong>',$notifications->news_draft,'</strong> ',$lang['admin_news_drafts'],'</li>
-				<li><strong>',$notifications->news_unapproved,'</strong> ',$lang['admin_news_needsapproval'],'</li>
+				<li><strong><?php echo $notifications->news_published; ?></strong> <?php echo $lang['admin_news_published']; ?></li>
+				<li><strong><?php echo $notifications->news_draft; ?></strong> <?php echo $lang['admin_news_drafts']; ?></li>
+				<li><strong><?php echo $notifications->news_unapproved; ?></strong> <?php echo $lang['admin_news_needsapproval']; ?></li>
 			</ul>
 		</div>
 	</div>
 	<div class="col-sm-6">
 		<div class="main-box box-body clearfix">
-			<h4>',$lang['admin_addnews'],'</h4>
-			<p>',anchor('admin/news/create', $lang['admin_news_create']),'</p>
+			<h4><?php echo $lang['admin_addnews']; ?></h4>
+			<p><?php echo anchor('admin/news/create', $lang['admin_news_create']); ?></p>
 		</div>
 	</div>
 </div>
-<!--<h4>',$lang['menu_archive'],'</h4>-->
-';
+<!--<h4><?php echo $lang['menu_archive']; ?></h4>-->
 
-
+<?php
 foreach($news_array as $news) {
 	?>
 	<div class="main-box box-body clearfix admin-news-entry margin-top">
@@ -36,6 +33,8 @@ foreach($news_array as $news) {
 						echo ' <span class="label label-warning">'.$lang['misc_pending'].'</span>';
 					if($news->draft)
 						echo ' <span class="label label-default">'.$lang['misc_draft'].'</span>';
+					if($news->scheduled)
+						echo ' <span class="label label-primary">'.$lang['misc_scheduled'].'</span>';
 					?>
 				</h4>
 				<h5>
