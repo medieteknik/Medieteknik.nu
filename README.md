@@ -67,7 +67,7 @@ To enable pretty urls, the following should be added into <code>.htaccess</code>
 
 [Master branch &mdash; medieteknik.nu](http://medieteknik.nu/)
 
-## 5. Contact Information
+## 4. Contact Information
 Questions about the system:
 	webbchef@medieteknik.nu
 
