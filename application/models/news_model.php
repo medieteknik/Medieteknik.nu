@@ -20,6 +20,7 @@ class News_model extends CI_Model
 
 		$this->db->select("users.first_name, users.last_name, users.id as userid, news_images.*, images.image_original_filename");
 		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
+		$this->db->select("(news.date > NOW()) as scheduled");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
@@ -30,11 +31,12 @@ class News_model extends CI_Model
 
 		if(!$admin)
 		{
-			// not admin, forces news to be approved and not draft
+			// not admin, forces news to be approved, not draft and not scheduled
 			$this->db->where("news.draft",0);
 			$this->db->where("news.approved",1);
+			$this->db->where("DATE(news.date) <= DATE(NOW())");
 		}
-		$this->db->where("DATE(news.date) <= DATE(NOW())");
+
 		$this->db->order_by("sticky_order DESC, news.date DESC");
 		$query = $this->db->get();
         return $query->result();
@@ -54,6 +56,7 @@ class News_model extends CI_Model
 
 		$this->db->select("users.first_name, users.last_name, users.id as userid, news_images.*, images.image_original_filename");
 		$this->db->select("news.date, news.id, news.draft, news.approved, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id");
+		$this->db->select("(news.date > NOW()) as scheduled");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
@@ -64,11 +67,12 @@ class News_model extends CI_Model
 
 		if(!$admin)
 		{
-			// not admin, forces news to be approved and not draft
-			$this->db->where("news.draft",0);
-			$this->db->where("news.approved",1);
+			// not admin, forces news to be approved, not draft and not scheduled
+			$this->db->where("news.date <= NOW()");
+			$this->db->where("news.draft", 0);
+			$this->db->where("news.approved", 1);
 		}
-		$this->db->where("DATE(news.date) <= DATE(NOW())");
+
 		$this->db->order_by("sticky_order DESC, news.date DESC");
 		$this->db->limit($limit, $page*$limit);
 		$query = $this->db->get();
@@ -83,6 +87,7 @@ class News_model extends CI_Model
     {
     	if(!$this->login->has_privilege('news_editor'))
     	{
+    		$this->db->where('news.date <= NOW()');
     		$this->db->where('draft', 0);
     		$this->db->where('approved', 1);
     	}
@@ -125,6 +130,7 @@ class News_model extends CI_Model
 
 		$this->db->select("users.first_name, users.last_name, users_data.gravatar as gravatar, users.id as userid, news_images.*, images.*");
 		$this->db->select("news.id, news.date, news_translation_language.title, news_translation_language.text, news_translation_language.lang_id, news_translation_language.last_edit");
+		$this->db->select("(news.date > NOW()) as scheduled");
 		$this->db->from("news");
 		$this->db->join("news_translation_language", 'news.id = news_translation_language.news_id', '');
 		$this->db->join("users", 'news.user_id = users.id', '');
@@ -135,9 +141,10 @@ class News_model extends CI_Model
 
 		if(!$admin)
 		{
-			// not admin, forces news to be approved and not draft
+			// not admin, forces news to be approved, not draft and not scheduled
 			$this->db->where("news.draft",0);
 			$this->db->where("news.approved",1);
+			$this->db->where("news.date <= NOW()");
 		}
 
 		$this->db->limit(1);
@@ -200,7 +207,7 @@ class News_model extends CI_Model
 		$query = $this->db->get();
 		$translations = $query->result();
 
-		$this->db->select("news.*, news_images.images_id, images.image_original_filename");
+		$this->db->select("news.*, (news.date > NOW()) as scheduled, news_images.images_id, images.image_original_filename");
 		$this->db->select("COALESCE(sticky_order, 0) as sticky_order",false);
 		$this->db->select("users.first_name, users.last_name");
 		$this->db->from("news");
@@ -333,7 +340,7 @@ class News_model extends CI_Model
 	 */
 	function admin_get_notifications()
 	{
-		$this->db->select("SUM(news.approved=0) as news_unapproved, SUM(news.draft=1) as news_draft, SUM(news.approved=1 AND news.draft=0) as news_published");
+		$this->db->select("SUM(news.approved=0) as news_unapproved, SUM(news.draft=1) as news_draft, SUM(news.approved=1 AND news.draft=0) as news_published, SUM(news.date > NOW()) as news_scheduled");
 		$this->db->from("news");
 		$query = $this->db->get();
 		$res = $query->result();

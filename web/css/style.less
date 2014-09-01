@@ -211,6 +211,10 @@ body {
 
 	img {
 		margin-right: 5px;
+
+		&.flag {
+			height: 20px;
+		}
 	}
 	a:hover {
 		color: @orange;
@@ -468,6 +472,17 @@ body {
 		margin: 0 -15px;
 	}
 }
+#forum-load {
+	margin-top: 15px;
+
+	a {
+		color: @orange;
+
+		&:hover {
+			color: @headfont;
+		}
+	}
+}
 /************ META ***************/
 .metadata {
 	margin: 0 -15px;
@@ -588,6 +603,13 @@ body {
 		height: auto;
 		float: none;
 	}
+	.forum-reply .report {
+		display: block;
+		margin-top: 3px;
+	}
+	.group-member:nth-child(odd) {
+		clear: left;
+	}
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -615,6 +637,25 @@ body {
 			padding-left: 0;
 			padding-right: 0;
 		}
+		.open {
+			& > a {
+				background: transparent;
+				color: #000;
+			}
+			& > .dropdown-menu {
+				padding: 0;
+
+				a {
+					border-bottom: 0;
+					border-left: 2px solid @bodybg;
+					padding: 7px 13px;
+
+					&:hover {
+						border-left: 2px solid @orange;
+					}
+				}
+			}
+		}
 	}
 	.forum-reply {
 		.report {
@@ -626,6 +667,9 @@ body {
 		&:hover .report {
 			opacity: 1;
 		}
+	}
+	.group-member {
+		text-align: center;
 	}
 }
 /* Medium devices (desktops, 992px and up) */
@@ -809,4 +853,19 @@ a.inline {
 text-align:center;
     float: none;
     margin: 0 auto;
+}
+
+h2.dark {
+	display: block;
+	background-color: #333;
+	text-decoration: none;
+	padding: 11px 15px;
+	margin: 0 -15px;
+	font-size: 15px;
+	color: @orange;
+	font-weight: normal !important;
+
+	small {
+		font-size: 12px;
+	}
 }

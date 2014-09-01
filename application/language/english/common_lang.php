@@ -25,7 +25,7 @@ $lang['footer_github'] = "The MT Organization at GitHub";
 // menu
 $lang['menu_menu'] = "Menu";
 $lang['menu_news'] = "News";
-$lang['menu_about'] = "Media Technology";
+$lang['menu_about'] = "About Media Technology";
 $lang['menu_mtd'] = "Media Technology Days";
 $lang['menu_archive'] = "Archive";
 $lang['menu_wiki'] = "Wiki";
@@ -80,6 +80,10 @@ $lang['forum_guest_topic_error'] = "Could not create topic. Please make sure you
 $lang['forum_guest_reply_error'] = "Could not post reply. Please make sure you entered everything correctly.";
 $lang['forum_guest_verify'] = "Almost there!";
 $lang['forum_guest_verify_info'] = "Before we can post your topic, we need you to verify your email. We just sent you an email with instructions on how to do so. If you havn't received it in an hour, please contact us.";
+$lang['forum_loadmore'] = "Load more posts";
+$lang['forum_deleted_string'] = "<p><em>This post has been deleted.</em></p>";
+$lang['forum_delete_thread'] = "Delete thread";
+$lang['forum_latest_reply'] = "Latest reply";
 
 // user
 $lang['user_username'] = "Username";
@@ -267,6 +271,11 @@ $lang['misc_post'] = "post";
 $lang['misc_guest'] = "Guest";
 $lang['misc_embeddedcontent'] = "Embedded content";
 $lang['misc_copyright'] = "Copyright";
+$lang['misc_now'] = "now";
+$lang['misc_scheduled'] = "Scheduled";
+$lang['misc_preview'] = "Preview";
+$lang['misc_preview_exp'] = "This is what your post will look";
+$lang['misc_loading'] = "Loading";
 
 
 // error

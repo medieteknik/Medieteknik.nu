@@ -1,6 +1,7 @@
 <?php
 // do_dump($replies);
 // do_dump($topic);
+// do_dump($count_replies);
 
 if(isset($post_data) && $post_data == 'verify')
 {
@@ -17,7 +18,7 @@ $first = array_shift($replies);
 	<h2 id="replyid-<?php echo $first->id; ?>">
 		<?php echo text_strip($topic->topic); ?>
 	</h2>
-	<?php echo text_format($first->reply); ?>
+	<?php echo $first->reply === $forum_deleted_string ? $lang['forum_deleted_string'] : text_format($first->reply); ?>
 	<div class="metadata">
 		<p>
 			<?php
@@ -36,32 +37,37 @@ $first = array_shift($replies);
 			</a>
 
 			<?php
-			if($this->login->is_logged_in() && $this->login->get_id() !== $first->user_id)
+			if($this->login->is_logged_in())
 			{
-				if(count($first->reports) == 0)
+				echo '<span class="report">';
+
+				if($this->login->has_privilege('forum_moderator'))
+					echo '<span class="glyphicon glyphicon-remove-sign"></span> '.anchor('forum/delete_thread/'.$first->id, $lang['forum_delete_thread'], 'data-toggle="delete"').' ';
+
+				if($this->login->get_id() == $first->user_id || $this->login->has_privilege('forum_moderator'))
+					echo '<span class="glyphicon glyphicon-trash"></span> '.anchor('forum/delete/'.$first->id, $lang['misc_delete'], 'data-toggle="delete"').' ';
+
+				if(count($first->reports) == 0 && $this->login->get_id() !== $first->user_id)
 				{
 					?>
-					<span class="report">
-						<span class="glyphicon glyphicon-exclamation-sign"></span>
-						<a href="#" class="toggle">
-							<?php echo $lang['forum_report']; ?>
-						</a>
-						<a href="#" class="hidden confirm" data-id="<?php echo $first->id; ?>">
-							<?php echo $lang['forum_report_confirm']; ?>!
-						</a>
-						<span class="thanks hidden"><?php echo $lang['forum_report_thanks']; ?></span>
-					</span>
+					<span class="glyphicon glyphicon-exclamation-sign"></span>
+					<a href="#" class="toggle">
+						<?php echo $lang['forum_report']; ?>
+					</a>
+					<a href="#" class="confirm hidden" data-id="<?php echo $first->id; ?>">
+						<?php echo $lang['forum_report_confirm']; ?>!
+					</a>
+					<span class="thanks hidden"><?php echo $lang['forum_report_thanks']; ?></span>
 					<?php
 				}
 				else
 				{
 					?>
-					<span class="report">
-						<span class="glyphicon glyphicon-exclamation-sign"></span>
-						<?php echo $lang['forum_report_thanks']; ?>
-					</span>
+					<span class="glyphicon glyphicon-exclamation-sign"></span>
+					<?php echo $lang['forum_report_thanks']; ?>
 					<?php
 				}
+				echo '</span>';
 			}
 			?>
 		</p>
@@ -69,11 +75,28 @@ $first = array_shift($replies);
 </div>
 
 <?php
+$count = 0;
+$break = 7;
+
+if($count_replies > $break && !(isset($post_data) && $post_data == 'all'))
+{
+	?>
+	<p class="text-center" id="forum-load">
+		<?php
+		echo anchor('/forum/thread/'.$topic->id.'/all',
+			'<span class="glyphicon glyphicon-comment"></span> '.$lang['forum_loadmore'],
+			array('data-thread' => $topic->id, 'class' => 'btn btn-default forum-load'));
+		?>
+	</p>
+	<?php
+}
+
 foreach($replies as $reply)
 {
 	?>
-	<div class="main-box box-body clearfix forum-view margin-top forum-reply" id="replyid-<?php echo $reply->id; ?>">
-		<p><?php echo text_format($reply->reply); ?></p>
+	<div class="main-box box-body clearfix forum-view
+		margin-top forum-reply<?php echo ($count > $count_replies-$break || (isset($post_data) && $post_data == 'all')) ? '' : ' hidden'; ?>" id="replyid-<?php echo $reply->id; ?>">
+		<p><?php echo $reply->reply === $forum_deleted_string ? $lang['forum_deleted_string'] : text_format($reply->reply); ?></p>
 		<div class="metadata">
 			<p>
 				<?php
@@ -87,44 +110,52 @@ foreach($replies as $reply)
 					echo anchor('user/profile/'.$reply->user_id, $user);
 				}
 				?>,
-				<a href="#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
+				<a href="<?php echo base_url('/forum/thread/'.$topic->id.'/all'); ?>#replyid-<?php echo $reply->id; ?>" title="<?php echo $reply->reply_date; ?>">
 					<?php echo strtolower(readable_date($reply->reply_date, $lang)); ?>
 				</a>
 				<?php
-				if($this->login->is_logged_in() && $this->login->get_id() !== $reply->user_id)
+				if($this->login->is_logged_in())
 				{
-					if(count($reply->reports) == 0)
+					echo '<span class="report">';
+
+					if($this->login->get_id() == $reply->user_id || $this->login->has_privilege('forum_moderator'))
+						echo '<span class="glyphicon glyphicon-trash"></span> '.anchor('forum/delete/'.$reply->id, $lang['misc_delete'], 'data-toggle="delete"').' ';
+
+					if(count($reply->reports) == 0 && $this->login->get_id() !== $reply->user_id)
 					{
 						?>
-						<span class="report">
-							<span class="glyphicon glyphicon-exclamation-sign"></span>
-							<a href="#" class="toggle">
-								<?php echo $lang['forum_report']; ?>
-							</a>
-							<a href="#" class="hidden confirm" data-id="<?php echo $reply->id; ?>">
-								<?php echo $lang['forum_report_confirm']; ?>!
-							</a>
-							<span class="thanks hidden"><?php echo $lang['forum_report_thanks']; ?></span>
-						</span>
+						<span class="glyphicon glyphicon-exclamation-sign"></span>
+						<a href="#" class="toggle">
+							<?php echo $lang['forum_report']; ?>
+						</a>
+						<a href="#" class="confirm hidden" data-id="<?php echo $reply->id; ?>">
+							<?php echo $lang['forum_report_confirm']; ?>!
+						</a>
+						<span class="thanks hidden"><?php echo $lang['forum_report_thanks']; ?></span>
 						<?php
 					}
-					else
+					elseif($this->login->get_id() !== $reply->user_id)
 					{
 						?>
-						<span class="report">
-							<span class="glyphicon glyphicon-flag"></span>
-							<?php echo $lang['forum_report_thanks']; ?>
-						</span>
+						<span class="glyphicon glyphicon-exclamation-sign"></span>
+						<?php echo $lang['forum_report_thanks']; ?>
 						<?php
 					}
+					echo '</span>';
 				}
 				?>
 			</p>
 		</div>
 	</div>
 	<?php
+	$count++;
 }
-
+?>
+<div class="main-box box-body clearfix forum-view margin-top forum-reply hidden" id="markdown_preview">
+	<h2 class="dark"><?php echo $lang['misc_preview'].' <small>'.$lang['misc_preview_exp'].'</small>'; ?></h2>
+	<div class="content"></div>
+</div>
+<?php
 if(isset($postform))
 {
 	echo '<div class="main-box box-body clearfix forum-view margin-top">';
@@ -160,7 +191,7 @@ if(isset($postform))
 				<div class="col-sm-4">
 					<p>
 						<?php
-						echo  form_label($lang['forum_guest_name'], 'name', array('class' => 'sr-only')),
+						echo form_label($lang['forum_guest_name'], 'name', array('class' => 'sr-only')),
 							form_input(array('name' => 'name',
 											   'id' => 'name',
 											   'class'=> 'form-control',
@@ -171,7 +202,7 @@ if(isset($postform))
 					</p>
 					<p>
 						<?php
-						echo  form_label($lang['forum_guest_email'], 'email', array('class' => 'sr-only')),
+						echo form_label($lang['forum_guest_email'], 'email', array('class' => 'sr-only')),
 							form_input(array('name' => 'email',
 											   'id' => 'email',
 											   'class'=> 'form-control',
@@ -185,6 +216,11 @@ if(isset($postform))
 						<input type="submit" name="post" value="<?php echo $lang['forum_submit']; ?>" class="btn btn-success form-control" />
 					</p>
 					<p>
+						<button class="btn btn-default form-control" data-toggle="preview" data-target="#markdown_preview" data-text="#reply" data-loading-text="<?php echo $lang['misc_loading']; ?>...">
+							<?php echo $lang['misc_preview']; ?>
+						</button>
+					</p>
+					<p>
 						<?php echo $lang['forum_guidelines']; ?>
 					</p>
 				</div>
@@ -194,30 +230,43 @@ if(isset($postform))
 	}
 	else
 	{
-		echo '<h2>'.$lang['forum_answer'].'</h2>';
-
-		echo '<div class="row">',
-			form_open('forum/post_reply'),
-
-				form_hidden(array('cat_id' => $categories_array[0]->id)),
-				form_hidden(array('topic_id' => $topic->id)),
-				form_hidden(array('guest' => 0)),
-				'<div class="col-sm-8"><p>',
+		$textarea = array(
+						'name' => 'reply',
+						'id' => 'reply',
+						'rows'	=>	6,
+						'class' => 'form-control',
+						'placeholder' => $lang['misc_text'].'...',
+						'required' 	=> ''
+					);
+		?>
+		<h2><?php echo $lang['forum_answer']; ?></h2>
+		<div class="row">
+			<?php
+			echo form_open('forum/post_reply'), form_hidden(array('cat_id' => $categories_array[0]->id)),
+				 form_hidden(array('topic_id' => $topic->id)), form_hidden(array('guest' => 0));
+			?>
+				<div class="col-sm-8">
+				<p>
+					<?php
 					// good praxis to allways add a label. Bootstraps' .sr-only will hide it since we use placeholders.
-					form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
-					form_textarea(array('name' => 'reply',
-										'id' => 'reply',
-										'rows'	=>	6,
-										'class' => 'form-control',
-										'placeholder' => $lang['misc_text'].'...',
-										'required' 	=> '')),
-				'</p></div>',
-				'<div class="col-sm-4">',
-					'<p><input type="submit" name="post" value="',$lang['forum_submit'],'" class="btn btn-success form-control" /></p>',
-					'<p>',$lang['forum_guidelines'],'</p>',
-				'</div>',
-			form_close(),
-		'</div>';
+					echo form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
+						 form_textarea($textarea);
+					?>
+				</p></div>
+				<div class="col-sm-4">
+					<p>
+						<input type="submit" name="post" value="<?php echo $lang['forum_submit']; ?>" class="btn btn-success form-control" />
+					</p>
+					<p>
+						<button class="btn btn-default form-control" data-toggle="preview" data-target="#markdown_preview" data-text="#reply" data-loading-text="<?php echo $lang['misc_loading']; ?>...">
+							<?php echo $lang['misc_preview']; ?>
+						</button>
+					</p>
+					<p><?php echo $lang['forum_guidelines']; ?></p>
+				</div>
+			<?php echo form_close(); ?>
+		</div>
+		<?php
 	}
 	echo '</div>';
 
