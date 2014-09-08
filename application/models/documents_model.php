@@ -107,4 +107,21 @@ class Documents_model extends CI_Model
 		}
 		$this->db->delete('documents', array('id' => $id));
 	}
+
+	function update_document_type($id, $document_type_id)
+	{
+		$query = $this->db->get_where('documents', array('id' => $id), 1, 0);
+		if ($query->num_rows() == 1)
+		{
+			$data = array(
+				'type', $document_type_id);
+
+			$this->db->where('id', $id);
+			$this->db->update('documents', $data);
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
