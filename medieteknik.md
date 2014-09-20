@@ -1,10 +1,4 @@
-# medieteknik.nu
-
-1. License
-2. Developing medieteknik.nu
-3. Demo/Dev URL
-4. Contact information
-
+# empty
 ## 1. License
 The license for Codeigniter can be found in "license_CodeIgniter.txt"
 
@@ -38,36 +32,34 @@ The system uses Less, currently being rendered on the run.
 ### .htaccess
 To enable pretty urls, the following should be added into <code>.htaccess</code> file in the root of this repo:
 
-```
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  # !IMPORTANT! Set your RewriteBase here and don't forget trailing and leading
-  #  slashes.
-  # If your page resides at
-  #  http://www.example.com/mypage/test1
-  # then use
-  # RewriteBase /mypage/test1/
-  RewriteBase /
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ index.php?/$1 [L]
-</IfModule>
 
-<IfModule !mod_rewrite.c>
-  # If we don't have mod_rewrite installed, all 404's
-  # can be sent to index.php, and everything works as normal.
-  # Submitted by: ElliotHaughin
+> <IfModule mod_rewrite.c> \n
+>   RewriteEngine On \n
+>   `# !IMPORTANT! Set your RewriteBase here and don't forget trailing and leading`\n
+>   `#  slashes.` \n
+>   `# If your page resides at `\n
+>   `#  http://www.example.com/mypage/test1 `\n
+>   `# then use `\n
+>   `# RewriteBase /mypage/test1/ `\n
+>   RewriteBase / \n
+>   RewriteCond %{REQUEST_FILENAME} !-f \n
+>   RewriteCond %{REQUEST_FILENAME} !-d \n
+>   RewriteRule ^(.*)$ index.php?/$1 [L] \n
+> </IfModule> \n
+> \n
+> <IfModule !mod_rewrite.c> \n
+>   `# If we don't have mod_rewrite installed, all 404's` \n
+>   `# can be sent to index.php, and everything works as normal.` \n
+>   `# Submitted by: ElliotHaughin` \n
+> \n
+>   ErrorDocument 404 /index.php \n
+> </IfModule> \n
 
-  ErrorDocument 404 /index.php
-</IfModule>
-```
 
 ## 3. Demo/Dev URL
-[Dev branch &mdash; dev.medieteknik.nu](http://dev.medieteknik.nu/)
+[http://dev.medieteknik.nu/](http://dev.medieteknik.nu/)
 
-[Master branch &mdash; medieteknik.nu](http://medieteknik.nu/)
-
-## 4. Contact Information
+## 5. Contact Information
 Questions about the system:
 	webbchef@medieteknik.nu
 
