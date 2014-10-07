@@ -55,6 +55,8 @@ class Association extends MY_Controller
 				}
 
 				$main_data['is_logged_in'] = $this->login->is_logged_in();
+				$main_data['evaluation_document_id'] = $this->Documents_model->get_document_type_id('documents_course_evaluation');
+
 				$main_data['protocol_year'] = $protocol_year;
 				$main_data['document_years_array'] = $this->Documents_model->get_document_years();
 				$main_data['document_types'] = $this->Documents_model->get_all_documents_for_group(1);

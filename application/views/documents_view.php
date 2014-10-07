@@ -61,7 +61,7 @@ foreach($protocols as $protocols_docs)
 
 //List documents
 foreach ($document_types as $type) {
-	if($type->id == 5 && !$is_logged_in) //FIXME
+	if($type->id == $evaluation_document_id && !$is_logged_in) //Course evaluations should only be shown for persons logged in
 		continue;
 
 	echo '<h3>'.$lang['document_'.$type->document_type].'</h3>';

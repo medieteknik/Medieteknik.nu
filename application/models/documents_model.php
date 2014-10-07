@@ -96,6 +96,22 @@ class Documents_model extends CI_Model
 		return $result;
 	}
 
+	function get_document_type_id($document_type_name)
+	{
+		$this->db->select('id');
+		$this->db->from('document_types');
+		$this->db->where('document_type', $document_type_name);
+		$query = $this->db->get();
+		if ($query->num_rows() == 1)
+		{
+			$document_type = $query->result();
+			$document_type = $document_type[0]->id;
+
+			return $document_type;
+		}
+		return false;
+	}
+
 	function delete_document($id)
 	{
 		$query = $this->db->get_where('documents', array('id' => $id), 1, 0);
