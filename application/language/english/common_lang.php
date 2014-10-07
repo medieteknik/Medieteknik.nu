@@ -122,6 +122,7 @@ $lang['document_protocol_normal'] = 'Board meeting';
 $lang['document_documents_meeting_autumn'] = 'Autumn meeting';
 $lang['document_documents_meeting_spring'] = 'Spring meeting';
 $lang['document_directional_document'] = 'Directional documents';
+$lang['document_documents_course_evaluation'] ='Evaluation documents';
 $lang['document_type'] = 'Type';
 
 

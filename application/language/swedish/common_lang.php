@@ -122,6 +122,8 @@ $lang['document_protocol_normal'] = 'Styrelsemöte';
 $lang['document_documents_meeting_autumn'] = 'Höstmöte';
 $lang['document_documents_meeting_spring'] = 'Vårmöte';
 $lang['document_directional_document'] = 'Styrdokument';
+$lang['document_documents_course_evaluation'] = 'Kursutvärderingar';
+
 $lang['document_type'] = 'Typ';
 
 // admin
