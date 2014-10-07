@@ -136,6 +136,25 @@ $lang['admin_addnews'] = "Skapa nyhet";
 	$lang['admin_news_delete'] = "Ta bort detta inlägg! (Endast utkast.)";
 	$lang['admin_news_uploadimage'] = "Ladda upp bild";
 	$lang['admin_news_existingimage'] = "eller använd en existerande bild." ;
+	$lang['admin_format_help_title'] = "Formateringshjälp" ;
+	$lang['admin_format_help_subhead'] = "Vi använder Markdown för formateringen av våra nyheter. Här under
+					följer en guide på hur du använder markdown för att få nyheterna att se bra ut.";
+	$lang['admin_format_help_paragraph'] = "Paragrafer" ;
+	$lang['admin_format_help_paragraph_text'] = "Skapa en ny paragraf genom att lämna en tomrad." ;
+	$lang['admin_format_help_headings'] = "Rubriker" ;
+	$lang['admin_format_help_headings_text'] = "<ul><li># Största rubriken</li><li>## Näst största rubriken</li><li>...</li><li>###### Sjätte största rubriken</li></ul>" ;
+	$lang['admin_format_help_blockqoute'] = "Citat" ;
+	$lang['admin_format_help_blockqoute_text'] = "För att få ett indraget citat kan &gt; användas i början av raden." ;
+	$lang['admin_format_help_styling'] = "Fetstil och kursiv" ;
+	$lang['admin_format_help_styling_text'] = "<p>** <b>Fetstilt text</b> **</p><p>* <i>Kursiv text</i> *</p><p>** <b>Fetstil och _<i>Kursiv text</i>_</b> **</p>" ;
+	$lang['admin_format_help_lists'] = "Listor" ;
+	$lang['admin_format_help_lists_text'] = "<p><b>Osorterade listor: </b></p>
+												<p>* punkt</p><p>* punkt</p><p>* punkt</p><br/><p>- punkt</p><p>- punkt</p><p>- punkt</p>
+											<p><b>Sorterade listor: </b></p>
+												<p> 1. punkt 1 </p> <p> 2. punkt 2 </p> <p> 3. punkt 3 </p>" ;
+	$lang['admin_format_help_links'] = "Länkar" ;
+	$lang['admin_format_help_links_text'] = "[Länk text](http länk)." ;
+
 $lang['admin_editimages'] = "Redigera bilder";
 $lang['admin_adminimages'] = "Bilder";
 $lang['admin_admingroups'] = "Grupper";
