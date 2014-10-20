@@ -176,6 +176,33 @@ echo '<div class="row">';
 		</div>';
 	}
 echo '</div>';
+echo '<div class="row">
+		<div class="col-sm-12">
+			<div class="main-box box-body clearfix margin-top">
+				<h2>', $lang['admin_format_help_title'] , '</h2>
+				<p>', $lang['admin_format_help_subhead'] ,'</p>
+				<div class="row">
+					<div class="col-sm-6">
+						<h4>', $lang['admin_format_help_paragraph'] ,'</h4>
+						<p>', $lang['admin_format_help_paragraph_text'] ,'</p>
+						<h4>', $lang['admin_format_help_headings'] ,'</h4>
+						<p>', $lang['admin_format_help_headings_text'] ,'</p>
+						<h4>', $lang['admin_format_help_styling'] ,'</h4>
+						<p>', $lang['admin_format_help_styling_text'] ,'</p>
+						<h4>', $lang['admin_format_help_links'] ,'</h4>
+						<p>', $lang['admin_format_help_links_text'] ,'</p>
+						<h4>', $lang['admin_format_help_blockqoute'] ,'</h4>
+						<p>', $lang['admin_format_help_blockqoute_text'] ,'</p>
+					</div>
+					<div class="col-sm-6">
+						<h4>', $lang['admin_format_help_lists'] ,'</h4>
+						<p>', $lang['admin_format_help_lists_text'] ,'</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>';
+
 echo form_close();
 
 

@@ -24,6 +24,7 @@
 							'<option value="1_spring"><?php echo $lang['document_protocol'].' - '.$lang['document_documents_meeting_spring']?></option>'+
 							'<option value="3"><?php echo $lang['document_documents_meeting_autumn']?></option>'+
 							'<option value="4"><?php echo $lang['document_documents_meeting_spring']?></option>'+
+							'<option value="5"><?php echo $lang['document_documents_course_evaluation']?></option>'+
 							'<option value="2"><?php echo $lang['document_directional_document']?></option>'+
 						'</select>'+
 					'</div>'+

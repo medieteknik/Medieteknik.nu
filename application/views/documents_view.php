@@ -13,7 +13,7 @@ foreach($protocols as $protocols_docs)
 	$form_options = array();
 
 	$uri = explode('/', uri_string());
-	
+
 	if(sizeof($uri) == 4) 		//association/documents/xxxx
 		$dropdown_uri = '';
 	else if(sizeof($uri) == 3) 		//association/documents/
@@ -49,7 +49,7 @@ foreach($protocols as $protocols_docs)
 			$upload_date = substr($doc->upload_date, 0, 10);
 			echo
 			'<li class = "document clearfix">
-			<a href="' . base_url() . '/user_content/documents/'.$upload_date.'/'.$doc->document_original_filename .'">	
+			<a href="' . base_url() . '/user_content/documents/'.$upload_date.'/'.$doc->document_original_filename .'">
 				<i class = "-icon-document"></i>
 				<h4>'. $doc->document_title . '</h4>
 				<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>
@@ -61,12 +61,15 @@ foreach($protocols as $protocols_docs)
 
 //List documents
 foreach ($document_types as $type) {
+	if($type->id == $evaluation_document_id && !$is_logged_in) //Course evaluations should only be shown for persons logged in
+		continue;
+
 	echo '<h3>'.$lang['document_'.$type->document_type].'</h3>';
 	foreach ($type->documents as $doc) {
 		$upload_date = substr($doc->upload_date, 0, 10);
 		echo
 		'<li class = "document clearfix">
-		<a href="' . base_url() . '/user_content/documents/'.$upload_date.'/'. $doc->document_original_filename .'">	
+		<a href="' . base_url() . '/user_content/documents/'.$upload_date.'/'. $doc->document_original_filename .'">
 			<i class = "-icon-document"></i>
 			<h4>'. $doc->document_title . '</h4>
 			<small>' . date("d M, Y", strtotime($doc->upload_date)) . '</small>

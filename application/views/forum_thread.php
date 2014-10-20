@@ -150,7 +150,12 @@ foreach($replies as $reply)
 	<?php
 	$count++;
 }
-
+?>
+<div class="main-box box-body clearfix forum-view margin-top forum-reply hidden" id="markdown_preview">
+	<h2 class="dark"><?php echo $lang['misc_preview'].' <small>'.$lang['misc_preview_exp'].'</small>'; ?></h2>
+	<div class="content"></div>
+</div>
+<?php
 if(isset($postform))
 {
 	echo '<div class="main-box box-body clearfix forum-view margin-top">';
@@ -186,7 +191,7 @@ if(isset($postform))
 				<div class="col-sm-4">
 					<p>
 						<?php
-						echo  form_label($lang['forum_guest_name'], 'name', array('class' => 'sr-only')),
+						echo form_label($lang['forum_guest_name'], 'name', array('class' => 'sr-only')),
 							form_input(array('name' => 'name',
 											   'id' => 'name',
 											   'class'=> 'form-control',
@@ -197,7 +202,7 @@ if(isset($postform))
 					</p>
 					<p>
 						<?php
-						echo  form_label($lang['forum_guest_email'], 'email', array('class' => 'sr-only')),
+						echo form_label($lang['forum_guest_email'], 'email', array('class' => 'sr-only')),
 							form_input(array('name' => 'email',
 											   'id' => 'email',
 											   'class'=> 'form-control',
@@ -211,6 +216,11 @@ if(isset($postform))
 						<input type="submit" name="post" value="<?php echo $lang['forum_submit']; ?>" class="btn btn-success form-control" />
 					</p>
 					<p>
+						<button class="btn btn-default form-control" data-toggle="preview" data-target="#markdown_preview" data-text="#reply" data-loading-text="<?php echo $lang['misc_loading']; ?>...">
+							<?php echo $lang['misc_preview']; ?>
+						</button>
+					</p>
+					<p>
 						<?php echo $lang['forum_guidelines']; ?>
 					</p>
 				</div>
@@ -220,30 +230,43 @@ if(isset($postform))
 	}
 	else
 	{
-		echo '<h2>'.$lang['forum_answer'].'</h2>';
-
-		echo '<div class="row">',
-			form_open('forum/post_reply'),
-
-				form_hidden(array('cat_id' => $categories_array[0]->id)),
-				form_hidden(array('topic_id' => $topic->id)),
-				form_hidden(array('guest' => 0)),
-				'<div class="col-sm-8"><p>',
+		$textarea = array(
+						'name' => 'reply',
+						'id' => 'reply',
+						'rows'	=>	6,
+						'class' => 'form-control',
+						'placeholder' => $lang['misc_text'].'...',
+						'required' 	=> ''
+					);
+		?>
+		<h2><?php echo $lang['forum_answer']; ?></h2>
+		<div class="row">
+			<?php
+			echo form_open('forum/post_reply'), form_hidden(array('cat_id' => $categories_array[0]->id)),
+				 form_hidden(array('topic_id' => $topic->id)), form_hidden(array('guest' => 0));
+			?>
+				<div class="col-sm-8">
+				<p>
+					<?php
 					// good praxis to allways add a label. Bootstraps' .sr-only will hide it since we use placeholders.
-					form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
-					form_textarea(array('name' => 'reply',
-										'id' => 'reply',
-										'rows'	=>	6,
-										'class' => 'form-control',
-										'placeholder' => $lang['misc_text'].'...',
-										'required' 	=> '')),
-				'</p></div>',
-				'<div class="col-sm-4">',
-					'<p><input type="submit" name="post" value="',$lang['forum_submit'],'" class="btn btn-success form-control" /></p>',
-					'<p>',$lang['forum_guidelines'],'</p>',
-				'</div>',
-			form_close(),
-		'</div>';
+					echo form_label($lang['misc_text'], 'reply', array('class' => 'sr-only')),
+						 form_textarea($textarea);
+					?>
+				</p></div>
+				<div class="col-sm-4">
+					<p>
+						<input type="submit" name="post" value="<?php echo $lang['forum_submit']; ?>" class="btn btn-success form-control" />
+					</p>
+					<p>
+						<button class="btn btn-default form-control" data-toggle="preview" data-target="#markdown_preview" data-text="#reply" data-loading-text="<?php echo $lang['misc_loading']; ?>...">
+							<?php echo $lang['misc_preview']; ?>
+						</button>
+					</p>
+					<p><?php echo $lang['forum_guidelines']; ?></p>
+				</div>
+			<?php echo form_close(); ?>
+		</div>
+		<?php
 	}
 	echo '</div>';
 

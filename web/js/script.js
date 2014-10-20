@@ -60,7 +60,43 @@ $(document).ready(function(){
 	$('#post_date_now').click(function(event){
 		event.preventDefault();
 		var d = new Date(),
-			now = d.getFullYear()+"-"+(d.getMonth() < 10 ? "0":"")+d.getMonth()+"-"+d.getDate()+"T"+d.getHours()+":"+d.getMinutes();
+			now = d.getFullYear()+"-"+(d.getMonth() < 10 ? "0":"")+d.getMonth()+"-"+(d.getDate() < 10 ? "0":"")+d.getDate()+"T"+(d.getHours() < 10 ? "0":"")+d.getHours()+":"+(d.getMinutes() < 10 ? "0":"")+d.getMinutes();
+		console.log(now);
 		$('input[type=datetime-local]').val(now);
+	});
+
+	$('[data-toggle="preview"]').click(function(event){
+		event.preventDefault();
+		var target 	= $(this).attr('data-target'),
+			text 	= $(this).attr('data-text'),
+			btn 	= $(this);
+
+		console.log('Previewing text ' + $(text).val());
+		btn.button('loading');
+
+		$.ajax({
+			url: BASE_URL+'en/api/forum/markdown_preview',
+			type: 'POST',
+			dataType: 'json',
+			data: {'text': $(text).val()},
+		})
+		.done(function(response){
+			if(response.status === "success")
+			{
+				console.log("success");
+				console.log(response);
+
+				$(target + ' .content').html(response.result);
+				$(target + '.hidden').hide().removeClass('hidden').slideDown('fast');
+			}
+		})
+		.fail(function(){
+			console.log("error");
+			window.alert("Something went wrong. Sorry!");
+		})
+		.always(function(){
+			btn.button('reset');
+		});
+
 	});
 })

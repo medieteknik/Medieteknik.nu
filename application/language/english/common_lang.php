@@ -122,6 +122,7 @@ $lang['document_protocol_normal'] = 'Board meeting';
 $lang['document_documents_meeting_autumn'] = 'Autumn meeting';
 $lang['document_documents_meeting_spring'] = 'Spring meeting';
 $lang['document_directional_document'] = 'Directional documents';
+$lang['document_documents_course_evaluation'] ='Evaluation documents';
 $lang['document_type'] = 'Type';
 
 
@@ -137,6 +138,23 @@ $lang['admin_addnews'] = "Create news";
 	$lang['admin_news_delete'] = "Delete this entry! (Draft required.)";
 	$lang['admin_news_uploadimage'] = "Upload image";
 	$lang['admin_news_existingimage'] = "or use an existing image";
+	$lang['admin_format_help_title'] = "Format help";
+	$lang['admin_format_help_subhead'] = "We use Markdown for formating of our news. below, you'll find a quick guide how to use markdown to make the news look great.";
+	$lang['admin_format_help_paragraph'] = "Paragraphs" ;
+	$lang['admin_format_help_paragraph_text'] = "Paragraphs in Markdown are just one or more lines of consecutive text followed by one or more blank lines." ;
+	$lang['admin_format_help_headings'] = "Headings" ;
+	$lang['admin_format_help_headings_text'] = "<ul><li># Largest heading</li><li>## Second largest heading</li><li>...</li><li>###### Sixth largest heading</li></ul>" ;
+	$lang['admin_format_help_blockqoute'] = "Blockqoute" ;
+	$lang['admin_format_help_blockqoute_text'] = "You can indicate blockquotes with a &gt;" ;
+	$lang['admin_format_help_styling'] = "Text styling" ;
+	$lang['admin_format_help_styling_text'] = "<p>** <b>Bold text</b> **</p><p>* <i>Italic text</i> *</p><p>** <b>Bold and _<i>italic text</i>_</b> **</p>" ;
+	$lang['admin_format_help_lists'] = "Lists" ;
+	$lang['admin_format_help_lists_text'] = "<p><b>Unsorted lists: </b></p>
+												<p>* Item</p><p>* Item</p><p>* Item</p><br/><p>- Item</p><p>- Item</p><p>- Item</p>
+											<p><b>Sorted lists: </b></p>
+												<p> 1. Item 1 </p> <p> 2. Item 2 </p> <p> 3. Item 3 </p>" ;
+	$lang['admin_format_help_links'] = "Links" ;
+	$lang['admin_format_help_links_text'] = "[Link text](http link)." ;
 $lang['admin_editimages'] = "Edit images";
 $lang['admin_adminimages'] = "Images";
 $lang['admin_admingroups'] = "Groups";
@@ -273,6 +291,9 @@ $lang['misc_embeddedcontent'] = "Embedded content";
 $lang['misc_copyright'] = "Copyright";
 $lang['misc_now'] = "now";
 $lang['misc_scheduled'] = "Scheduled";
+$lang['misc_preview'] = "Preview";
+$lang['misc_preview_exp'] = "This is what your post will look";
+$lang['misc_loading'] = "Loading";
 
 
 // error
