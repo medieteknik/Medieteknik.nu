@@ -20,6 +20,9 @@ class About extends MY_Controller
 		$string = trim($string,"/");
 		$this->load->model('Page_model');
 
+		$main_data['name'] = $string;
+		$main_data['lang'] = $this->lang_data;
+
 		$template_data['menu'] = $this->load->view('includes/menu',$this->lang_data, true);
 		switch($string)
 		{
@@ -35,8 +38,6 @@ class About extends MY_Controller
 
 				break;
 		}
-		$main_data['name'] = $string;
-		$main_data['lang'] = $this->lang_data;
 
 		$template_data['sidebar_content'] = $this->sidebar->get_about().$this->sidebar->get_standard();
 		$this->load->view('templates/main_template',$template_data);
