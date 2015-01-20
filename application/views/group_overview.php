@@ -7,7 +7,7 @@ $most_recent_group = end($group_years);
 	foreach($groups as $group)
 	{
 		?>
-		<h2><?php echo $group->name; ?></h2>
+		<h2><?php echo $group->name . " " . substr($most_recent_group->start_year,2) . "/" . substr($most_recent_group->stop_year,2); ?></h2>
 		<?php echo text_format($group->description); ?>
 		<div class="row">
 			<?php
