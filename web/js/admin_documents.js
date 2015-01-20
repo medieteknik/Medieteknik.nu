@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 				if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0)
 				{
-					console.log('Que done');
+					console.log('Queue done');
 					$("#queue-processed").removeClass('hidden');
 				}
 				else if(this.getUploadingFiles().length < 3 && this.getQueuedFiles().length > 0)
