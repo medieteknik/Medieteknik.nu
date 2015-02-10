@@ -45,6 +45,8 @@ $lang['menu_documents'] = "Protocols and documents";
 $lang['menu_education'] = "About the education";
 $lang['menu_applicants'] = "Applicants";
 $lang['menu_businesses'] = "Businesses";
+$lang['menu_theses'] = "Theses suggestions";
+$lang['menu_homemission'] = "Hemmissionering";
 
 // news
 $lang['news_news'] = "News";

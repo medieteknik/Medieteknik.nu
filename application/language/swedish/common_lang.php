@@ -45,6 +45,8 @@ $lang['menu_documents'] = "Protokoll och stadgar";
 $lang['menu_education'] = "Om utbildningen";
 $lang['menu_applicants'] = "Sökande";
 $lang['menu_businesses'] = "Företag";
+$lang['menu_theses'] = "Exjobbsförslag";
+$lang['menu_homemission'] = "Hemmissionering";
 
 // news
 $lang['news_news'] = "Nyheter";
