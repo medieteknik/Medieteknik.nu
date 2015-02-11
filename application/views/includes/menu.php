@@ -37,6 +37,7 @@
 						<li><?php echo anchor("about", $menu_about); ?></li>
 						<li><?php echo anchor("about/applicant", $menu_applicants); ?></li>
 						<li><?php echo anchor("about/business", $menu_businesses); ?></li>
+						<li><?php echo anchor("about/cubes", $menu_cubes); ?></li>
 					</ul>
 				</li>
 				<li class="dropdown">

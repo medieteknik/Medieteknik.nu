@@ -47,6 +47,7 @@ $lang['menu_applicants'] = "Sökande";
 $lang['menu_businesses'] = "Företag";
 $lang['menu_theses'] = "Exjobbsförslag";
 $lang['menu_homemission'] = "Hemmissionering";
+$lang['menu_cubes'] = "MT-kuberna";
 
 // news
 $lang['news_news'] = "Nyheter";

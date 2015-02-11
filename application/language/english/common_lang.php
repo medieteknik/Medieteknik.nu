@@ -47,6 +47,8 @@ $lang['menu_applicants'] = "Applicants";
 $lang['menu_businesses'] = "Businesses";
 $lang['menu_theses'] = "Theses suggestions";
 $lang['menu_homemission'] = "Hemmissionering";
+$lang['menu_cubes'] = "MT-cubes";
+
 
 // news
 $lang['news_news'] = "News";
