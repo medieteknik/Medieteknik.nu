@@ -32,8 +32,8 @@ class Fika extends MY_Controller {
 		$date = new DateTime();
 		$week = $date->format("W");
 		$index = (($week+5)/2)%count($group->members);
-		$next_index = (($week+7)/2)%count($group->members);
-		$fika_boss = $group->members[$index]; /*<- lol */
+		$next_index = (($week+6)/2)%count($group->members);
+		$fika_boss = $group->members[$index];
 		$next_fika_boss = $group->members[$next_index];
 
 		$main_data['fika_boss'] = $fika_boss;
