@@ -132,7 +132,8 @@ class Sidebar
 		$rss = $this->CI->rssparser->getFeed(3);
 
 		$rssfeed['feed'] = $rss;
-		$rssfeed['title'] = "Exjobbsflöde";
+		$rssfeed['title'] = "Jobb- och Exjobbsflöde";
+
 
 		return $this->CI->load->view('includes/rss', $rssfeed, true);
 	}
