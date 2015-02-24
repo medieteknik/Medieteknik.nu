@@ -20,5 +20,5 @@
     }
     ?>
     </ul>
-    <p>Flöde från <?php echo anchor("http://exjobba.se", "Xamera"); ?></P>
+    <p>Flöde från <?php echo anchor("http://xjobba.nu", "Xamera"); ?></P>
 </div>
