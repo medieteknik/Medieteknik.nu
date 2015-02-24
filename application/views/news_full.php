@@ -32,7 +32,7 @@
 	<div class="main-box news clearfix">
 		<?php
 			if($news->image_original_filename != '')
-				echo '<img src="'.base_url().'user_content/images/original/'.$news->image_original_filename.'" class="img-responsive" alt="Responsive image">';
+				echo '<img src="'.base_url().'user_content/images/original/'.$news->image_original_filename.'" class="img-responsive full-image" alt="Responsive image">';
 		?>
 		<div class="box-body">
 			<h1>
