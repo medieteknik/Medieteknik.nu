@@ -120,7 +120,19 @@ class Sidebar
 		}
 
 		$menus .= $this->get_latest_forum();
+		$menus .= $this->get_xamera_rss();
 		return $menus;
 	}
 
+	public function get_xamera_rss()
+	{
+		$this->CI->load->library('rssparser');
+		$this->CI->rssparser->set_feed_url('http://cv.xjobba.nu/cv/rss.jsp?key=Mt');
+		$this->CI->rssparser->set_cache_life(0);
+		$rss = $this->CI->rssparser->getFeed(3);
+		$rssfeed['feed'] = $rss;
+		$rssfeed['title'] = "Exjobbsflöde";
+
+		return $this->CI->load->view('includes/rss', $rssfeed, true);
+	}
 }
