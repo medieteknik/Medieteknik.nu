@@ -63,6 +63,11 @@ $(document).ready(function() {
     	var title = $(this).closest('.row').find('input[name="title"]');
     	var description = $(this).closest('.row').find('input[name="description"]');
     	var date = $(this).closest('.row').find('input[name="upload_date"]');
+    	var title_text = $(this).closest('.row').find('label[id="doc_title"]');
+    	var date_text = $(this).closest('.row').find('label[id="doc_date"]');
+			title_text.text("Titel");
+			date_text.text("Datum");
+
 		if ($(this).val()=="1")
 		{
 			title.val("Styrelsemöte");
@@ -84,6 +89,16 @@ $(document).ready(function() {
 			title.attr('disabled', 'disabled');
 			description.attr('disabled', 'disabled');
 		}
+		else if($(this).val() == "5" )
+		{
+    	title_text.text("Kurskod")
+			title.removeAttr('disabled');
+			date_text.text("Datum (sätt till kurstartsdatum)");
+			title.val('TNX0XX');
+			description.val("Kursutvärdering för " + title.val());
+
+			description.attr('disabled', 'disabled');
+		}
 		else
 		{
 			title.val("");
@@ -93,10 +108,21 @@ $(document).ready(function() {
 		}
 	});
 
+	$(document).on('input', 'input[name="title"]', function(event){
+    var type = $(this).closest('.row').find('select[name="document_type"]');
+  	var description = $(this).closest('.row').find('input[name="description"]');
+    if(type.val() == "5")
+    {
+	  	description.val("Kursutvärdering för " + $(this).val());
+    }
+	});
+
 	$(document).on('change', 'input[name="upload_date"]', function(event){
 		console.log($(this).val());
     	var type = $(this).closest('.row').find('select[name="document_type"]');
     	var description = $(this).closest('.row').find('input[name="description"]');
+    	var type = $(this).closest('.row').find('select[name="document_type"]');
+
 		if (type.val() == "1")
 		{
         	description.val("Protokoll från styrelsemötet " + $(this).val());

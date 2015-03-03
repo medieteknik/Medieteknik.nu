@@ -47,7 +47,6 @@
 						<li><?php echo anchor("association/committee", $menu_committees); ?></li>
 						<li><?php echo anchor("association/web", $menu_webgroup); ?></li>
 						<li><?php echo anchor("association/mette", "Mette"); ?></li>
-						<li><?php echo anchor("association/theses", $menu_theses); ?></li>
 						<li><?php echo anchor("association/homemission", $menu_homemission); ?></li>
 
 						<li><?php echo anchor("https://alumni.liu.se/Portal/Public/Default.aspx", $menu_alumnus); ?></li>

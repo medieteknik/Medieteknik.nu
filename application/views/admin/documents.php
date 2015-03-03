@@ -29,11 +29,11 @@
 						'</select>'+
 					'</div>'+
 					'<div class="col-sm-4">'+
-						'<label><?php echo $lang['misc_title']; ?></label>'+
+						'<label id="doc_title"><?php echo $lang['misc_title']; ?></label>'+
 						'<input id="title" type="text" class="form-control" name="title" value="Styrelsemöte" disabled/>'+
 					'</div>'+
 					'<div class="col-sm-4">'+
-						'<label><?php echo $lang['misc_date']; ?></label>'+
+						'<label id="doc_date"><?php echo $lang['misc_date']; ?></label>'+
 						'<input id="date" type="date" class="form-control" name="upload_date" value="'+today+'">'+
 					'</div>'+
 					'<div class="col-sm-12">'+
