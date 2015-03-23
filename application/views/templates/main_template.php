@@ -90,6 +90,14 @@
 							<?php
 							if(date('n') <= 4)
 							{
+								if(!$this->login->is_logged_in()  && date('n') >= 3)
+								{
+								?>
+									<div class="pull-right hidden-xs header-box" id="search-header">
+										<?php echo anchor('/about/applicant', 'Sök Medieteknik!'); ?>
+									</div>
+								<?php
+								}
 								?>
 								<div class="pull-right hidden-xs header-box" id="mtd-header">
 									<?php echo anchor('http://medieteknikdagarna.se', 'medieteknikdagarna.se', 'target="_blank"'); ?>
