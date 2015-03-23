@@ -120,6 +120,7 @@ body {
   opacity: 0.7;
 }
 #main-header .header-box#lang-control,
+#main-header .header-box#search-header,
 #main-header .header-box#header-user {
   margin-left: 3px;
 }
