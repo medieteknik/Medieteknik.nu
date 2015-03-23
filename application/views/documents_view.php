@@ -59,6 +59,8 @@ foreach($protocols as $protocols_docs)
 		}
 	}
 }
+
+// Course evaluation files
 if($is_logged_in)
 {
 	foreach ($evalulations as $document) {
@@ -76,7 +78,7 @@ if($is_logged_in)
     	'</ul>
     </h3>';
 	}
-
+	$period = -1;
 	foreach ($document->documents as $doc) {
 		$doc_date = strtotime($doc->upload_date);
 		$doc_year = date('Y', $doc_date);
@@ -86,6 +88,30 @@ if($is_logged_in)
 			$doc_year--;
 		if($doc_year == $protocol_year)
 		{
+			if($period == -1 && $doc_month >=1 && $doc_month <= 3)
+			{
+				echo '<li class = "document clearfix">VT period 1</li>';
+				$period = 1;
+			}
+
+			if($period != 2 && $doc_month > 3 && $doc_month <= 6)
+			{
+				echo '<li class = "document clearfix">VT period 2</li>';
+				$period = 2;
+			}
+
+			if($period != 3 && $doc_month > 6 && $doc_month <= 10)
+			{
+				echo '<li class = "document clearfix">HT period 1</li>';
+				$period = 3;
+			}
+
+			if($period != 4 && $doc_month > 10 && $doc_month <= 12)
+			{
+				echo '<li class = "document clearfix">HT period 2</li>';
+				$period = 4;
+			}
+
 			$upload_date = substr($doc->upload_date, 0, 10);
 			echo
 			'<li class = "document clearfix">
