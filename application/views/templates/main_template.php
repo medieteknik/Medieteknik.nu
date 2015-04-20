@@ -90,7 +90,7 @@
 							<?php
 							if(date('n') <= 4)
 							{
-								if(!$this->login->is_logged_in()  && date('n') >= 3)
+								if(!$this->login->is_logged_in()  && date('n') == 4 && date('d') < 15)
 								{
 								?>
 									<div class="pull-right hidden-xs header-box" id="search-header">
