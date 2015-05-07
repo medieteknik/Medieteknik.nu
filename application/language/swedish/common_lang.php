@@ -48,6 +48,9 @@ $lang['menu_businesses'] = "Företag";
 $lang['menu_theses'] = "Exjobbsförslag";
 $lang['menu_homemission'] = "Hemmissionering";
 $lang['menu_cubes'] = "MT-kuberna";
+$lang['menu_alumni'] = "Alumni";
+$lang['menu_mentor'] = "Mentorskap";
+$lang['menu_alumni_work'] = "MT-Verksamhet";
 
 // news
 $lang['news_news'] = "Nyheter";
