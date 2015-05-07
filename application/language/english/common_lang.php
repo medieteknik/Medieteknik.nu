@@ -50,7 +50,7 @@ $lang['menu_homemission'] = "Hemmissionering";
 $lang['menu_cubes'] = "MT-cubes";
 $lang['menu_alumni'] = "Alumni";
 $lang['menu_mentor'] = "Mentoring";
-$lang['menu_alumni_work'] = "Verksamhet";
+$lang['menu_alumni_work'] = "activities";
 
 
 // news
