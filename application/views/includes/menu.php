@@ -55,6 +55,13 @@
 						<li><?php echo anchor("association/documents", $menu_documents); ?></li>
 					</ul>
 				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $menu_alumni; ?> <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><?php echo anchor("association/alumni", $menu_alumni_work); ?></li>
+						<li><?php echo anchor("association/mentor", $menu_mentor); ?></li>
+					</ul>
+				</li>
 				<li><?php echo anchor("about/mtd", $menu_mtd); ?></li>
 				<li><?php echo anchor("forum", $menu_forum); ?></li>
 
