@@ -11,7 +11,7 @@ class News_model extends CI_Model
 	/**
 	 * Fetches latest news
 	 *
-	 * @return array
+	 * @return Array
 	 */
     function get_latest_news()
     {
