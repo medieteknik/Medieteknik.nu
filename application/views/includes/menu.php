@@ -46,7 +46,7 @@
 						<li><?php echo anchor("association", $menu_association); ?></li>
 						<li><?php echo anchor("association/board", $menu_board); ?></li>
 						<li><?php echo anchor("association/committee", $menu_committees); ?></li>
-						<li><?php echo anchor("association/web", $menu_webgroup); ?></li>
+						<li><?php echo anchor("association/web", "Webbutskottet"); ?></li>
 						<li><?php echo anchor("association/mette", "Mette"); ?></li>
 						<li><?php echo anchor("association/theses", $menu_theses); ?></li>
 						<li><?php echo anchor("association/homemission", $menu_homemission); ?></li>
